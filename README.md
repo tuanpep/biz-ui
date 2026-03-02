@@ -76,20 +76,9 @@ function MyComponent() {
 }
 ```
 
-## Monorepo Structure
+## Repository
 
-This repository uses Turborepo and contains:
-
-### Apps
-
-- `docs`: Documentation site (Next.js)
-- `web`: Demo application (Next.js)
-
-### Packages
-
-- `biz-ui`: The main UI component library
-- `@repo/eslint-config`: ESLint configurations
-- `@repo/typescript-config`: TypeScript configurations
+This repository contains the **biz-ui** package only. The library lives in `packages/ui` and is built with Turborepo.
 
 ## Development
 
@@ -103,8 +92,7 @@ bun run build
 # Run development mode
 bun run dev
 
-# Run Storybook
-cd packages/ui
+# Run Storybook (from repo root)
 bun run storybook
 
 # Run linting
