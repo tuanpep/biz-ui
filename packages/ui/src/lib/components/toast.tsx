@@ -1,0 +1,272 @@
+import * as React from 'react';
+import * as ToastPrimitives from '@radix-ui/react-toast';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '../utils/cn';
+import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
+
+/**
+ * Toast Component
+ *
+ * Biz UI aligned toast notifications with:
+ * - Multiple variants (default, success, error, warning, info)
+ * - Action button support
+ * - Auto-dismiss with progress
+ * - Stacked toasts
+ * - Multiple positions
+ */
+
+const ToastProvider = ToastPrimitives.Provider;
+
+const ToastViewport = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Viewport>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Viewport
+    ref={ref}
+    className={cn(
+      'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]',
+      className
+    )}
+    {...props}
+  />
+));
+ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
+
+const toastVariants = cva(
+  'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-4 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full',
+  {
+    variants: {
+      variant: {
+        default: 'border bg-background text-foreground',
+        success: 'border-success/20 bg-success/10 text-success',
+        error: 'border-destructive/20 bg-destructive/10 text-destructive',
+        warning: 'border-warning/20 bg-warning/10 text-warning',
+        info: 'border-info/20 bg-info/10 text-info',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
+
+const Toast = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
+    VariantProps<typeof toastVariants>
+>(({ className, variant, ...props }, ref) => {
+  return (
+    <ToastPrimitives.Root
+      ref={ref}
+      className={cn(toastVariants({ variant }), className)}
+      {...props}
+    />
+  );
+});
+Toast.displayName = ToastPrimitives.Root.displayName;
+
+const ToastAction = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Action>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Action
+    ref={ref}
+    className={cn(
+      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+      className
+    )}
+    {...props}
+  />
+));
+ToastAction.displayName = ToastPrimitives.Action.displayName;
+
+const ToastClose = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Close>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Close
+    ref={ref}
+    className={cn(
+      'absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100',
+      className
+    )}
+    toast-close=""
+    {...props}
+  >
+    <X className="h-4 w-4" />
+  </ToastPrimitives.Close>
+));
+ToastClose.displayName = ToastPrimitives.Close.displayName;
+
+const ToastTitle = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Title>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Title
+    ref={ref}
+    className={cn('text-sm font-semibold', className)}
+    {...props}
+  />
+));
+ToastTitle.displayName = ToastPrimitives.Title.displayName;
+
+const ToastDescription = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Description>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Description
+    ref={ref}
+    className={cn('text-sm opacity-90', className)}
+    {...props}
+  />
+));
+ToastDescription.displayName = ToastPrimitives.Description.displayName;
+
+// Toast icon based on variant
+const ToastIcon = ({ variant }: { variant?: 'default' | 'success' | 'error' | 'warning' | 'info' }) => {
+  const iconClass = 'h-5 w-5 flex-shrink-0';
+
+  switch (variant) {
+    case 'success':
+      return <CheckCircle className={cn(iconClass, 'text-success')} />;
+    case 'error':
+      return <AlertCircle className={cn(iconClass, 'text-destructive')} />;
+    case 'warning':
+      return <AlertTriangle className={cn(iconClass, 'text-warning')} />;
+    case 'info':
+      return <Info className={cn(iconClass, 'text-info')} />;
+    default:
+      return null;
+  }
+};
+
+// Types for useToast hook
+type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
+
+interface ToastMessage {
+  id: string;
+  title?: string;
+  description?: string;
+  variant?: ToastVariant;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+  duration?: number;
+}
+
+interface ToastContextValue {
+  toasts: ToastMessage[];
+  toast: (message: Omit<ToastMessage, 'id'>) => string;
+  dismiss: (id: string) => void;
+  dismissAll: () => void;
+}
+
+const ToastContext = React.createContext<ToastContextValue | undefined>(undefined);
+
+export function useToast() {
+  const context = React.useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastContextProvider');
+  }
+  return context;
+}
+
+// Toast Provider with state management
+export interface ToastProviderProps {
+  children: React.ReactNode;
+  /** Duration in milliseconds (default: 5000) */
+  duration?: number;
+  /** Maximum number of toasts to show */
+  maxToasts?: number;
+  /** Position of toast container */
+  position?: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+}
+
+const ToastContextProvider = ({
+  children,
+  duration = 5000,
+  maxToasts = 5,
+}: ToastProviderProps) => {
+  const [toasts, setToasts] = React.useState<ToastMessage[]>([]);
+
+  const toast = React.useCallback(
+    (message: Omit<ToastMessage, 'id'>) => {
+      const id = React.useId();
+      const newToast: ToastMessage = {
+        ...message,
+        id,
+        duration: message.duration ?? duration,
+      };
+
+      setToasts((prev) => {
+        const updated = [...prev, newToast];
+        return updated.slice(-maxToasts);
+      });
+
+      return id;
+    },
+    [duration, maxToasts]
+  );
+
+  const dismiss = React.useCallback((id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  const dismissAll = React.useCallback(() => {
+    setToasts([]);
+  }, []);
+
+  return (
+    <ToastContext.Provider value={{ toasts, toast, dismiss, dismissAll }}>
+      <ToastProvider>
+        {children}
+        {toasts.map((t) => (
+          <Toast key={t.id} variant={t.variant} duration={t.duration}>
+            <div className="flex items-start gap-3">
+              {t.variant && <ToastIcon variant={t.variant} />}
+              <div className="grid gap-1">
+                {t.title && <ToastTitle>{t.title}</ToastTitle>}
+                {t.description && <ToastDescription>{t.description}</ToastDescription>}
+              </div>
+            </div>
+            {t.action && (
+              <ToastAction altText={t.action.label} onClick={t.action.onClick}>
+                {t.action.label}
+              </ToastAction>
+            )}
+            <ToastClose onClick={() => dismiss(t.id)} />
+          </Toast>
+        ))}
+        <ToastViewport />
+      </ToastProvider>
+    </ToastContext.Provider>
+  );
+};
+
+// Simple toast function for imperative usage
+type ToastOptions = {
+  title?: string;
+  description?: string;
+  variant?: ToastVariant;
+  duration?: number;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+};
+
+// Export types
+export type { ToastVariant, ToastMessage, ToastContextValue };
+
+export {
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastTitle,
+  ToastDescription,
+  ToastProvider,
+  ToastViewport,
+  ToastContextProvider,
+  toastVariants,
+};

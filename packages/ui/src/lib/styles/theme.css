@@ -1,0 +1,1046 @@
+/**
+ * Ocean-UI Design System CSS Variables
+ *
+ * Color system based on Biz UI's default colors
+ * Each color has 10 shades (0-9), larger index = darker
+ *
+ * Design Principles:
+ * - Biz UI-compatible color palette
+ * - Clear visual hierarchy with depth
+ * - Accessible contrast (WCAG 4.5:1+)
+ * - Light mode only
+ * - Isolated scope to prevent host app conflicts
+ */
+
+/* ========================================
+ * CSS LAYER ISOLATION
+ * All biz-ui styles are in a dedicated layer
+ * to prevent specificity conflicts with host apps
+ * ======================================== */
+@layer biz-ui;
+
+/* ========================================
+ * THEME SCOPE
+ * All variables and base styles are scoped to .biz-ui
+ * ======================================== */
+.biz-ui {
+  /* ========================================
+   * SPACING SYSTEM (8px base)
+   * ======================================== */
+  --biz-space-1: 0.25rem;
+  /* 4px */
+  --biz-space-2: 0.5rem;
+  /* 8px */
+  --biz-space-3: 0.75rem;
+  /* 12px */
+  --biz-space-4: 1rem;
+  /* 16px */
+  --biz-space-5: 1.25rem;
+  /* 20px */
+  --biz-space-6: 1.5rem;
+  /* 24px */
+  --biz-space-8: 2rem;
+  /* 32px */
+  --biz-space-10: 2.5rem;
+  /* 40px */
+  --biz-space-12: 3rem;
+  /* 48px */
+  --biz-space-16: 4rem;
+  /* 64px */
+
+  /* ========================================
+   * Biz UI color palette (Hex values)
+   * 10 shades per color (0=lightest, 9=darkest)
+   * ======================================== */
+
+  /* Blue (Primary) */
+  --biz-blue-0: #e7f5ff;
+  --biz-blue-1: #d0ebff;
+  --biz-blue-2: #a5d8ff;
+  --biz-blue-3: #74c0fc;
+  --biz-blue-4: #4dabf7;
+  --biz-blue-5: #339af0;
+  --biz-blue-6: #228be6;
+  --biz-blue-7: #1c7ed6;
+  --biz-blue-8: #1971c2;
+  --biz-blue-9: #1864ab;
+
+  /* Cyan */
+  --biz-cyan-0: #e3fafc;
+  --biz-cyan-1: #c5f6fa;
+  --biz-cyan-2: #99e9f2;
+  --biz-cyan-3: #66d9e8;
+  --biz-cyan-4: #3bc9db;
+  --biz-cyan-5: #22b8cf;
+  --biz-cyan-6: #15aabf;
+  --biz-cyan-7: #1098ad;
+  --biz-cyan-8: #0c8599;
+  --biz-cyan-9: #0b7285;
+
+  /* Teal */
+  --biz-teal-0: #e6fcf5;
+  --biz-teal-1: #c3fae8;
+  --biz-teal-2: #96f2d7;
+  --biz-teal-3: #63e6be;
+  --biz-teal-4: #38d9a9;
+  --biz-teal-5: #20c997;
+  --biz-teal-6: #12b886;
+  --biz-teal-7: #0ca678;
+  --biz-teal-8: #099268;
+  --biz-teal-9: #087f5b;
+
+  /* Green */
+  --biz-green-0: #ebfbee;
+  --biz-green-1: #d3f9d8;
+  --biz-green-2: #b2f2bb;
+  --biz-green-3: #8ce99a;
+  --biz-green-4: #69db7c;
+  --biz-green-5: #51cf66;
+  --biz-green-6: #40c057;
+  --biz-green-7: #37b24d;
+  --biz-green-8: #2f9e44;
+  --biz-green-9: #2b8a3e;
+
+  /* Lime */
+  --biz-lime-0: #f4fce3;
+  --biz-lime-1: #e9fac8;
+  --biz-lime-2: #d8f5a2;
+  --biz-lime-3: #c0eb75;
+  --biz-lime-4: #a9e34b;
+  --biz-lime-5: #94d82d;
+  --biz-lime-6: #82c91e;
+  --biz-lime-7: #74b816;
+  --biz-lime-8: #66a80f;
+  --biz-lime-9: #5c940d;
+
+  /* Yellow */
+  --biz-yellow-0: #fff9db;
+  --biz-yellow-1: #fff3bf;
+  --biz-yellow-2: #ffec99;
+  --biz-yellow-3: #ffe066;
+  --biz-yellow-4: #ffd43b;
+  --biz-yellow-5: #fcc419;
+  --biz-yellow-6: #fab005;
+  --biz-yellow-7: #f59f00;
+  --biz-yellow-8: #f08c00;
+  --biz-yellow-9: #e67700;
+
+  /* Orange */
+  --biz-orange-0: #fff4e6;
+  --biz-orange-1: #ffe8cc;
+  --biz-orange-2: #ffd8a8;
+  --biz-orange-3: #ffc078;
+  --biz-orange-4: #ffa94d;
+  --biz-orange-5: #ff922b;
+  --biz-orange-6: #fd7e14;
+  --biz-orange-7: #f76707;
+  --biz-orange-8: #e8590c;
+  --biz-orange-9: #d9480f;
+
+  /* Pink */
+  --biz-pink-0: #fff0f6;
+  --biz-pink-1: #ffdeeb;
+  --biz-pink-2: #fcc2d7;
+  --biz-pink-3: #faa2c1;
+  --biz-pink-4: #f783ac;
+  --biz-pink-5: #f06595;
+  --biz-pink-6: #e64980;
+  --biz-pink-7: #d6336c;
+  --biz-pink-8: #c2255c;
+  --biz-pink-9: #a61e4d;
+
+  /* Violet */
+  --biz-violet-0: #f3f0ff;
+  --biz-violet-1: #e5dbff;
+  --biz-violet-2: #d0bfff;
+  --biz-violet-3: #b197fc;
+  --biz-violet-4: #9775fa;
+  --biz-violet-5: #845ef7;
+  --biz-violet-6: #7950f2;
+  --biz-violet-7: #7048e8;
+  --biz-violet-8: #6741d9;
+  --biz-violet-9: #5f3dc4;
+
+  /* Indigo */
+  --biz-indigo-0: #edf2ff;
+  --biz-indigo-1: #dbe4ff;
+  --biz-indigo-2: #bac8ff;
+  --biz-indigo-3: #91a7ff;
+  --biz-indigo-4: #748ffc;
+  --biz-indigo-5: #5c7cfa;
+  --biz-indigo-6: #4c6ef5;
+  --biz-indigo-7: #4263eb;
+  --biz-indigo-8: #3b5bdb;
+  --biz-indigo-9: #364fc7;
+
+  /* Grape (Purple) */
+  --biz-grape-0: #f8f0fc;
+  --biz-grape-1: #f3d9fa;
+  --biz-grape-2: #eebefa;
+  --biz-grape-3: #e599f7;
+  --biz-grape-4: #da77f2;
+  --biz-grape-5: #cc5de8;
+  --biz-grape-6: #be4bdb;
+  --biz-grape-7: #ae3ec9;
+  --biz-grape-8: #9c36b5;
+  --biz-grape-9: #862e9c;
+
+  /* Red */
+  --biz-red-0: #fff5f5;
+  --biz-red-1: #ffe3e3;
+  --biz-red-2: #ffc9c9;
+  --biz-red-3: #ffa8a8;
+  --biz-red-4: #ff8787;
+  --biz-red-5: #ff6b6b;
+  --biz-red-6: #fa5252;
+  --biz-red-7: #f03e3e;
+  --biz-red-8: #e03131;
+  --biz-red-9: #c92a2a;
+
+  /* Gray */
+  --biz-gray-0: #f8f9fa;
+  --biz-gray-1: #f1f3f5;
+  --biz-gray-2: #e9ecef;
+  --biz-gray-3: #dee2e6;
+  --biz-gray-4: #ced4da;
+  --biz-gray-5: #adb5bd;
+  --biz-gray-6: #868e96;
+  --biz-gray-7: #495057;
+  --biz-gray-8: #343a40;
+  --biz-gray-9: #212529;
+
+  /* Dark */
+  --biz-dark-0: #c9c9c9;
+  --biz-dark-1: #b8b8b8;
+  --biz-dark-2: #828282;
+  --biz-dark-3: #696969;
+  --biz-dark-4: #424242;
+  --biz-dark-5: #3b3b3b;
+  --biz-dark-6: #2e2e2e;
+  --biz-dark-7: #242424;
+  --biz-dark-8: #1f1f1f;
+  --biz-dark-9: #141414;
+
+  /* ========================================
+   * SEMANTIC COLORS (mapped to Biz UI colors)
+   * ======================================== */
+  --primary: var(--biz-blue-6);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--biz-gray-6);
+  --secondary-foreground: #ffffff;
+
+  --destructive: var(--biz-red-6);
+  --destructive-foreground: #ffffff;
+
+  --success: var(--biz-green-6);
+  --success-foreground: #ffffff;
+
+  --warning: var(--biz-yellow-6);
+  --warning-foreground: #ffffff;
+
+  --info: var(--biz-cyan-6);
+  --info-foreground: #ffffff;
+
+  /* Muted variants */
+  --primary-muted: var(--biz-blue-0);
+  --success-muted: var(--biz-green-0);
+  --warning-muted: var(--biz-yellow-0);
+  --info-muted: var(--biz-cyan-0);
+  --destructive-muted: var(--biz-red-0);
+
+  --muted: var(--biz-gray-1);
+  --muted-foreground: var(--biz-gray-6);
+
+  --accent: var(--biz-gray-1);
+  --accent-foreground: var(--biz-gray-9);
+
+  --popover: #ffffff;
+  --popover-foreground: var(--biz-gray-9);
+
+  --card: #ffffff;
+  --card-foreground: var(--biz-gray-9);
+
+  --background: #f8f9fa;
+  --foreground: var(--biz-gray-9);
+
+  --border: var(--biz-gray-3);
+  --input: var(--biz-gray-3);
+  --ring: var(--biz-blue-6);
+
+  /* ========================================
+   * OCEAN UI STYLE SYSTEM TOKENS
+   * Semantic tokens for consistent theming
+   * ======================================== */
+
+  /* Interactive colors (Biz UI-aligned) */
+  --interactive-01: var(--biz-blue-6);
+  --interactive-01-hover: var(--biz-blue-7);
+  --interactive-01-foreground: #ffffff;
+  --interactive-02: var(--biz-gray-7);
+  --interactive-02-hover: var(--biz-gray-8);
+  --interactive-02-foreground: #ffffff;
+  --interactive-03: #ffffff;
+  --interactive-03-hover: var(--biz-gray-1);
+  --interactive-03-foreground: var(--biz-gray-9);
+  --interactive-04: var(--biz-blue-5);
+
+  /* UI colors */
+  --ui-background: #ffffff;
+  --ui-01: #ffffff;
+  --ui-02: #f4f4f4;
+  --ui-03: #e0e0e0;
+  --ui-04: #c6c6c6;
+  --ui-05: #8c8c8c;
+
+  /* Text colors */
+  --text-01: var(--biz-gray-9);
+  --text-02: var(--biz-gray-7);
+  --text-03: var(--biz-gray-6);
+  --text-04: var(--biz-gray-5);
+  --text-05: #ffffff;
+  --text-error: var(--biz-red-6);
+
+  /* Icon colors */
+  --icon-01: var(--biz-gray-7);
+  --icon-02: var(--biz-gray-6);
+  --icon-03: #ffffff;
+
+  /* Support colors (feedback) */
+  --support-success: var(--biz-green-6);
+  --support-warning: var(--biz-yellow-6);
+  --support-error: var(--biz-red-6);
+  --support-info: var(--biz-blue-5);
+  --support-info-subtle: var(--biz-blue-0);
+
+  /* Subtle backgrounds for interactive elements */
+  --interactive-01-subtle: var(--biz-blue-0);
+  --interactive-02-subtle: var(--biz-gray-0);
+  --support-success-subtle: var(--biz-green-0);
+  --support-warning-subtle: var(--biz-yellow-0);
+  --support-error-subtle: var(--biz-red-0);
+
+  /* Hover states */
+  --ui-hover: var(--biz-gray-1);
+  --ui-active: var(--biz-gray-2);
+
+  /* Focus */
+  --focus: var(--biz-blue-5);
+  --focus-inset: #ffffff;
+
+  /* ========================================
+   * COMPONENT TOKENS
+   * Pre-composed tokens for specific components
+   * ======================================== */
+
+  /* Button */
+  --button-primary-bg: var(--interactive-01);
+  --button-primary-hover: var(--interactive-01-hover);
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: var(--interactive-02);
+  --button-secondary-hover: var(--interactive-02-hover);
+  --button-secondary-text: #ffffff;
+  --button-tertiary-bg: transparent;
+  --button-tertiary-hover: var(--ui-hover);
+  --button-tertiary-text: var(--interactive-01);
+  --button-danger-bg: var(--support-error);
+  --button-danger-hover: var(--biz-red-7);
+  --button-danger-text: #ffffff;
+
+  /* Link */
+  --link-primary: var(--interactive-01);
+  --link-primary-hover: var(--interactive-04);
+  --link-secondary: var(--text-02);
+  --link-visited: var(--biz-violet-6);
+
+  /* Tag/Badge */
+  --tag-background: var(--ui-02);
+  --tag-text: var(--text-02);
+
+  /* Input fields */
+  --field-01: #ffffff;
+  --field-02: var(--ui-02);
+  --field-03: transparent;
+
+  /* Skeleton */
+  --skeleton-01: var(--ui-03);
+  --skeleton-02: var(--ui-04);
+
+  /* ========================================
+   * RADIUS (Biz UI uses 0px)
+   * ======================================== */
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-full: 9999px;
+
+  /* ========================================
+   * SHADOWS
+   * ======================================== */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.08);
+
+  /* ========================================
+   * TRANSITIONS
+   * ======================================== */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================
+   * Z-INDEX SCALE
+   * ======================================== */
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-modal: 200;
+  --z-popover: 300;
+  --z-tooltip: 400;
+
+  /* ========================================
+   * BASE RESET (Scoped to .biz-ui only)
+   * ======================================== */
+  border-color: var(--border);
+}
+
+/* ========================================
+ * KEYFRAME ANIMATIONS (Prefixed)
+ * ======================================== */
+@keyframes biz-accordion-down {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes biz-accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+/* Scoped animation classes */
+.biz-ui .biz-animate-accordion-down {
+  animation: biz-accordion-down 0.2s ease-out;
+}
+
+.biz-ui .biz-animate-accordion-up {
+  animation: biz-accordion-up 0.2s ease-out;
+}
+
+/* Backward-compatible aliases (deprecated, will be removed) */
+.biz-ui .animate-accordion-down {
+  animation: biz-accordion-down 0.2s ease-out;
+}
+
+.biz-ui .animate-accordion-up {
+  animation: biz-accordion-up 0.2s ease-out;
+}
+
+/* ========================================
+ * GRID SYSTEM (12-column, Biz UI-aligned)
+ * ======================================== */
+
+/* Grid container */
+.biz-ui .biz-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: auto;
+  max-width: 1584px;
+  padding-inline: 16px;
+}
+
+.biz-ui .biz-grid--condensed {
+  padding-inline: 0;
+}
+
+.biz-ui .biz-grid--narrow {
+  max-width: 1312px;
+}
+
+.biz-ui .biz-grid--full-width {
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+/* Row */
+.biz-ui .biz-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -16px;
+}
+
+.biz-ui .biz-row--condensed {
+  margin-inline: -4px;
+}
+
+.biz-ui .biz-row--narrow {
+  margin-inline: -8px;
+}
+
+/* Column base */
+.biz-ui .biz-col {
+  box-sizing: border-box;
+  padding-inline: 16px;
+  flex: 1 0 0%;
+  max-width: 100%;
+}
+
+/* Condensed columns */
+.biz-ui .biz-row--condensed .biz-col {
+  padding-inline: 4px;
+}
+
+/* Narrow columns */
+.biz-ui .biz-row--narrow .biz-col {
+  padding-inline: 8px;
+}
+
+/* ========================================
+ * 12-COLUMN GRID CLASSES
+ * Each column = 8.333% (100/12)
+ * ======================================== */
+
+/* Small breakpoint (320px+) */
+.biz-ui .biz-col-sm-1 {
+  flex: 0 0 8.333%;
+  max-width: 8.333%;
+}
+
+.biz-ui .biz-col-sm-2 {
+  flex: 0 0 16.667%;
+  max-width: 16.667%;
+}
+
+.biz-ui .biz-col-sm-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.biz-ui .biz-col-sm-4 {
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+}
+
+.biz-ui .biz-col-sm-5 {
+  flex: 0 0 41.667%;
+  max-width: 41.667%;
+}
+
+.biz-ui .biz-col-sm-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.biz-ui .biz-col-sm-7 {
+  flex: 0 0 58.333%;
+  max-width: 58.333%;
+}
+
+.biz-ui .biz-col-sm-8 {
+  flex: 0 0 66.667%;
+  max-width: 66.667%;
+}
+
+.biz-ui .biz-col-sm-9 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+.biz-ui .biz-col-sm-10 {
+  flex: 0 0 83.333%;
+  max-width: 83.333%;
+}
+
+.biz-ui .biz-col-sm-11 {
+  flex: 0 0 91.667%;
+  max-width: 91.667%;
+}
+
+.biz-ui .biz-col-sm-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Small offset */
+.biz-ui .biz-col-offset-sm-1 {
+  margin-left: 8.333%;
+}
+
+.biz-ui .biz-col-offset-sm-2 {
+  margin-left: 16.667%;
+}
+
+.biz-ui .biz-col-offset-sm-3 {
+  margin-left: 25%;
+}
+
+.biz-ui .biz-col-offset-sm-4 {
+  margin-left: 33.333%;
+}
+
+.biz-ui .biz-col-offset-sm-5 {
+  margin-left: 41.667%;
+}
+
+.biz-ui .biz-col-offset-sm-6 {
+  margin-left: 50%;
+}
+
+.biz-ui .biz-col-offset-sm-7 {
+  margin-left: 58.333%;
+}
+
+.biz-ui .biz-col-offset-sm-8 {
+  margin-left: 66.667%;
+}
+
+.biz-ui .biz-col-offset-sm-9 {
+  margin-left: 75%;
+}
+
+.biz-ui .biz-col-offset-sm-10 {
+  margin-left: 83.333%;
+}
+
+.biz-ui .biz-col-offset-sm-11 {
+  margin-left: 91.667%;
+}
+
+/* Medium breakpoint (672px+) */
+@media (min-width: 672px) {
+  .biz-ui .biz-col-md-1 {
+    flex: 0 0 8.333%;
+    max-width: 8.333%;
+  }
+
+  .biz-ui .biz-col-md-2 {
+    flex: 0 0 16.667%;
+    max-width: 16.667%;
+  }
+
+  .biz-ui .biz-col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .biz-ui .biz-col-md-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .biz-ui .biz-col-md-5 {
+    flex: 0 0 41.667%;
+    max-width: 41.667%;
+  }
+
+  .biz-ui .biz-col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .biz-ui .biz-col-md-7 {
+    flex: 0 0 58.333%;
+    max-width: 58.333%;
+  }
+
+  .biz-ui .biz-col-md-8 {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+  }
+
+  .biz-ui .biz-col-md-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .biz-ui .biz-col-md-10 {
+    flex: 0 0 83.333%;
+    max-width: 83.333%;
+  }
+
+  .biz-ui .biz-col-md-11 {
+    flex: 0 0 91.667%;
+    max-width: 91.667%;
+  }
+
+  .biz-ui .biz-col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .biz-ui .biz-col-offset-md-1 {
+    margin-left: 8.333%;
+  }
+
+  .biz-ui .biz-col-offset-md-2 {
+    margin-left: 16.667%;
+  }
+
+  .biz-ui .biz-col-offset-md-3 {
+    margin-left: 25%;
+  }
+
+  .biz-ui .biz-col-offset-md-4 {
+    margin-left: 33.333%;
+  }
+
+  .biz-ui .biz-col-offset-md-5 {
+    margin-left: 41.667%;
+  }
+
+  .biz-ui .biz-col-offset-md-6 {
+    margin-left: 50%;
+  }
+
+  .biz-ui .biz-col-offset-md-7 {
+    margin-left: 58.333%;
+  }
+
+  .biz-ui .biz-col-offset-md-8 {
+    margin-left: 66.667%;
+  }
+
+  .biz-ui .biz-col-offset-md-9 {
+    margin-left: 75%;
+  }
+
+  .biz-ui .biz-col-offset-md-10 {
+    margin-left: 83.333%;
+  }
+
+  .biz-ui .biz-col-offset-md-11 {
+    margin-left: 91.667%;
+  }
+}
+
+/* Large breakpoint (1056px+) */
+@media (min-width: 1056px) {
+  .biz-ui .biz-col-lg-1 {
+    flex: 0 0 8.333%;
+    max-width: 8.333%;
+  }
+
+  .biz-ui .biz-col-lg-2 {
+    flex: 0 0 16.667%;
+    max-width: 16.667%;
+  }
+
+  .biz-ui .biz-col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .biz-ui .biz-col-lg-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .biz-ui .biz-col-lg-5 {
+    flex: 0 0 41.667%;
+    max-width: 41.667%;
+  }
+
+  .biz-ui .biz-col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .biz-ui .biz-col-lg-7 {
+    flex: 0 0 58.333%;
+    max-width: 58.333%;
+  }
+
+  .biz-ui .biz-col-lg-8 {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+  }
+
+  .biz-ui .biz-col-lg-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .biz-ui .biz-col-lg-10 {
+    flex: 0 0 83.333%;
+    max-width: 83.333%;
+  }
+
+  .biz-ui .biz-col-lg-11 {
+    flex: 0 0 91.667%;
+    max-width: 91.667%;
+  }
+
+  .biz-ui .biz-col-lg-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .biz-ui .biz-col-offset-lg-1 {
+    margin-left: 8.333%;
+  }
+
+  .biz-ui .biz-col-offset-lg-2 {
+    margin-left: 16.667%;
+  }
+
+  .biz-ui .biz-col-offset-lg-3 {
+    margin-left: 25%;
+  }
+
+  .biz-ui .biz-col-offset-lg-4 {
+    margin-left: 33.333%;
+  }
+
+  .biz-ui .biz-col-offset-lg-5 {
+    margin-left: 41.667%;
+  }
+
+  .biz-ui .biz-col-offset-lg-6 {
+    margin-left: 50%;
+  }
+
+  .biz-ui .biz-col-offset-lg-7 {
+    margin-left: 58.333%;
+  }
+
+  .biz-ui .biz-col-offset-lg-8 {
+    margin-left: 66.667%;
+  }
+
+  .biz-ui .biz-col-offset-lg-9 {
+    margin-left: 75%;
+  }
+
+  .biz-ui .biz-col-offset-lg-10 {
+    margin-left: 83.333%;
+  }
+
+  .biz-ui .biz-col-offset-lg-11 {
+    margin-left: 91.667%;
+  }
+}
+
+/* Extra-large breakpoint (1312px+) */
+@media (min-width: 1312px) {
+  .biz-ui .biz-col-xlg-1 {
+    flex: 0 0 8.333%;
+    max-width: 8.333%;
+  }
+
+  .biz-ui .biz-col-xlg-2 {
+    flex: 0 0 16.667%;
+    max-width: 16.667%;
+  }
+
+  .biz-ui .biz-col-xlg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .biz-ui .biz-col-xlg-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .biz-ui .biz-col-xlg-5 {
+    flex: 0 0 41.667%;
+    max-width: 41.667%;
+  }
+
+  .biz-ui .biz-col-xlg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .biz-ui .biz-col-xlg-7 {
+    flex: 0 0 58.333%;
+    max-width: 58.333%;
+  }
+
+  .biz-ui .biz-col-xlg-8 {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+  }
+
+  .biz-ui .biz-col-xlg-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .biz-ui .biz-col-xlg-10 {
+    flex: 0 0 83.333%;
+    max-width: 83.333%;
+  }
+
+  .biz-ui .biz-col-xlg-11 {
+    flex: 0 0 91.667%;
+    max-width: 91.667%;
+  }
+
+  .biz-ui .biz-col-xlg-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-1 {
+    margin-left: 8.333%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-2 {
+    margin-left: 16.667%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-3 {
+    margin-left: 25%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-4 {
+    margin-left: 33.333%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-5 {
+    margin-left: 41.667%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-6 {
+    margin-left: 50%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-7 {
+    margin-left: 58.333%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-8 {
+    margin-left: 66.667%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-9 {
+    margin-left: 75%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-10 {
+    margin-left: 83.333%;
+  }
+
+  .biz-ui .biz-col-offset-xlg-11 {
+    margin-left: 91.667%;
+  }
+}
+
+/* Max breakpoint (1584px+) */
+@media (min-width: 1584px) {
+  .biz-ui .biz-col-max-1 {
+    flex: 0 0 8.333%;
+    max-width: 8.333%;
+  }
+
+  .biz-ui .biz-col-max-2 {
+    flex: 0 0 16.667%;
+    max-width: 16.667%;
+  }
+
+  .biz-ui .biz-col-max-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .biz-ui .biz-col-max-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .biz-ui .biz-col-max-5 {
+    flex: 0 0 41.667%;
+    max-width: 41.667%;
+  }
+
+  .biz-ui .biz-col-max-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .biz-ui .biz-col-max-7 {
+    flex: 0 0 58.333%;
+    max-width: 58.333%;
+  }
+
+  .biz-ui .biz-col-max-8 {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+  }
+
+  .biz-ui .biz-col-max-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  .biz-ui .biz-col-max-10 {
+    flex: 0 0 83.333%;
+    max-width: 83.333%;
+  }
+
+  .biz-ui .biz-col-max-11 {
+    flex: 0 0 91.667%;
+    max-width: 91.667%;
+  }
+
+  .biz-ui .biz-col-max-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .biz-ui .biz-col-offset-max-1 {
+    margin-left: 8.333%;
+  }
+
+  .biz-ui .biz-col-offset-max-2 {
+    margin-left: 16.667%;
+  }
+
+  .biz-ui .biz-col-offset-max-3 {
+    margin-left: 25%;
+  }
+
+  .biz-ui .biz-col-offset-max-4 {
+    margin-left: 33.333%;
+  }
+
+  .biz-ui .biz-col-offset-max-5 {
+    margin-left: 41.667%;
+  }
+
+  .biz-ui .biz-col-offset-max-6 {
+    margin-left: 50%;
+  }
+
+  .biz-ui .biz-col-offset-max-7 {
+    margin-left: 58.333%;
+  }
+
+  .biz-ui .biz-col-offset-max-8 {
+    margin-left: 66.667%;
+  }
+
+  .biz-ui .biz-col-offset-max-9 {
+    margin-left: 75%;
+  }
+
+  .biz-ui .biz-col-offset-max-10 {
+    margin-left: 83.333%;
+  }
+
+  .biz-ui .biz-col-offset-max-11 {
+    margin-left: 91.667%;
+  }
+}

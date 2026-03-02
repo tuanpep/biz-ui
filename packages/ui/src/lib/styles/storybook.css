@@ -1,0 +1,29 @@
+/**
+ * Ocean-UI Storybook Styles
+ *
+ * This file is for Storybook development only.
+ * For library consumption, use index.css instead.
+ */
+
+/* Import theme CSS variables - must be first */
+@import './theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Layer - Storybook specific styling */
+@layer base {
+  /* Only apply border color to elements within biz-ui scope */
+  .biz-ui * {
+    border-color: var(--border);
+  }
+
+  /* Storybook body styling */
+  body {
+    background-color: var(--ocean-gray-0);
+    color: var(--ocean-gray-9);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
