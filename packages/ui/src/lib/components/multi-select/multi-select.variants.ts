@@ -110,3 +110,41 @@ export const multiSelectTagVariants = cva(
     },
   }
 );
+
+/**
+ * MultiSelect skeleton variants.
+ */
+export const multiSelectSkeletonVariants = cva(
+  'animate-pulse rounded-md bg-muted',
+  {
+    variants: {
+      size: {
+        sm: 'h-8',
+        md: 'h-10',
+        lg: 'h-12',
+      },
+    },
+    defaultVariants: {
+      size: 'md',
+    },
+  }
+);
+
+/**
+ * MultiSelect skeleton label variants.
+ */
+export const multiSelectSkeletonLabelVariants = cva(
+  'animate-pulse rounded bg-muted',
+  {
+    variants: {
+      size: {
+        sm: 'h-3 w-16',
+        md: 'h-4 w-20',
+        lg: 'h-4 w-24',
+      },
+    },
+    defaultVariants: {
+      size: 'md',
+    },
+  }
+);

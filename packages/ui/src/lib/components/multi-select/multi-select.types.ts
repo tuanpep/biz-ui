@@ -1,6 +1,6 @@
 /**
  * MultiSelect component types.
- * Separated for better organization and reusability.
+ * Following Carbon's patterns with enhanced validation states.
  */
 
 import * as React from 'react';
@@ -39,9 +39,33 @@ export interface MultiSelectProps
   size?: MultiSelectSize;
   /** Disabled state */
   disabled?: boolean;
-  /** Error state */
-  error?: boolean;
-  /** Error message */
+  /** Read-only state (renders as disabled but accessible) */
+  readOnly?: boolean;
+  /** Error message to display (sets invalid state) */
+  error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Description text shown below the multi-select */
+  description?: string;
+  /** Label text */
+  label?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Hide label visually but keep for accessibility */
+  hideLabel?: boolean;
+  /** Additional wrapper className */
+  wrapperClassName?: string;
+  /** Test id for testing */
+  'data-testid'?: string;
+  /**
+   * @deprecated Use `error` prop with error message string instead
+   * Error state (boolean)
+   */
+  hasError?: boolean;
+  /**
+   * @deprecated Use `error` prop with error message instead
+   * Error message (legacy prop)
+   */
   errorMessage?: string;
 }
 
@@ -59,4 +83,18 @@ export interface MultiSelectTagProps extends Omit<React.HTMLAttributes<HTMLSpanE
   removable?: boolean;
   /** Callback when remove is clicked */
   onRemove?: () => void;
+}
+
+/**
+ * MultiSelect skeleton props.
+ */
+export interface MultiSelectSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Skeleton size to match multi-select */
+  size?: MultiSelectSize;
+  /** Show skeleton with label placeholder */
+  withLabel?: boolean;
+  /** Show description skeleton */
+  hasDescription?: boolean;
+  /** Show error skeleton */
+  hasError?: boolean;
 }

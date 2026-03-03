@@ -1,11 +1,12 @@
 /**
  * Search Component
  *
- * Biz UI aligned search input with:
+ * Design Principles:
  * - Search icon prefix
  * - Clear button
  * - Expandable variant
  * - Loading state
+ * - Carbon-aligned validation patterns
  */
 
 import * as React from 'react';
@@ -23,7 +24,7 @@ import type { SearchProps, ExpandableSearchProps } from './Search.types';
 // Loading Spinner Component
 // ============================================================================
 
-const LoadingSpinner = ({ size }: { size?: 'sm' | 'md' | 'lg' }) => (
+const LoadingSpinner = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) => (
   <span className={cn(clearButtonVariants({ size }), 'animate-spin')}>
     <svg
       className="h-full w-full"
@@ -63,6 +64,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       label = 'Search',
       description,
       error,
+      warn,
+      required = false,
+      hideLabel = false,
       loading = false,
       value: controlledValue,
       defaultValue,
@@ -71,6 +75,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onSearch,
       hideClear = false,
       disabled,
+      readOnly,
+      id: propId,
+      'data-testid': testId,
       onKeyDown,
       ...props
     },
@@ -79,12 +86,18 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue ?? '');
     const value = controlledValue ?? uncontrolledValue;
     const hasValue = Boolean(value);
-    const hasError = !!error;
 
+    // Generate IDs
     const generatedId = React.useId();
-    const inputId = props.id || generatedId;
+    const inputId = propId || generatedId;
     const descriptionId = `${inputId}-description`;
     const errorId = `${inputId}-error`;
+    const warnId = `${inputId}-warn`;
+
+    // Calculate effective states
+    const effectiveDisabled = !readOnly && (disabled || loading);
+    const hasError = !readOnly && !effectiveDisabled && !!error;
+    const hasWarning = !readOnly && !hasError && !effectiveDisabled && !!warn;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setUncontrolledValue(event.target.value);
@@ -105,14 +118,21 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
 
     // Build aria-describedby
     const ariaDescribedBy = [
-      description && !error ? descriptionId : null,
-      error ? errorId : null,
+      description && !hasError && !hasWarning ? descriptionId : null,
+      hasError ? errorId : null,
+      hasWarning ? warnId : null,
     ]
       .filter(Boolean)
       .join(' ') || undefined;
 
+    // Build validation classes
+    const validationClasses = {
+      'border-destructive focus-visible:ring-destructive': hasError,
+      'border-warning focus-visible:ring-warning': hasWarning,
+    };
+
     const searchInput = (
-      <div className={cn(searchVariants({ size, expandable }), wrapperClassName)}>
+      <div className={cn(searchVariants({ size, expandable }))}>
         <SearchIcon className={cn(searchIconVariants({ size }))} aria-hidden="true" />
         <input
           ref={ref}
@@ -123,13 +143,16 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           onKeyDown={handleKeyDown}
           className={cn(
             searchInputVariants({ variant, size }),
-            hasError && 'border-destructive focus-visible:ring-destructive',
+            validationClasses,
             className
           )}
-          disabled={disabled || loading}
-          aria-label={label}
+          disabled={effectiveDisabled}
+          readOnly={readOnly}
+          aria-label={hideLabel ? label : undefined}
           aria-invalid={hasError}
           aria-describedby={ariaDescribedBy}
+          aria-required={required}
+          data-testid={testId}
           {...props}
         />
         {loading && <LoadingSpinner size={size} />}
@@ -147,22 +170,44 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       </div>
     );
 
-    if (!description && !error) {
+    // Render without wrapper if no visible label/description/error/warn
+    if (hideLabel && !description && !error && !warn) {
       return searchInput;
     }
 
     return (
-      <div className="grid w-full gap-1.5">
+      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+        {label && !hideLabel && (
+          <label
+            htmlFor={inputId}
+            className={cn(
+              'text-sm font-medium leading-none',
+              effectiveDisabled && 'opacity-50'
+            )}
+          >
+            {label}
+            {required && (
+              <span className="text-destructive ml-1" aria-hidden="true">
+                *
+              </span>
+            )}
+          </label>
+        )}
         {searchInput}
         <div>
-          {description && !error && (
+          {description && !hasError && !hasWarning && (
             <p id={descriptionId} className="text-sm text-muted-foreground">
               {description}
             </p>
           )}
-          {error && (
+          {hasError && (
             <p id={errorId} className="text-xs text-destructive" role="alert">
               {error}
+            </p>
+          )}
+          {hasWarning && !hasError && (
+            <p id={warnId} className="text-xs text-warning" role="alert">
+              {warn}
             </p>
           )}
         </div>

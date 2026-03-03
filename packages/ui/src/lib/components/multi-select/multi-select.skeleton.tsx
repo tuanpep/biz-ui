@@ -1,20 +1,20 @@
 /**
- * ComboBox Skeleton Component
+ * MultiSelect Skeleton Component
  *
- * Loading placeholder for ComboBox component.
+ * Loading placeholder for MultiSelect component.
  * Following Carbon's skeleton pattern.
  */
 
 import * as React from 'react';
 import { cn } from '../../utils/cn';
-import { comboBoxSkeletonVariants, comboBoxSkeletonLabelVariants } from './ComboBox.variants';
-import type { ComboBoxSkeletonProps } from './ComboBox.types';
+import { multiSelectSkeletonVariants, multiSelectSkeletonLabelVariants } from './multi-select.variants';
+import type { MultiSelectSkeletonProps } from './multi-select.types';
 
 // ============================================================================
-// ComboBox Skeleton Component
+// MultiSelect Skeleton Component
 // ============================================================================
 
-const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>(
+const MultiSelectSkeleton = React.forwardRef<HTMLDivElement, MultiSelectSkeletonProps>(
   (
     {
       className,
@@ -26,8 +26,8 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
     },
     ref
   ) => {
-    const comboBoxElement = (
-      <div className={cn(comboBoxSkeletonVariants({ size }))} />
+    const skeletonElement = (
+      <div className={cn('w-full', multiSelectSkeletonVariants({ size }))} />
     );
 
     // Render without wrapper if no label/description/error
@@ -39,7 +39,7 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
           aria-hidden="true"
           {...props}
         >
-          {comboBoxElement}
+          {skeletonElement}
         </div>
       );
     }
@@ -52,9 +52,9 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
         {...props}
       >
         {withLabel && (
-          <div className={cn(comboBoxSkeletonLabelVariants({ size }))} />
+          <div className={cn(multiSelectSkeletonLabelVariants({ size }))} />
         )}
-        {comboBoxElement}
+        {skeletonElement}
         {hasDescription && !hasError && (
           <div className="h-3 w-32 bg-muted animate-pulse rounded" />
         )}
@@ -66,10 +66,10 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
   }
 );
 
-ComboBoxSkeleton.displayName = 'ComboBoxSkeleton';
+MultiSelectSkeleton.displayName = 'MultiSelectSkeleton';
 
 // ============================================================================
 // Exports
 // ============================================================================
 
-export { ComboBoxSkeleton };
+export { MultiSelectSkeleton };

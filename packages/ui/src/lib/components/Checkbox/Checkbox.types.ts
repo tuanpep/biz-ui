@@ -1,5 +1,6 @@
 /**
  * Checkbox component types.
+ * Following Carbon's patterns with enhanced validation states.
  */
 
 import * as React from 'react';
@@ -30,8 +31,14 @@ export interface CheckboxProps
   label?: string;
   /** Description text shown below the label */
   description?: string;
-  /** Error message to display */
+  /** Error message to display (sets invalid state) */
   error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Additional wrapper className when label/description is present */
+  wrapperClassName?: string;
 }
 
 /**

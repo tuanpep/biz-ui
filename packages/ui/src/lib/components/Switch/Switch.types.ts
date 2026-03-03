@@ -1,6 +1,6 @@
 /**
  * Switch component types.
- * Separated for better organization and reusability.
+ * Following Carbon's patterns with enhanced validation states.
  */
 
 import * as React from 'react';
@@ -30,6 +30,14 @@ export interface SwitchProps
   label?: string;
   /** Description text shown below the label */
   description?: string;
+  /** Error message to display (sets invalid state) */
+  error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Additional wrapper className when label/description is present */
+  wrapperClassName?: string;
 }
 
 /**
@@ -40,4 +48,6 @@ export interface SwitchSkeletonProps extends React.HTMLAttributes<HTMLDivElement
   size?: SwitchSize;
   /** Show skeleton with label placeholder */
   withLabel?: boolean;
+  /** Show description skeleton */
+  withDescription?: boolean;
 }

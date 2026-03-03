@@ -1,6 +1,6 @@
 /**
  * Search component types.
- * Separated for better organization and reusability.
+ * Following Carbon's patterns with enhanced validation states.
  */
 
 import * as React from 'react';
@@ -27,12 +27,18 @@ export interface SearchProps
   size?: SearchSize;
   /** Expandable search bar */
   expandable?: boolean;
-  /** Label text for accessibility */
+  /** Label text for the search */
   label?: string;
   /** Description text shown below the search */
   description?: string;
-  /** Error message to display */
+  /** Error message to display (sets invalid state) */
   error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Hide label visually but keep for accessibility */
+  hideLabel?: boolean;
   /** Show loading spinner */
   loading?: boolean;
   /** Controlled value for clear button visibility */
@@ -45,10 +51,12 @@ export interface SearchProps
   onClear?: () => void;
   /** Callback when search is submitted (Enter key) */
   onSearch?: (value: string) => void;
-  /** Additional wrapper className */
+  /** Additional wrapper className when label/description is present */
   wrapperClassName?: string;
   /** Hide clear button */
   hideClear?: boolean;
+  /** Test id for testing */
+  'data-testid'?: string;
 }
 
 /**
@@ -64,4 +72,10 @@ export interface SearchSkeletonProps extends React.HTMLAttributes<HTMLDivElement
   size?: SearchSize;
   /** Show skeleton with icon placeholder */
   hasIcon?: boolean;
+  /** Show label skeleton */
+  hasLabel?: boolean;
+  /** Show description skeleton */
+  hasDescription?: boolean;
+  /** Show error skeleton */
+  hasError?: boolean;
 }

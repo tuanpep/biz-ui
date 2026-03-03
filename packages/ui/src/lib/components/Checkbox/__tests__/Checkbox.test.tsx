@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '../../../test/utils';
+import { render, screen, fireEvent } from '../../../../test/utils';
 import { Checkbox } from '../Checkbox';
 
 describe('Checkbox', () => {
@@ -24,9 +24,9 @@ describe('Checkbox', () => {
     expect(screen.getByRole('checkbox')).not.toBeChecked();
   });
 
-  it('handles onChange', () => {
+  it('handles onCheckedChange', () => {
     const handleChange = vi.fn();
-    render(<Checkbox onChange={handleChange} />);
+    render(<Checkbox onCheckedChange={handleChange} />);
 
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);

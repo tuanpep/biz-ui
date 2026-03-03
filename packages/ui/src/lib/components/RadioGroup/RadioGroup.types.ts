@@ -1,6 +1,6 @@
 /**
  * RadioGroup component types.
- * Separated for better organization and reusability.
+ * Following Carbon's patterns with enhanced validation states.
  */
 
 import * as React from 'react';
@@ -24,6 +24,22 @@ export interface RadioGroupProps
   extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
   /** Orientation of the radio group */
   orientation?: 'horizontal' | 'vertical';
+  /** Label text for the radio group */
+  label?: string;
+  /** Description text shown below the label */
+  description?: string;
+  /** Error message to display (sets invalid state) */
+  error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Hide label visually but keep for accessibility */
+  hideLabel?: boolean;
+  /** Additional wrapper className when label/description is present */
+  wrapperClassName?: string;
+  /** Test id for testing */
+  'data-testid'?: string;
 }
 
 /**
@@ -51,4 +67,10 @@ export interface RadioGroupSkeletonProps extends React.HTMLAttributes<HTMLDivEle
   size?: RadioGroupSize;
   /** Show skeleton with label placeholders */
   withLabels?: boolean;
+  /** Show group label skeleton */
+  hasLabel?: boolean;
+  /** Show description skeleton */
+  hasDescription?: boolean;
+  /** Show error skeleton */
+  hasError?: boolean;
 }

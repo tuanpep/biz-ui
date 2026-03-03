@@ -1,11 +1,11 @@
 /**
  * MultiSelect Component
  *
- * Biz UI aligned multi-select with:
+ * Design Principles:
  * - Checkbox selection
  * - Tag display
  * - Multiple sizes
- * - Disabled state
+ * - Carbon-aligned validation patterns
  */
 
 import * as React from 'react';
@@ -28,6 +28,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
   (
     {
       className,
+      wrapperClassName,
       size = 'md',
       value: controlledValue,
       defaultValue,
@@ -35,12 +36,52 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
       options = [],
       placeholder = 'Select options',
       disabled = false,
-      error = false,
+      readOnly = false,
+      error,
       errorMessage,
+      hasError: legacyHasError,
+      warn,
+      description,
+      label,
+      required = false,
+      hideLabel = false,
+      'data-testid': testId,
+      id: propId,
       ...props
     },
     ref
   ) => {
+    // Handle legacy props with deprecation warnings
+    const resolvedError = React.useMemo(() => {
+      if (error) return error;
+      if (errorMessage) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('MultiSelect: errorMessage is deprecated. Use error prop with the message string instead.');
+        }
+        return errorMessage;
+      }
+      if (legacyHasError) {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('MultiSelect: hasError is deprecated. Use error prop with the message string instead.');
+        }
+        return 'Invalid selection';
+      }
+      return undefined;
+    }, [error, errorMessage, legacyHasError]);
+
+    // Generate IDs
+    const generatedId = React.useId();
+    const selectId = propId || generatedId;
+    const descriptionId = `${selectId}-description`;
+    const errorId = `${selectId}-error`;
+    const warnId = `${selectId}-warn`;
+    const listId = `${selectId}-list`;
+
+    // Calculate effective states
+    const effectiveDisabled = !readOnly && disabled;
+    const hasErrorState = !readOnly && !effectiveDisabled && !!resolvedError;
+    const hasWarning = !readOnly && !hasErrorState && !effectiveDisabled && !!warn;
+
     const [isOpen, setIsOpen] = React.useState(false);
     const [selected, setSelected] = React.useState<string[]>(controlledValue ?? defaultValue ?? []);
     const [searchValue, setSearchValue] = React.useState('');
@@ -53,7 +94,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
     }, [controlledValue]);
 
     const toggleOption = (optionValue: string) => {
-      if (disabled) return;
+      if (effectiveDisabled) return;
 
       const newSelected = selected.includes(optionValue)
         ? selected.filter((v) => v !== optionValue)
@@ -77,20 +118,32 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
       opt.label.toLowerCase().includes(searchValue.toLowerCase())
     );
 
-    return (
-      <div
-        ref={ref}
-        className={cn(multiSelectVariants({ size }), className)}
-        {...props}
-      >
-        {/* Trigger */}
+    // Build aria-describedby
+    const ariaDescribedBy = [
+      description && !hasErrorState && !hasWarning ? descriptionId : null,
+      hasErrorState ? errorId : null,
+      hasWarning ? warnId : null,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined;
+
+    const triggerElement = (
+      <>
         <button
           type="button"
-          disabled={disabled}
-          onClick={() => !disabled && setIsOpen(!isOpen)}
-          className={cn(multiSelectTriggerVariants({ size, error }))}
+          id={selectId}
+          disabled={effectiveDisabled}
+          onClick={() => !effectiveDisabled && setIsOpen(!isOpen)}
+          className={cn(
+            multiSelectTriggerVariants({ size, error: hasErrorState }),
+            hasWarning && 'border-warning focus-visible:ring-warning'
+          )}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
+          aria-invalid={hasErrorState}
+          aria-describedby={ariaDescribedBy}
+          aria-required={required}
+          data-testid={testId}
         >
           <div className="flex flex-wrap gap-1 flex-1">
             {selected.length > 0 ? (
@@ -100,18 +153,24 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
                   tag={label}
                   size={size}
                   onRemove={() => removeOption(selected[index])}
+                  removable
                 />
               ))
             ) : (
               <span className="text-muted-foreground">{placeholder}</span>
             )}
           </div>
-          <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+          <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" aria-hidden="true" />
         </button>
 
         {/* Dropdown */}
         {isOpen && (
-          <div className={cn(multiSelectMenuVariants({ size }), 'top-full')}>
+          <div
+            id={listId}
+            className={cn(multiSelectMenuVariants({ size }), 'top-full')}
+            role="listbox"
+            aria-multiselectable
+          >
             {filteredOptions.map((option) => (
               <div
                 key={option.value}
@@ -122,6 +181,8 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
                     disabled: option.disabled,
                   })
                 )}
+                role="option"
+                aria-selected={selected.includes(option.value)}
               >
                 <div className="flex items-center gap-2">
                   <div
@@ -142,11 +203,66 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
             ))}
           </div>
         )}
+      </>
+    );
 
-        {/* Error message */}
-        {error && errorMessage && (
-          <p className="text-xs text-destructive mt-1">{errorMessage}</p>
+    // Render without wrapper if no label/description/error/warn
+    if (hideLabel && !description && !hasErrorState && !hasWarning) {
+      return (
+        <div
+          ref={ref}
+          className={cn(multiSelectVariants({ size }), className)}
+          data-testid={testId}
+          {...props}
+        >
+          {triggerElement}
+        </div>
+      );
+    }
+
+    return (
+      <div
+        ref={ref}
+        className={cn(multiSelectVariants({ size }), wrapperClassName, className)}
+        data-testid={testId}
+        {...props}
+      >
+        {label && !hideLabel && (
+          <label
+            htmlFor={selectId}
+            className={cn(
+              'block font-medium mb-1.5 text-text-02',
+              size === 'sm' && 'text-xs',
+              size === 'lg' && 'text-base',
+              effectiveDisabled && 'opacity-50'
+            )}
+          >
+            {label}
+            {required && (
+              <span className="text-destructive ml-1" aria-hidden="true">
+                *
+              </span>
+            )}
+          </label>
         )}
+        {triggerElement}
+        <div>
+          {description && !hasErrorState && !hasWarning && (
+            <p id={descriptionId} className="text-sm text-muted-foreground mt-1">
+              {description}
+            </p>
+          )}
+          {hasErrorState && (
+            <p id={errorId} className="text-xs text-destructive mt-1" role="alert">
+              {resolvedError}
+            </p>
+          )}
+          {hasWarning && !hasErrorState && (
+            <p id={warnId} className="text-xs text-warning mt-1" role="alert">
+              {warn}
+            </p>
+          )}
+        </div>
       </div>
     );
   }
@@ -177,7 +293,7 @@ const MultiSelectTag = React.forwardRef<HTMLSpanElement, MultiSelectTagProps>(
             className="ml-1 hover:bg-muted rounded-sm"
             aria-label={`Remove ${typeof tag === 'string' ? tag : ''}`}
           >
-            <X className="h-3 w-3" />
+            <X className="h-3 w-3" aria-hidden="true" />
           </button>
         )}
       </span>

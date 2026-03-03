@@ -1,6 +1,6 @@
 /**
  * DatePicker component types.
- * Separated for better organization and reusability.
+ * Following Carbon's patterns with enhanced validation states.
  */
 
 import * as React from 'react';
@@ -25,16 +25,36 @@ export interface DatePickerProps
   placeholder?: string;
   /** Date format string (default: MM/dd/yyyy) */
   dateFormat?: string;
-  /** Error state */
-  error?: boolean;
-  /** Error message */
-  errorMessage?: string;
-  /** Label */
+  /** Error message to display (sets invalid state) */
+  error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Description text shown below the date picker */
+  description?: string;
+  /** Label text */
   label?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Hide label visually but keep for accessibility */
+  hideLabel?: boolean;
+  /** Additional wrapper className */
+  wrapperClassName?: string;
+  /** Test id for testing */
+  'data-testid'?: string;
   /** Minimum date */
   minDate?: Date;
   /** Maximum date */
   maxDate?: Date;
+  /**
+   * @deprecated Use `error` prop with error message string instead
+   * Error state (boolean) - use error string instead
+   */
+  hasError?: boolean;
+  /**
+   * @deprecated Use `error` prop with error message instead
+   * Error message (legacy prop)
+   */
+  errorMessage?: string;
 }
 
 /**
@@ -61,16 +81,30 @@ export interface DateRangePickerProps
   endPlaceholder?: string;
   /** Date format string */
   dateFormat?: string;
-  /** Error state */
-  error?: boolean;
-  /** Error message */
-  errorMessage?: string;
-  /** Label */
+  /** Error message to display (sets invalid state) */
+  error?: string;
+  /** Warning message to display (warning state, not invalid) */
+  warn?: string;
+  /** Description text shown below the picker */
+  description?: string;
+  /** Label text */
   label?: string;
+  /** Show required indicator on label */
+  required?: boolean;
+  /** Hide label visually but keep for accessibility */
+  hideLabel?: boolean;
+  /** Additional wrapper className */
+  wrapperClassName?: string;
+  /** Test id for testing */
+  'data-testid'?: string;
   /** Minimum date */
   minDate?: Date;
   /** Maximum date */
   maxDate?: Date;
+  /**
+   * @deprecated Use `error` prop with error message string instead
+   */
+  errorMessage?: string;
 }
 
 /**
@@ -91,4 +125,8 @@ export interface DatePickerSkeletonProps extends React.HTMLAttributes<HTMLDivEle
   size?: DatePickerSize;
   /** Show skeleton with label placeholder */
   withLabel?: boolean;
+  /** Show description skeleton */
+  hasDescription?: boolean;
+  /** Show error skeleton */
+  hasError?: boolean;
 }

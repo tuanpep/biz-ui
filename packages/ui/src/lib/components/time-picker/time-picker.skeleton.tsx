@@ -1,20 +1,20 @@
 /**
- * ComboBox Skeleton Component
+ * TimePicker Skeleton Component
  *
- * Loading placeholder for ComboBox component.
+ * Loading placeholder for TimePicker component.
  * Following Carbon's skeleton pattern.
  */
 
 import * as React from 'react';
 import { cn } from '../../utils/cn';
-import { comboBoxSkeletonVariants, comboBoxSkeletonLabelVariants } from './ComboBox.variants';
-import type { ComboBoxSkeletonProps } from './ComboBox.types';
+import { timePickerSkeletonVariants, timePickerSkeletonLabelVariants } from './time-picker.variants';
+import type { TimePickerSkeletonProps } from './time-picker.types';
 
 // ============================================================================
-// ComboBox Skeleton Component
+// TimePicker Skeleton Component
 // ============================================================================
 
-const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>(
+const TimePickerSkeleton = React.forwardRef<HTMLDivElement, TimePickerSkeletonProps>(
   (
     {
       className,
@@ -26,8 +26,8 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
     },
     ref
   ) => {
-    const comboBoxElement = (
-      <div className={cn(comboBoxSkeletonVariants({ size }))} />
+    const timePickerElement = (
+      <div className={cn('w-full', timePickerSkeletonVariants({ size }))} />
     );
 
     // Render without wrapper if no label/description/error
@@ -39,7 +39,7 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
           aria-hidden="true"
           {...props}
         >
-          {comboBoxElement}
+          {timePickerElement}
         </div>
       );
     }
@@ -52,9 +52,9 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
         {...props}
       >
         {withLabel && (
-          <div className={cn(comboBoxSkeletonLabelVariants({ size }))} />
+          <div className={cn(timePickerSkeletonLabelVariants({ size }))} />
         )}
-        {comboBoxElement}
+        {timePickerElement}
         {hasDescription && !hasError && (
           <div className="h-3 w-32 bg-muted animate-pulse rounded" />
         )}
@@ -66,10 +66,10 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
   }
 );
 
-ComboBoxSkeleton.displayName = 'ComboBoxSkeleton';
+TimePickerSkeleton.displayName = 'TimePickerSkeleton';
 
 // ============================================================================
 // Exports
 // ============================================================================
 
-export { ComboBoxSkeleton };
+export { TimePickerSkeleton };

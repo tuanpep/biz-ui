@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '../../../test/utils';
+import { render, screen, fireEvent } from '../../../../test/utils';
 import { RadioGroup, RadioGroupItem } from '../RadioGroup';
 
 describe('RadioGroup', () => {
@@ -38,7 +38,8 @@ describe('RadioGroup', () => {
         <RadioGroupItem value="option2" id="option2" />
       </RadioGroup>
     );
-    expect(screen.getByRole('radio', { name: 'option1' })).toBeChecked();
+    const radio = document.getElementById('option1');
+    expect(radio).toBeChecked();
   });
 
   it('handles value change', () => {
@@ -50,7 +51,7 @@ describe('RadioGroup', () => {
       </RadioGroup>
     );
 
-    const radio2 = screen.getByRole('radio', { name: 'option2' });
+    const radio2 = document.getElementById('option2');
     fireEvent.click(radio2);
 
     expect(handleValueChange).toHaveBeenCalledWith('option2');
@@ -108,8 +109,8 @@ describe('RadioGroup', () => {
         <RadioGroupItem value="option1" id="option1" />
       </RadioGroup>
     );
-    const radio = screen.getByRole('radio');
-    expect(radio).toHaveAttribute('aria-invalid', 'true');
+    const radiogroup = screen.getByRole('radiogroup');
+    expect(radiogroup).toHaveAttribute('aria-invalid', 'true');
   });
 
   it('accepts custom className', () => {
@@ -129,10 +130,57 @@ describe('RadioGroup', () => {
       </RadioGroup>
     );
 
-    const radio1 = screen.getByRole('radio', { name: 'option1' });
+    const radio1 = document.getElementById('option1');
     radio1.focus();
 
     // Arrow down should move to next radio
     fireEvent.keyDown(radio1, { key: 'ArrowDown' });
+  });
+
+  it('renders with group label', () => {
+    render(
+      <RadioGroup label="Select option">
+        <RadioGroupItem value="option1" id="option1" />
+      </RadioGroup>
+    );
+    expect(screen.getByText('Select option')).toBeInTheDocument();
+  });
+
+  it('renders with warning state', () => {
+    render(
+      <RadioGroup warn="Please verify your selection">
+        <RadioGroupItem value="option1" id="option1" />
+      </RadioGroup>
+    );
+    expect(screen.getByRole('alert')).toHaveTextContent('Please verify your selection');
+  });
+
+  it('renders with required indicator', () => {
+    render(
+      <RadioGroup label="Select option" required>
+        <RadioGroupItem value="option1" id="option1" />
+      </RadioGroup>
+    );
+    const label = screen.getByText('Select option').closest('label');
+    expect(label).toHaveTextContent('*');
+  });
+
+  it('hides label visually with hideLabel', () => {
+    render(
+      <RadioGroup label="Select option" hideLabel>
+        <RadioGroupItem value="option1" id="option1" />
+      </RadioGroup>
+    );
+    expect(screen.getByText('Select option')).toHaveClass('sr-only');
+  });
+
+  it('error takes precedence over warning', () => {
+    render(
+      <RadioGroup error="Required field" warn="Just a warning">
+        <RadioGroupItem value="option1" id="option1" />
+      </RadioGroup>
+    );
+    expect(screen.getByRole('alert')).toHaveTextContent('Required field');
+    expect(screen.queryByText('Just a warning')).not.toBeInTheDocument();
   });
 });

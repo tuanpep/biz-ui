@@ -1,37 +1,43 @@
 /**
- * ComboBox Skeleton Component
+ * NumberInput Skeleton Component
  *
- * Loading placeholder for ComboBox component.
+ * Loading placeholder for NumberInput component.
  * Following Carbon's skeleton pattern.
  */
 
 import * as React from 'react';
 import { cn } from '../../utils/cn';
-import { comboBoxSkeletonVariants, comboBoxSkeletonLabelVariants } from './ComboBox.variants';
-import type { ComboBoxSkeletonProps } from './ComboBox.types';
+import { numberInputSkeletonVariants, numberInputSkeletonLabelVariants } from './NumberInput.variants';
+import type { NumberInputSkeletonProps } from './NumberInput.types';
 
 // ============================================================================
-// ComboBox Skeleton Component
+// NumberInput Skeleton Component
 // ============================================================================
 
-const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>(
+const NumberInputSkeleton = React.forwardRef<HTMLDivElement, NumberInputSkeletonProps>(
   (
     {
       className,
       size = 'md',
-      withLabel = false,
+      hasLabel = false,
       hasDescription = false,
       hasError = false,
       ...props
     },
     ref
   ) => {
-    const comboBoxElement = (
-      <div className={cn(comboBoxSkeletonVariants({ size }))} />
+    const skeletonElement = (
+      <div className={cn('relative flex w-full', numberInputSkeletonVariants({ size }))}>
+        {/* Steppers */}
+        <div className="flex flex-col gap-0.5">
+          <div className={cn('h-3 w-full', numberInputSkeletonVariants({ size }))} />
+          <div className={cn('h-3 w-full', numberInputSkeletonVariants({ size }))} />
+        </div>
+      </div>
     );
 
     // Render without wrapper if no label/description/error
-    if (!withLabel && !hasDescription && !hasError) {
+    if (!hasLabel && !hasDescription && !hasError) {
       return (
         <div
           ref={ref}
@@ -39,7 +45,7 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
           aria-hidden="true"
           {...props}
         >
-          {comboBoxElement}
+          {skeletonElement}
         </div>
       );
     }
@@ -51,10 +57,10 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
         aria-hidden="true"
         {...props}
       >
-        {withLabel && (
-          <div className={cn(comboBoxSkeletonLabelVariants({ size }))} />
+        {hasLabel && (
+          <div className={cn(numberInputSkeletonLabelVariants({ size }))} />
         )}
-        {comboBoxElement}
+        {skeletonElement}
         {hasDescription && !hasError && (
           <div className="h-3 w-32 bg-muted animate-pulse rounded" />
         )}
@@ -66,10 +72,10 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
   }
 );
 
-ComboBoxSkeleton.displayName = 'ComboBoxSkeleton';
+NumberInputSkeleton.displayName = 'NumberInputSkeleton';
 
 // ============================================================================
 // Exports
 // ============================================================================
 
-export { ComboBoxSkeleton };
+export { NumberInputSkeleton };
