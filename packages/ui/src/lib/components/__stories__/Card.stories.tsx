@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
 } from '../card';
-import { Button } from '../button';
+import { Button } from '../Button';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',

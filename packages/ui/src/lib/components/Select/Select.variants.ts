@@ -1,11 +1,13 @@
 /**
  * Select variants using CVA.
+ * Aligned with Input component for consistency.
  */
 
 import { cva } from 'class-variance-authority';
 
 /**
  * Select trigger variant styles.
+ * Biz UI aligned with clear visual feedback on validation states.
  */
 export const selectTriggerVariants = cva(
   'flex w-full items-center justify-between border bg-card text-sm ring-offset-background transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
@@ -25,11 +27,16 @@ export const selectTriggerVariants = cva(
         true: 'border-destructive focus-visible:ring-destructive',
         false: '',
       },
+      warn: {
+        true: 'border-warning focus-visible:ring-warning',
+        false: '',
+      },
     },
     defaultVariants: {
       variant: 'default',
       size: 'md',
       error: false,
+      warn: false,
     },
   }
 );

@@ -2,7 +2,8 @@
  * Checkbox Component Module
  */
 
-export { Checkbox, checkboxVariants } from './Checkbox';
+export { Checkbox } from './Checkbox';
+export { checkboxVariants, checkboxSkeletonVariants } from './Checkbox.variants';
 export { CheckboxSkeleton } from './Checkbox.skeleton';
 export type {
   CheckboxProps,

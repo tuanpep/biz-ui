@@ -10,7 +10,7 @@ describe('Switch', () => {
   });
 
   it('can be toggled', () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Switch label="Toggle me" onCheckedChange={handleChange} />);
 
     const switchElement = screen.getByRole('switch');

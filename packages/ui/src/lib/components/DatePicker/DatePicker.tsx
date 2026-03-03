@@ -9,7 +9,7 @@ import * as React from 'react';
 import { cn } from '../../utils/cn';
 import { CalendarIcon } from 'lucide-react';
 import { format, isSameDay, isValid } from 'date-fns';
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
 import { Calendar } from '../calendar';
 import { TimePicker } from '../time-picker';
 import { datePickerVariants, datePickerInputVariants } from './DatePicker.variants';

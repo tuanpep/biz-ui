@@ -30,3 +30,13 @@ export type AvatarImageProps = React.ComponentPropsWithoutRef<typeof AvatarPrimi
 export interface AvatarFallbackProps
   extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>,
     VariantProps<typeof import('./Avatar.variants').avatarFallbackVariants> {}
+
+/**
+ * AvatarSkeleton component props.
+ */
+export interface AvatarSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Size of the skeleton avatar */
+  size?: AvatarSize;
+  /** Animate the skeleton */
+  animate?: boolean;
+}

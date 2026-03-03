@@ -25,3 +25,15 @@ export interface BadgeProps
   /** Map to a child component */
   asChild?: boolean;
 }
+
+/**
+ * BadgeSkeleton component props.
+ */
+export interface BadgeSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Variant style of the skeleton */
+  variant?: BadgeVariant;
+  /** Size of the skeleton */
+  size?: BadgeSize;
+  /** Animate the skeleton */
+  animate?: boolean;
+}

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Form, FormField, FormGroup } from '../form-field';
-import { Input } from '../input';
-import { Button } from '../button';
+import { Input } from '../Input';
+import { Button } from '../Button';
 import { Checkbox } from '../checkbox';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../select';
 

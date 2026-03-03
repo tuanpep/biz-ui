@@ -56,3 +56,17 @@ export interface SelectableTagProps extends Omit<TagProps, 'selectable'> {
   /** Callback when selection changes */
   onSelect?: (selected: boolean) => void;
 }
+
+/**
+ * TagSkeleton component props.
+ */
+export interface TagSkeletonProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** Tag color variant */
+  variant?: TagVariant;
+  /** Size variant */
+  size?: TagSize;
+  /** Animate the skeleton */
+  animate?: boolean;
+  /** Show icon placeholder */
+  hasIcon?: boolean;
+}

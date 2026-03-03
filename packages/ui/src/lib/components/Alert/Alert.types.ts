@@ -42,3 +42,13 @@ export interface AlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement
  * AlertDescription component props.
  */
 export interface AlertDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+/**
+ * AlertSkeleton component props.
+ */
+export interface AlertSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Variant style of the skeleton */
+  variant?: AlertVariant;
+  /** Animate the skeleton */
+  animate?: boolean;
+}

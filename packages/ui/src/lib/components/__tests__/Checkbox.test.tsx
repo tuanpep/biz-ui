@@ -10,7 +10,7 @@ describe('Checkbox', () => {
   });
 
   it('can be checked and unchecked', () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Checkbox label="Check me" onCheckedChange={handleChange} />);
 
     const checkbox = screen.getByRole('checkbox');

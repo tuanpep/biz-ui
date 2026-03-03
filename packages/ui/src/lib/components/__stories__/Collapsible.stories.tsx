@@ -4,7 +4,7 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from '../collapsible';
-import { Button } from '../button';
+import { Button } from '../Button';
 import { ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 

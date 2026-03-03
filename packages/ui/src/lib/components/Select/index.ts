@@ -11,10 +11,10 @@ export {
   SelectItem,
   SelectLabel,
   SelectSeparator,
-  SelectSkeleton,
   selectTriggerVariants,
   selectItemVariants,
 } from './Select';
+export { SelectSkeleton } from './Select.skeleton';
 export type {
   SelectTriggerProps,
   SelectItemProps,
@@ -22,4 +22,6 @@ export type {
   SelectTriggerVariant,
   SelectTriggerSize,
   SelectItemSize,
+  SelectValidationState,
+  SelectFieldProps,
 } from './Select.types';

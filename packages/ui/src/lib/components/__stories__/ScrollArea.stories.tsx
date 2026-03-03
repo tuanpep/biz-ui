@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ScrollArea, ScrollBar } from '../scroll-area';
+import { ScrollArea, ScrollBar } from '../ScrollArea';
 
 const meta: Meta<typeof ScrollArea> = {
   title: 'Components/ScrollArea',

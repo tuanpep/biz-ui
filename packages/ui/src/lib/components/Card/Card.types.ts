@@ -59,3 +59,21 @@ export interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
 export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
 }
+
+/**
+ * CardSkeleton component props.
+ */
+export interface CardSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Card variant style */
+  variant?: CardVariant;
+  /** Card size */
+  size?: CardSize;
+  /** Animate the skeleton */
+  animate?: boolean;
+  /** Show header skeleton */
+  hasHeader?: boolean;
+  /** Show footer skeleton */
+  hasFooter?: boolean;
+  /** Number of content lines */
+  lines?: number;
+}

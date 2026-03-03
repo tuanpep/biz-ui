@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '../../../test/utils';
-import { Alert, AlertTitle, AlertDescription } from '../alert';
+import { Alert, AlertTitle, AlertDescription } from '../Alert';
 
 describe('Alert', () => {
   it('renders correctly', () => {
@@ -35,7 +35,7 @@ describe('Alert', () => {
   });
 
   it('can be closed when closable', () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(
       <Alert closable onClose={onClose} title="Closable">
         Close me

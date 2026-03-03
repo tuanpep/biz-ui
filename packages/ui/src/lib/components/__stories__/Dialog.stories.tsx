@@ -9,8 +9,8 @@ import {
   DialogDescription,
   DialogClose,
 } from '../dialog';
-import { Button } from '../button';
-import { Input } from '../input';
+import { Button } from '../Button';
+import { Input } from '../Input';
 import { Label } from '../label';
 
 const meta: Meta<typeof Dialog> = {

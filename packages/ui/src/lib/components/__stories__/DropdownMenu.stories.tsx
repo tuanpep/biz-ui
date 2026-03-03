@@ -14,7 +14,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from '../dropdown-menu';
-import { Button } from '../button';
+import { Button } from '../Button';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Components/DropdownMenu',

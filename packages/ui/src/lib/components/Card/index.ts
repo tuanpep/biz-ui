@@ -3,7 +3,9 @@
  *
  * Following Carbon's component export pattern:
  * - Main component as named export
+ * - Sub-components
  * - Variants utility
+ * - Skeleton component
  * - Type exports
  */
 
@@ -18,6 +20,9 @@ export {
   cardVariants,
 } from './Card';
 
+// Skeleton component
+export { CardSkeleton } from './Card.skeleton';
+
 // Types
 export type {
   CardProps,
@@ -28,4 +33,5 @@ export type {
   CardFooterProps,
   CardVariant,
   CardSize,
+  CardSkeletonProps,
 } from './Card.types';

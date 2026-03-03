@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '../../../test/utils';
-import { Input } from '../input';
+import { Input } from '../Input';
 
 describe('Input', () => {
   it('renders correctly', () => {
@@ -57,7 +57,7 @@ describe('Input', () => {
   });
 
   it('handles value changes', () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Input onChange={handleChange} />);
     const input = screen.getByRole('textbox');
     fireEvent.change(input, { target: { value: 'test value' } });

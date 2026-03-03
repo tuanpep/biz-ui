@@ -27,7 +27,7 @@ import {
   startOfDay
 } from 'date-fns';
 import { cn } from '../../utils/cn';
-import { IconButton } from '../icon-button';
+import { IconButton } from '../IconButton';
 import type { CalendarProps } from './calendar.types';
 
 // ============================================================================

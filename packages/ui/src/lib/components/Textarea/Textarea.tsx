@@ -4,8 +4,9 @@
  * Design Principles:
  * - Consistent styling with Input component
  * - Support for auto-resize
- * - Clear focus and error states
+ * - Clear focus and error/warning states
  * - Character count support
+ * - Carbon-aligned validation patterns
  */
 
 import * as React from 'react';
@@ -23,25 +24,39 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       label,
       description,
       error,
+      warn,
+      required = false,
+      hideLabel = false,
       showCount,
       maxLength,
       autoResize,
       value,
       defaultValue,
       onChange,
+      wrapperClassName,
+      'data-testid': testId,
       id: propId,
+      disabled,
+      readOnly,
       ...props
     },
     ref
   ) => {
+    // Generate IDs
     const generatedId = React.useId();
     const id = propId || generatedId;
     const descriptionId = `${id}-description`;
     const errorId = `${id}-error`;
+    const warnId = `${id}-warn`;
 
+    // Calculate effective states (matching Carbon's useNormalizedInputProps)
+    const effectiveDisabled = !readOnly && disabled;
+    const hasError = !readOnly && !effectiveDisabled && !!error;
+    const hasWarning = !readOnly && !hasError && !effectiveDisabled && !!warn;
+
+    // Value handling
     const [internalValue, setInternalValue] = React.useState(defaultValue || '');
     const textareaValue = value !== undefined ? value : internalValue;
-    const hasError = !!error;
     const characterCount = String(textareaValue).length;
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -64,11 +79,18 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     // Build aria-describedby
     const ariaDescribedBy = [
-      description && !error ? descriptionId : null,
-      error ? errorId : null,
+      description && !hasError && !hasWarning ? descriptionId : null,
+      hasError ? errorId : null,
+      hasWarning ? warnId : null,
     ]
       .filter(Boolean)
       .join(' ') || undefined;
+
+    // Build validation classes
+    const validationClasses = {
+      'border-destructive focus-visible:ring-destructive': hasError,
+      'border-warning focus-visible:ring-warning': hasWarning,
+    };
 
     const textarea = (
       <textarea
@@ -77,44 +99,72 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         value={textareaValue}
         onChange={handleChange}
         maxLength={maxLength}
-        aria-invalid={hasError ? 'true' : undefined}
+        aria-invalid={hasError}
         aria-describedby={ariaDescribedBy}
+        data-testid={testId}
+        disabled={effectiveDisabled}
+        readOnly={readOnly}
         className={cn(
           textareaVariants({ variant, resize, size }),
-          hasError && 'border-destructive focus-visible:ring-destructive',
+          validationClasses,
           className
         )}
         {...props}
       />
     );
 
-    if (!label && !description && !error && !showCount) {
+    // Render without wrapper if no label/description/error/warn/count
+    if (!label && !description && !error && !warn && !showCount) {
       return textarea;
     }
 
     return (
-      <div className="grid w-full gap-1.5">
+      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
         {label && (
-          <label htmlFor={id} className="text-sm font-medium">
+          <label
+            htmlFor={id}
+            className={cn(
+              'text-sm font-medium leading-none',
+              hideLabel && 'sr-only',
+              effectiveDisabled && 'opacity-50'
+            )}
+          >
             {label}
+            {required && (
+              <span className="text-destructive ml-1" aria-hidden="true">
+                *
+              </span>
+            )}
           </label>
         )}
         {textarea}
         <div className="flex items-center justify-between">
           <div>
-            {description && !error && (
+            {description && !hasError && !hasWarning && (
               <p id={descriptionId} className="text-sm text-muted-foreground">
                 {description}
               </p>
             )}
-            {error && (
+            {hasError && (
               <p id={errorId} role="alert" className="text-xs text-destructive">
                 {error}
               </p>
             )}
+            {hasWarning && !hasError && (
+              <p id={warnId} role="alert" className="text-xs text-warning">
+                {warn}
+              </p>
+            )}
           </div>
           {showCount && (
-            <p className="text-xs text-muted-foreground ml-auto">
+            <p
+              className={cn(
+                'text-xs ml-auto',
+                maxLength && characterCount >= maxLength
+                  ? 'text-destructive font-medium'
+                  : 'text-muted-foreground'
+              )}
+            >
               {characterCount}
               {maxLength && ` / ${maxLength}`}
             </p>
@@ -128,4 +178,5 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = 'Textarea';
 
 export { Textarea };
+export { textareaVariants } from './Textarea.variants';
 export type { TextareaProps } from './Textarea.types';

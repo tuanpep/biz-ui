@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Input } from '../input';
+import { Input } from '../Input';
 import { Search, Mail, Lock, User } from 'lucide-react';
 
 const meta: Meta<typeof Input> = {

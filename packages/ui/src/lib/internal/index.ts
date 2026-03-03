@@ -40,3 +40,42 @@ export {
   resetIdCounter,
   getIdCounter,
 } from './id';
+
+// Polymorphic component types
+export type {
+  PolymorphicComponentProp,
+  PolymorphicComponentPropWithRef,
+  PolymorphicForwardRefComponent,
+  PolymorphicRef,
+  ElementTypeFromProps,
+  MergeElementProps,
+  RefFromProps,
+} from './polymorphic';
+export { isValidElementType } from './polymorphic';
+
+// Event handling utilities
+export {
+  composeEventHandlers,
+  composeHandlers,
+  stopPropagation,
+  preventDefault,
+  stopEvent,
+} from './events';
+
+// Component utilities
+export {
+  isComponentElement,
+  isComponentElementOf,
+  findChildrenByType,
+  findChildByType,
+  hasChildOfType,
+  cloneElementIfType,
+} from './component-utils';
+
+// Normalized input props hook
+export {
+  useNormalizedInputProps,
+  getValidationClassNames,
+  type NormalizedInputPropsConfig,
+  type NormalizedInputProps,
+} from './use-normalized-input-props';
