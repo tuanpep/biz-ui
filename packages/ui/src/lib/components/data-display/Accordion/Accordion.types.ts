@@ -3,23 +3,26 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type * as AccordionPrimitive from '@radix-ui/react-accordion';
+import * as React from "react";
+import type * as AccordionPrimitive from "@radix-ui/react-accordion";
 
 /**
  * AccordionItem component props.
  */
-export interface AccordionItemProps
-  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> {}
+export type AccordionItemProps = React.ComponentPropsWithoutRef<
+  typeof AccordionPrimitive.Item
+>;
 
 /**
  * AccordionTrigger component props.
  */
-export interface AccordionTriggerProps
-  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {}
+export type AccordionTriggerProps = React.ComponentPropsWithoutRef<
+  typeof AccordionPrimitive.Trigger
+>;
 
 /**
  * AccordionContent component props.
  */
-export interface AccordionContentProps
-  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> {}
+export type AccordionContentProps = React.ComponentPropsWithoutRef<
+  typeof AccordionPrimitive.Content
+>;

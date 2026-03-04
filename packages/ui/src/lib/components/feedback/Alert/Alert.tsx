@@ -8,17 +8,24 @@
  * - Support for title and description
  */
 
-import * as React from 'react';
-import { AlertCircle, CheckCircle2, Info, XCircle, X } from 'lucide-react';
-import { cn } from '../../utils/cn';
-import { alertVariants } from './Alert.variants';
-import type { AlertProps, AlertTitleProps, AlertDescriptionProps, AlertVariant } from './Alert.types';
+import * as React from "react";
+import { AlertCircle, CheckCircle2, Info, XCircle, X } from "lucide-react";
+import { cn } from "../../../utils/cn";
+import { alertVariants } from "./Alert.variants";
+import type {
+  AlertProps,
+  AlertTitleProps,
+  AlertDescriptionProps,
+} from "./Alert.types";
 
 // ============================================================================
 // Icon Map
 // ============================================================================
 
-const alertIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const alertIconMap: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
   default: Info,
   info: Info,
   success: CheckCircle2,
@@ -45,7 +52,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isVisible, setIsVisible] = React.useState(true);
 
@@ -58,28 +65,27 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       return null;
     }
 
-    const IconComponent = alertIconMap[variant || 'default'];
-    const displayIcon = icon || (showIcon && <IconComponent className="h-5 w-5" />);
+    const IconComponent = alertIconMap[variant || "default"];
+    const displayIcon =
+      icon !== undefined ? (
+        icon
+      ) : showIcon && IconComponent ? (
+        <IconComponent className="h-5 w-5" />
+      ) : null;
 
     return (
       <div
         ref={ref}
-        role={variant === 'destructive' ? 'alert' : 'status'}
+        role={variant === "destructive" ? "alert" : "status"}
         className={cn(alertVariants({ variant }), className)}
         {...props}
       >
         {displayIcon}
         <div className="flex-1 pr-8">
-          {title && (
-            <AlertTitle>{title}</AlertTitle>
-          )}
-          {description && (
-            <AlertDescription>{description}</AlertDescription>
-          )}
+          {title && <AlertTitle>{title}</AlertTitle>}
+          {description && <AlertDescription>{description}</AlertDescription>}
           {children}
-          {actions && (
-            <div className="mt-3 flex gap-2">{actions}</div>
-          )}
+          {actions && <div className="mt-3 flex gap-2">{actions}</div>}
         </div>
         {closable && (
           <button
@@ -93,9 +99,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         )}
       </div>
     );
-  }
+  },
 );
-Alert.displayName = 'Alert';
+Alert.displayName = "Alert";
 
 // ============================================================================
 // AlertTitle Component
@@ -105,32 +111,41 @@ const AlertTitle = React.forwardRef<HTMLHeadingElement, AlertTitleProps>(
   ({ className, ...props }, ref) => (
     <h5
       ref={ref}
-      className={cn('mb-1 font-semibold leading-none tracking-tight', className)}
+      className={cn(
+        "mb-1 font-semibold leading-none tracking-tight",
+        className,
+      )}
       {...props}
     />
-  )
+  ),
 );
-AlertTitle.displayName = 'AlertTitle';
+AlertTitle.displayName = "AlertTitle";
 
 // ============================================================================
 // AlertDescription Component
 // ============================================================================
 
-const AlertDescription = React.forwardRef<HTMLDivElement, AlertDescriptionProps>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('text-sm [&_p]:leading-relaxed', className)}
-      {...props}
-    />
-  )
-);
-AlertDescription.displayName = 'AlertDescription';
+const AlertDescription = React.forwardRef<
+  HTMLDivElement,
+  AlertDescriptionProps
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("text-sm [&_p]:leading-relaxed", className)}
+    {...props}
+  />
+));
+AlertDescription.displayName = "AlertDescription";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Alert, AlertTitle, AlertDescription };
-export { alertVariants } from './Alert.variants';
-export type { AlertProps, AlertTitleProps, AlertDescriptionProps, AlertVariant } from './Alert.types';
+export { alertVariants } from "./Alert.variants";
+export type {
+  AlertProps,
+  AlertTitleProps,
+  AlertDescriptionProps,
+  AlertVariant,
+} from "./Alert.types";

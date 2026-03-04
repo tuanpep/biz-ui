@@ -9,10 +9,10 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { inputVariants } from './Input.variants';
-import type { InputProps } from './Input.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { inputVariants } from "./Input.variants";
+import type { InputProps } from "./Input.types";
 
 // ============================================================================
 // Input Component
@@ -22,7 +22,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      type = 'text',
+      type = "text",
       variant,
       size,
       label,
@@ -34,13 +34,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       leftIcon,
       rightIcon,
       wrapperClassName,
-      'data-testid': testId,
+      "data-testid": testId,
       id: providedId,
       disabled,
       readOnly,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -62,12 +62,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         hasWarning ? warnId : null,
       ]
         .filter(Boolean)
-        .join(' ') || undefined;
+        .join(" ") || undefined;
 
     // Build validation classes
     const validationClasses = {
-      'border-destructive focus-visible:ring-destructive': hasError,
-      'border-warning focus-visible:ring-warning': hasWarning,
+      "border-destructive focus-visible:ring-destructive": hasError,
+      "border-warning focus-visible:ring-warning": hasWarning,
     };
 
     // Has icons
@@ -87,9 +87,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             inputVariants({ variant, size }),
             validationClasses,
-            hasLeftIcon && 'pl-10',
-            hasRightIcon && 'pr-10',
-            className
+            hasLeftIcon && "pl-10",
+            hasRightIcon && "pr-10",
+            className,
           )}
           ref={ref}
           aria-invalid={hasError}
@@ -113,14 +113,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+      <div className={cn("grid w-full gap-1.5", wrapperClassName)}>
         {label && (
           <label
             htmlFor={inputId}
             className={cn(
-              'text-sm font-medium leading-none',
-              hideLabel && 'sr-only',
-              effectiveDisabled && 'opacity-50'
+              "text-sm font-medium leading-none",
+              hideLabel && "sr-only",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -134,48 +134,37 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {input}
         <div>
           {description && !hasError && !hasWarning && (
-            <p
-              id={descriptionId}
-              className="text-sm text-muted-foreground"
-            >
+            <p id={descriptionId} className="text-sm text-muted-foreground">
               {description}
             </p>
           )}
           {hasError && (
-            <p
-              id={errorId}
-              className="text-xs text-destructive"
-              role="alert"
-            >
+            <p id={errorId} className="text-xs text-destructive" role="alert">
               {error}
             </p>
           )}
           {hasWarning && !hasError && (
-            <p
-              id={warnId}
-              className="text-xs text-warning"
-              role="alert"
-            >
+            <p id={warnId} className="text-xs text-warning" role="alert">
               {warn}
             </p>
           )}
         </div>
       </div>
     );
-  }
+  },
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Input };
-export { inputVariants } from './Input.variants';
+export { inputVariants } from "./Input.variants";
 export type {
   InputProps,
   InputSkeletonProps,
   InputVariant,
   InputSize,
-} from './Input.types';
+} from "./Input.types";

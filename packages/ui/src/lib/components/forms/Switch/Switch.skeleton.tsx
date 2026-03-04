@@ -5,19 +5,19 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { switchSkeletonVariants } from './Switch.variants';
-import type { SwitchSkeletonProps } from './Switch.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { switchSkeletonVariants } from "./Switch.variants";
+import type { SwitchSkeletonProps } from "./Switch.types";
 
 // ============================================================================
 // Switch Skeleton Component
 // ============================================================================
 
 const SwitchSkeleton = React.forwardRef<HTMLDivElement, SwitchSkeletonProps>(
-  ({ className, size = 'md', withLabel = false, ...props }, ref) => {
+  ({ className, size = "md", withLabel = false, ...props }, ref) => {
     return (
-      <div className={cn('flex items-center gap-2', className)} {...props}>
+      <div className={cn("flex items-center gap-2", className)} {...props}>
         <div
           ref={ref}
           className={cn(switchSkeletonVariants({ size }))}
@@ -28,10 +28,10 @@ const SwitchSkeleton = React.forwardRef<HTMLDivElement, SwitchSkeletonProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-SwitchSkeleton.displayName = 'SwitchSkeleton';
+SwitchSkeleton.displayName = "SwitchSkeleton";
 
 // ============================================================================
 // Exports

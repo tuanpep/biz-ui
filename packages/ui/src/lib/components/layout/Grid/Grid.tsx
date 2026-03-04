@@ -22,11 +22,16 @@
  * ```
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
-import { gridVariants, rowVariants } from './Grid.variants';
-import type { GridProps, RowProps, ColumnProps, ColumnBreakpoints } from './Grid.types';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
+import { gridVariants, rowVariants } from "./Grid.variants";
+import type {
+  GridProps,
+  RowProps,
+  ColumnProps,
+  ColumnBreakpoints,
+} from "./Grid.types";
 
 // ============================================================================
 // Grid Component
@@ -34,17 +39,20 @@ import type { GridProps, RowProps, ColumnProps, ColumnBreakpoints } from './Grid
 
 const Grid = React.forwardRef<HTMLDivElement, GridProps>(
   ({ className, condensed, narrow, fullWidth, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <Comp
         ref={ref}
-        className={cn(gridVariants({ condensed, narrow, fullWidth }), className)}
+        className={cn(
+          gridVariants({ condensed, narrow, fullWidth }),
+          className,
+        )}
         {...props}
       />
     );
-  }
+  },
 );
-Grid.displayName = 'Grid';
+Grid.displayName = "Grid";
 
 // ============================================================================
 // Row Component
@@ -52,7 +60,7 @@ Grid.displayName = 'Grid';
 
 const Row = React.forwardRef<HTMLDivElement, RowProps>(
   ({ className, condensed, narrow, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <Comp
         ref={ref}
@@ -60,9 +68,9 @@ const Row = React.forwardRef<HTMLDivElement, RowProps>(
         {...props}
       />
     );
-  }
+  },
 );
-Row.displayName = 'Row';
+Row.displayName = "Row";
 
 // ============================================================================
 // Column Component
@@ -70,21 +78,10 @@ Row.displayName = 'Row';
 
 const Column = React.forwardRef<HTMLDivElement, ColumnProps>(
   (
-    {
-      className,
-      span,
-      sm,
-      md,
-      lg,
-      xlg,
-      max,
-      offset,
-      asChild,
-      ...props
-    },
-    ref
+    { className, span, sm, md, lg, xlg, max, offset, asChild, ...props },
+    ref,
   ) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
 
     // Merge shorthand props with span object
     const breakpoints: ColumnBreakpoints = {
@@ -97,7 +94,7 @@ const Column = React.forwardRef<HTMLDivElement, ColumnProps>(
 
     // Generate column classes
     const columnClasses = cn(
-      'ocean-col',
+      "ocean-col",
       // Responsive column widths
       breakpoints.sm && `ocean-col-sm-${breakpoints.sm}`,
       breakpoints.md && `ocean-col-md-${breakpoints.md}`,
@@ -110,20 +107,20 @@ const Column = React.forwardRef<HTMLDivElement, ColumnProps>(
       offset?.lg && `ocean-col-offset-lg-${offset.lg}`,
       offset?.xlg && `ocean-col-offset-xlg-${offset.xlg}`,
       offset?.max && `ocean-col-offset-max-${offset.max}`,
-      className
+      className,
     );
 
     return <Comp ref={ref} className={columnClasses} {...props} />;
-  }
+  },
 );
-Column.displayName = 'Column';
+Column.displayName = "Column";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Grid, Row, Column };
-export { gridVariants, rowVariants } from './Grid.variants';
+export { gridVariants, rowVariants } from "./Grid.variants";
 export type {
   GridProps,
   RowProps,
@@ -131,4 +128,4 @@ export type {
   ColumnBreakpoints,
   ColumnOffset,
   BreakpointValue,
-} from './Grid.types';
+} from "./Grid.types";

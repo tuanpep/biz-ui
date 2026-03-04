@@ -5,41 +5,48 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
 import {
-  fileUploaderSkeletonVariants,
-  fileUploaderSkeletonLabelVariants
-  fileUploaderSkeletonDropContainerVariants
-  fileUploaderSkeletonItemVariants
-} from './FileUploader.variants';
-import type { FileUploaderSkeletonProps } from './FileUploader.types';
+  fileUploaderSkeletonLabelVariants,
+  fileUploaderSkeletonDropContainerVariants,
+  fileUploaderSkeletonItemVariants,
+} from "./FileUploader.variants";
+import type { FileUploaderSkeletonProps } from "./FileUploader.types";
 
 // ============================================================================
 // FileUploader Skeleton Component
 // ============================================================================
 
-const FileUploaderSkeleton = React.forwardRef<HTMLDivElement, FileUploaderSkeletonProps>(
+const FileUploaderSkeleton = React.forwardRef<
+  HTMLDivElement,
+  FileUploaderSkeletonProps
+>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       hasLabel = false,
       hasDescription = false,
       hasError = false,
       itemCount = 0,
       ...props
     },
-    ref
+    ref,
   ) => {
     const dropContainerElement = (
-      <div className={cn(fileUploaderSkeletonDropContainerVariants({ size }))} />
+      <div
+        className={cn(fileUploaderSkeletonDropContainerVariants({ size }))}
+      />
     );
 
     const itemsElement = itemCount > 0 && (
       <div className="flex flex-col gap-2 mt-4">
         {Array.from({ length: itemCount }).map((_, index) => (
-          <div key={index} className={cn(fileUploaderSkeletonItemVariants({ size }))} />
+          <div
+            key={index}
+            className={cn(fileUploaderSkeletonItemVariants({ size }))}
+          />
         ))}
       </div>
     );
@@ -47,12 +54,7 @@ const FileUploaderSkeleton = React.forwardRef<HTMLDivElement, FileUploaderSkelet
     // Render without wrapper if no label/description/error
     if (!hasLabel && !hasDescription && !hasError) {
       return (
-        <div
-          ref={ref}
-          className={className}
-          aria-hidden="true"
-          {...props}
-        >
+        <div ref={ref} className={className} aria-hidden="true" {...props}>
           {dropContainerElement}
           {itemsElement}
         </div>
@@ -62,7 +64,7 @@ const FileUploaderSkeleton = React.forwardRef<HTMLDivElement, FileUploaderSkelet
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', className)}
+        className={cn("flex flex-col gap-1.5", className)}
         aria-hidden="true"
         {...props}
       >
@@ -79,10 +81,10 @@ const FileUploaderSkeleton = React.forwardRef<HTMLDivElement, FileUploaderSkelet
         )}
       </div>
     );
-  }
+  },
 );
 
-FileUploaderSkeleton.displayName = 'FileUploaderSkeleton';
+FileUploaderSkeleton.displayName = "FileUploaderSkeleton";
 
 // ============================================================================
 // Exports

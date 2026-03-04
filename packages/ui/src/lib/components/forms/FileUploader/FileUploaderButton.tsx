@@ -4,30 +4,33 @@
  * Button component that triggers file selection dialog.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { fileUploaderButtonVariants } from './FileUploader.variants';
-import type { FileUploaderButtonProps } from './FileUploader.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { fileUploaderButtonVariants } from "./FileUploader.variants";
+import type { FileUploaderButtonProps } from "./FileUploader.types";
 
 // ============================================================================
 // FileUploaderButton Component
 // ============================================================================
 
-const FileUploaderButton = React.forwardRef<HTMLInputElement, FileUploaderButtonProps>(
+const FileUploaderButton = React.forwardRef<
+  HTMLInputElement,
+  FileUploaderButtonProps
+>(
   (
     {
       className,
-      size = 'md',
-      variant = 'primary',
+      size = "md",
+      variant = "primary",
       disabled = false,
       accept,
       multiple = false,
       onChange,
-      children = 'Add file',
+      children = "Add file",
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
     const generatedId = React.useId();
@@ -48,7 +51,7 @@ const FileUploaderButton = React.forwardRef<HTMLInputElement, FileUploaderButton
         onChange(files);
       }
       // Reset input value to allow selecting the same file again
-      event.target.value = '';
+      event.target.value = "";
     };
 
     return (
@@ -57,7 +60,10 @@ const FileUploaderButton = React.forwardRef<HTMLInputElement, FileUploaderButton
           type="button"
           disabled={disabled}
           onClick={handleClick}
-          className={cn(fileUploaderButtonVariants({ size, variant }), className)}
+          className={cn(
+            fileUploaderButtonVariants({ size, variant }),
+            className,
+          )}
           aria-disabled={disabled}
           {...props}
         >
@@ -77,10 +83,10 @@ const FileUploaderButton = React.forwardRef<HTMLInputElement, FileUploaderButton
         />
       </>
     );
-  }
+  },
 );
 
-FileUploaderButton.displayName = 'FileUploaderButton';
+FileUploaderButton.displayName = "FileUploaderButton";
 
 // ============================================================================
 // Exports

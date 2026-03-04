@@ -1,7 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
+import { useState, useEffect } from "react";
 
 // Server-side rendering check
-const canUseDOM = typeof window !== 'undefined';
+const canUseDOM = typeof window !== "undefined";
 
 // Global ID counter for SSR consistency
 let serverGeneratedId = 0;
@@ -17,34 +18,30 @@ let serverGeneratedId = 0;
  * const id = useId(undefined, 'custom-id'); // "custom-id" (uses provided ID)
  * ```
  */
-export function useId(prefix: string = 'biz', providedId?: string): string {
-  // If an ID is provided, use it directly
-  if (providedId) {
-    return providedId;
-  }
+export function useId(prefix: string = "biz", providedId?: string): string {
+  // 1. Get native React ID if available
+  // We call it unconditionally to follow Hook rules
+  const reactId = React.useId();
 
-  // React 18+ has built-in useId hook
-  if ('useId' in React) {
-    const id = (React as typeof React & { useId: () => string }).useId();
-    return `${prefix}-${id}`;
-  }
-
-  // Fallback for React < 18 or SSR
-  const [id, setId] = React.useState(() => {
-    // On server, use a counter
+  // 2. State-based fallback for older React Versions or custom needs
+  // We use prefix as key to reset if it changes
+  const [fallbackId, setFallbackId] = useState(() => {
+    if (providedId) return "";
     if (!canUseDOM) {
       serverGeneratedId += 1;
       return `${prefix}-${serverGeneratedId}`;
     }
-    // On client, generate random ID
     return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
   });
 
-  // On client hydration, ensure uniqueness
-  React.useEffect(() => {
-    if (!canUseDOM) return;
-    setId(`${prefix}-${Math.random().toString(36).slice(2, 9)}`);
-  }, [prefix]);
+  // Client-side hydration safety
+  useEffect(() => {
+    if (providedId || !canUseDOM) return;
+    // Ensure unique ID on client after hydration
+    setFallbackId(`${prefix}-${Math.random().toString(36).slice(2, 9)}`);
+  }, [prefix, providedId]);
 
-  return id;
+  // Priority: Provided ID > React.useId > Fallback
+  if (providedId) return providedId;
+  return reactId ? `${prefix}-${reactId}` : fallbackId;
 }

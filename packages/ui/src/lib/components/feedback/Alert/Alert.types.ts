@@ -3,20 +3,23 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * Alert variant types.
  */
-export type AlertVariant = VariantProps<typeof import('./Alert.variants').alertVariants>['variant'];
+export type AlertVariant = VariantProps<
+  typeof import("./Alert.variants").alertVariants
+>["variant"];
 
 /**
  * Alert component props.
  */
 export interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-  VariantProps<typeof import('./Alert.variants').alertVariants> {
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof import("./Alert.variants").alertVariants> {
   /** Title of the alert */
   title?: string;
   /** Description text */
@@ -36,12 +39,12 @@ export interface AlertProps
 /**
  * AlertTitle component props.
  */
-export interface AlertTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+export type AlertTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
 
 /**
  * AlertDescription component props.
  */
-export interface AlertDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type AlertDescriptionProps = React.HTMLAttributes<HTMLDivElement>;
 
 /**
  * AlertSkeleton component props.

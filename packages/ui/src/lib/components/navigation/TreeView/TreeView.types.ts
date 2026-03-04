@@ -3,13 +3,15 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * TreeView size type.
  */
-export type TreeViewSize = VariantProps<typeof import('./tree-view.variants').treeViewVariants>['size'];
+export type TreeViewSize = VariantProps<
+  typeof import("./TreeView.variants").treeViewVariants
+>["size"];
 
 /**
  * TreeView item data.
@@ -25,8 +27,10 @@ export interface TreeViewItemData {
 /**
  * TreeView component props.
  */
-export interface TreeViewProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange' | 'onSelect'> {
+export interface TreeViewProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange" | "onSelect"
+> {
   /** Tree data */
   items: TreeViewItemData[];
   /** Selected item ID */
@@ -50,7 +54,10 @@ export interface TreeViewProps
 /**
  * TreeItem component props.
  */
-export interface TreeItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+export interface TreeItemProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size"
+> {
   /** Item data */
   item: TreeViewItemData;
   /** Depth level */

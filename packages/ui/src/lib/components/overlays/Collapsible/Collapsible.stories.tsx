@@ -1,27 +1,27 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from './Collapsible';
-import { Button } from '../../forms/Button';
-import { ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+} from "./Collapsible";
+import { Button } from "../../forms/Button";
+import { ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 const meta: Meta<typeof Collapsible> = {
-  title: 'Components/Collapsible',
+  title: "Components/Collapsible",
   component: Collapsible,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export default meta;
 type Story = StoryObj<typeof Collapsible>;
 
 export const Default: Story = {
-  render: () => {
+  render: function Render() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -38,7 +38,7 @@ export const Default: Story = {
             <Button variant="ghost" size="sm">
               <ChevronRight
                 className={`h-4 w-4 transition-transform duration-200 ${
-                  isOpen ? 'rotate-90' : ''
+                  isOpen ? "rotate-90" : ""
                 }`}
               />
               <span className="sr-only">Toggle</span>
@@ -83,20 +83,24 @@ export const FaqList: Story = {
     <div className="w-[400px] space-y-2">
       {[
         {
-          question: 'What is Biz UI?',
-          answer: 'Biz UI is a comprehensive React component library built with Radix UI and Tailwind CSS.',
+          question: "What is Biz UI?",
+          answer:
+            "Biz UI is a comprehensive React component library built with Radix UI and Tailwind CSS.",
         },
         {
-          question: 'How do I install Biz UI?',
-          answer: 'You can install Biz UI using npm or yarn: npm install @cmc-dx/biz-ui',
+          question: "How do I install Biz UI?",
+          answer:
+            "You can install Biz UI using npm or yarn: npm install @cmc-dx/biz-ui",
         },
         {
-          question: 'Is Biz UI accessible?',
-          answer: 'Yes! Biz UI is built on top of Radix UI, which provides excellent accessibility out of the box.',
+          question: "Is Biz UI accessible?",
+          answer:
+            "Yes! Biz UI is built on top of Radix UI, which provides excellent accessibility out of the box.",
         },
         {
-          question: 'Can I customize the theme?',
-          answer: 'Absolutely! Biz UI uses CSS variables for theming, making it easy to customize colors, spacing, and more.',
+          question: "Can I customize the theme?",
+          answer:
+            "Absolutely! Biz UI uses CSS variables for theming, making it easy to customize colors, spacing, and more.",
         },
       ].map((faq, index) => (
         <Collapsible key={index} className="rounded-lg border">
@@ -145,14 +149,16 @@ export const Nested: Story = {
 };
 
 export const SettingsPanel: Story = {
-  render: () => {
-    const [expandedSections, setExpandedSections] = useState<string[]>(['profile']);
+  render: function Render() {
+    const [expandedSections, setExpandedSections] = useState<string[]>([
+      "profile",
+    ]);
 
     const toggleSection = (section: string) => {
       setExpandedSections((prev) =>
         prev.includes(section)
           ? prev.filter((s) => s !== section)
-          : [...prev, section]
+          : [...prev, section],
       );
     };
 
@@ -161,15 +167,15 @@ export const SettingsPanel: Story = {
         <h3 className="text-lg font-semibold mb-4">Settings</h3>
 
         <Collapsible
-          open={expandedSections.includes('profile')}
-          onOpenChange={() => toggleSection('profile')}
+          open={expandedSections.includes("profile")}
+          onOpenChange={() => toggleSection("profile")}
           className="rounded-lg border"
         >
           <CollapsibleTrigger className="flex w-full items-center justify-between p-4 hover:bg-muted/50">
             <span className="font-medium">Profile</span>
             <ChevronRight
               className={`h-4 w-4 transition-transform ${
-                expandedSections.includes('profile') ? 'rotate-90' : ''
+                expandedSections.includes("profile") ? "rotate-90" : ""
               }`}
             />
           </CollapsibleTrigger>
@@ -181,15 +187,15 @@ export const SettingsPanel: Story = {
         </Collapsible>
 
         <Collapsible
-          open={expandedSections.includes('notifications')}
-          onOpenChange={() => toggleSection('notifications')}
+          open={expandedSections.includes("notifications")}
+          onOpenChange={() => toggleSection("notifications")}
           className="rounded-lg border"
         >
           <CollapsibleTrigger className="flex w-full items-center justify-between p-4 hover:bg-muted/50">
             <span className="font-medium">Notifications</span>
             <ChevronRight
               className={`h-4 w-4 transition-transform ${
-                expandedSections.includes('notifications') ? 'rotate-90' : ''
+                expandedSections.includes("notifications") ? "rotate-90" : ""
               }`}
             />
           </CollapsibleTrigger>
@@ -201,15 +207,15 @@ export const SettingsPanel: Story = {
         </Collapsible>
 
         <Collapsible
-          open={expandedSections.includes('security')}
-          onOpenChange={() => toggleSection('security')}
+          open={expandedSections.includes("security")}
+          onOpenChange={() => toggleSection("security")}
           className="rounded-lg border"
         >
           <CollapsibleTrigger className="flex w-full items-center justify-between p-4 hover:bg-muted/50">
             <span className="font-medium">Security</span>
             <ChevronRight
               className={`h-4 w-4 transition-transform ${
-                expandedSections.includes('security') ? 'rotate-90' : ''
+                expandedSections.includes("security") ? "rotate-90" : ""
               }`}
             />
           </CollapsibleTrigger>

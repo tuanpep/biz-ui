@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 /**
  * Run a cleanup function when the component unmounts.
@@ -21,7 +21,7 @@ export function useUnmount(cleanup: () => void): void {
     () => () => {
       cleanupRef.current();
     },
-    []
+    [],
   );
 }
 
@@ -41,5 +41,5 @@ export function useUnmount(cleanup: () => void): void {
 export function useMount(callback: () => void | (() => void)): void {
   React.useEffect(() => {
     return callback();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 }

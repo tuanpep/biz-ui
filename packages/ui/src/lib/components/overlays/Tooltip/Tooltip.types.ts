@@ -3,13 +3,14 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
 /**
  * TooltipContent component props.
  */
-export interface TooltipContentProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-tooltip').Content> {}
+export type TooltipContentProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-tooltip").Content
+>;
 
 /**
  * SimpleTooltip component props.
@@ -20,11 +21,11 @@ export interface SimpleTooltipProps {
   /** The element that triggers the tooltip */
   children: React.ReactNode;
   /** Which side to show the tooltip on */
-  side?: 'top' | 'right' | 'bottom' | 'left';
+  side?: "top" | "right" | "bottom" | "left";
   /** Distance from trigger in pixels */
   sideOffset?: number;
   /** Alignment of the tooltip */
-  align?: 'start' | 'center' | 'end';
+  align?: "start" | "center" | "end";
   /** Distance from alignment edge in pixels */
   alignOffset?: number;
   /** Time in ms before tooltip opens */

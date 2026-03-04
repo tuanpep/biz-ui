@@ -1,14 +1,5 @@
-/**
- * Component utilities for Biz UI.
- * Following Carbon's component detection patterns.
- */
-
-import type {
-  ReactNode,
-  ReactElement,
-  ComponentType,
-  isValidElement,
-} from 'react';
+import { isValidElement, Children, cloneElement } from "react";
+import type { ReactNode, ReactElement, ComponentType } from "react";
 
 /**
  * Check if a React element is of a specific component type.
@@ -26,7 +17,7 @@ import type {
  */
 export function isComponentElement<P>(
   element: ReactNode,
-  component: ComponentType<P>
+  component: ComponentType<P>,
 ): element is ReactElement<P> {
   return isValidElement<P>(element) && element.type === component;
 }
@@ -43,7 +34,7 @@ export function isComponentElement<P>(
  */
 export function isComponentElementOf<P>(
   element: ReactNode,
-  components: ComponentType<P>[]
+  components: ComponentType<P>[],
 ): boolean {
   return (
     isValidElement<P>(element) &&
@@ -61,16 +52,14 @@ export function isComponentElementOf<P>(
  */
 export function findChildrenByType<P>(
   children: ReactNode,
-  component: ComponentType<P>
+  component: ComponentType<P>,
 ): ReactElement<P>[] {
   const result: ReactElement<P>[] = [];
 
-  import('react').then(({ Children }) => {
-    Children.forEach(children, (child) => {
-      if (isComponentElement(child, component)) {
-        result.push(child);
-      }
-    });
+  Children.forEach(children, (child) => {
+    if (isComponentElement(child, component)) {
+      result.push(child);
+    }
   });
 
   return result;
@@ -86,12 +75,11 @@ export function findChildrenByType<P>(
  */
 export function findChildByType<P>(
   children: ReactNode,
-  component: ComponentType<P>
+  component: ComponentType<P>,
 ): ReactElement<P> | null {
   let result: ReactElement<P> | null = null;
 
-  const { Children } = require('react');
-  Children.forEach(children, (child) => {
+  Children.forEach(children, (child: ReactNode) => {
     if (result === null && isComponentElement(child, component)) {
       result = child;
     }
@@ -112,12 +100,11 @@ export function findChildByType<P>(
  */
 export function hasChildOfType<P>(
   children: ReactNode,
-  component: ComponentType<P>
+  component: ComponentType<P>,
 ): boolean {
-  const { Children } = require('react');
   let found = false;
 
-  Children.forEach(children, (child) => {
+  Children.forEach(children, (child: ReactNode) => {
     if (found) return;
     if (isComponentElement(child, component)) {
       found = true;
@@ -140,10 +127,9 @@ export function hasChildOfType<P>(
 export function cloneElementIfType<P>(
   element: ReactNode,
   component: ComponentType<P>,
-  additionalProps: Partial<P>
+  additionalProps: Partial<P>,
 ): ReactNode {
   if (isComponentElement(element, component)) {
-    const { cloneElement } = require('react');
     return cloneElement(element, additionalProps);
   }
   return element;

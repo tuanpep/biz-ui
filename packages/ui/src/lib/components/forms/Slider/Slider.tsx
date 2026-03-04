@@ -9,16 +9,16 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import * as SliderPrimitive from '@radix-ui/react-slider';
-import { cn } from '../../utils/cn';
+import * as React from "react";
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import { cn } from "../../../utils/cn";
 import {
   sliderVariants,
   sliderTrackVariants,
   sliderRangeVariants,
   sliderThumbVariants,
-} from './Slider.variants';
-import type { SliderProps, RangeSliderProps } from './Slider.types';
+} from "./Slider.variants";
+import type { SliderProps, RangeSliderProps } from "./Slider.types";
 
 // ============================================================================
 // Slider Component
@@ -31,7 +31,7 @@ const Slider = React.forwardRef<
   (
     {
       className,
-      size = 'md',
+      size = "md",
       variant,
       label,
       description,
@@ -42,10 +42,10 @@ const Slider = React.forwardRef<
       wrapperClassName,
       disabled,
       id: propId,
-      'data-testid': testId,
+      "data-testid": testId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -58,27 +58,33 @@ const Slider = React.forwardRef<
     const effectiveDisabled = disabled;
     const hasError = !effectiveDisabled && !!error;
     const hasWarning = !effectiveDisabled && !hasError && !!warn;
+    const effectiveVariant = hasError
+      ? "destructive"
+      : hasWarning
+        ? "warning"
+        : variant;
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     // Build validation classes
     const validationClasses = {
-      'border-destructive': hasError,
-      'border-warning': hasWarning,
+      "border-destructive": hasError,
+      "border-warning": hasWarning,
     };
 
     const slider = (
       <SliderPrimitive.Root
         ref={ref}
         id={sliderId}
-        className={cn(sliderVariants({ size, variant }), validationClasses, className)}
+        className={cn(sliderVariants({ size }), validationClasses, className)}
         disabled={effectiveDisabled}
         aria-invalid={hasError}
         aria-describedby={ariaDescribedBy}
@@ -86,11 +92,15 @@ const Slider = React.forwardRef<
         {...props}
       >
         <SliderPrimitive.Track className={cn(sliderTrackVariants({ size }))}>
-          <SliderPrimitive.Range className={cn(sliderRangeVariants({ variant }))} />
+          <SliderPrimitive.Range
+            className={cn(sliderRangeVariants({ variant: effectiveVariant }))}
+          />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
-          className={cn(sliderThumbVariants({ size, variant }))}
-          aria-label={label || 'Value'}
+          className={cn(
+            sliderThumbVariants({ size, variant: effectiveVariant }),
+          )}
+          aria-label={label || "Value"}
         />
       </SliderPrimitive.Root>
     );
@@ -101,14 +111,14 @@ const Slider = React.forwardRef<
     }
 
     return (
-      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+      <div className={cn("grid w-full gap-1.5", wrapperClassName)}>
         {label && (
           <label
             htmlFor={sliderId}
             className={cn(
-              'text-sm font-medium leading-none',
-              hideLabel && 'sr-only',
-              effectiveDisabled && 'opacity-50'
+              "text-sm font-medium leading-none",
+              hideLabel && "sr-only",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -139,10 +149,10 @@ const Slider = React.forwardRef<
         </div>
       </div>
     );
-  }
+  },
 );
 
-Slider.displayName = 'Slider';
+Slider.displayName = "Slider";
 
 // ============================================================================
 // RangeSlider Component
@@ -163,14 +173,15 @@ const RangeSlider = React.forwardRef<
       required = false,
       hideLabel = false,
       wrapperClassName,
-      size = 'md',
+      size = "md",
       variant,
       disabled,
       id: propId,
-      'data-testid': testId,
+      className,
+      "data-testid": testId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -183,20 +194,33 @@ const RangeSlider = React.forwardRef<
     const effectiveDisabled = disabled;
     const hasError = !effectiveDisabled && !!error;
     const hasWarning = !effectiveDisabled && !hasError && !!warn;
+    const effectiveVariant = hasError
+      ? "destructive"
+      : hasWarning
+        ? "warning"
+        : variant;
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
+
+    // Build validation classes
+    const validationClasses = {
+      "border-destructive": hasError,
+      "border-warning": hasWarning,
+    };
 
     const slider = (
       <SliderPrimitive.Root
         ref={ref}
         id={sliderId}
+        className={cn(sliderVariants({ size }), validationClasses, className)}
         disabled={effectiveDisabled}
         aria-invalid={hasError}
         aria-describedby={ariaDescribedBy}
@@ -204,15 +228,21 @@ const RangeSlider = React.forwardRef<
         {...props}
       >
         <SliderPrimitive.Track className={cn(sliderTrackVariants({ size }))}>
-          <SliderPrimitive.Range className={cn(sliderRangeVariants({ variant }))} />
+          <SliderPrimitive.Range
+            className={cn(sliderRangeVariants({ variant: effectiveVariant }))}
+          />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
-          className={cn(sliderThumbVariants({ size, variant }))}
-          aria-label={startLabel || label || 'Minimum value'}
+          className={cn(
+            sliderThumbVariants({ size, variant: effectiveVariant }),
+          )}
+          aria-label={startLabel || label || "Minimum value"}
         />
         <SliderPrimitive.Thumb
-          className={cn(sliderThumbVariants({ size, variant }))}
-          aria-label={endLabel || label || 'Maximum value'}
+          className={cn(
+            sliderThumbVariants({ size, variant: effectiveVariant }),
+          )}
+          aria-label={endLabel || label || "Maximum value"}
         />
       </SliderPrimitive.Root>
     );
@@ -223,14 +253,14 @@ const RangeSlider = React.forwardRef<
     }
 
     return (
-      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+      <div className={cn("grid w-full gap-1.5", wrapperClassName)}>
         {label && (
           <label
             htmlFor={sliderId}
             className={cn(
-              'text-sm font-medium leading-none',
-              hideLabel && 'sr-only',
-              effectiveDisabled && 'opacity-50'
+              "text-sm font-medium leading-none",
+              hideLabel && "sr-only",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -261,10 +291,10 @@ const RangeSlider = React.forwardRef<
         </div>
       </div>
     );
-  }
+  },
 );
 
-RangeSlider.displayName = 'RangeSlider';
+RangeSlider.displayName = "RangeSlider";
 
 // ============================================================================
 // Exports
@@ -276,11 +306,11 @@ export {
   sliderTrackVariants,
   sliderRangeVariants,
   sliderThumbVariants,
-} from './Slider.variants';
+} from "./Slider.variants";
 export type {
   SliderProps,
   RangeSliderProps,
   SliderSkeletonProps,
   SliderVariant,
   SliderSize,
-} from './Slider.types';
+} from "./Slider.types";

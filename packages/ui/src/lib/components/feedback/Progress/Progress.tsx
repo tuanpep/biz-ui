@@ -14,11 +14,14 @@
  * ```
  */
 
-import * as React from 'react';
-import * as ProgressPrimitive from '@radix-ui/react-progress';
-import { cn } from '../../utils/cn';
-import { progressVariants, progressIndicatorVariants } from './Progress.variants';
-import type { ProgressProps, ProgressVariant, ProgressSize } from './Progress.types';
+import * as React from "react";
+import * as ProgressPrimitive from "@radix-ui/react-progress";
+import { cn } from "../../../utils/cn";
+import {
+  progressVariants,
+  progressIndicatorVariants,
+} from "./Progress.variants";
+import type { ProgressProps } from "./Progress.types";
 
 // ============================================================================
 // Progress Component
@@ -46,5 +49,12 @@ Progress.displayName = ProgressPrimitive.Root.displayName;
 // ============================================================================
 
 export { Progress };
-export { progressVariants, progressIndicatorVariants } from './Progress.variants';
-export type { ProgressProps, ProgressVariant, ProgressSize } from './Progress.types';
+export {
+  progressVariants,
+  progressIndicatorVariants,
+} from "./Progress.variants";
+export type {
+  ProgressProps,
+  ProgressVariant,
+  ProgressSize,
+} from "./Progress.types";

@@ -10,27 +10,27 @@
  */
 
 // Main component
-export { FileUploader } from './FileUploader';
+export { FileUploader } from "./FileUploader";
 
 // Sub-components
-export { FileUploaderButton } from './FileUploaderButton';
-export { FileUploaderDropContainer } from './FileUploaderDropContainer';
-export { FileUploaderItem } from './FileUploaderItem';
+export { FileUploaderButton } from "./FileUploaderButton";
+export { FileUploaderDropContainer } from "./FileUploaderDropContainer";
+export { FileUploaderItem } from "./FileUploaderItem";
 
 // Skeleton component
-export { FileUploaderSkeleton } from './FileUploader.skeleton';
+export { FileUploaderSkeleton } from "./FileUploader.skeleton";
 
 // Variants
 export {
-  fileUploaderVariants
+  fileUploaderVariants,
   fileUploaderButtonVariants,
   fileUploaderDropContainerVariants,
   fileUploaderItemVariants,
   fileUploaderSkeletonVariants,
   fileUploaderSkeletonLabelVariants,
   fileUploaderSkeletonDropContainerVariants,
-  fileUploaderSkeletonItemVariants
-} from './FileUploader.variants';
+  fileUploaderSkeletonItemVariants,
+} from "./FileUploader.variants";
 
 // Types
 export type {
@@ -41,5 +41,5 @@ export type {
   FileUploaderFile,
   FileUploaderFileStatus,
   FileUploaderSize,
-  FileUploaderSkeletonProps
-} from './FileUploader.types';
+  FileUploaderSkeletonProps,
+} from "./FileUploader.types";

@@ -3,17 +3,18 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * Table size type.
  */
-export type TableSize = VariantProps<typeof import('./table.variants').tableVariants>['size'];
+export type TableSize = VariantProps<
+  typeof import("./Table.variants").tableVariants
+>["size"];
 
 /**
  * Table component props.
  */
-export interface TableProps
-  extends React.HTMLAttributes<HTMLTableElement>,
-    VariantProps<typeof import('./table.variants').tableVariants> {}
+export type TableProps = React.HTMLAttributes<HTMLTableElement> &
+  VariantProps<typeof import("./Table.variants").tableVariants>;

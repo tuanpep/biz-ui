@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 type PossibleRef<T> = React.Ref<T> | undefined;
 
@@ -18,16 +18,18 @@ type PossibleRef<T> = React.Ref<T> | undefined;
  * );
  * ```
  */
-export function useMergedRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> {
+export function useMergedRefs<T>(
+  ...refs: PossibleRef<T>[]
+): React.RefCallback<T> {
   return React.useCallback((element: T | null) => {
     for (const ref of refs) {
-      if (typeof ref === 'function') {
+      if (typeof ref === "function") {
         ref(element);
       } else if (ref !== null && ref !== undefined) {
         (ref as React.MutableRefObject<T | null>).current = element;
       }
     }
-  }, refs);
+  }, refs); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 /**
@@ -35,7 +37,7 @@ export function useMergedRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T
  * Utility function used internally by useMergedRefs.
  */
 export function assignRef<T>(ref: PossibleRef<T>, value: T | null): void {
-  if (typeof ref === 'function') {
+  if (typeof ref === "function") {
     ref(value);
   } else if (ref !== null && ref !== undefined) {
     (ref as React.MutableRefObject<T | null>).current = value;

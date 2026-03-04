@@ -3,8 +3,8 @@
  * Following Carbon's translateWithId pattern.
  */
 
-import * as React from 'react';
-import { createContext } from '../utils/create-context';
+import * as React from "react";
+import { createContext } from "../utils/create-context";
 
 // ============================================================================
 // Types
@@ -20,13 +20,16 @@ export type MessageId = string;
  */
 export type TranslateFn<MID = MessageId, ARGS = Record<string, unknown>> = (
   messageId: MID,
-  args?: ARGS
+  args?: ARGS,
 ) => string;
 
 /**
  * Translation context value.
  */
-export interface TranslationContextValue<MID = MessageId, ARGS = Record<string, unknown>> {
+export interface TranslationContextValue<
+  MID = MessageId,
+  ARGS = Record<string, unknown>,
+> {
   /** Translation function */
   t: TranslateFn<MID, ARGS>;
   /** Current locale */
@@ -39,110 +42,111 @@ export interface TranslationContextValue<MID = MessageId, ARGS = Record<string, 
 
 export const defaultTranslations: Record<string, string> = {
   // Button
-  'button.loading': 'Loading...',
-  'button.aria.close': 'Close',
+  "button.loading": "Loading...",
+  "button.aria.close": "Close",
 
   // Input
-  'input.required': 'This field is required',
-  'input.placeholder': 'Enter value',
-  'input.clear': 'Clear',
+  "input.required": "This field is required",
+  "input.placeholder": "Enter value",
+  "input.clear": "Clear",
 
   // Select
-  'select.placeholder': 'Select an option',
-  'select.clear': 'Clear selection',
-  'select.noResults': 'No results found',
-  'select.loading': 'Loading...',
+  "select.placeholder": "Select an option",
+  "select.clear": "Clear selection",
+  "select.noResults": "No results found",
+  "select.loading": "Loading...",
 
   // Pagination
-  'pagination.next': 'Next',
-  'pagination.previous': 'Previous',
-  'pagination.page': 'Page',
-  'pagination.of': 'of',
-  'pagination.itemsPerPage': 'Items per page',
+  "pagination.next": "Next",
+  "pagination.previous": "Previous",
+  "pagination.page": "Page",
+  "pagination.of": "of",
+  "pagination.itemsPerPage": "Items per page",
 
   // Modal
-  'modal.close': 'Close',
-  'modal.aria.close': 'Close modal',
+  "modal.close": "Close",
+  "modal.aria.close": "Close modal",
 
   // Toast
-  'toast.close': 'Close notification',
-  'toast.aria.close': 'Close notification',
+  "toast.close": "Close notification",
+  "toast.aria.close": "Close notification",
 
   // Accordion
-  'accordion.open': 'Open',
-  'accordion.close': 'Close',
+  "accordion.open": "Open",
+  "accordion.close": "Close",
 
   // Tabs
-  'tabs.selected': 'selected',
-  'tabs.previous': 'Previous tab',
-  'tabs.next': 'Next tab',
+  "tabs.selected": "selected",
+  "tabs.previous": "Previous tab",
+  "tabs.next": "Next tab",
 
   // DatePicker
-  'datePicker.previousMonth': 'Previous month',
-  'datePicker.nextMonth': 'Next month',
-  'datePicker.selectMonth': 'Select month',
-  'datePicker.selectYear': 'Select year',
-  'datePicker.clear': 'Clear date',
+  "datePicker.previousMonth": "Previous month",
+  "datePicker.nextMonth": "Next month",
+  "datePicker.selectMonth": "Select month",
+  "datePicker.selectYear": "Select year",
+  "datePicker.clear": "Clear date",
 
   // FileUploader
-  'fileUploader.browse': 'Browse files',
-  'fileUploader.clear': 'Clear file',
-  'fileUploader.remove': 'Remove file',
+  "fileUploader.browse": "Browse files",
+  "fileUploader.clear": "Clear file",
+  "fileUploader.remove": "Remove file",
 
   // Search
-  'search.clear': 'Clear search',
-  'search.placeholder': 'Search...',
+  "search.clear": "Clear search",
+  "search.placeholder": "Search...",
 
   // Table
-  'table.sort': 'Sort',
-  'table.sorted': 'Sorted',
-  'table.unsorted': 'Unsorted',
-  'table.expand': 'Expand row',
-  'table.collapse': 'Collapse row',
-  'table.noData': 'No data available',
-  'table.selectAll': 'Select all',
-  'table.selectAllRows': 'Select all rows',
-  'table.selectRow': 'Select row',
+  "table.sort": "Sort",
+  "table.sorted": "Sorted",
+  "table.unsorted": "Unsorted",
+  "table.expand": "Expand row",
+  "table.collapse": "Collapse row",
+  "table.noData": "No data available",
+  "table.selectAll": "Select all",
+  "table.selectAllRows": "Select all rows",
+  "table.selectRow": "Select row",
 
   // TimePicker
-  'timePicker.am': 'AM',
-  'timePicker.pm': 'PM',
-  'timePicker.clear': 'Clear time',
+  "timePicker.am": "AM",
+  "timePicker.pm": "PM",
+  "timePicker.clear": "Clear time",
 
   // Checkbox
-  'checkbox.checked': 'checked',
-  'checkbox.unchecked': 'unchecked',
-  'checkbox.indeterminate': 'indeterminate',
+  "checkbox.checked": "checked",
+  "checkbox.unchecked": "unchecked",
+  "checkbox.indeterminate": "indeterminate",
 
   // Radio
-  'radio.selected': 'selected',
-  'radio.unselected': 'not selected',
+  "radio.selected": "selected",
+  "radio.unselected": "not selected",
 
   // Switch
-  'switch.on': 'On',
-  'switch.off': 'Off',
+  "switch.on": "On",
+  "switch.off": "Off",
 
   // Alert
-  'alert.close': 'Close alert',
-  'alert.dismiss': 'Dismiss',
+  "alert.close": "Close alert",
+  "alert.dismiss": "Dismiss",
 
   // Dialog
-  'dialog.close': 'Close',
-  'dialog.cancel': 'Cancel',
-  'dialog.confirm': 'Confirm',
+  "dialog.close": "Close",
+  "dialog.cancel": "Cancel",
+  "dialog.confirm": "Confirm",
 };
 
 // ============================================================================
 // Context
 // ============================================================================
 
-const [TranslationProvider, useTranslationContext, TranslationContext] = createContext<TranslationContextValue>({
-  name: 'Translation',
-  defaultValue: {
-    t: (messageId) => defaultTranslations[messageId] || messageId,
-    locale: 'en',
-  },
-});
+const [TranslationProvider, useTranslationContext, TranslationContext] =
+  createContext<TranslationContextValue>({
+    name: "Translation",
+    defaultValue: {
+      t: (messageId) => defaultTranslations[messageId] || messageId,
+      locale: "en",
+    },
+  });
 
 // ============================================================================
 // Provider Props
@@ -165,13 +169,13 @@ export interface I18nProviderProps {
 
 export function I18nProvider({
   translations,
-  locale = 'en',
+  locale = "en",
   translateFn,
   children,
-}: I18nProviderProps): JSX.Element {
+}: I18nProviderProps): React.JSX.Element {
   const mergedTranslations = React.useMemo(
     () => ({ ...defaultTranslations, ...translations }),
-    [translations]
+    [translations],
   );
 
   const t = React.useCallback<TranslateFn>(
@@ -185,25 +189,18 @@ export function I18nProvider({
       // Replace placeholders like {count} with args
       if (args) {
         Object.entries(args).forEach(([key, value]) => {
-          message = message.replace(new RegExp(`{${key}}`, 'g'), String(value));
+          message = message.replace(new RegExp(`{${key}}`, "g"), String(value));
         });
       }
 
       return message;
     },
-    [mergedTranslations, translateFn]
+    [mergedTranslations, translateFn],
   );
 
-  const value = React.useMemo(
-    () => ({ t, locale }),
-    [t, locale]
-  );
+  const value = React.useMemo(() => ({ t, locale }), [t, locale]);
 
-  return (
-    <TranslationProvider value={value}>
-      {children}
-    </TranslationProvider>
-  );
+  return <TranslationProvider value={value}>{children}</TranslationProvider>;
 }
 
 // ============================================================================
@@ -233,10 +230,10 @@ export function useTranslation(): TranslationContextValue {
  * const withArgs = useTranslate('pagination.page', { current: 1, total: 10 });
  * ```
  */
-export function useTranslate<MID extends MessageId, ARGS extends Record<string, unknown>>(
-  messageId: MID,
-  args?: ARGS
-): string {
+export function useTranslate<
+  MID extends MessageId,
+  ARGS extends Record<string, unknown>,
+>(messageId: MID, args?: ARGS): string {
   const { t } = useTranslationContext();
   return t(messageId, args);
 }
@@ -261,9 +258,12 @@ export function useTranslate<MID extends MessageId, ARGS extends Record<string, 
  * };
  * ```
  */
-export function createTranslateWithId<MID extends string, ARGS extends Record<string, unknown>>(
+export function createTranslateWithId<
+  MID extends string,
+  ARGS extends Record<string, unknown>,
+>(
   customTranslate: TranslateFn<MID, ARGS> | undefined,
-  defaultMessages: Record<MID, string>
+  defaultMessages: Record<MID, string>,
 ): TranslateFn<MID, ARGS> {
   return (messageId: MID, args?: ARGS) => {
     if (customTranslate) {

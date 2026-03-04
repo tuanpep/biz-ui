@@ -8,12 +8,12 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import * as SelectPrimitive from '@radix-ui/react-select';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-import { cn } from '../../utils/cn';
-import { selectTriggerVariants, selectItemVariants } from './Select.variants';
-import type { SelectTriggerProps, SelectItemProps } from './Select.types';
+import * as React from "react";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "../../../utils/cn";
+import { selectTriggerVariants, selectItemVariants } from "./Select.variants";
+import type { SelectTriggerProps, SelectItemProps } from "./Select.types";
 
 // ============================================================================
 // ROOT COMPONENTS (Radix re-exports)
@@ -46,12 +46,12 @@ const SelectTrigger = React.forwardRef<
       required = false,
       hideLabel = false,
       wrapperClassName,
-      'data-testid': testId,
+      "data-testid": testId,
       id: providedId,
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -74,15 +74,20 @@ const SelectTrigger = React.forwardRef<
         displayWarning ? warnId : null,
       ]
         .filter(Boolean)
-        .join(' ') || undefined;
+        .join(" ") || undefined;
 
     const trigger = (
       <SelectPrimitive.Trigger
         ref={ref}
         id={selectId}
         className={cn(
-          selectTriggerVariants({ variant, size, error: hasError, warn: hasWarning }),
-          className
+          selectTriggerVariants({
+            variant,
+            size,
+            error: hasError,
+            warn: hasWarning,
+          }),
+          className,
         )}
         aria-invalid={hasError}
         aria-describedby={ariaDescribedBy}
@@ -103,14 +108,14 @@ const SelectTrigger = React.forwardRef<
     }
 
     return (
-      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+      <div className={cn("grid w-full gap-1.5", wrapperClassName)}>
         {label && (
           <label
             htmlFor={selectId}
             className={cn(
-              'text-sm font-medium leading-none',
-              hideLabel && 'sr-only',
-              disabled && 'opacity-50'
+              "text-sm font-medium leading-none",
+              hideLabel && "sr-only",
+              disabled && "opacity-50",
             )}
           >
             {label}
@@ -124,35 +129,24 @@ const SelectTrigger = React.forwardRef<
         {trigger}
         <div>
           {description && !hasError && !hasWarning && (
-            <p
-              id={descriptionId}
-              className="text-sm text-muted-foreground"
-            >
+            <p id={descriptionId} className="text-sm text-muted-foreground">
               {description}
             </p>
           )}
           {displayError && (
-            <p
-              id={errorId}
-              className="text-xs text-destructive"
-              role="alert"
-            >
+            <p id={errorId} className="text-xs text-destructive" role="alert">
               {errorText}
             </p>
           )}
           {displayWarning && !displayError && (
-            <p
-              id={warnId}
-              className="text-xs text-warning"
-              role="alert"
-            >
+            <p id={warnId} className="text-xs text-warning" role="alert">
               {warnText}
             </p>
           )}
         </div>
       </div>
     );
-  }
+  },
 );
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 
@@ -163,16 +157,16 @@ SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = 'popper', ...props }, ref) => (
+>(({ className, children, position = "popper", ...props }, ref) => (
   <SelectPrimitive.Portal>
     <div className="biz-ui">
       <SelectPrimitive.Content
         ref={ref}
         className={cn(
-          'relative z-50 max-h-96 min-w-[8rem] overflow-hidden border border-border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-          position === 'popper' &&
-            'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
-          className
+          "relative z-50 max-h-96 min-w-[8rem] overflow-hidden border border-border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          position === "popper" &&
+            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          className,
         )}
         position={position}
         {...props}
@@ -182,9 +176,9 @@ const SelectContent = React.forwardRef<
         </SelectPrimitive.ScrollUpButton>
         <SelectPrimitive.Viewport
           className={cn(
-            'p-1',
-            position === 'popper' &&
-              'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
+            "p-1",
+            position === "popper" &&
+              "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
           )}
         >
           {children}
@@ -231,7 +225,10 @@ const SelectLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
     ref={ref}
-    className={cn('px-2 py-1.5 text-sm font-semibold text-muted-foreground', className)}
+    className={cn(
+      "px-2 py-1.5 text-sm font-semibold text-muted-foreground",
+      className,
+    )}
     {...props}
   />
 ));
@@ -247,7 +244,7 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-border', className)}
+    className={cn("-mx-1 my-1 h-px bg-border", className)}
     {...props}
   />
 ));

@@ -20,11 +20,15 @@
  * ```
  */
 
-import * as React from 'react';
-import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { cn } from '../../utils/cn';
-import { tabsListVariants, tabsTriggerVariants } from './Tabs.variants';
-import type { TabsListProps, TabsTriggerProps, TabsContentProps, TabsVariant, TabsSize } from './Tabs.types';
+import * as React from "react";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cn } from "../../../utils/cn";
+import { tabsListVariants, tabsTriggerVariants } from "./Tabs.variants";
+import type {
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
+} from "./Tabs.types";
 
 // ============================================================================
 // Tabs Root
@@ -75,8 +79,8 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      'mt-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      className
+      "mt-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      className,
     )}
     {...props}
   />
@@ -88,5 +92,11 @@ TabsContent.displayName = TabsPrimitive.Content.displayName;
 // ============================================================================
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
-export { tabsListVariants, tabsTriggerVariants } from './Tabs.variants';
-export type { TabsListProps, TabsTriggerProps, TabsContentProps, TabsVariant, TabsSize } from './Tabs.types';
+export { tabsListVariants, tabsTriggerVariants } from "./Tabs.variants";
+export type {
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
+  TabsVariant,
+  TabsSize,
+} from "./Tabs.types";

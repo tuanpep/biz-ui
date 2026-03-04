@@ -22,8 +22,8 @@
  * ```
  */
 
-import * as React from 'react';
-import { createContext } from '../utils/create-context';
+import * as React from "react";
+import { createContext } from "../utils/create-context";
 
 // ============================================================================
 // Feature Flag Types
@@ -34,21 +34,21 @@ import { createContext } from '../utils/create-context';
  */
 export interface FeatureFlags {
   /** Enable experimental features */
-  'enable-experimental-features': boolean;
+  "enable-experimental-features": boolean;
   /** Enable dark mode support */
-  'enable-dark-mode': boolean;
+  "enable-dark-mode": boolean;
   /** Enable CSS custom properties for theming */
-  'enable-css-custom-properties': boolean;
+  "enable-css-custom-properties": boolean;
   /** Enable CSS Grid layout */
-  'enable-css-grid': boolean;
+  "enable-css-grid": boolean;
   /** Enable new tile contrast styles */
-  'enable-tile-contrast': boolean;
+  "enable-tile-contrast": boolean;
   /** Enable v12 dynamic floating styles */
-  'enable-dynamic-floating-styles': boolean;
+  "enable-dynamic-floating-styles": boolean;
   /** Enable ai features */
-  'enable-ai-features': boolean;
+  "enable-ai-features": boolean;
   /** Enable async loading for icons */
-  'enable-async-icon-loading': boolean;
+  "enable-async-icon-loading": boolean;
 }
 
 /**
@@ -61,33 +61,36 @@ export type FeatureFlag = keyof FeatureFlags;
 // ============================================================================
 
 export const defaultFeatureFlags: FeatureFlags = {
-  'enable-experimental-features': false,
-  'enable-dark-mode': false,
-  'enable-css-custom-properties': true,
-  'enable-css-grid': true,
-  'enable-tile-contrast': false,
-  'enable-dynamic-floating-styles': false,
-  'enable-ai-features': false,
-  'enable-async-icon-loading': false,
+  "enable-experimental-features": false,
+  "enable-dark-mode": false,
+  "enable-css-custom-properties": true,
+  "enable-css-grid": true,
+  "enable-tile-contrast": false,
+  "enable-dynamic-floating-styles": false,
+  "enable-ai-features": false,
+  "enable-async-icon-loading": false,
 };
 
 // ============================================================================
 // Context
 // ============================================================================
 
-const [FeatureFlagsContextProvider, useFeatureFlagsContext, FeatureFlagsContext] =
-  createContext<{
-    flags: FeatureFlags;
-    setFlag: <K extends FeatureFlag>(flag: K, value: FeatureFlags[K]) => void;
-  }>({
-    name: 'FeatureFlags',
-    defaultValue: {
-      flags: defaultFeatureFlags,
-      setFlag: () => {
-        console.warn('FeatureFlagsProvider not found. Using default flags.');
-      },
+const [
+  FeatureFlagsContextProvider,
+  useFeatureFlagsContext,
+  FeatureFlagsContext,
+] = createContext<{
+  flags: FeatureFlags;
+  setFlag: <K extends FeatureFlag>(flag: K, value: FeatureFlags[K]) => void;
+}>({
+  name: "FeatureFlags",
+  defaultValue: {
+    flags: defaultFeatureFlags,
+    setFlag: () => {
+      console.warn("FeatureFlagsProvider not found. Using default flags.");
     },
-  });
+  },
+});
 
 // ============================================================================
 // Provider Props
@@ -107,7 +110,7 @@ export interface FeatureFlagsProviderProps {
 export function FeatureFlagsProvider({
   flags: initialFlags,
   children,
-}: FeatureFlagsProviderProps): JSX.Element {
+}: FeatureFlagsProviderProps): React.JSX.Element {
   const [flags, setFlags] = React.useState<FeatureFlags>(() => ({
     ...defaultFeatureFlags,
     ...initialFlags,
@@ -117,7 +120,7 @@ export function FeatureFlagsProvider({
     <K extends FeatureFlag>(flag: K, value: FeatureFlags[K]) => {
       setFlags((prev) => ({ ...prev, [flag]: value }));
     },
-    []
+    [],
   );
 
   const value = React.useMemo(() => ({ flags, setFlag }), [flags, setFlag]);
@@ -141,7 +144,9 @@ export function FeatureFlagsProvider({
  * const isEnabled = useFeatureFlag('enable-experimental-features');
  * ```
  */
-export function useFeatureFlag<K extends FeatureFlag>(flag: K): FeatureFlags[K] {
+export function useFeatureFlag<K extends FeatureFlag>(
+  flag: K,
+): FeatureFlags[K] {
   const { flags } = useFeatureFlagsContext();
   return flags[flag];
 }
@@ -171,7 +176,7 @@ export function useFeatureFlags(): FeatureFlags {
  */
 export function useSetFeatureFlag(): <K extends FeatureFlag>(
   flag: K,
-  value: FeatureFlags[K]
+  value: FeatureFlags[K],
 ) => void {
   const { setFlag } = useFeatureFlagsContext();
   return setFlag;
@@ -185,9 +190,7 @@ export function useSetFeatureFlag(): <K extends FeatureFlag>(
  * Merge feature flags with defaults.
  * Useful for testing or partial configuration.
  */
-export function mergeFeatureFlags(
-  flags: Partial<FeatureFlags>
-): FeatureFlags {
+export function mergeFeatureFlags(flags: Partial<FeatureFlags>): FeatureFlags {
   return { ...defaultFeatureFlags, ...flags };
 }
 

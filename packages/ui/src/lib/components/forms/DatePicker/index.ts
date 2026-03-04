@@ -15,10 +15,10 @@ export {
   DateTimePicker,
   datePickerVariants,
   datePickerInputVariants,
-} from './DatePicker';
+} from "./DatePicker";
 
 // Skeleton variant
-export { DatePickerSkeleton } from './DatePicker.skeleton';
+export { DatePickerSkeleton } from "./DatePicker.skeleton";
 
 // Types
 export type {
@@ -26,6 +26,5 @@ export type {
   DateRangePickerProps,
   DateTimePickerProps,
   DatePickerSkeletonProps,
-  DateRange,
   DatePickerSize,
-} from './DatePicker.types';
+} from "./DatePicker.types";

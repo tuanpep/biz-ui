@@ -9,23 +9,23 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { Search as SearchIcon, X } from 'lucide-react';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { Search as SearchIcon, X } from "lucide-react";
 import {
   searchVariants,
   searchInputVariants,
   searchIconVariants,
   clearButtonVariants,
-} from './Search.variants';
-import type { SearchProps, ExpandableSearchProps } from './Search.types';
+} from "./Search.variants";
+import type { SearchProps, ExpandableSearchProps } from "./Search.types";
 
 // ============================================================================
 // Loading Spinner Component
 // ============================================================================
 
-const LoadingSpinner = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) => (
-  <span className={cn(clearButtonVariants({ size }), 'animate-spin')}>
+const LoadingSpinner = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => (
+  <span className={cn(clearButtonVariants({ size }), "animate-spin")}>
     <svg
       className="h-full w-full"
       fill="none"
@@ -59,9 +59,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       className,
       wrapperClassName,
       variant,
-      size = 'md',
+      size = "md",
       expandable,
-      label = 'Search',
+      label = "Search",
       description,
       error,
       warn,
@@ -77,13 +77,15 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       disabled,
       readOnly,
       id: propId,
-      'data-testid': testId,
+      "data-testid": testId,
       onKeyDown,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue ?? '');
+    const [uncontrolledValue, setUncontrolledValue] = React.useState(
+      defaultValue ?? "",
+    );
     const value = controlledValue ?? uncontrolledValue;
     const hasValue = Boolean(value);
 
@@ -105,35 +107,39 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     };
 
     const handleClear = () => {
-      setUncontrolledValue('');
+      setUncontrolledValue("");
       onClear?.();
     };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter') {
+      if (event.key === "Enter") {
         onSearch?.(value as string);
       }
       onKeyDown?.(event);
     };
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     // Build validation classes
     const validationClasses = {
-      'border-destructive focus-visible:ring-destructive': hasError,
-      'border-warning focus-visible:ring-warning': hasWarning,
+      "border-destructive focus-visible:ring-destructive": hasError,
+      "border-warning focus-visible:ring-warning": hasWarning,
     };
 
     const searchInput = (
       <div className={cn(searchVariants({ size, expandable }))}>
-        <SearchIcon className={cn(searchIconVariants({ size }))} aria-hidden="true" />
+        <SearchIcon
+          className={cn(searchIconVariants({ size }))}
+          aria-hidden="true"
+        />
         <input
           ref={ref}
           type="search"
@@ -144,7 +150,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           className={cn(
             searchInputVariants({ variant, size }),
             validationClasses,
-            className
+            className,
           )}
           disabled={effectiveDisabled}
           readOnly={readOnly}
@@ -155,7 +161,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           data-testid={testId}
           {...props}
         />
-        {loading && <LoadingSpinner size={size} />}
+        {loading && <LoadingSpinner size={size || "md"} />}
         {!loading && hasValue && !hideClear && (
           <button
             type="button"
@@ -176,13 +182,13 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     }
 
     return (
-      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+      <div className={cn("grid w-full gap-1.5", wrapperClassName)}>
         {label && !hideLabel && (
           <label
             htmlFor={inputId}
             className={cn(
-              'text-sm font-medium leading-none',
-              effectiveDisabled && 'opacity-50'
+              "text-sm font-medium leading-none",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -213,46 +219,55 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-Search.displayName = 'Search';
+Search.displayName = "Search";
 
 // ============================================================================
 // ExpandableSearch Component
 // ============================================================================
 
-const ExpandableSearch = React.forwardRef<HTMLInputElement, ExpandableSearchProps>(
-  (props, ref) => {
-    const [expanded, setExpanded] = React.useState(false);
+const ExpandableSearch = React.forwardRef<
+  HTMLInputElement,
+  ExpandableSearchProps
+>((props, ref) => {
+  const [expanded, setExpanded] = React.useState(false);
 
-    return (
-      <Search
-        ref={ref}
-        expandable
-        className={cn(
-          'transition-all duration-200',
-          expanded ? 'w-64' : 'w-10'
-        )}
-        onFocus={() => setExpanded(true)}
-        onBlur={(e) => {
-          if (!e.target.value) {
-            setExpanded(false);
-          }
-          props.onBlur?.(e);
-        }}
-        {...props}
-      />
-    );
-  }
-);
+  return (
+    <Search
+      ref={ref}
+      expandable
+      className={cn("transition-all duration-200", expanded ? "w-64" : "w-10")}
+      onFocus={() => setExpanded(true)}
+      onBlur={(e) => {
+        if (!e.target.value) {
+          setExpanded(false);
+        }
+        props.onBlur?.(e);
+      }}
+      {...props}
+    />
+  );
+});
 
-ExpandableSearch.displayName = 'ExpandableSearch';
+ExpandableSearch.displayName = "ExpandableSearch";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Search, ExpandableSearch };
-export { searchVariants, searchInputVariants, searchIconVariants, clearButtonVariants } from './Search.variants';
-export type { SearchProps, ExpandableSearchProps, SearchSkeletonProps, SearchVariant, SearchSize } from './Search.types';
+export {
+  searchVariants,
+  searchInputVariants,
+  searchIconVariants,
+  clearButtonVariants,
+} from "./Search.variants";
+export type {
+  SearchProps,
+  ExpandableSearchProps,
+  SearchSkeletonProps,
+  SearchVariant,
+  SearchSize,
+} from "./Search.types";

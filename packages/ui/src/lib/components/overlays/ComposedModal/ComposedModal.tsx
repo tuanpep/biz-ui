@@ -19,11 +19,11 @@
  * ```
  */
 
-import * as React from 'react';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { X } from 'lucide-react';
-import { cn } from '../../utils/cn';
-import { modalVariants } from './composed-modal.variants';
+import * as React from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
+import { cn } from "../../../utils/cn";
+import { modalVariants } from "./ComposedModal.variants";
 import type {
   ModalOverlayProps,
   ComposedModalContentProps,
@@ -32,7 +32,7 @@ import type {
   ModalFooterProps,
   ModalSkeletonProps,
   ModalSize,
-} from './composed-modal.types';
+} from "./ComposedModal.types";
 
 // ============================================================================
 // Context
@@ -44,8 +44,8 @@ interface ModalContextValue {
 }
 
 const ModalContext = React.createContext<ModalContextValue>({
-  size: 'md',
-  closeButtonLabel: 'Close',
+  size: "md",
+  closeButtonLabel: "Close",
 });
 
 function useModalContext() {
@@ -71,13 +71,13 @@ const ModalOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      className
+      "fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className,
     )}
     {...props}
   />
 ));
-ModalOverlay.displayName = 'ModalOverlay';
+ModalOverlay.displayName = "ModalOverlay";
 
 // ============================================================================
 // ComposedModal Content
@@ -91,19 +91,19 @@ const ComposedModalContent = React.forwardRef<
     {
       className,
       children,
-      size = 'md',
-      closeButtonLabel = 'Close',
+      size = "md",
+      closeButtonLabel = "Close",
       hideCloseButton = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const contextValue = React.useMemo(
       () => ({
         size: size as ModalSize,
         closeButtonLabel,
       }),
-      [size, closeButtonLabel]
+      [size, closeButtonLabel],
     );
 
     return (
@@ -128,9 +128,9 @@ const ComposedModalContent = React.forwardRef<
         </div>
       </DialogPrimitive.Portal>
     );
-  }
+  },
 );
-ComposedModalContent.displayName = 'ComposedModalContent';
+ComposedModalContent.displayName = "ComposedModalContent";
 
 // ============================================================================
 // Modal Header
@@ -147,7 +147,7 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { closeButtonLabel } = useModalContext();
 
@@ -155,8 +155,8 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          'flex flex-col space-y-1.5 border-b border-border px-6 py-4 text-left',
-          className
+          "flex flex-col space-y-1.5 border-b border-border px-6 py-4 text-left",
+          className,
         )}
         {...props}
       >
@@ -188,9 +188,9 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
         {children}
       </div>
     );
-  }
+  },
 );
-ModalHeader.displayName = 'ModalHeader';
+ModalHeader.displayName = "ModalHeader";
 
 // ============================================================================
 // Modal Body
@@ -202,48 +202,48 @@ const ModalBody = React.forwardRef<HTMLDivElement, ModalBodyProps>(
       <div
         ref={ref}
         className={cn(
-          'px-6 py-4',
-          scrollable && 'max-h-[60vh] overflow-y-auto',
-          className
+          "px-6 py-4",
+          scrollable && "max-h-[60vh] overflow-y-auto",
+          className,
         )}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
-ModalBody.displayName = 'ModalBody';
+ModalBody.displayName = "ModalBody";
 
 // ============================================================================
 // Modal Footer
 // ============================================================================
 
 const ModalFooter = React.forwardRef<HTMLDivElement, ModalFooterProps>(
-  ({ className, align = 'right', children, ...props }, ref) => {
+  ({ className, align = "right", children, ...props }, ref) => {
     const alignClasses = {
-      left: 'justify-start',
-      center: 'justify-center',
-      right: 'justify-end',
-      between: 'justify-between',
+      left: "justify-start",
+      center: "justify-center",
+      right: "justify-end",
+      between: "justify-between",
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          'flex flex-col-reverse sm:flex-row sm:gap-2 border-t border-border px-6 py-4',
-          alignClasses[align],
-          className
+          "flex flex-col-reverse sm:flex-row sm:gap-2 border-t border-border px-6 py-4",
+          alignClasses[align as keyof typeof alignClasses],
+          className,
         )}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
-ModalFooter.displayName = 'ModalFooter';
+ModalFooter.displayName = "ModalFooter";
 
 // ============================================================================
 // Modal Skeleton
@@ -253,45 +253,50 @@ const ModalSkeleton = React.forwardRef<HTMLDivElement, ModalSkeletonProps>(
   (
     {
       className,
+      size = "md",
       hasHeader = true,
       hasFooter = true,
       bodyLines = 3,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
-        className={cn('w-full max-w-lg border border-border bg-popover rounded-lg', className)}
+        className={cn(
+          modalVariants({ size }),
+          "animate-pulse pointer-events-none",
+          className,
+        )}
         {...props}
       >
         {hasHeader && (
           <div className="border-b border-border px-6 py-4 space-y-3">
-            <div className="h-5 w-40 bg-muted animate-pulse rounded" />
-            <div className="h-4 w-60 bg-muted animate-pulse rounded" />
+            <div className="h-5 w-40 bg-muted rounded" />
+            <div className="h-4 w-60 bg-muted rounded" />
           </div>
         )}
         <div className="px-6 py-4 space-y-2">
           {Array.from({ length: bodyLines }).map((_, i) => (
             <div
               key={i}
-              className="h-4 bg-muted animate-pulse rounded"
+              className="h-4 bg-muted rounded"
               style={{ width: `${100 - i * 15}%` }}
             />
           ))}
         </div>
         {hasFooter && (
           <div className="border-t border-border px-6 py-4 flex justify-end gap-2">
-            <div className="h-9 w-20 bg-muted animate-pulse rounded-md" />
-            <div className="h-9 w-24 bg-muted animate-pulse rounded-md" />
+            <div className="h-9 w-20 bg-muted rounded-md" />
+            <div className="h-9 w-24 bg-muted rounded-md" />
           </div>
         )}
       </div>
     );
-  }
+  },
 );
-ModalSkeleton.displayName = 'ModalSkeleton';
+ModalSkeleton.displayName = "ModalSkeleton";
 
 // ============================================================================
 // Exports

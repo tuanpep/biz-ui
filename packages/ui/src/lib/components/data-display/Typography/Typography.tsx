@@ -21,16 +21,16 @@
  * ```
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
 import {
   headingVariants,
   bodyVariants,
   typographyLabelVariants,
   helperTextVariants,
   codeVariants,
-} from './typography.variants';
+} from "./Typography.variants";
 import type {
   HeadingProps,
   BodyProps,
@@ -38,20 +38,23 @@ import type {
   HelperTextProps,
   CodeProps,
   HeadingVariant,
-} from './typography.types';
+} from "./Typography.types";
 
 // ============================================================================
 // Default Heading Elements Map
 // ============================================================================
 
-const defaultHeadingElements: Record<HeadingVariant, 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> = {
-  'heading-01': 'h6',
-  'heading-02': 'h5',
-  'heading-03': 'h4',
-  'heading-04': 'h3',
-  'heading-05': 'h2',
-  'heading-06': 'h1',
-  'heading-07': 'h1',
+const defaultHeadingElements: Record<
+  HeadingVariant,
+  "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
+> = {
+  "heading-01": "h6",
+  "heading-02": "h5",
+  "heading-03": "h4",
+  "heading-04": "h3",
+  "heading-05": "h2",
+  "heading-06": "h1",
+  "heading-07": "h1",
 };
 
 // ============================================================================
@@ -59,7 +62,7 @@ const defaultHeadingElements: Record<HeadingVariant, 'h1' | 'h2' | 'h3' | 'h4' |
 // ============================================================================
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, variant = 'heading-03', as, asChild, ...props }, ref) => {
+  ({ className, variant = "heading-03", as, asChild, ...props }, ref) => {
     const Component = asChild ? Slot : (as ?? defaultHeadingElements[variant]);
     return (
       <Component
@@ -68,17 +71,17 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         {...props}
       />
     );
-  }
+  },
 );
-Heading.displayName = 'Heading';
+Heading.displayName = "Heading";
 
 // ============================================================================
 // Body Component
 // ============================================================================
 
 const Body = React.forwardRef<HTMLParagraphElement, BodyProps>(
-  ({ className, variant = 'body-01', asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'p';
+  ({ className, variant = "body-01", asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "p";
     return (
       <Comp
         ref={ref}
@@ -86,17 +89,17 @@ const Body = React.forwardRef<HTMLParagraphElement, BodyProps>(
         {...props}
       />
     );
-  }
+  },
 );
-Body.displayName = 'Body';
+Body.displayName = "Body";
 
 // ============================================================================
 // TypographyLabel Component
 // ============================================================================
 
 const TypographyLabel = React.forwardRef<HTMLSpanElement, TypographyLabelProps>(
-  ({ className, variant = 'label-01', asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'span';
+  ({ className, variant = "label-01", asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "span";
     return (
       <Comp
         ref={ref}
@@ -104,17 +107,17 @@ const TypographyLabel = React.forwardRef<HTMLSpanElement, TypographyLabelProps>(
         {...props}
       />
     );
-  }
+  },
 );
-TypographyLabel.displayName = 'TypographyLabel';
+TypographyLabel.displayName = "TypographyLabel";
 
 // ============================================================================
 // HelperText Component
 // ============================================================================
 
 const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(
-  ({ className, variant = 'helper-text-01', asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'p';
+  ({ className, variant = "helper-text-01", asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "p";
     return (
       <Comp
         ref={ref}
@@ -122,17 +125,17 @@ const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(
         {...props}
       />
     );
-  }
+  },
 );
-HelperText.displayName = 'HelperText';
+HelperText.displayName = "HelperText";
 
 // ============================================================================
 // Code Component
 // ============================================================================
 
 const Code = React.forwardRef<HTMLElement, CodeProps>(
-  ({ className, variant = 'code-01', asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'code';
+  ({ className, variant = "code-01", asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "code";
     return (
       <Comp
         ref={ref}
@@ -140,9 +143,9 @@ const Code = React.forwardRef<HTMLElement, CodeProps>(
         {...props}
       />
     );
-  }
+  },
 );
-Code.displayName = 'Code';
+Code.displayName = "Code";
 
 // ============================================================================
 // Compound Export
@@ -160,11 +163,4 @@ const Typography = {
 // Exports
 // ============================================================================
 
-export {
-  Heading,
-  Body,
-  TypographyLabel,
-  HelperText,
-  Code,
-  Typography,
-};
+export { Heading, Body, TypographyLabel, HelperText, Code, Typography };

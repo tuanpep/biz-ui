@@ -10,11 +10,20 @@
  * - Keyboard navigation
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
-import { paginationVariants, paginationButtonVariants, iconSizes } from './pagination.variants';
-import type { PaginationProps, PaginationNavProps } from './pagination.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
+import {
+  paginationVariants,
+  paginationButtonVariants,
+  iconSizes,
+} from "./Pagination.variants";
+import type { PaginationProps, PaginationNavProps } from "./Pagination.types";
 
 // ============================================================================
 // Pagination Component
@@ -24,7 +33,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       page,
       total,
       onChange,
@@ -35,16 +44,16 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
       onPageSizeChange,
       showTotal = false,
       totalItems,
-      itemName = 'items',
+      itemName = "items",
       siblingsCount = 1,
       disabled = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate page numbers with ellipsis
-    const getPageNumbers = (): (number | 'ellipsis')[] => {
-      const pages: (number | 'ellipsis')[] = [];
+    const getPageNumbers = (): (number | "ellipsis")[] => {
+      const pages: (number | "ellipsis")[] = [];
 
       // Always show first page
       pages.push(1);
@@ -55,7 +64,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
 
       // Add ellipsis on left if needed
       if (leftSibling > 2) {
-        pages.push('ellipsis');
+        pages.push("ellipsis");
       }
 
       // Add pages in range
@@ -65,7 +74,7 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
 
       // Add ellipsis on right if needed
       if (rightSibling < total - 1) {
-        pages.push('ellipsis');
+        pages.push("ellipsis");
       }
 
       // Always show last page if more than 1 page
@@ -83,7 +92,9 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
       onChange?.(newPage);
     };
 
-    const handlePageSizeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handlePageSizeChange = (
+      event: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
       const newPageSize = parseInt(event.target.value, 10);
       onPageSizeChange?.(newPageSize);
     };
@@ -114,14 +125,14 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               onChange={handlePageSizeChange}
               disabled={disabled}
               className={cn(
-                'border rounded-none bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                size === 'sm' && 'h-7 px-2 text-xs',
-                size === 'md' && 'h-9 px-2 text-sm',
-                size === 'lg' && 'h-10 px-3 text-base'
+                "border rounded-none bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                size === "sm" && "h-7 px-2 text-xs",
+                size === "md" && "h-9 px-2 text-sm",
+                size === "lg" && "h-10 px-3 text-base",
               )}
               aria-label="Items per page"
             >
-              {pageSizes.map((ps) => (
+              {pageSizes.map((ps: number) => (
                 <option key={ps} value={ps}>
                   {ps}
                 </option>
@@ -146,7 +157,10 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
             disabled={disabled || !canGoPrev}
             aria-label="First page"
           >
-            <ChevronsLeft className={iconSizes[size || 'md']} aria-hidden="true" />
+            <ChevronsLeft
+              className={iconSizes[(size as keyof typeof iconSizes) || "md"]}
+              aria-hidden="true"
+            />
           </button>
         )}
 
@@ -158,17 +172,22 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           disabled={disabled || !canGoPrev}
           aria-label="Previous page"
         >
-          <ChevronLeft className={iconSizes[size || 'md']} aria-hidden="true" />
+          <ChevronLeft
+            className={iconSizes[(size as keyof typeof iconSizes) || "md"]}
+            aria-hidden="true"
+          />
         </button>
 
         {/* Page numbers */}
         <div className="flex items-center gap-1">
           {pageNumbers.map((pageNumber, index) => {
-            if (pageNumber === 'ellipsis') {
+            if (pageNumber === "ellipsis") {
               return (
                 <span
                   key={`ellipsis-${index}`}
-                  className={cn(paginationButtonVariants({ variant: 'ellipsis', size }))}
+                  className={cn(
+                    paginationButtonVariants({ variant: "ellipsis", size }),
+                  )}
                   aria-hidden="true"
                 >
                   ...
@@ -183,12 +202,15 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
                 key={pageNumber}
                 type="button"
                 className={cn(
-                  paginationButtonVariants({ variant: isActive ? 'active' : 'default', size })
+                  paginationButtonVariants({
+                    variant: isActive ? "active" : "default",
+                    size,
+                  }),
                 )}
                 onClick={() => handlePageChange(pageNumber)}
                 disabled={disabled}
                 aria-label={`Page ${pageNumber}`}
-                aria-current={isActive ? 'page' : undefined}
+                aria-current={isActive ? "page" : undefined}
               >
                 {pageNumber}
               </button>
@@ -204,7 +226,10 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           disabled={disabled || !canGoNext}
           aria-label="Next page"
         >
-          <ChevronRight className={iconSizes[size || 'md']} aria-hidden="true" />
+          <ChevronRight
+            className={iconSizes[(size as keyof typeof iconSizes) || "md"]}
+            aria-hidden="true"
+          />
         </button>
 
         {/* Last page */}
@@ -216,15 +241,18 @@ const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
             disabled={disabled || !canGoNext}
             aria-label="Last page"
           >
-            <ChevronsRight className={iconSizes[size || 'md']} aria-hidden="true" />
+            <ChevronsRight
+              className={iconSizes[(size as keyof typeof iconSizes) || "md"]}
+              aria-hidden="true"
+            />
           </button>
         )}
       </div>
     );
-  }
+  },
 );
 
-Pagination.displayName = 'Pagination';
+Pagination.displayName = "Pagination";
 
 // ============================================================================
 // Pagination Nav Component
@@ -237,7 +265,7 @@ const PaginationNav = React.forwardRef<HTMLDivElement, PaginationNavProps>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       page,
       total,
       onChange,
@@ -245,7 +273,7 @@ const PaginationNav = React.forwardRef<HTMLDivElement, PaginationNavProps>(
       showIndicator = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const canGoPrev = page > 1;
     const canGoNext = page < total;
@@ -259,19 +287,22 @@ const PaginationNav = React.forwardRef<HTMLDivElement, PaginationNavProps>(
     return (
       <div
         ref={ref}
-        className={cn(paginationVariants({ size }), 'gap-2', className)}
+        className={cn(paginationVariants({ size }), "gap-2", className)}
         role="navigation"
         aria-label="Pagination"
         {...props}
       >
         <button
           type="button"
-          className={cn(paginationButtonVariants({ size }), 'gap-1 px-3')}
+          className={cn(paginationButtonVariants({ size }), "gap-1 px-3")}
           onClick={() => handlePageChange(page - 1)}
           disabled={disabled || !canGoPrev}
           aria-label="Previous page"
         >
-          <ChevronLeft className={iconSizes[size || 'md']} aria-hidden="true" />
+          <ChevronLeft
+            className={iconSizes[(size as keyof typeof iconSizes) || "md"]}
+            aria-hidden="true"
+          />
           <span>Previous</span>
         </button>
 
@@ -283,20 +314,23 @@ const PaginationNav = React.forwardRef<HTMLDivElement, PaginationNavProps>(
 
         <button
           type="button"
-          className={cn(paginationButtonVariants({ size }), 'gap-1 px-3')}
+          className={cn(paginationButtonVariants({ size }), "gap-1 px-3")}
           onClick={() => handlePageChange(page + 1)}
           disabled={disabled || !canGoNext}
           aria-label="Next page"
         >
           <span>Next</span>
-          <ChevronRight className={iconSizes[size || 'md']} aria-hidden="true" />
+          <ChevronRight
+            className={iconSizes[(size as keyof typeof iconSizes) || "md"]}
+            aria-hidden="true"
+          />
         </button>
       </div>
     );
-  }
+  },
 );
 
-PaginationNav.displayName = 'PaginationNav';
+PaginationNav.displayName = "PaginationNav";
 
 // ============================================================================
 // Exports

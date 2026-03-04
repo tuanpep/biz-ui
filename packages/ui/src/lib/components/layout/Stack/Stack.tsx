@@ -14,11 +14,11 @@
  * ```
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
-import { stackVariants } from './Stack.variants';
-import type { StackProps, HStackProps, VStackProps } from './Stack.types';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
+import { stackVariants } from "./Stack.variants";
+import type { StackProps, HStackProps, VStackProps } from "./Stack.types";
 
 // ============================================================================
 // Stack Component
@@ -37,23 +37,26 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
       asChild,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <Comp
         ref={ref}
         className={cn(
           stackVariants({ gap, align, justify, direction, wrap }),
-          reverse && (direction === 'horizontal' ? 'flex-row-reverse' : 'flex-col-reverse'),
-          className
+          reverse &&
+            (direction === "horizontal"
+              ? "flex-row-reverse"
+              : "flex-col-reverse"),
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
-Stack.displayName = 'Stack';
+Stack.displayName = "Stack";
 
 // ============================================================================
 // HStack Component (Horizontal Stack)
@@ -69,9 +72,9 @@ const HStack = React.forwardRef<HTMLDivElement, HStackProps>(
         {...props}
       />
     );
-  }
+  },
 );
-HStack.displayName = 'HStack';
+HStack.displayName = "HStack";
 
 // ============================================================================
 // VStack Component (Vertical Stack)
@@ -80,23 +83,18 @@ HStack.displayName = 'HStack';
 const VStack = React.forwardRef<HTMLDivElement, VStackProps>(
   ({ className, ...props }, ref) => {
     return (
-      <Stack
-        ref={ref}
-        direction="vertical"
-        className={className}
-        {...props}
-      />
+      <Stack ref={ref} direction="vertical" className={className} {...props} />
     );
-  }
+  },
 );
-VStack.displayName = 'VStack';
+VStack.displayName = "VStack";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Stack, HStack, VStack };
-export { stackVariants } from './Stack.variants';
+export { stackVariants } from "./Stack.variants";
 export type {
   StackProps,
   HStackProps,
@@ -105,4 +103,4 @@ export type {
   StackAlign,
   StackJustify,
   StackDirection,
-} from './Stack.types';
+} from "./Stack.types";

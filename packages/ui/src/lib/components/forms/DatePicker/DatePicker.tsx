@@ -7,15 +7,26 @@
  * - Supports: Single date selection, Date range, and DateTime.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { CalendarIcon } from 'lucide-react';
-import { format, isSameDay, isValid } from 'date-fns';
-import { Popover, PopoverContent, PopoverTrigger } from '../../overlays/Popover';
-import { Calendar } from '../../data-display/Calendar';
-import { TimePicker } from '../TimePicker';
-import { datePickerVariants, datePickerInputVariants } from './DatePicker.variants';
-import type { DatePickerProps, DateRangePickerProps, DateTimePickerProps } from './DatePicker.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { CalendarIcon } from "lucide-react";
+import { format, isSameDay, isValid } from "date-fns";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../overlays/Popover";
+import { Calendar } from "../../data-display/Calendar";
+import { TimePicker } from "../TimePicker";
+import {
+  datePickerVariants,
+  datePickerInputVariants,
+} from "./DatePicker.variants";
+import type {
+  DatePickerProps,
+  DateRangePickerProps,
+  DateTimePickerProps,
+} from "./DatePicker.types";
 
 // ============================================================================
 // DatePicker Component
@@ -29,8 +40,8 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
       size,
       value,
       onChange,
-      placeholder = 'Select date',
-      dateFormat = 'MM/dd/yyyy',
+      placeholder = "Select date",
+      dateFormat = "MM/dd/yyyy",
       disabled = false,
       readOnly = false,
       error,
@@ -43,26 +54,30 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
       hideLabel = false,
       minDate,
       maxDate,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Handle legacy props with deprecation warnings
     const resolvedError = React.useMemo(() => {
       if (error) return error;
       if (errorMessage) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('DatePicker: errorMessage is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "DatePicker: errorMessage is deprecated. Use error prop with the message string instead.",
+          );
         }
         return errorMessage;
       }
       if (legacyHasError) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('DatePicker: hasError is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "DatePicker: hasError is deprecated. Use error prop with the message string instead.",
+          );
         }
-        return 'Invalid date';
+        return "Invalid date";
       }
       return undefined;
     }, [error, errorMessage, legacyHasError]);
@@ -84,13 +99,14 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
     };
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     const triggerElement = (
       <Popover>
@@ -98,15 +114,17 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           <div
             className={cn(
               datePickerInputVariants({ size, error: hasError }),
-              'w-full justify-between',
-              hasWarning && 'border-warning focus-visible:ring-warning'
+              "w-full justify-between",
+              hasWarning && "border-warning focus-visible:ring-warning",
             )}
             aria-invalid={hasError}
             aria-describedby={ariaDescribedBy}
             aria-required={required}
           >
-            <span className={cn(!value && 'text-text-03')}>
-              {value && isValid(value) ? format(value, dateFormat) : placeholder}
+            <span className={cn(!value && "text-text-03")}>
+              {value && isValid(value)
+                ? format(value, dateFormat)
+                : placeholder}
             </span>
             <CalendarIcon className="h-4 w-4 text-text-02" aria-hidden="true" />
           </div>
@@ -128,7 +146,10 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
         <div
           ref={ref}
           id={pickerId}
-          className={cn(datePickerVariants({ size, disabled: effectiveDisabled }), className)}
+          className={cn(
+            datePickerVariants({ size, disabled: effectiveDisabled }),
+            className,
+          )}
           data-testid={testId}
           {...props}
         >
@@ -141,7 +162,10 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
       <div
         ref={ref}
         id={pickerId}
-        className={cn(datePickerVariants({ size, disabled: effectiveDisabled }), wrapperClassName)}
+        className={cn(
+          datePickerVariants({ size, disabled: effectiveDisabled }),
+          wrapperClassName,
+        )}
         data-testid={testId}
         {...props}
       >
@@ -149,10 +173,10 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           <label
             htmlFor={pickerId}
             className={cn(
-              'block font-medium mb-1.5 text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              effectiveDisabled && 'opacity-50'
+              "block font-medium mb-1.5 text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -166,12 +190,19 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
         {triggerElement}
         <div>
           {description && !hasError && !hasWarning && (
-            <p id={descriptionId} className="text-sm text-muted-foreground mt-1">
+            <p
+              id={descriptionId}
+              className="text-sm text-muted-foreground mt-1"
+            >
               {description}
             </p>
           )}
           {hasError && (
-            <p id={errorId} className="text-xs text-destructive mt-1" role="alert">
+            <p
+              id={errorId}
+              className="text-xs text-destructive mt-1"
+              role="alert"
+            >
               {resolvedError}
             </p>
           )}
@@ -183,10 +214,10 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-DatePicker.displayName = 'DatePicker';
+DatePicker.displayName = "DatePicker";
 
 // ============================================================================
 // DateRangePicker Component
@@ -200,9 +231,9 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
       size,
       value = { start: null, end: null },
       onChange,
-      startPlaceholder = 'Start date',
-      endPlaceholder = 'End date',
-      dateFormat = 'MM/dd/yyyy',
+      startPlaceholder = "Start date",
+      endPlaceholder = "End date",
+      dateFormat = "MM/dd/yyyy",
       disabled = false,
       readOnly = false,
       error,
@@ -214,18 +245,20 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
       hideLabel = false,
       minDate,
       maxDate,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Handle legacy errorMessage prop
     const resolvedError = React.useMemo(() => {
       if (error) return error;
       if (errorMessage) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('DateRangePicker: errorMessage is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "DateRangePicker: errorMessage is deprecated. Use error prop with the message string instead.",
+          );
         }
         return errorMessage;
       }
@@ -260,18 +293,22 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
 
     const displayText =
       value.start && isValid(value.start)
-        ? `${format(value.start, dateFormat)} - ${value.end && isValid(value.end) ? format(value.end, dateFormat) : endPlaceholder
-        }`
+        ? `${format(value.start, dateFormat)} - ${
+            value.end && isValid(value.end)
+              ? format(value.end, dateFormat)
+              : endPlaceholder
+          }`
         : `${startPlaceholder} - ${endPlaceholder}`;
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     const triggerElement = (
       <Popover>
@@ -279,14 +316,14 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
           <div
             className={cn(
               datePickerInputVariants({ size, error: hasError }),
-              'w-full justify-between',
-              hasWarning && 'border-warning focus-visible:ring-warning'
+              "w-full justify-between",
+              hasWarning && "border-warning focus-visible:ring-warning",
             )}
             aria-invalid={hasError}
             aria-describedby={ariaDescribedBy}
             aria-required={required}
           >
-            <span className={cn(!value.start && 'text-text-03')}>
+            <span className={cn(!value.start && "text-text-03")}>
               {displayText}
             </span>
             <CalendarIcon className="h-4 w-4 text-text-02" aria-hidden="true" />
@@ -310,7 +347,10 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
         <div
           ref={ref}
           id={pickerId}
-          className={cn(datePickerVariants({ size, disabled: effectiveDisabled }), className)}
+          className={cn(
+            datePickerVariants({ size, disabled: effectiveDisabled }),
+            className,
+          )}
           data-testid={testId}
           {...props}
         >
@@ -323,7 +363,10 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
       <div
         ref={ref}
         id={pickerId}
-        className={cn(datePickerVariants({ size, disabled: effectiveDisabled }), wrapperClassName)}
+        className={cn(
+          datePickerVariants({ size, disabled: effectiveDisabled }),
+          wrapperClassName,
+        )}
         data-testid={testId}
         {...props}
       >
@@ -331,10 +374,10 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
           <label
             htmlFor={pickerId}
             className={cn(
-              'block font-medium mb-1.5 text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              effectiveDisabled && 'opacity-50'
+              "block font-medium mb-1.5 text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -348,12 +391,19 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
         {triggerElement}
         <div>
           {description && !hasError && !hasWarning && (
-            <p id={descriptionId} className="text-sm text-muted-foreground mt-1">
+            <p
+              id={descriptionId}
+              className="text-sm text-muted-foreground mt-1"
+            >
               {description}
             </p>
           )}
           {hasError && (
-            <p id={errorId} className="text-xs text-destructive mt-1" role="alert">
+            <p
+              id={errorId}
+              className="text-xs text-destructive mt-1"
+              role="alert"
+            >
               {resolvedError}
             </p>
           )}
@@ -365,9 +415,9 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
         </div>
       </div>
     );
-  }
+  },
 );
-DateRangePicker.displayName = 'DateRangePicker';
+DateRangePicker.displayName = "DateRangePicker";
 
 // ============================================================================
 // DateTimePicker Component
@@ -389,7 +439,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>(
       onTimeChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -399,15 +449,19 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>(
       <div
         ref={ref}
         id={pickerId}
-        className={cn('flex flex-col gap-1.5', props.wrapperClassName, className)}
+        className={cn(
+          "flex flex-col gap-1.5",
+          props.wrapperClassName,
+          className,
+        )}
       >
         {label && !hideLabel && (
           <label
             className={cn(
-              'block font-medium text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              disabled && 'opacity-50'
+              "block font-medium text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              disabled && "opacity-50",
             )}
           >
             {label}
@@ -435,14 +489,12 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>(
             size={size}
             value={timeValue}
             onChange={onTimeChange}
-            disabled={disabled}
+            disabled={disabled ?? undefined}
             className="w-32"
           />
         </div>
         {description && !error && !warn && (
-          <p className="text-sm text-muted-foreground">
-            {description}
-          </p>
+          <p className="text-sm text-muted-foreground">{description}</p>
         )}
         {error && (
           <p className="text-xs text-destructive" role="alert">
@@ -456,16 +508,19 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>(
         )}
       </div>
     );
-  }
+  },
 );
-DateTimePicker.displayName = 'DateTimePicker';
+DateTimePicker.displayName = "DateTimePicker";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { DatePicker, DateRangePicker, DateTimePicker };
-export { datePickerVariants, datePickerInputVariants } from './DatePicker.variants';
+export {
+  datePickerVariants,
+  datePickerInputVariants,
+} from "./DatePicker.variants";
 export type {
   DatePickerProps,
   DateRangePickerProps,
@@ -473,4 +528,4 @@ export type {
   DatePickerSkeletonProps,
   DateRange,
   DatePickerSize,
-} from './DatePicker.types';
+} from "./DatePicker.types";

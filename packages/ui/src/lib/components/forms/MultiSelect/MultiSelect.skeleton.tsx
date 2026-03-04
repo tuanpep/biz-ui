@@ -5,40 +5,41 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { multiSelectSkeletonVariants, multiSelectSkeletonLabelVariants } from './multi-select.variants';
-import type { MultiSelectSkeletonProps } from './multi-select.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import {
+  multiSelectSkeletonVariants,
+  multiSelectSkeletonLabelVariants,
+} from "./MultiSelect.variants";
+import type { MultiSelectSkeletonProps } from "./MultiSelect.types";
 
 // ============================================================================
 // MultiSelect Skeleton Component
 // ============================================================================
 
-const MultiSelectSkeleton = React.forwardRef<HTMLDivElement, MultiSelectSkeletonProps>(
+const MultiSelectSkeleton = React.forwardRef<
+  HTMLDivElement,
+  MultiSelectSkeletonProps
+>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       withLabel = false,
       hasDescription = false,
       hasError = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const skeletonElement = (
-      <div className={cn('w-full', multiSelectSkeletonVariants({ size }))} />
+      <div className={cn("w-full", multiSelectSkeletonVariants({ size }))} />
     );
 
     // Render without wrapper if no label/description/error
     if (!withLabel && !hasDescription && !hasError) {
       return (
-        <div
-          ref={ref}
-          className={className}
-          aria-hidden="true"
-          {...props}
-        >
+        <div ref={ref} className={className} aria-hidden="true" {...props}>
           {skeletonElement}
         </div>
       );
@@ -47,7 +48,7 @@ const MultiSelectSkeleton = React.forwardRef<HTMLDivElement, MultiSelectSkeleton
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', className)}
+        className={cn("flex flex-col gap-1.5", className)}
         aria-hidden="true"
         {...props}
       >
@@ -63,10 +64,10 @@ const MultiSelectSkeleton = React.forwardRef<HTMLDivElement, MultiSelectSkeleton
         )}
       </div>
     );
-  }
+  },
 );
 
-MultiSelectSkeleton.displayName = 'MultiSelectSkeleton';
+MultiSelectSkeleton.displayName = "MultiSelectSkeleton";
 
 // ============================================================================
 // Exports

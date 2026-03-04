@@ -3,20 +3,26 @@
  * Following Carbon's patterns with enhanced validation states.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * TimePicker size type.
  */
-export type TimePickerSize = VariantProps<typeof import('./time-picker.variants').timePickerVariants>['size'];
+export type TimePickerSize = VariantProps<
+  typeof import("./TimePicker.variants").timePickerVariants
+>["size"];
 
 /**
  * TimePicker component props.
  */
 export interface TimePickerProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange'>,
-    VariantProps<typeof import('./time-picker.variants').timePickerVariants> {
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, "size" | "onChange">,
+    Omit<
+      VariantProps<typeof import("./TimePicker.variants").timePickerVariants>,
+      "error"
+    > {
   /** Value: 'HH:mm' string */
   value?: string | null;
   /** Callback on change */
@@ -42,7 +48,7 @@ export interface TimePickerProps
   /** Additional wrapper className */
   wrapperClassName?: string;
   /** Test id for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 /**

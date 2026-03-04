@@ -23,15 +23,17 @@
  * ```
  */
 
-import * as React from 'react';
-import type { OceanTheme, OceanThemeContextValue } from './theme-types';
-import { defaultTheme } from './default-theme';
+import * as React from "react";
+import type { OceanTheme, OceanThemeContextValue } from "./theme-types";
+import { defaultTheme } from "./default-theme";
 
 // ============================================================================
 // Context
 // ============================================================================
 
-const OceanThemeContext = React.createContext<OceanThemeContextValue | null>(null);
+const OceanThemeContext = React.createContext<OceanThemeContextValue | null>(
+  null,
+);
 
 // ============================================================================
 // Hook
@@ -44,7 +46,7 @@ const OceanThemeContext = React.createContext<OceanThemeContextValue | null>(nul
 export function useOceanTheme(): OceanThemeContextValue {
   const context = React.useContext(OceanThemeContext);
   if (!context) {
-    throw new Error('useOceanTheme must be used within an OceanThemeProvider');
+    throw new Error("useOceanTheme must be used within an OceanThemeProvider");
   }
   return context;
 }
@@ -77,16 +79,16 @@ function deepMerge<T extends object>(target: T, source: Partial<T>): T {
       if (
         sourceValue !== undefined &&
         sourceValue !== null &&
-        typeof sourceValue === 'object' &&
+        typeof sourceValue === "object" &&
         !Array.isArray(sourceValue) &&
         targetValue !== undefined &&
         targetValue !== null &&
-        typeof targetValue === 'object' &&
+        typeof targetValue === "object" &&
         !Array.isArray(targetValue)
       ) {
         (result as Record<string, unknown>)[key] = deepMerge(
           targetValue as object,
-          sourceValue as object
+          sourceValue as object,
         );
       } else if (sourceValue !== undefined) {
         (result as Record<string, unknown>)[key] = sourceValue;
@@ -105,7 +107,15 @@ function generateCssVariables(theme: OceanTheme): string {
   const vars: string[] = [];
 
   // Colors
-  const colorNames = ['primary', 'secondary', 'destructive', 'success', 'warning', 'info', 'gray'] as const;
+  const colorNames = [
+    "primary",
+    "secondary",
+    "destructive",
+    "success",
+    "warning",
+    "info",
+    "gray",
+  ] as const;
 
   colorNames.forEach((colorName) => {
     const scale = theme.colors[colorName];
@@ -114,9 +124,12 @@ function generateCssVariables(theme: OceanTheme): string {
         // Map index 0-9 to Biz UI-style 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
         const oceanIndex = index === 0 ? 50 : index * 100;
         // Wrap bare HSL triplets (e.g. "214 100% 97%") in hsl() for valid CSS
-        const cssValue = value.startsWith('#') || value.startsWith('hsl') || value.startsWith('rgb')
-          ? value
-          : `hsl(${value})`;
+        const cssValue =
+          value.startsWith("#") ||
+          value.startsWith("hsl") ||
+          value.startsWith("rgb")
+            ? value
+            : `hsl(${value})`;
         vars.push(`--ocean-${colorName}-${oceanIndex}: ${cssValue};`);
       });
     }
@@ -127,34 +140,43 @@ function generateCssVariables(theme: OceanTheme): string {
   vars.push(`--font-family-mono: ${theme.typography.fontFamilyMonospace};`);
 
   // Spacing
-  const spacingKeys = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'] as const;
+  const spacingKeys = [
+    "xs",
+    "sm",
+    "md",
+    "lg",
+    "xl",
+    "2xl",
+    "3xl",
+    "4xl",
+  ] as const;
   spacingKeys.forEach((key) => {
     vars.push(`--spacing-${key}: ${theme.spacing[key]};`);
   });
 
   // Shadows
-  const shadowKeys = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const shadowKeys = ["xs", "sm", "md", "lg", "xl"] as const;
   shadowKeys.forEach((key) => {
     vars.push(`--shadow-${key}: ${theme.shadows[key]};`);
   });
 
   // Radius
-  const radiusKeys = ['xs', 'sm', 'md', 'lg', 'xl', 'full'] as const;
+  const radiusKeys = ["xs", "sm", "md", "lg", "xl", "full"] as const;
   radiusKeys.forEach((key) => {
     vars.push(`--radius-${key}: ${theme.radius[key]};`);
   });
 
-  return vars.join('\n  ');
+  return vars.join("\n  ");
 }
 
 function injectThemeStyles(theme: OceanTheme, selector: string): void {
   const cssVariables = generateCssVariables(theme);
 
-  const styleId = 'biz-ui-theme-variables';
+  const styleId = "biz-ui-theme-variables";
   let styleElement = document.getElementById(styleId);
 
   if (!styleElement) {
-    styleElement = document.createElement('style');
+    styleElement = document.createElement("style");
     styleElement.id = styleId;
     document.head.appendChild(styleElement);
   }
@@ -174,7 +196,7 @@ export function OceanThemeProvider({
   theme: customTheme,
   children,
   injectCssVariables = false,
-}: OceanThemeProviderProps): JSX.Element {
+}: OceanThemeProviderProps): React.JSX.Element {
   // Merge custom theme with default theme
   const theme = React.useMemo(() => {
     if (!customTheme) return defaultTheme;
@@ -183,7 +205,7 @@ export function OceanThemeProvider({
 
   // Inject CSS variables if enabled
   React.useEffect(() => {
-    if (injectCssVariables && typeof document !== 'undefined') {
+    if (injectCssVariables && typeof document !== "undefined") {
       injectThemeStyles(theme, theme.cssVariablesSelector);
     }
   }, [theme, injectCssVariables]);
@@ -192,15 +214,15 @@ export function OceanThemeProvider({
   const contextValue = React.useMemo<OceanThemeContextValue>(
     () => ({
       theme,
-      colorScheme: 'light',
+      colorScheme: "light",
       setColorScheme: () => {
-        console.warn('Dark mode is not implemented yet');
+        console.warn("Dark mode is not implemented yet");
       },
       toggleColorScheme: () => {
-        console.warn('Dark mode is not implemented yet');
+        console.warn("Dark mode is not implemented yet");
       },
     }),
-    [theme]
+    [theme],
   );
 
   return (

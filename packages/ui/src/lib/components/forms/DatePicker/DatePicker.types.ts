@@ -3,20 +3,23 @@
  * Following Carbon's patterns with enhanced validation states.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * DatePicker size types.
  */
-export type DatePickerSize = VariantProps<typeof import('./DatePicker.variants').datePickerVariants>['size'];
+export type DatePickerSize = VariantProps<
+  typeof import("./DatePicker.variants").datePickerVariants
+>["size"];
 
 /**
  * DatePicker component props.
  */
 export interface DatePickerProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange' | 'value'>,
-  VariantProps<typeof import('./DatePicker.variants').datePickerVariants> {
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, "size" | "onChange" | "value">,
+    VariantProps<typeof import("./DatePicker.variants").datePickerVariants> {
   /** Selected date */
   value?: Date | null;
   /** Callback when date changes */
@@ -40,7 +43,9 @@ export interface DatePickerProps
   /** Additional wrapper className */
   wrapperClassName?: string;
   /** Test id for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
+  /** Read-only */
+  readOnly?: boolean;
   /** Minimum date */
   minDate?: Date;
   /** Maximum date */
@@ -69,8 +74,9 @@ export interface DateRange {
  * DateRangePicker component props.
  */
 export interface DateRangePickerProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange' | 'value'>,
-  VariantProps<typeof import('./DatePicker.variants').datePickerVariants> {
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, "size" | "onChange" | "value">,
+    VariantProps<typeof import("./DatePicker.variants").datePickerVariants> {
   /** Selected date range */
   value?: DateRange;
   /** Callback when range changes */
@@ -96,7 +102,9 @@ export interface DateRangePickerProps
   /** Additional wrapper className */
   wrapperClassName?: string;
   /** Test id for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
+  /** Read-only */
+  readOnly?: boolean;
   /** Minimum date */
   minDate?: Date;
   /** Maximum date */

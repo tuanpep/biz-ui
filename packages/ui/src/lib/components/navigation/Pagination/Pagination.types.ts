@@ -3,24 +3,30 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * Pagination size type.
  */
-export type PaginationSize = VariantProps<typeof import('./pagination.variants').paginationVariants>['size'];
+export type PaginationSize = VariantProps<
+  typeof import("./Pagination.variants").paginationVariants
+>["size"];
 
 /**
  * Pagination button variant type.
  */
-export type PaginationButtonVariant = VariantProps<typeof import('./pagination.variants').paginationButtonVariants>['variant'];
+export type PaginationButtonVariant = VariantProps<
+  typeof import("./Pagination.variants").paginationButtonVariants
+>["variant"];
 
 /**
  * Pagination component props.
  */
-export interface PaginationProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange'> {
+export interface PaginationProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange"
+> {
   /** Size variant */
   size?: PaginationSize;
   /** Current page (1-indexed) */
@@ -54,8 +60,10 @@ export interface PaginationProps
 /**
  * Pagination nav component props.
  */
-export interface PaginationNavProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange'> {
+export interface PaginationNavProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange"
+> {
   /** Size variant */
   size?: PaginationSize;
   /** Current page (1-indexed) */

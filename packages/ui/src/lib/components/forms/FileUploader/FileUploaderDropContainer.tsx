@@ -4,32 +4,35 @@
  * Drag and drop container for file uploads.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { Upload, Warning } from 'lucide-react';
-import { fileUploaderDropContainerVariants } from './FileUploader.variants';
-import type { FileUploaderDropContainerProps } from './FileUploader.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { Upload } from "lucide-react";
+import { fileUploaderDropContainerVariants } from "./FileUploader.variants";
+import type { FileUploaderDropContainerProps } from "./FileUploader.types";
 
 // ============================================================================
 // FileUploaderDropContainer Component
 // ============================================================================
 
-const FileUploaderDropContainer = React.forwardRef<HTMLDivElement, FileUploaderDropContainerProps>(
+const FileUploaderDropContainer = React.forwardRef<
+  HTMLDivElement,
+  FileUploaderDropContainerProps
+>(
   (
     {
       className,
-      size = 'md',
-      variant = 'default',
+      size = "md",
+      variant = "default",
       disabled = false,
       accept,
       multiple,
       onChange,
-      label = 'Drag and drop files here or click to upload',
-      dropLabel = 'Drop files here',
-      'data-testid': testId,
+      label = "Drag and drop files here or click to upload",
+      dropLabel = "Drop files here",
+      "data-testid": testId,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isDragActive, setIsDragActive] = React.useState(false);
     const inputRef = React.useRef<HTMLInputElement>(null);
@@ -72,7 +75,7 @@ const FileUploaderDropContainer = React.forwardRef<HTMLDivElement, FileUploaderD
         onChange(files);
       }
       // Reset input value to allow re-uploading the same file
-      event.target.value = '';
+      event.target.value = "";
     };
 
     return (
@@ -80,11 +83,11 @@ const FileUploaderDropContainer = React.forwardRef<HTMLDivElement, FileUploaderD
         ref={ref}
         className={cn(
           fileUploaderDropContainerVariants({
-            size: variant === 'compact' ? 'sm' : size,
+            size: variant === "compact" ? "sm" : size,
             disabled,
             active: isDragActive,
           }),
-          className
+          className,
         )}
         onClick={handleClick}
         onDragOver={handleDragOver}
@@ -112,31 +115,40 @@ const FileUploaderDropContainer = React.forwardRef<HTMLDivElement, FileUploaderD
           {isDragActive ? (
             <>
               <Upload className="h-6 w-6 text-primary" />
-              <span className="text-sm font-medium text-primary">{dropLabel}</span>
+              <span className="text-sm font-medium text-primary">
+                {dropLabel}
+              </span>
             </>
           ) : (
             <>
-              <Upload className={cn('h-6 w-6', disabled ? 'text-muted-foreground' : 'text-muted-foreground')} />
+              <Upload
+                className={cn(
+                  "h-6 w-6",
+                  disabled ? "text-muted-foreground" : "text-muted-foreground",
+                )}
+              />
               <span
                 className={cn(
-                  'text-sm',
-                  disabled ? 'text-muted-foreground' : 'text-muted-foreground'
+                  "text-sm",
+                  disabled ? "text-muted-foreground" : "text-muted-foreground",
                 )}
               >
                 {label}
               </span>
               <span className="text-xs text-muted-foreground">
-                {multiple ? 'You can upload multiple files' : 'You can upload one file'}
+                {multiple
+                  ? "You can upload multiple files"
+                  : "You can upload one file"}
               </span>
             </>
           )}
         </div>
       </div>
     );
-  }
+  },
 );
 
-FileUploaderDropContainer.displayName = 'FileUploaderDropContainer';
+FileUploaderDropContainer.displayName = "FileUploaderDropContainer";
 
 // ============================================================================
 // Exports

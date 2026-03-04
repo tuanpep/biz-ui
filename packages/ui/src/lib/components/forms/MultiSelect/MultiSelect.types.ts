@@ -3,13 +3,15 @@
  * Following Carbon's patterns with enhanced validation states.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * MultiSelect size type.
  */
-export type MultiSelectSize = VariantProps<typeof import('./multi-select.variants').multiSelectVariants>['size'];
+export type MultiSelectSize = VariantProps<
+  typeof import("./MultiSelect.variants").multiSelectVariants
+>["size"];
 
 /**
  * MultiSelect option type.
@@ -23,8 +25,10 @@ export interface MultiSelectOption {
 /**
  * MultiSelect component props.
  */
-export interface MultiSelectProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange'> {
+export interface MultiSelectProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange"
+> {
   /** Selected values */
   value?: string[];
   /** Default value for uncontrolled */
@@ -56,7 +60,7 @@ export interface MultiSelectProps
   /** Additional wrapper className */
   wrapperClassName?: string;
   /** Test id for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
   /**
    * @deprecated Use `error` prop with error message string instead
    * Error state (boolean)
@@ -72,7 +76,10 @@ export interface MultiSelectProps
 /**
  * MultiSelectTag component props.
  */
-export interface MultiSelectTagProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'size'> {
+export interface MultiSelectTagProps extends Omit<
+  React.HTMLAttributes<HTMLSpanElement>,
+  "size"
+> {
   /** Tag content */
   tag: React.ReactNode;
   /** Size variant */

@@ -3,29 +3,35 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * ProgressIndicator orientation type.
  */
-export type ProgressIndicatorOrientation = VariantProps<typeof import('./progress-indicator.variants').stepProgressVariants>['orientation'];
+export type ProgressIndicatorOrientation = VariantProps<
+  typeof import("./ProgressIndicator.variants").stepProgressVariants
+>["orientation"];
 
 /**
  * ProgressIndicator size type.
  */
-export type ProgressIndicatorSize = VariantProps<typeof import('./progress-indicator.variants').stepProgressVariants>['size'];
+export type ProgressIndicatorSize = VariantProps<
+  typeof import("./ProgressIndicator.variants").stepProgressVariants
+>["size"];
 
 /**
  * Progress step status type.
  */
-export type ProgressStepStatus = 'pending' | 'current' | 'completed';
+export type ProgressStepStatus = "pending" | "current" | "completed";
 
 /**
  * ProgressIndicator component props.
  */
-export interface ProgressIndicatorProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange'> {
+export interface ProgressIndicatorProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange"
+> {
   /** Orientation of the indicator */
   orientation?: ProgressIndicatorOrientation;
   /** Size variant */
@@ -39,13 +45,16 @@ export interface ProgressIndicatorProps
   /** Show step labels */
   showLabels?: boolean;
   /** Position of labels (for vertical orientation) */
-  labelPosition?: 'start' | 'end';
+  labelPosition?: "start" | "end";
 }
 
 /**
  * ProgressStep component props.
  */
-export interface ProgressStepProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+export interface ProgressStepProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size"
+> {
   /** Step number */
   step: number;
   /** Step label */

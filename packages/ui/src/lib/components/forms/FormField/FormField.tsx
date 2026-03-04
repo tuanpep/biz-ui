@@ -10,9 +10,13 @@
  * - Accessible form structure
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import type { FormFieldProps, FormGroupProps, FormProps } from './form-field.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import type {
+  FormFieldProps,
+  FormGroupProps,
+  FormProps,
+} from "./FormField.types";
 
 // ============================================================================
 // FormField Component
@@ -27,12 +31,12 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
       description,
       error,
       required,
-      orientation = 'vertical',
-      size = 'md',
+      orientation = "vertical",
+      size = "md",
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const hasError = !!error;
 
@@ -40,11 +44,12 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
       <div
         ref={ref}
         className={cn(
-          'grid gap-1.5',
-          orientation === 'horizontal' && 'flex items-center gap-4 grid-cols-none',
-          size === 'sm' && 'gap-1',
-          size === 'lg' && 'gap-2',
-          className
+          "grid gap-1.5",
+          orientation === "horizontal" &&
+            "flex items-center gap-4 grid-cols-none",
+          size === "sm" && "gap-1",
+          size === "lg" && "gap-2",
+          className,
         )}
         {...props}
       >
@@ -52,31 +57,38 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
           <label
             htmlFor={htmlFor}
             className={cn(
-              'text-sm font-medium leading-none',
-              orientation === 'horizontal' && 'shrink-0 w-24',
-              hasError && 'text-destructive',
-              'peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+              "text-sm font-medium leading-none",
+              orientation === "horizontal" && "shrink-0 w-24",
+              hasError && "text-destructive",
+              "peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
             )}
           >
             {label}
             {required && <span className="text-destructive ml-1">*</span>}
           </label>
         )}
-        <div className={cn('grid gap-1.5', orientation === 'horizontal' && 'flex-1')}>
+        <div
+          className={cn(
+            "grid gap-1.5",
+            orientation === "horizontal" && "flex-1",
+          )}
+        >
           {children}
           {description && !error && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
           {error && (
-            <p className="text-xs text-destructive font-medium" role="alert">{error}</p>
+            <p className="text-xs text-destructive font-medium" role="alert">
+              {error}
+            </p>
           )}
         </div>
       </div>
     );
-  }
+  },
 );
 
-FormField.displayName = 'FormField';
+FormField.displayName = "FormField";
 
 // ============================================================================
 // FormGroup Component
@@ -88,11 +100,7 @@ FormField.displayName = 'FormField';
 const FormGroup = React.forwardRef<HTMLFieldSetElement, FormGroupProps>(
   ({ className, legend, description, children, ...props }, ref) => {
     return (
-      <fieldset
-        ref={ref}
-        className={cn('space-y-4', className)}
-        {...props}
-      >
+      <fieldset ref={ref} className={cn("space-y-4", className)} {...props}>
         {(legend || description) && (
           <div className="space-y-1">
             {legend && (
@@ -106,10 +114,10 @@ const FormGroup = React.forwardRef<HTMLFieldSetElement, FormGroupProps>(
         {children}
       </fieldset>
     );
-  }
+  },
 );
 
-FormGroup.displayName = 'FormGroup';
+FormGroup.displayName = "FormGroup";
 
 // ============================================================================
 // Form Component
@@ -119,23 +127,23 @@ FormGroup.displayName = 'FormGroup';
  * A form wrapper with consistent styling.
  */
 const Form = React.forwardRef<HTMLFormElement, FormProps>(
-  ({ className, variant = 'default', ...props }, ref) => {
+  ({ className, variant = "default", ...props }, ref) => {
     return (
       <form
         ref={ref}
         className={cn(
-          'space-y-6',
-          variant === 'compact' && 'space-y-4',
-          variant === 'spacious' && 'space-y-8',
-          className
+          "space-y-6",
+          variant === "compact" && "space-y-4",
+          variant === "spacious" && "space-y-8",
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
-Form.displayName = 'Form';
+Form.displayName = "Form";
 
 // ============================================================================
 // Exports

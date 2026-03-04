@@ -5,33 +5,48 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { numberInputSkeletonVariants, numberInputSkeletonLabelVariants } from './NumberInput.variants';
-import type { NumberInputSkeletonProps } from './NumberInput.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import {
+  numberInputSkeletonVariants,
+  numberInputSkeletonLabelVariants,
+} from "./NumberInput.variants";
+import type { NumberInputSkeletonProps } from "./NumberInput.types";
 
 // ============================================================================
 // NumberInput Skeleton Component
 // ============================================================================
 
-const NumberInputSkeleton = React.forwardRef<HTMLDivElement, NumberInputSkeletonProps>(
+const NumberInputSkeleton = React.forwardRef<
+  HTMLDivElement,
+  NumberInputSkeletonProps
+>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       hasLabel = false,
       hasDescription = false,
       hasError = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const skeletonElement = (
-      <div className={cn('relative flex w-full', numberInputSkeletonVariants({ size }))}>
+      <div
+        className={cn(
+          "relative flex w-full",
+          numberInputSkeletonVariants({ size }),
+        )}
+      >
         {/* Steppers */}
         <div className="flex flex-col gap-0.5">
-          <div className={cn('h-3 w-full', numberInputSkeletonVariants({ size }))} />
-          <div className={cn('h-3 w-full', numberInputSkeletonVariants({ size }))} />
+          <div
+            className={cn("h-3 w-full", numberInputSkeletonVariants({ size }))}
+          />
+          <div
+            className={cn("h-3 w-full", numberInputSkeletonVariants({ size }))}
+          />
         </div>
       </div>
     );
@@ -39,12 +54,7 @@ const NumberInputSkeleton = React.forwardRef<HTMLDivElement, NumberInputSkeleton
     // Render without wrapper if no label/description/error
     if (!hasLabel && !hasDescription && !hasError) {
       return (
-        <div
-          ref={ref}
-          className={className}
-          aria-hidden="true"
-          {...props}
-        >
+        <div ref={ref} className={className} aria-hidden="true" {...props}>
           {skeletonElement}
         </div>
       );
@@ -53,7 +63,7 @@ const NumberInputSkeleton = React.forwardRef<HTMLDivElement, NumberInputSkeleton
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', className)}
+        className={cn("flex flex-col gap-1.5", className)}
         aria-hidden="true"
         {...props}
       >
@@ -69,10 +79,10 @@ const NumberInputSkeleton = React.forwardRef<HTMLDivElement, NumberInputSkeleton
         )}
       </div>
     );
-  }
+  },
 );
 
-NumberInputSkeleton.displayName = 'NumberInputSkeleton';
+NumberInputSkeleton.displayName = "NumberInputSkeleton";
 
 // ============================================================================
 // Exports

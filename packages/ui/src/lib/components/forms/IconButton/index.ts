@@ -8,7 +8,11 @@
  */
 
 // Main components
-export { IconButton, iconButtonVariants, iconSizes } from './IconButton';
+export { IconButton, iconButtonVariants } from "./IconButton";
 
 // Types
-export type { IconButtonProps, IconButtonVariant, IconButtonSize } from './IconButton.types';
+export type {
+  IconButtonProps,
+  IconButtonVariant,
+  IconButtonSize,
+} from "./IconButton.types";

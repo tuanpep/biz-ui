@@ -8,11 +8,11 @@
  * - Loading state with spinner
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
-import { iconButtonVariants, iconSizes } from './IconButton.variants';
-import type { IconButtonProps, IconButtonVariant, IconButtonSize } from './IconButton.types';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
+import { iconButtonVariants, iconSizes } from "./IconButton.variants";
+import type { IconButtonProps } from "./IconButton.types";
 
 // ============================================================================
 // Loading Spinner Component
@@ -20,7 +20,7 @@ import type { IconButtonProps, IconButtonVariant, IconButtonSize } from './IconB
 
 const LoadingSpinner = ({ className }: { className?: string }) => (
   <svg
-    className={cn('animate-spin', className)}
+    className={cn("animate-spin", className)}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
@@ -51,7 +51,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     {
       className,
       variant,
-      size = 'md',
+      size = "md",
       icon: Icon,
       label,
       asChild = false,
@@ -59,9 +59,9 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const Comp = asChild ? Slot : 'button';
+    const Comp = asChild ? Slot : "button";
     const isDisabled = disabled || loading;
 
     return (
@@ -75,22 +75,26 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         {...props}
       >
         {loading ? (
-          <LoadingSpinner className={iconSizes[size || 'md']} />
+          <LoadingSpinner className={iconSizes[size || "md"]} />
         ) : (
-          <Icon className={iconSizes[size || 'md']} aria-hidden="true" />
+          <Icon className={iconSizes[size || "md"]} aria-hidden="true" />
         )}
         <span className="sr-only">{loading ? `Loading: ${label}` : label}</span>
       </Comp>
     );
-  }
+  },
 );
 
-IconButton.displayName = 'IconButton';
+IconButton.displayName = "IconButton";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { IconButton };
-export { iconButtonVariants, iconSizes } from './IconButton.variants';
-export type { IconButtonProps, IconButtonVariant, IconButtonSize } from './IconButton.types';
+export { iconButtonVariants, iconSizes } from "./IconButton.variants";
+export type {
+  IconButtonProps,
+  IconButtonVariant,
+  IconButtonSize,
+} from "./IconButton.types";

@@ -9,16 +9,16 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { ChevronDown, X } from 'lucide-react';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { ChevronDown, X } from "lucide-react";
 import {
   comboBoxVariants,
   comboBoxInputVariants,
   comboBoxMenuVariants,
   comboBoxItemVariants,
-} from './ComboBox.variants';
-import type { ComboBoxProps } from './ComboBox.types';
+} from "./ComboBox.variants";
+import type { ComboBoxProps } from "./ComboBox.types";
 
 // ============================================================================
 // ComboBox Component
@@ -29,12 +29,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     {
       className,
       wrapperClassName,
-      size = 'md',
+      size = "md",
       value: controlledValue,
       defaultValue,
       onChange,
       options,
-      placeholder = 'Select...',
+      placeholder = "Select...",
       disabled = false,
       readOnly = false,
       error,
@@ -48,28 +48,32 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       hideLabel = false,
       clearable = true,
       filterOption,
-      noOptionsMessage = 'No options found',
+      noOptionsMessage = "No options found",
       loading = false,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Handle legacy props with deprecation warnings
     const resolvedError = React.useMemo(() => {
       if (error) return error;
       if (errorMessage) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('ComboBox: errorMessage is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "ComboBox: errorMessage is deprecated. Use error prop with the message string instead.",
+          );
         }
         return errorMessage;
       }
       if (legacyHasError) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('ComboBox: hasError is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "ComboBox: hasError is deprecated. Use error prop with the message string instead.",
+          );
         }
-        return 'Invalid selection';
+        return "Invalid selection";
       }
       return undefined;
     }, [error, errorMessage, legacyHasError]);
@@ -77,8 +81,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     const resolvedDescription = React.useMemo(() => {
       if (description) return description;
       if (helperText) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('ComboBox: helperText is deprecated. Use description instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "ComboBox: helperText is deprecated. Use description instead.",
+          );
         }
         return helperText;
       }
@@ -99,8 +105,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     const hasWarning = !readOnly && !hasError && !effectiveDisabled && !!warn;
 
     const [isOpen, setIsOpen] = React.useState(false);
-    const [inputValue, setInputValue] = React.useState('');
-    const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue ?? '');
+    const [inputValue, setInputValue] = React.useState("");
+    const [uncontrolledValue, setUncontrolledValue] = React.useState(
+      defaultValue ?? "",
+    );
     const containerRef = React.useRef<HTMLDivElement>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
@@ -109,7 +117,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     const selectedOption = options.find((opt) => opt.value === selectedValue);
 
     // Default filter function
-    const defaultFilter = (option: typeof options[0], input: string) => {
+    const defaultFilter = (option: (typeof options)[0], input: string) => {
       return option.label.toLowerCase().includes(input.toLowerCase());
     };
 
@@ -123,18 +131,21 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
     // Close dropdown when clicking outside
     React.useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        if (
+          containerRef.current &&
+          !containerRef.current.contains(event.target as Node)
+        ) {
           setIsOpen(false);
-          setInputValue('');
+          setInputValue("");
         }
       };
 
       if (isOpen) {
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
       }
 
       return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [isOpen]);
 
@@ -144,24 +155,24 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       setHighlightedIndex(0);
     };
 
-    const handleSelect = (option: typeof options[0]) => {
+    const handleSelect = (option: (typeof options)[0]) => {
       if (option.disabled) return;
       setUncontrolledValue(option.value);
       onChange?.(option.value);
       setIsOpen(false);
-      setInputValue('');
+      setInputValue("");
     };
 
     const handleClear = () => {
-      setUncontrolledValue('');
-      onChange?.('');
-      setInputValue('');
+      setUncontrolledValue("");
+      onChange?.("");
+      setInputValue("");
       inputRef.current?.focus();
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
       if (!isOpen) {
-        if (event.key === 'ArrowDown' || event.key === 'Enter') {
+        if (event.key === "ArrowDown" || event.key === "Enter") {
           setIsOpen(true);
           setHighlightedIndex(0);
         }
@@ -169,37 +180,38 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
       }
 
       switch (event.key) {
-        case 'ArrowDown':
+        case "ArrowDown":
           event.preventDefault();
           setHighlightedIndex((prev) =>
-            prev < filteredOptions.length - 1 ? prev + 1 : prev
+            prev < filteredOptions.length - 1 ? prev + 1 : prev,
           );
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           event.preventDefault();
           setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
           break;
-        case 'Enter':
+        case "Enter":
           event.preventDefault();
           if (highlightedIndex >= 0 && filteredOptions[highlightedIndex]) {
             handleSelect(filteredOptions[highlightedIndex]);
           }
           break;
-        case 'Escape':
+        case "Escape":
           setIsOpen(false);
-          setInputValue('');
+          setInputValue("");
           break;
       }
     };
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      resolvedDescription && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        resolvedDescription && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     const inputElement = (
       <div ref={containerRef} className="relative">
@@ -208,7 +220,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
             ref={inputRef}
             type="text"
             id={comboBoxId}
-            value={isOpen ? inputValue : (selectedOption?.label ?? '')}
+            value={isOpen ? inputValue : (selectedOption?.label ?? "")}
             onChange={handleInputChange}
             onFocus={() => !effectiveDisabled && setIsOpen(true)}
             onKeyDown={handleKeyDown}
@@ -217,14 +229,18 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
             placeholder={placeholder}
             className={cn(
               comboBoxInputVariants({ size, error: hasError }),
-              hasWarning && 'border-warning focus-visible:ring-warning',
-              className
+              hasWarning && "border-warning focus-visible:ring-warning",
+              className,
             )}
             role="combobox"
             aria-expanded={isOpen}
             aria-autocomplete="list"
             aria-controls={isOpen ? listId : undefined}
-            aria-activedescendant={highlightedIndex >= 0 ? `${comboBoxId}-option-${highlightedIndex}` : undefined}
+            aria-activedescendant={
+              highlightedIndex >= 0
+                ? `${comboBoxId}-option-${highlightedIndex}`
+                : undefined
+            }
             aria-invalid={hasError}
             aria-describedby={ariaDescribedBy}
             aria-required={required}
@@ -238,7 +254,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
             tabIndex={-1}
             aria-hidden="true"
           >
-            <ChevronDown className={cn('h-4 w-4 text-muted-foreground transition-transform', isOpen && 'rotate-180')} />
+            <ChevronDown
+              className={cn(
+                "h-4 w-4 text-muted-foreground transition-transform",
+                isOpen && "rotate-180",
+              )}
+            />
           </button>
           {/* Clear button */}
           {clearable && selectedValue && !effectiveDisabled && (
@@ -282,7 +303,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
                         selected: selectedValue === option.value,
                         disabled: option.disabled,
                         highlighted: highlightedIndex === index,
-                      })
+                      }),
                     )}
                     onClick={() => handleSelect(option)}
                     onMouseEnter={() => setHighlightedIndex(index)}
@@ -325,10 +346,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
           <label
             htmlFor={comboBoxId}
             className={cn(
-              'block font-medium mb-1.5 text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              effectiveDisabled && 'opacity-50'
+              "block font-medium mb-1.5 text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -342,12 +363,19 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
         {inputElement}
         <div>
           {resolvedDescription && !hasError && !hasWarning && (
-            <p id={descriptionId} className="text-sm text-muted-foreground mt-1">
+            <p
+              id={descriptionId}
+              className="text-sm text-muted-foreground mt-1"
+            >
               {resolvedDescription}
             </p>
           )}
           {hasError && (
-            <p id={errorId} className="text-xs text-destructive mt-1" role="alert">
+            <p
+              id={errorId}
+              className="text-xs text-destructive mt-1"
+              role="alert"
+            >
               {resolvedError}
             </p>
           )}
@@ -359,15 +387,25 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-ComboBox.displayName = 'ComboBox';
+ComboBox.displayName = "ComboBox";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { ComboBox };
-export { comboBoxVariants, comboBoxInputVariants, comboBoxMenuVariants, comboBoxItemVariants } from './ComboBox.variants';
-export type { ComboBoxProps, ComboBoxSkeletonProps, ComboBoxOption, ComboBoxSize } from './ComboBox.types';
+export {
+  comboBoxVariants,
+  comboBoxInputVariants,
+  comboBoxMenuVariants,
+  comboBoxItemVariants,
+} from "./ComboBox.variants";
+export type {
+  ComboBoxProps,
+  ComboBoxSkeletonProps,
+  ComboBoxOption,
+  ComboBoxSize,
+} from "./ComboBox.types";

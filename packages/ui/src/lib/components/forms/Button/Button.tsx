@@ -10,26 +10,26 @@
  * - Biz UI-aligned variant aliases (primary, secondary, tertiary)
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
-import { buttonVariants } from './Button.variants';
-import type { ButtonProps } from './Button.types';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
+import { buttonVariants } from "./Button.variants";
+import type { ButtonProps } from "./Button.types";
 
 // ============================================================================
 // Loading Spinner Component
 // ============================================================================
 
-const LoadingSpinner = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) => {
+const LoadingSpinner = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => {
   const sizeClasses = {
-    sm: 'h-3 w-3',
-    md: 'h-4 w-4',
-    lg: 'h-5 w-5',
+    sm: "h-3 w-3",
+    md: "h-4 w-4",
+    lg: "h-5 w-5",
   };
 
   return (
     <svg
-      className={cn('animate-spin', sizeClasses[size])}
+      className={cn("animate-spin", sizeClasses[size])}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -61,7 +61,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       variant,
-      size = 'md',
+      size = "md",
       asChild = false,
       loading = false,
       loadingText,
@@ -72,13 +72,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const Comp = asChild ? Slot : 'button';
+    const Comp = asChild ? Slot : "button";
     const isDisabled = disabled || loading;
 
     // Determine spinner size based on button size
-    const spinnerSize = size === 'sm' ? 'sm' : size === 'lg' || size === 'xl' ? 'lg' : 'md';
+    const spinnerSize =
+      size === "sm" ? "sm" : size === "lg" || size === "xl" ? "lg" : "md";
 
     // When asChild is true, Radix Slot requires exactly one child element.
     // We cannot pass loading spinner or loadingText as siblings.
@@ -98,20 +99,21 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     // Determine if this is effectively an icon-only button
-    const isIconOnly = hasIconOnly || (size === 'icon' && !leftIcon && !rightIcon && !loading);
+    const isIconOnly =
+      hasIconOnly || (size === "icon" && !leftIcon && !rightIcon && !loading);
 
     return (
       <Comp
         className={cn(
           buttonVariants({ variant, size }),
-          isIconOnly && 'aspect-square p-0',
-          className
+          isIconOnly && "aspect-square p-0",
+          className,
         )}
         ref={ref}
         disabled={isDisabled}
         aria-busy={loading}
         aria-live="polite"
-        aria-label={loading ? loadingText || 'Loading' : props['aria-label']}
+        aria-label={loading ? loadingText || "Loading" : props["aria-label"]}
         {...props}
       >
         {loading ? (
@@ -124,20 +126,27 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <>
             {leftIcon && <span className="mr-2 flex-shrink-0">{leftIcon}</span>}
             {children}
-            {rightIcon && <span className="ml-2 flex-shrink-0">{rightIcon}</span>}
+            {rightIcon && (
+              <span className="ml-2 flex-shrink-0">{rightIcon}</span>
+            )}
           </>
         )}
       </Comp>
     );
-  }
+  },
 );
 
-Button.displayName = 'Button';
+Button.displayName = "Button";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Button };
-export { buttonVariants } from './Button.variants';
-export type { ButtonProps, ButtonSkeletonProps, ButtonVariant, ButtonSize } from './Button.types';
+export { buttonVariants } from "./Button.variants";
+export type {
+  ButtonProps,
+  ButtonSkeletonProps,
+  ButtonVariant,
+  ButtonSize,
+} from "./Button.types";

@@ -13,11 +13,11 @@
  * ```
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
-import { flexVariants, flexItemVariants } from './Flex.variants';
-import type { FlexProps, FlexItemProps, SpacerProps } from './Flex.types';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
+import { flexVariants, flexItemVariants } from "./Flex.variants";
+import type { FlexProps, FlexItemProps, SpacerProps } from "./Flex.types";
 
 // ============================================================================
 // Flex Component
@@ -36,22 +36,22 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
       asChild,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <Comp
         ref={ref}
         className={cn(
           flexVariants({ direction, wrap, justify, align, gap, inline }),
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
-Flex.displayName = 'Flex';
+Flex.displayName = "Flex";
 
 // ============================================================================
 // FlexItem Component
@@ -59,32 +59,23 @@ Flex.displayName = 'Flex';
 
 const FlexItem = React.forwardRef<HTMLDivElement, FlexItemProps>(
   (
-    {
-      className,
-      flex,
-      grow,
-      shrink,
-      alignSelf,
-      order,
-      asChild,
-      ...props
-    },
-    ref
+    { className, flex, grow, shrink, alignSelf, order, asChild, ...props },
+    ref,
   ) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <Comp
         ref={ref}
         className={cn(
           flexItemVariants({ flex, grow, shrink, alignSelf, order }),
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
-FlexItem.displayName = 'FlexItem';
+FlexItem.displayName = "FlexItem";
 
 // ============================================================================
 // Spacer Component
@@ -92,24 +83,18 @@ FlexItem.displayName = 'FlexItem';
 
 const Spacer = React.forwardRef<HTMLDivElement, SpacerProps>(
   ({ className, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'div';
-    return (
-      <Comp
-        ref={ref}
-        className={cn('flex-1', className)}
-        {...props}
-      />
-    );
-  }
+    const Comp = asChild ? Slot : "div";
+    return <Comp ref={ref} className={cn("flex-1", className)} {...props} />;
+  },
 );
-Spacer.displayName = 'Spacer';
+Spacer.displayName = "Spacer";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Flex, FlexItem, Spacer };
-export { flexVariants, flexItemVariants } from './Flex.variants';
+export { flexVariants, flexItemVariants } from "./Flex.variants";
 export type {
   FlexProps,
   FlexItemProps,
@@ -122,4 +107,4 @@ export type {
   FlexItemFlex,
   FlexItemAlign,
   FlexItemOrder,
-} from './Flex.types';
+} from "./Flex.types";

@@ -3,27 +3,31 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * Modal size type.
  */
-export type ModalSize = VariantProps<typeof import('./composed-modal.variants').modalVariants>['size'];
+export type ModalSize = VariantProps<
+  typeof import("./ComposedModal.variants").modalVariants
+>["size"];
 
 /**
  * Modal overlay props.
  */
-export interface ModalOverlayProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> {}
+export type ModalOverlayProps = React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Overlay
+>;
 
 /**
  * ComposedModal content props.
  */
 export interface ComposedModalContentProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof import('./composed-modal.variants').modalVariants> {
+  extends
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
+    VariantProps<typeof import("./ComposedModal.variants").modalVariants> {
   /** Label for the close button (for accessibility) */
   closeButtonLabel?: string;
   /** Hide the close button */
@@ -57,13 +61,15 @@ export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Align footer content */
-  align?: 'left' | 'center' | 'right' | 'between';
+  align?: "left" | "center" | "right" | "between";
 }
 
 /**
  * Modal skeleton props.
  */
 export interface ModalSkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Skeleton size to match modal */
+  size?: ModalSize;
   /** Show header skeleton */
   hasHeader?: boolean;
   /** Show footer skeleton */

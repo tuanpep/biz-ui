@@ -3,25 +3,31 @@
  * Following Carbon's patterns with enhanced validation states.
  */
 
-import * as React from 'react';
-import type * as SliderPrimitive from '@radix-ui/react-slider';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type * as SliderPrimitive from "@radix-ui/react-slider";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * Slider variant types.
  */
-export type SliderVariant = VariantProps<typeof import('./Slider.variants').sliderVariants>['variant'];
+export type SliderVariant = VariantProps<
+  typeof import("./Slider.variants").sliderRangeVariants
+>["variant"];
 
 /**
  * Slider size types.
  */
-export type SliderSize = VariantProps<typeof import('./Slider.variants').sliderVariants>['size'];
+export type SliderSize = VariantProps<
+  typeof import("./Slider.variants").sliderVariants
+>["size"];
 
 /**
  * Slider component props.
  */
-export interface SliderProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>, 'size'> {
+export interface SliderProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>,
+  "size"
+> {
   /** Size variant */
   size?: SliderSize;
   /** Color variant */
@@ -41,13 +47,13 @@ export interface SliderProps
   /** Additional wrapper className when label/description is present */
   wrapperClassName?: string;
   /** Test id for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 /**
  * Range Slider component props.
  */
-export interface RangeSliderProps extends Omit<SliderProps, 'label'> {
+export interface RangeSliderProps extends Omit<SliderProps, "label"> {
   /** Label for the slider group */
   label?: string;
   /** Label for first thumb */

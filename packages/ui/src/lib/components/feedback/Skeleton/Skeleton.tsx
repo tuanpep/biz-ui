@@ -16,16 +16,15 @@
  * ```
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { skeletonVariants } from './Skeleton.variants';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { skeletonVariants } from "./Skeleton.variants";
 import type {
   SkeletonProps,
   SkeletonTextProps,
   SkeletonCircleProps,
   SkeletonGroupProps,
-  SkeletonVariant,
-} from './Skeleton.types';
+} from "./Skeleton.types";
 
 // ============================================================================
 // Skeleton Component
@@ -38,11 +37,11 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
       animate = true,
       width,
       height,
-      variant = 'text',
+      variant = "text",
       style,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -57,9 +56,9 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
         {...props}
       />
     );
-  }
+  },
 );
-Skeleton.displayName = 'Skeleton';
+Skeleton.displayName = "Skeleton";
 
 // ============================================================================
 // SkeletonText Component
@@ -73,15 +72,15 @@ const SkeletonText = React.forwardRef<HTMLDivElement, SkeletonTextProps>(
       animate = true,
       lineHeight = 16,
       gap = 8,
-      lastLineWidth = '60%',
+      lastLineWidth = "60%",
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
-        className={cn('space-y-2', className)}
+        className={cn("space-y-2", className)}
         style={{ gap }}
         {...props}
       >
@@ -90,15 +89,15 @@ const SkeletonText = React.forwardRef<HTMLDivElement, SkeletonTextProps>(
             key={index}
             animate={animate}
             height={lineHeight}
-            width={index === lines - 1 ? lastLineWidth : '100%'}
+            width={index === lines - 1 ? lastLineWidth : "100%"}
             variant="text"
           />
         ))}
       </div>
     );
-  }
+  },
 );
-SkeletonText.displayName = 'SkeletonText';
+SkeletonText.displayName = "SkeletonText";
 
 // ============================================================================
 // SkeletonCircle Component
@@ -117,40 +116,44 @@ const SkeletonCircle = React.forwardRef<HTMLDivElement, SkeletonCircleProps>(
         {...props}
       />
     );
-  }
+  },
 );
-SkeletonCircle.displayName = 'SkeletonCircle';
+SkeletonCircle.displayName = "SkeletonCircle";
 
 // ============================================================================
 // SkeletonGroup Component
 // ============================================================================
 
 const SkeletonGroup = React.forwardRef<HTMLDivElement, SkeletonGroupProps>(
-  ({ className, direction = 'column', gap = 8, children, ...props }, ref) => {
+  ({ className, direction = "column", gap = 8, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={cn('flex', direction === 'column' ? 'flex-col' : 'flex-row', className)}
+        className={cn(
+          "flex",
+          direction === "column" ? "flex-col" : "flex-row",
+          className,
+        )}
         style={{ gap }}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
-SkeletonGroup.displayName = 'SkeletonGroup';
+SkeletonGroup.displayName = "SkeletonGroup";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Skeleton, SkeletonText, SkeletonCircle, SkeletonGroup };
-export { skeletonVariants } from './Skeleton.variants';
+export { skeletonVariants } from "./Skeleton.variants";
 export type {
   SkeletonProps,
   SkeletonTextProps,
   SkeletonCircleProps,
   SkeletonGroupProps,
   SkeletonVariant,
-} from './Skeleton.types';
+} from "./Skeleton.types";

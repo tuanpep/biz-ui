@@ -8,8 +8,7 @@
  * - Animated expand/collapse
  */
 
-import * as React from 'react';
-import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 
 // ============================================================================
 // Collapsible Primitive Exports

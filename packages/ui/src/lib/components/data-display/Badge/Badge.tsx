@@ -14,11 +14,11 @@
  * ```
  */
 
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cn } from '../../utils/cn';
-import { badgeVariants } from './Badge.variants';
-import type { BadgeProps, BadgeVariant, BadgeSize } from './Badge.types';
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cn } from "../../../utils/cn";
+import { badgeVariants } from "./Badge.variants";
+import type { BadgeProps } from "./Badge.types";
 
 // ============================================================================
 // Badge Component
@@ -26,7 +26,7 @@ import type { BadgeProps, BadgeVariant, BadgeSize } from './Badge.types';
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
   ({ className, variant, size, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'div';
+    const Comp = asChild ? Slot : "div";
     return (
       <Comp
         ref={ref}
@@ -34,14 +34,14 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
         {...props}
       />
     );
-  }
+  },
 );
-Badge.displayName = 'Badge';
+Badge.displayName = "Badge";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Badge };
-export { badgeVariants } from './Badge.variants';
-export type { BadgeProps, BadgeVariant, BadgeSize } from './Badge.types';
+export { badgeVariants } from "./Badge.variants";
+export type { BadgeProps, BadgeVariant, BadgeSize } from "./Badge.types";

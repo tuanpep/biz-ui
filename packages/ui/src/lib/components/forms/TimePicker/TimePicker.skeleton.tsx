@@ -5,40 +5,41 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { timePickerSkeletonVariants, timePickerSkeletonLabelVariants } from './time-picker.variants';
-import type { TimePickerSkeletonProps } from './time-picker.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import {
+  timePickerSkeletonVariants,
+  timePickerSkeletonLabelVariants,
+} from "./TimePicker.variants";
+import type { TimePickerSkeletonProps } from "./TimePicker.types";
 
 // ============================================================================
 // TimePicker Skeleton Component
 // ============================================================================
 
-const TimePickerSkeleton = React.forwardRef<HTMLDivElement, TimePickerSkeletonProps>(
+const TimePickerSkeleton = React.forwardRef<
+  HTMLDivElement,
+  TimePickerSkeletonProps
+>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       withLabel = false,
       hasDescription = false,
       hasError = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const timePickerElement = (
-      <div className={cn('w-full', timePickerSkeletonVariants({ size }))} />
+      <div className={cn("w-full", timePickerSkeletonVariants({ size }))} />
     );
 
     // Render without wrapper if no label/description/error
     if (!withLabel && !hasDescription && !hasError) {
       return (
-        <div
-          ref={ref}
-          className={className}
-          aria-hidden="true"
-          {...props}
-        >
+        <div ref={ref} className={className} aria-hidden="true" {...props}>
           {timePickerElement}
         </div>
       );
@@ -47,7 +48,7 @@ const TimePickerSkeleton = React.forwardRef<HTMLDivElement, TimePickerSkeletonPr
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', className)}
+        className={cn("flex flex-col gap-1.5", className)}
         aria-hidden="true"
         {...props}
       >
@@ -63,10 +64,10 @@ const TimePickerSkeleton = React.forwardRef<HTMLDivElement, TimePickerSkeletonPr
         )}
       </div>
     );
-  }
+  },
 );
 
-TimePickerSkeleton.displayName = 'TimePickerSkeleton';
+TimePickerSkeleton.displayName = "TimePickerSkeleton";
 
 // ============================================================================
 // Exports

@@ -1,8 +1,9 @@
-import '@testing-library/jest-dom/vitest';
-import { vi } from 'vitest';
+import { beforeAll, afterAll } from "vitest";
+import "@testing-library/jest-dom/vitest";
+import { vi } from "vitest";
 
 // Mock window.matchMedia for components that use media queries
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query: string) => ({
     matches: false,
@@ -38,8 +39,8 @@ const originalError = console.error;
 beforeAll(() => {
   console.error = (...args: unknown[]) => {
     if (
-      typeof args[0] === 'string' &&
-      args[0].includes('Warning: ReactDOM.render is no longer supported')
+      typeof args[0] === "string" &&
+      args[0].includes("Warning: ReactDOM.render is no longer supported")
     ) {
       return;
     }

@@ -9,10 +9,10 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { textareaVariants } from './Textarea.variants';
-import type { TextareaProps } from './Textarea.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { textareaVariants } from "./Textarea.variants";
+import type { TextareaProps } from "./Textarea.types";
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
@@ -34,13 +34,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       defaultValue,
       onChange,
       wrapperClassName,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       disabled,
       readOnly,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -55,7 +55,9 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const hasWarning = !readOnly && !hasError && !effectiveDisabled && !!warn;
 
     // Value handling
-    const [internalValue, setInternalValue] = React.useState(defaultValue || '');
+    const [internalValue, setInternalValue] = React.useState(
+      defaultValue || "",
+    );
     const textareaValue = value !== undefined ? value : internalValue;
     const characterCount = String(textareaValue).length;
 
@@ -68,28 +70,32 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     // Auto-resize logic
     const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
-    React.useImperativeHandle(ref, () => textareaRef.current as HTMLTextAreaElement);
+    React.useImperativeHandle(
+      ref,
+      () => textareaRef.current as HTMLTextAreaElement,
+    );
 
     React.useEffect(() => {
       if (autoResize && textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
+        textareaRef.current.style.height = "auto";
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       }
     }, [textareaValue, autoResize]);
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     // Build validation classes
     const validationClasses = {
-      'border-destructive focus-visible:ring-destructive': hasError,
-      'border-warning focus-visible:ring-warning': hasWarning,
+      "border-destructive focus-visible:ring-destructive": hasError,
+      "border-warning focus-visible:ring-warning": hasWarning,
     };
 
     const textarea = (
@@ -107,7 +113,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={cn(
           textareaVariants({ variant, resize, size }),
           validationClasses,
-          className
+          className,
         )}
         {...props}
       />
@@ -119,14 +125,14 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     }
 
     return (
-      <div className={cn('grid w-full gap-1.5', wrapperClassName)}>
+      <div className={cn("grid w-full gap-1.5", wrapperClassName)}>
         {label && (
           <label
             htmlFor={id}
             className={cn(
-              'text-sm font-medium leading-none',
-              hideLabel && 'sr-only',
-              effectiveDisabled && 'opacity-50'
+              "text-sm font-medium leading-none",
+              hideLabel && "sr-only",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -159,10 +165,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           {showCount && (
             <p
               className={cn(
-                'text-xs ml-auto',
+                "text-xs ml-auto",
                 maxLength && characterCount >= maxLength
-                  ? 'text-destructive font-medium'
-                  : 'text-muted-foreground'
+                  ? "text-destructive font-medium"
+                  : "text-muted-foreground",
               )}
             >
               {characterCount}
@@ -172,11 +178,11 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-Textarea.displayName = 'Textarea';
+Textarea.displayName = "Textarea";
 
 export { Textarea };
-export { textareaVariants } from './Textarea.variants';
-export type { TextareaProps } from './Textarea.types';
+export { textareaVariants } from "./Textarea.variants";
+export type { TextareaProps } from "./Textarea.types";

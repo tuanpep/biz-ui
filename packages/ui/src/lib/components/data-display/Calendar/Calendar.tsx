@@ -7,8 +7,8 @@
  * - Min/max date constraints
  */
 
-import * as React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import * as React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   addMonths,
   subMonths,
@@ -24,27 +24,27 @@ import {
   isWithinInterval,
   isBefore,
   isAfter,
-  startOfDay
-} from 'date-fns';
-import { cn } from '../../utils/cn';
-import { IconButton } from '../../forms/IconButton';
-import type { CalendarProps } from './calendar.types';
+  startOfDay,
+} from "date-fns";
+import { cn } from "../../../utils/cn";
+import { IconButton } from "../../forms/IconButton";
+import type { CalendarProps } from "./Calendar.types";
 
 // ============================================================================
 // Calendar Component
 // ============================================================================
 
 const Calendar = ({
-  mode = 'single',
+  mode = "single",
   selected,
   range,
   onSelect,
   className,
   minDate,
-  maxDate
+  maxDate,
 }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = React.useState(
-    selected ?? range?.start ?? new Date()
+    selected ?? range?.start ?? new Date(),
   );
 
   const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
@@ -60,24 +60,27 @@ const Calendar = ({
     end: endDate,
   });
 
-  const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  const weekDays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   const handleDateClick = (day: Date) => {
     onSelect?.(day);
   };
 
   const isSelected = (day: Date) => {
-    if (mode === 'single' && selected) {
+    if (mode === "single" && selected) {
       return isSameDay(day, selected);
     }
-    if (mode === 'range' && range) {
-      return (range.start && isSameDay(day, range.start)) || (range.end && isSameDay(day, range.end));
+    if (mode === "range" && range) {
+      return (
+        (range.start && isSameDay(day, range.start)) ||
+        (range.end && isSameDay(day, range.end))
+      );
     }
     return false;
   };
 
   const isInRange = (day: Date) => {
-    if (mode === 'range' && range?.start && range?.end) {
+    if (mode === "range" && range?.start && range?.end) {
       return isWithinInterval(day, { start: range.start, end: range.end });
     }
     return false;
@@ -91,7 +94,7 @@ const Calendar = ({
   };
 
   return (
-    <div className={cn('p-3', className)}>
+    <div className={cn("p-3", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <IconButton
@@ -102,7 +105,7 @@ const Calendar = ({
           onClick={prevMonth}
         />
         <div className="text-sm font-semibold">
-          {format(currentMonth, 'MMMM yyyy')}
+          {format(currentMonth, "MMMM yyyy")}
         </div>
         <IconButton
           icon={ChevronRight}
@@ -116,7 +119,10 @@ const Calendar = ({
       {/* Grid */}
       <div className="grid grid-cols-7 gap-1">
         {weekDays.map((day) => (
-          <div key={day} className="h-8 w-8 flex items-center justify-center text-[10px] uppercase font-semibold text-text-02">
+          <div
+            key={day}
+            className="h-8 w-8 flex items-center justify-center text-[10px] uppercase font-semibold text-text-02"
+          >
             {day}
           </div>
         ))}
@@ -133,16 +139,22 @@ const Calendar = ({
               disabled={disabledState}
               onClick={() => handleDateClick(day)}
               className={cn(
-                'h-8 w-8 text-xs flex items-center justify-center rounded-sm transition-colors relative',
-                !currentMonthState && 'text-text-03 opacity-40',
-                selectedState && 'bg-interactive-01 text-white z-10',
-                rangeState && !selectedState && 'bg-interactive-01/10',
-                !selectedState && currentMonthState && !disabledState && 'hover:bg-ui-02',
-                isToday(day) && !selectedState && 'border border-interactive-01 text-interactive-01',
-                disabledState && 'cursor-not-allowed text-text-03 bg-transparent'
+                "h-8 w-8 text-xs flex items-center justify-center rounded-sm transition-colors relative",
+                !currentMonthState && "text-text-03 opacity-40",
+                selectedState && "bg-interactive-01 text-white z-10",
+                rangeState && !selectedState && "bg-interactive-01/10",
+                !selectedState &&
+                  currentMonthState &&
+                  !disabledState &&
+                  "hover:bg-ui-02",
+                isToday(day) &&
+                  !selectedState &&
+                  "border border-interactive-01 text-interactive-01",
+                disabledState &&
+                  "cursor-not-allowed text-text-03 bg-transparent",
               )}
             >
-              {format(day, 'd')}
+              {format(day, "d")}
             </button>
           );
         })}

@@ -3,10 +3,10 @@
  * Loading placeholder for Card component.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { cardVariants } from './Card.variants';
-import type { CardSkeletonProps } from './Card.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { cardVariants } from "./Card.variants";
+import type { CardSkeletonProps } from "./Card.types";
 
 // ============================================================================
 // CardSkeleton Component
@@ -24,7 +24,7 @@ const CardSkeleton = React.forwardRef<HTMLDivElement, CardSkeletonProps>(
       lines = 3,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -36,9 +36,16 @@ const CardSkeleton = React.forwardRef<HTMLDivElement, CardSkeletonProps>(
         {hasHeader && (
           <div className="p-6 pb-4 space-y-3">
             {/* Title skeleton */}
-            <div className={cn('h-5 rounded bg-muted', animate && 'animate-pulse')} />
+            <div
+              className={cn("h-5 rounded bg-muted", animate && "animate-pulse")}
+            />
             {/* Description skeleton */}
-            <div className={cn('h-4 w-2/3 rounded bg-muted', animate && 'animate-pulse')} />
+            <div
+              className={cn(
+                "h-4 w-2/3 rounded bg-muted",
+                animate && "animate-pulse",
+              )}
+            />
           </div>
         )}
 
@@ -48,9 +55,9 @@ const CardSkeleton = React.forwardRef<HTMLDivElement, CardSkeletonProps>(
             <div
               key={i}
               className={cn(
-                'h-3 rounded bg-muted',
-                animate && 'animate-pulse',
-                i === lines - 1 ? 'w-3/4' : 'w-full'
+                "h-3 rounded bg-muted",
+                animate && "animate-pulse",
+                i === lines - 1 ? "w-3/4" : "w-full",
               )}
             />
           ))}
@@ -59,15 +66,25 @@ const CardSkeleton = React.forwardRef<HTMLDivElement, CardSkeletonProps>(
         {hasFooter && (
           <div className="p-6 pt-4 flex gap-2">
             {/* Button skeletons */}
-            <div className={cn('h-9 w-20 rounded bg-muted', animate && 'animate-pulse')} />
-            <div className={cn('h-9 w-20 rounded bg-muted', animate && 'animate-pulse')} />
+            <div
+              className={cn(
+                "h-9 w-20 rounded bg-muted",
+                animate && "animate-pulse",
+              )}
+            />
+            <div
+              className={cn(
+                "h-9 w-20 rounded bg-muted",
+                animate && "animate-pulse",
+              )}
+            />
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
-CardSkeleton.displayName = 'CardSkeleton';
+CardSkeleton.displayName = "CardSkeleton";
 
 export { CardSkeleton };

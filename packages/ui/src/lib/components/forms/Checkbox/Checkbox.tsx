@@ -9,12 +9,12 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { Check, Minus } from 'lucide-react';
-import { cn } from '../../utils/cn';
-import { checkboxVariants } from './Checkbox.variants';
-import type { CheckboxProps } from './Checkbox.types';
+import * as React from "react";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { Check, Minus } from "lucide-react";
+import { cn } from "../../../utils/cn";
+import { checkboxVariants } from "./Checkbox.variants";
+import type { CheckboxProps } from "./Checkbox.types";
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -36,9 +36,10 @@ const Checkbox = React.forwardRef<
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const innerRef = React.useRef<React.ElementRef<typeof CheckboxPrimitive.Root>>(null);
+    const innerRef =
+      React.useRef<React.ElementRef<typeof CheckboxPrimitive.Root>>(null);
 
     // Generate unique IDs for accessibility
     const generatedId = React.useId();
@@ -52,21 +53,25 @@ const Checkbox = React.forwardRef<
     const hasWarning = !disabled && !hasError && !!warn;
 
     // Expose the inner checkbox element to the parent ref
-    React.useImperativeHandle(ref, () => innerRef.current as React.ElementRef<typeof CheckboxPrimitive.Root>);
+    React.useImperativeHandle(
+      ref,
+      () => innerRef.current as React.ElementRef<typeof CheckboxPrimitive.Root>,
+    );
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     // Build validation classes
     const validationClasses = {
-      'border-destructive': hasError,
-      'border-warning': hasWarning,
+      "border-destructive": hasError,
+      "border-warning": hasWarning,
     };
 
     const checkbox = (
@@ -80,15 +85,31 @@ const Checkbox = React.forwardRef<
         className={cn(
           checkboxVariants({ variant, size }),
           validationClasses,
-          className
+          className,
         )}
         {...props}
       >
         <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-          {checked === 'indeterminate' ? (
-            <Minus className={cn(size === 'sm' ? 'h-3 w-3' : size === 'lg' ? 'h-5 w-5' : 'h-4 w-4')} />
+          {checked === "indeterminate" ? (
+            <Minus
+              className={cn(
+                size === "sm"
+                  ? "h-3 w-3"
+                  : size === "lg"
+                    ? "h-5 w-5"
+                    : "h-4 w-4",
+              )}
+            />
           ) : (
-            <Check className={cn(size === 'sm' ? 'h-3 w-3' : size === 'lg' ? 'h-5 w-5' : 'h-4 w-4')} />
+            <Check
+              className={cn(
+                size === "sm"
+                  ? "h-3 w-3"
+                  : size === "lg"
+                    ? "h-5 w-5"
+                    : "h-4 w-4",
+              )}
+            />
           )}
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
@@ -100,17 +121,17 @@ const Checkbox = React.forwardRef<
     }
 
     return (
-      <div className={cn('flex items-start space-x-2', wrapperClassName)}>
+      <div className={cn("flex items-start space-x-2", wrapperClassName)}>
         <div className="pt-0.5">{checkbox}</div>
         <div className="grid gap-1.5 leading-none">
           {label && (
             <label
               htmlFor={id}
               className={cn(
-                'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer',
-                hasError && 'text-destructive',
-                hasWarning && 'text-warning',
-                disabled && 'opacity-50 cursor-not-allowed'
+                "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer",
+                hasError && "text-destructive",
+                hasWarning && "text-warning",
+                disabled && "opacity-50 cursor-not-allowed",
               )}
             >
               {label}
@@ -123,17 +144,28 @@ const Checkbox = React.forwardRef<
           )}
           <div>
             {description && !hasError && !hasWarning && (
-              <p id={descriptionId} className="text-sm text-muted-foreground leading-normal">
+              <p
+                id={descriptionId}
+                className="text-sm text-muted-foreground leading-normal"
+              >
                 {description}
               </p>
             )}
             {hasError && (
-              <p id={errorId} role="alert" className="text-xs text-destructive leading-normal">
+              <p
+                id={errorId}
+                role="alert"
+                className="text-xs text-destructive leading-normal"
+              >
                 {error}
               </p>
             )}
             {hasWarning && !hasError && (
-              <p id={warnId} role="alert" className="text-xs text-warning leading-normal">
+              <p
+                id={warnId}
+                role="alert"
+                className="text-xs text-warning leading-normal"
+              >
                 {warn}
               </p>
             )}
@@ -141,10 +173,10 @@ const Checkbox = React.forwardRef<
         </div>
       </div>
     );
-  }
+  },
 );
 
-Checkbox.displayName = 'Checkbox';
+Checkbox.displayName = "Checkbox";
 
 export { Checkbox };
-export type { CheckboxProps } from './Checkbox.types';
+export type { CheckboxProps } from "./Checkbox.types";

@@ -7,11 +7,11 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { Clock } from 'lucide-react';
-import { timePickerVariants } from './time-picker.variants';
-import type { TimePickerProps } from './time-picker.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { Clock } from "lucide-react";
+import { timePickerVariants } from "./TimePicker.variants";
+import type { TimePickerProps } from "./TimePicker.types";
 
 // ============================================================================
 // TimePicker Component
@@ -26,7 +26,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
       value,
       onChange,
       label,
-      placeholder = '00:00',
+      placeholder = "00:00",
       error,
       warn,
       description,
@@ -34,11 +34,11 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
       hideLabel = false,
       disabled = false,
       readOnly = false,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -57,20 +57,21 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
     };
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasError && !hasWarning ? descriptionId : null,
+        hasError ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     const inputElement = (
       <div
         className={cn(
           timePickerVariants({ size, error: hasError }),
-          hasWarning && 'border-warning focus-within:ring-warning',
-          effectiveDisabled && 'opacity-50 cursor-not-allowed'
+          hasWarning && "border-warning focus-within:ring-warning",
+          effectiveDisabled && "opacity-50 cursor-not-allowed",
         )}
       >
         <input
@@ -78,7 +79,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
           type="time"
           disabled={effectiveDisabled}
           readOnly={readOnly}
-          value={value || ''}
+          value={value || ""}
           onChange={handleTimeChange}
           placeholder={placeholder}
           className="flex-1 bg-transparent border-none outline-none text-text-01 placeholder:text-text-03"
@@ -94,12 +95,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
     // Render without wrapper if no label/description/error/warn
     if (hideLabel && !description && !hasError && !hasWarning) {
       return (
-        <div
-          ref={ref}
-          className={className}
-          data-testid={testId}
-          {...props}
-        >
+        <div ref={ref} className={className} data-testid={testId} {...props}>
           {inputElement}
         </div>
       );
@@ -108,7 +104,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', wrapperClassName, className)}
+        className={cn("flex flex-col gap-1.5", wrapperClassName, className)}
         data-testid={testId}
         {...props}
       >
@@ -116,10 +112,10 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
           <label
             htmlFor={pickerId}
             className={cn(
-              'block font-medium text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              effectiveDisabled && 'opacity-50'
+              "block font-medium text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -150,14 +146,18 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-TimePicker.displayName = 'TimePicker';
+TimePicker.displayName = "TimePicker";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { TimePicker };
-export type { TimePickerProps, TimePickerSkeletonProps, TimePickerSize } from './time-picker.types';
+export type {
+  TimePickerProps,
+  TimePickerSkeletonProps,
+  TimePickerSize,
+} from "./TimePicker.types";

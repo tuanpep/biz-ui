@@ -5,33 +5,39 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { radioGroupSkeletonVariants, radioGroupSkeletonLabelVariants } from './RadioGroup.variants';
-import type { RadioGroupSkeletonProps } from './RadioGroup.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import {
+  radioGroupSkeletonVariants,
+  radioGroupSkeletonLabelVariants,
+} from "./RadioGroup.variants";
+import type { RadioGroupSkeletonProps } from "./RadioGroup.types";
 
 // ============================================================================
 // RadioGroup Skeleton Component
 // ============================================================================
 
-const RadioGroupSkeleton = React.forwardRef<HTMLDivElement, RadioGroupSkeletonProps>(
+const RadioGroupSkeleton = React.forwardRef<
+  HTMLDivElement,
+  RadioGroupSkeletonProps
+>(
   (
     {
       className,
       itemCount = 3,
-      size = 'md',
+      size = "md",
       withLabels = false,
       hasLabel = false,
       hasDescription = false,
       hasError = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
         ref={ref}
-        className={cn('space-y-1.5', className)}
+        className={cn("space-y-1.5", className)}
         aria-hidden="true"
         {...props}
       >
@@ -43,7 +49,9 @@ const RadioGroupSkeleton = React.forwardRef<HTMLDivElement, RadioGroupSkeletonPr
             <div key={index} className="flex items-center gap-2">
               <div className={cn(radioGroupSkeletonVariants({ size }))} />
               {withLabels && (
-                <div className={cn(radioGroupSkeletonLabelVariants({ size }))} />
+                <div
+                  className={cn(radioGroupSkeletonLabelVariants({ size }))}
+                />
               )}
             </div>
           ))}
@@ -56,10 +64,10 @@ const RadioGroupSkeleton = React.forwardRef<HTMLDivElement, RadioGroupSkeletonPr
         )}
       </div>
     );
-  }
+  },
 );
 
-RadioGroupSkeleton.displayName = 'RadioGroupSkeleton';
+RadioGroupSkeleton.displayName = "RadioGroupSkeleton";
 
 // ============================================================================
 // Exports

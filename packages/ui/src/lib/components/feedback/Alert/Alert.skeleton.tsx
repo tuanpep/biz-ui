@@ -3,16 +3,16 @@
  * Loading placeholder for Alert component.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import type { AlertSkeletonProps } from './Alert.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import type { AlertSkeletonProps } from "./Alert.types";
 
 // ============================================================================
 // AlertSkeleton Component
 // ============================================================================
 
 const AlertSkeleton = React.forwardRef<HTMLDivElement, AlertSkeletonProps>(
-  ({ className, variant = 'default', animate = true, ...props }, ref) => {
+  ({ className, variant = "default", animate = true, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -20,15 +20,16 @@ const AlertSkeleton = React.forwardRef<HTMLDivElement, AlertSkeletonProps>(
         aria-label="Loading alert"
         aria-live="polite"
         className={cn(
-          'relative w-full rounded-lg border p-4',
-          animate && 'animate-pulse',
+          "relative w-full rounded-lg border p-4",
+          animate && "animate-pulse",
           {
-            'border-border bg-background': variant === 'default' || variant === 'info',
-            'border-success/30 bg-success/5': variant === 'success',
-            'border-warning/30 bg-warning/5': variant === 'warning',
-            'border-destructive/30 bg-destructive/5': variant === 'destructive',
+            "border-border bg-background":
+              variant === "default" || variant === "info",
+            "border-success/30 bg-success/5": variant === "success",
+            "border-warning/30 bg-warning/5": variant === "warning",
+            "border-destructive/30 bg-destructive/5": variant === "destructive",
           },
-          className
+          className,
         )}
         {...props}
       >
@@ -46,9 +47,9 @@ const AlertSkeleton = React.forwardRef<HTMLDivElement, AlertSkeletonProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-AlertSkeleton.displayName = 'AlertSkeleton';
+AlertSkeleton.displayName = "AlertSkeleton";
 
 export { AlertSkeleton };

@@ -7,10 +7,10 @@
  * - Accessible form labeling
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { labelVariants } from './Label.variants';
-import type { LabelProps } from './Label.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { labelVariants } from "./Label.variants";
+import type { LabelProps } from "./Label.types";
 
 // ============================================================================
 // Label Component
@@ -23,9 +23,9 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
       className={cn(labelVariants({ size }), className)}
       {...props}
     />
-  )
+  ),
 );
-Label.displayName = 'Label';
+Label.displayName = "Label";
 
 // ============================================================================
 // Exports

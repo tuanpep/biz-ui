@@ -3,13 +3,13 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * Toast variant types.
  */
-export type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
+export type ToastVariant = "default" | "success" | "error" | "warning" | "info";
 
 /**
  * Toast message interface.
@@ -31,7 +31,7 @@ export interface ToastMessage {
  */
 export interface ToastContextValue {
   toasts: ToastMessage[];
-  toast: (message: Omit<ToastMessage, 'id'>) => string;
+  toast: (message: Omit<ToastMessage, "id">) => string;
   dismiss: (id: string) => void;
   dismissAll: () => void;
 }
@@ -39,39 +39,45 @@ export interface ToastContextValue {
 /**
  * Toast component props.
  */
-export interface ToastProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-toast').Root>,
-  VariantProps<typeof import('./Toast.variants').toastVariants> {}
+export type ToastProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-toast").Root
+> &
+  VariantProps<typeof import("./Toast.variants").toastVariants>;
 
 /**
  * ToastAction component props.
  */
-export interface ToastActionProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-toast').Action> {}
+export type ToastActionProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-toast").Action
+>;
 
 /**
  * ToastClose component props.
  */
-export interface ToastCloseProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-toast').Close> {}
+export type ToastCloseProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-toast").Close
+>;
 
 /**
  * ToastTitle component props.
  */
-export interface ToastTitleProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-toast').Title> {}
+export type ToastTitleProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-toast").Title
+>;
 
 /**
  * ToastDescription component props.
  */
-export interface ToastDescriptionProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-toast').Description> {}
+export type ToastDescriptionProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-toast").Description
+>;
 
 /**
  * ToastViewport component props.
  */
-export interface ToastViewportProps
-  extends React.ComponentPropsWithoutRef<typeof import('@radix-ui/react-toast').Viewport> {}
+export type ToastViewportProps = React.ComponentPropsWithoutRef<
+  typeof import("@radix-ui/react-toast").Viewport
+>;
 
 /**
  * ToastProvider props.
@@ -83,7 +89,13 @@ export interface ToastProviderProps {
   /** Maximum number of toasts to show */
   maxToasts?: number;
   /** Position of toast container */
-  position?: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+  position?:
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
 }
 
 /**

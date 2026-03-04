@@ -9,29 +9,30 @@
  * - Progress percentage support
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { Loader2 } from 'lucide-react';
-import { spinnerVariants, loadingOverlayVariants, inlineLoadingVariants } from './Loading.variants';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { Loader2 } from "lucide-react";
+import {
+  spinnerVariants,
+  loadingOverlayVariants,
+  inlineLoadingVariants,
+} from "./Loading.variants";
 import type {
   SpinnerProps,
   LoadingOverlayProps,
   InlineLoadingProps,
-  SpinnerSize,
-  LoadingOverlayVariant,
-  InlineLoadingStatus,
-} from './Loading.types';
+} from "./Loading.types";
 
 // ============================================================================
 // Spinner Component
 // ============================================================================
 
 const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
-  ({ className, size, label = 'Loading', ...props }, ref) => {
+  ({ className, size, label = "Loading", ...props }, ref) => {
     return (
       <span
         ref={ref}
-        className={cn('inline-flex items-center justify-center', className)}
+        className={cn("inline-flex items-center justify-center", className)}
         role="status"
         aria-label={label}
         {...props}
@@ -40,17 +41,17 @@ const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
         <span className="sr-only">{label}</span>
       </span>
     );
-  }
+  },
 );
 
-Spinner.displayName = 'Spinner';
+Spinner.displayName = "Spinner";
 
 // ============================================================================
 // LoadingOverlay Component
 // ============================================================================
 
 const LoadingOverlay = React.forwardRef<HTMLDivElement, LoadingOverlayProps>(
-  ({ className, variant, size = 'xl', text, show = true, ...props }, ref) => {
+  ({ className, variant, size = "xl", text, show = true, ...props }, ref) => {
     if (!show) return null;
 
     return (
@@ -67,10 +68,10 @@ const LoadingOverlay = React.forwardRef<HTMLDivElement, LoadingOverlayProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-LoadingOverlay.displayName = 'LoadingOverlay';
+LoadingOverlay.displayName = "LoadingOverlay";
 
 // ============================================================================
 // InlineLoading Component
@@ -80,7 +81,7 @@ const InlineLoading = React.forwardRef<HTMLDivElement, InlineLoadingProps>(
   (
     {
       className,
-      status = 'active',
+      status = "active",
       text,
       showSpinner = true,
       progress,
@@ -88,7 +89,7 @@ const InlineLoading = React.forwardRef<HTMLDivElement, InlineLoadingProps>(
       errorIcon,
       ...props
     },
-    ref
+    ref,
   ) => {
     const defaultSuccessIcon = (
       <svg
@@ -122,12 +123,12 @@ const InlineLoading = React.forwardRef<HTMLDivElement, InlineLoadingProps>(
 
     const renderIcon = () => {
       switch (status) {
-        case 'finished':
+        case "finished":
           return successIcon || defaultSuccessIcon;
-        case 'error':
+        case "error":
           return errorIcon || defaultErrorIcon;
-        case 'active':
-        case 'inactive':
+        case "active":
+        case "inactive":
         default:
           if (showSpinner) {
             return <Spinner size="sm" />;
@@ -142,27 +143,31 @@ const InlineLoading = React.forwardRef<HTMLDivElement, InlineLoadingProps>(
         className={cn(inlineLoadingVariants({ status }), className)}
         role="status"
         aria-live="polite"
-        aria-busy={status === 'active'}
+        aria-busy={status === "active"}
         {...props}
       >
         {renderIcon()}
         {text && <span>{text}</span>}
-        {progress !== undefined && status === 'active' && (
+        {progress !== undefined && status === "active" && (
           <span className="text-xs text-muted-foreground">({progress}%)</span>
         )}
       </div>
     );
-  }
+  },
 );
 
-InlineLoading.displayName = 'InlineLoading';
+InlineLoading.displayName = "InlineLoading";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Spinner, LoadingOverlay, InlineLoading };
-export { spinnerVariants, loadingOverlayVariants, inlineLoadingVariants } from './Loading.variants';
+export {
+  spinnerVariants,
+  loadingOverlayVariants,
+  inlineLoadingVariants,
+} from "./Loading.variants";
 export type {
   SpinnerProps,
   LoadingOverlayProps,
@@ -170,4 +175,4 @@ export type {
   SpinnerSize,
   LoadingOverlayVariant,
   InlineLoadingStatus,
-} from './Loading.types';
+} from "./Loading.types";

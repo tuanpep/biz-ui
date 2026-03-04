@@ -8,17 +8,20 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { Check, ChevronDown, X } from 'lucide-react';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { Check, ChevronDown, X } from "lucide-react";
 import {
   multiSelectVariants,
   multiSelectTriggerVariants,
   multiSelectMenuVariants,
   multiSelectItemVariants,
   multiSelectTagVariants,
-} from './multi-select.variants';
-import type { MultiSelectProps, MultiSelectTagProps } from './multi-select.types';
+} from "./MultiSelect.variants";
+import type {
+  MultiSelectProps,
+  MultiSelectTagProps,
+} from "./MultiSelect.types";
 
 // ============================================================================
 // MultiSelect Component
@@ -29,12 +32,12 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
     {
       className,
       wrapperClassName,
-      size = 'md',
+      size = "md",
       value: controlledValue,
       defaultValue,
       onChange,
-      options = [],
-      placeholder = 'Select options',
+      options = [] as { label: string; value: string; disabled?: boolean }[],
+      placeholder = "Select options",
       disabled = false,
       readOnly = false,
       error,
@@ -45,26 +48,30 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
       label,
       required = false,
       hideLabel = false,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Handle legacy props with deprecation warnings
     const resolvedError = React.useMemo(() => {
       if (error) return error;
       if (errorMessage) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('MultiSelect: errorMessage is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "MultiSelect: errorMessage is deprecated. Use error prop with the message string instead.",
+          );
         }
         return errorMessage;
       }
       if (legacyHasError) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('MultiSelect: hasError is deprecated. Use error prop with the message string instead.');
+        if (process.env.NODE_ENV === "development") {
+          console.warn(
+            "MultiSelect: hasError is deprecated. Use error prop with the message string instead.",
+          );
         }
-        return 'Invalid selection';
+        return "Invalid selection";
       }
       return undefined;
     }, [error, errorMessage, legacyHasError]);
@@ -80,11 +87,13 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
     // Calculate effective states
     const effectiveDisabled = !readOnly && disabled;
     const hasErrorState = !readOnly && !effectiveDisabled && !!resolvedError;
-    const hasWarning = !readOnly && !hasErrorState && !effectiveDisabled && !!warn;
+    const hasWarning =
+      !readOnly && !hasErrorState && !effectiveDisabled && !!warn;
 
     const [isOpen, setIsOpen] = React.useState(false);
-    const [selected, setSelected] = React.useState<string[]>(controlledValue ?? defaultValue ?? []);
-    const [searchValue, setSearchValue] = React.useState('');
+    const [selected, setSelected] = React.useState<string[]>(
+      controlledValue ?? defaultValue ?? [],
+    );
 
     // Sync with controlled value
     React.useEffect(() => {
@@ -114,18 +123,17 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
       .filter((opt) => selected.includes(opt.value))
       .map((opt) => opt.label);
 
-    const filteredOptions = options.filter((opt) =>
-      opt.label.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    const filteredOptions = options;
 
     // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasErrorState && !hasWarning ? descriptionId : null,
-      hasErrorState ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
+    const ariaDescribedBy =
+      [
+        description && !hasErrorState && !hasWarning ? descriptionId : null,
+        hasErrorState ? errorId : null,
+        hasWarning ? warnId : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     const triggerElement = (
       <>
@@ -136,7 +144,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
           onClick={() => !effectiveDisabled && setIsOpen(!isOpen)}
           className={cn(
             multiSelectTriggerVariants({ size, error: hasErrorState }),
-            hasWarning && 'border-warning focus-visible:ring-warning'
+            hasWarning && "border-warning focus-visible:ring-warning",
           )}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -147,12 +155,12 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
         >
           <div className="flex flex-wrap gap-1 flex-1">
             {selected.length > 0 ? (
-              selectedLabels.map((label, index) => (
+              selectedLabels.map((label: string, index: number) => (
                 <MultiSelectTag
                   key={index}
                   tag={label}
                   size={size}
-                  onRemove={() => removeOption(selected[index])}
+                  onRemove={() => removeOption(selected[index]!)}
                   removable
                 />
               ))
@@ -160,14 +168,17 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
               <span className="text-muted-foreground">{placeholder}</span>
             )}
           </div>
-          <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" aria-hidden="true" />
+          <ChevronDown
+            className="h-4 w-4 text-muted-foreground flex-shrink-0"
+            aria-hidden="true"
+          />
         </button>
 
         {/* Dropdown */}
         {isOpen && (
           <div
             id={listId}
-            className={cn(multiSelectMenuVariants({ size }), 'top-full')}
+            className={cn(multiSelectMenuVariants({ size }), "top-full")}
             role="listbox"
             aria-multiselectable
           >
@@ -179,7 +190,7 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
                   multiSelectItemVariants({
                     selected: selected.includes(option.value),
                     disabled: option.disabled,
-                  })
+                  }),
                 )}
                 role="option"
                 aria-selected={selected.includes(option.value)}
@@ -187,15 +198,18 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
                 <div className="flex items-center gap-2">
                   <div
                     className={cn(
-                      'h-4 w-4 border rounded flex items-center justify-center',
-                      selected.includes(option.value) && 'bg-primary border-primary text-primary-foreground'
+                      "h-4 w-4 border rounded flex items-center justify-center",
+                      selected.includes(option.value) &&
+                        "bg-primary border-primary text-primary-foreground",
                     )}
                   >
                     {selected.includes(option.value) && (
                       <Check className="h-3 w-3" aria-hidden="true" />
                     )}
                   </div>
-                  <span className={cn(option.disabled && 'text-muted-foreground')}>
+                  <span
+                    className={cn(option.disabled && "text-muted-foreground")}
+                  >
                     {option.label}
                   </span>
                 </div>
@@ -223,7 +237,11 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
     return (
       <div
         ref={ref}
-        className={cn(multiSelectVariants({ size }), wrapperClassName, className)}
+        className={cn(
+          multiSelectVariants({ size }),
+          wrapperClassName,
+          className,
+        )}
         data-testid={testId}
         {...props}
       >
@@ -231,10 +249,10 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
           <label
             htmlFor={selectId}
             className={cn(
-              'block font-medium mb-1.5 text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              effectiveDisabled && 'opacity-50'
+              "block font-medium mb-1.5 text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -248,12 +266,19 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
         {triggerElement}
         <div>
           {description && !hasErrorState && !hasWarning && (
-            <p id={descriptionId} className="text-sm text-muted-foreground mt-1">
+            <p
+              id={descriptionId}
+              className="text-sm text-muted-foreground mt-1"
+            >
               {description}
             </p>
           )}
           {hasErrorState && (
-            <p id={errorId} className="text-xs text-destructive mt-1" role="alert">
+            <p
+              id={errorId}
+              className="text-xs text-destructive mt-1"
+              role="alert"
+            >
               {resolvedError}
             </p>
           )}
@@ -265,17 +290,28 @@ const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-MultiSelect.displayName = 'MultiSelect';
+MultiSelect.displayName = "MultiSelect";
 
 // ============================================================================
 // MultiSelectTag Component
 // ============================================================================
 
 const MultiSelectTag = React.forwardRef<HTMLSpanElement, MultiSelectTagProps>(
-  ({ tag, size = 'md', selected = false, removable = false, onRemove, className, ...props }, ref) => {
+  (
+    {
+      tag,
+      size = "md",
+      selected = false,
+      removable = false,
+      onRemove,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <span
         ref={ref}
@@ -291,17 +327,17 @@ const MultiSelectTag = React.forwardRef<HTMLSpanElement, MultiSelectTagProps>(
               onRemove?.();
             }}
             className="ml-1 hover:bg-muted rounded-sm"
-            aria-label={`Remove ${typeof tag === 'string' ? tag : ''}`}
+            aria-label={`Remove ${typeof tag === "string" ? tag : ""}`}
           >
             <X className="h-3 w-3" aria-hidden="true" />
           </button>
         )}
       </span>
     );
-  }
+  },
 );
 
-MultiSelectTag.displayName = 'MultiSelectTag';
+MultiSelectTag.displayName = "MultiSelectTag";
 
 // ============================================================================
 // Exports

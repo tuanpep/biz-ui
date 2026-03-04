@@ -8,11 +8,15 @@
  * - Selection support
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { ChevronRight, ChevronDown } from 'lucide-react';
-import { treeViewVariants, treeItemVariants } from './tree-view.variants';
-import type { TreeViewProps, TreeItemProps, TreeViewSize } from './tree-view.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { ChevronRight, ChevronDown } from "lucide-react";
+import { treeViewVariants, treeItemVariants } from "./TreeView.variants";
+import type {
+  TreeViewProps,
+  TreeItemProps,
+  TreeViewItemData,
+} from "./TreeView.types";
 
 // ============================================================================
 // TreeView Component
@@ -22,7 +26,7 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       items,
       selectedId: controlledSelectedId,
       defaultSelectedId,
@@ -33,10 +37,14 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
       onExpand,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [selected, setSelected] = React.useState<string | null>(controlledSelectedId ?? defaultSelectedId ?? null);
-    const [selectedIds, setSelectedIds] = React.useState<string[]>(controlledSelectedIds ?? []);
+    const [selected, setSelected] = React.useState<string | null>(
+      controlledSelectedId ?? defaultSelectedId ?? null,
+    );
+    const [selectedIds, setSelectedIds] = React.useState<string[]>(
+      controlledSelectedIds ?? [],
+    );
     const [expandedIds, setExpandedIds] = React.useState<string[]>([]);
 
     // Sync with controlled selected
@@ -83,7 +91,9 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
       return (
         <div
           key={item.id}
-          className={cn(treeItemVariants({ selected: isSelected, disabled: item.disabled }))}
+          className={cn(
+            treeItemVariants({ selected: isSelected, disabled: item.disabled }),
+          )}
           style={{ paddingLeft: depth * 16 }}
           role="treeitem"
           aria-selected={isSelected}
@@ -95,7 +105,7 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
               type="button"
               onClick={() => toggleExpanded(item.id)}
               className="mr-1 p-1 rounded hover:bg-muted"
-              aria-label={isExpanded ? 'Collapse' : 'Expand'}
+              aria-label={isExpanded ? "Collapse" : "Expand"}
             >
               {isExpanded ? (
                 <ChevronDown className="h-4 w-4" />
@@ -110,10 +120,8 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
             className="flex-1 flex items-center gap-2"
             onClick={() => !item.disabled && handleSelect(item.id)}
           >
-            {item.icon && (
-              <span className="flex-shrink-0">{item.icon}</span>
-            )}
-            <span className={cn(item.disabled && 'text-muted-foreground')}>
+            {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+            <span className={cn(item.disabled && "text-muted-foreground")}>
               {item.label}
             </span>
           </div>
@@ -135,20 +143,34 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
         role="tree"
         {...props}
       >
-        {items.map((item) => renderTreeItem(item, 0))}
+        {items.map((item: TreeViewItemData) => renderTreeItem(item, 0))}
       </div>
     );
-  }
+  },
 );
 
-TreeView.displayName = 'TreeView';
+TreeView.displayName = "TreeView";
 
 // ============================================================================
 // TreeItem Component
 // ============================================================================
 
 const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
-  ({ item, size = 'md', depth = 0, selected = false, expanded = false, disabled = false, onClick, onToggleExpand, className, ...props }, ref) => {
+  (
+    {
+      item,
+      size = "md",
+      depth = 0,
+      selected = false,
+      expanded = false,
+      disabled = false,
+      onClick,
+      onToggleExpand,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
     const hasChildren = item.children && item.children.length > 0;
 
     return (
@@ -172,21 +194,16 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
           </button>
         )}
 
-        <div
-          className="flex-1 flex items-center gap-2"
-          onClick={onClick}
-        >
-          {item.icon && (
-            <span className="flex-shrink-0">{item.icon}</span>
-          )}
-          <span className={cn(disabled && 'text-muted-foreground')}>
+        <div className="flex-1 flex items-center gap-2" onClick={onClick}>
+          {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+          <span className={cn(disabled && "text-muted-foreground")}>
             {item.label}
           </span>
         </div>
 
         {hasChildren && expanded && (
           <div className="ml-4">
-            {item.children?.map((child, index) => (
+            {item.children?.map((child: TreeViewItemData, index: number) => (
               <TreeItem
                 key={index}
                 item={child}
@@ -198,10 +215,10 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-TreeItem.displayName = 'TreeItem';
+TreeItem.displayName = "TreeItem";
 
 // ============================================================================
 // Exports

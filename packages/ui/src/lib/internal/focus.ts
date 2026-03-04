@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 /**
  * Focus management utilities for Biz UI components.
@@ -7,37 +7,43 @@ import * as React from 'react';
 
 // Focusable element selectors
 const FOCUSABLE_SELECTOR = [
-  'a[href]',
-  'button:not([disabled])',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
   '[tabindex]:not([tabindex="-1"])',
 ]
   .map((selector) => `${selector}:not([hidden])`)
-  .join(', ');
+  .join(", ");
 
 /**
  * Get all focusable elements within a container.
  */
 export function getFocusableElements(container: HTMLElement): HTMLElement[] {
-  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+  );
 }
 
 /**
  * Get the first focusable element within a container.
  */
-export function getFirstFocusableElement(container: HTMLElement): HTMLElement | null {
+export function getFirstFocusableElement(
+  container: HTMLElement,
+): HTMLElement | null {
   const elements = getFocusableElements(container);
-  return elements.length > 0 ? elements[0] : null;
+  return elements.length > 0 ? (elements[0] ?? null) : null;
 }
 
 /**
  * Get the last focusable element within a container.
  */
-export function getLastFocusableElement(container: HTMLElement): HTMLElement | null {
+export function getLastFocusableElement(
+  container: HTMLElement,
+): HTMLElement | null {
   const elements = getFocusableElements(container);
-  return elements.length > 0 ? elements[elements.length - 1] : null;
+  return elements.length > 0 ? (elements[elements.length - 1] ?? null) : null;
 }
 
 /**
@@ -85,13 +91,13 @@ export function focusLastElement(container: HTMLElement): boolean {
  */
 export function trapFocus(container: HTMLElement): () => void {
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== 'Tab') return;
+    if (event.key !== "Tab") return;
 
     const focusableElements = getFocusableElements(container);
     if (focusableElements.length === 0) return;
 
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
+    const firstElement = focusableElements[0]!;
+    const lastElement = focusableElements[focusableElements.length - 1]!;
 
     if (event.shiftKey) {
       // Shift+Tab: if on first element, move to last
@@ -108,13 +114,13 @@ export function trapFocus(container: HTMLElement): () => void {
     }
   };
 
-  container.addEventListener('keydown', handleKeyDown);
+  container.addEventListener("keydown", handleKeyDown);
 
   // Focus first element
   focusFirstElement(container);
 
   return () => {
-    container.removeEventListener('keydown', handleKeyDown);
+    container.removeEventListener("keydown", handleKeyDown);
   };
 }
 
@@ -133,7 +139,7 @@ export function trapFocus(container: HTMLElement): () => void {
  */
 export function useFocusTrap(
   containerRef: React.RefObject<HTMLElement | null>,
-  enabled: boolean = true
+  enabled: boolean = true,
 ): void {
   React.useEffect(() => {
     if (!enabled || !containerRef.current) return;
@@ -180,15 +186,16 @@ export function useSavedFocus(shouldSave: boolean): void {
  */
 export function useReturnFocus(
   triggerRef: React.RefObject<HTMLElement | null>,
-  enabled: boolean = true
+  enabled: boolean = true,
 ): void {
   React.useEffect(() => {
     if (!enabled) return;
+    const node = triggerRef.current;
 
     return () => {
       // Use setTimeout to ensure DOM is ready
       setTimeout(() => {
-        triggerRef.current?.focus();
+        node?.focus();
       }, 0);
     };
   }, [enabled, triggerRef]);

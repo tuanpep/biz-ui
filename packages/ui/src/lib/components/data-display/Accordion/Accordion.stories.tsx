@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from './Accordion';
+} from "./Accordion";
 
 const meta: Meta<typeof Accordion> = {
-  title: 'Components/Accordion',
+  title: "Components/Accordion",
   component: Accordion,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-[400px]">
@@ -37,14 +37,15 @@ export const Default: Story = {
       <AccordionItem value="item-2">
         <AccordionTrigger>Is it styled?</AccordionTrigger>
         <AccordionContent>
-          Yes. It comes with default styles that matches the other components'
-          aesthetic.
+          Yes. It comes with default styles that matches the other
+          components&apos;&apos; aesthetic.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>Is it animated?</AccordionTrigger>
         <AccordionContent>
-          Yes. It's animated by default, but you can disable it if you prefer.
+          Yes. It&apos;s animated by default, but you can disable it if you
+          prefer.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
@@ -62,15 +63,11 @@ export const SingleMode: Story = {
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Section 2</AccordionTrigger>
-        <AccordionContent>
-          Opening this will close Section 1.
-        </AccordionContent>
+        <AccordionContent>Opening this will close Section 1.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>Section 3</AccordionTrigger>
-        <AccordionContent>
-          Only one section can be expanded.
-        </AccordionContent>
+        <AccordionContent>Only one section can be expanded.</AccordionContent>
       </AccordionItem>
     </Accordion>
   ),
@@ -107,8 +104,8 @@ export const FAQ: Story = {
       <AccordionItem value="q1">
         <AccordionTrigger>How do I reset my password?</AccordionTrigger>
         <AccordionContent>
-          Click on "Forgot Password" on the login page and follow the instructions
-          sent to your email.
+          Click on &quot;Forgot Password&quot; on the login page and follow the
+          instructions sent to your email.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="q2">

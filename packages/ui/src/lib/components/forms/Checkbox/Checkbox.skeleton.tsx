@@ -2,16 +2,32 @@
  * Checkbox Skeleton Component
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { checkboxSkeletonVariants } from './Checkbox.variants';
-import type { CheckboxSkeletonProps } from './Checkbox.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { checkboxSkeletonVariants } from "./Checkbox.variants";
+import type { CheckboxSkeletonProps } from "./Checkbox.types";
 
-const CheckboxSkeleton = React.forwardRef<HTMLDivElement, CheckboxSkeletonProps>(
-  ({ className, size = 'md', hasLabel = false, hasDescription = false, ...props }, ref) => {
+const CheckboxSkeleton = React.forwardRef<
+  HTMLDivElement,
+  CheckboxSkeletonProps
+>(
+  (
+    {
+      className,
+      size = "md",
+      hasLabel = false,
+      hasDescription = false,
+      ...props
+    },
+    ref,
+  ) => {
     return (
-      <div ref={ref} className={cn('flex items-start space-x-2', className)} {...props}>
-        <div className={cn(checkboxSkeletonVariants({ size }), 'pt-0.5')} />
+      <div
+        ref={ref}
+        className={cn("flex items-start space-x-2", className)}
+        {...props}
+      >
+        <div className={cn(checkboxSkeletonVariants({ size }), "pt-0.5")} />
         {(hasLabel || hasDescription) && (
           <div className="grid gap-1.5">
             {hasLabel && (
@@ -24,9 +40,9 @@ const CheckboxSkeleton = React.forwardRef<HTMLDivElement, CheckboxSkeletonProps>
         )}
       </div>
     );
-  }
+  },
 );
 
-CheckboxSkeleton.displayName = 'CheckboxSkeleton';
+CheckboxSkeleton.displayName = "CheckboxSkeleton";
 
 export { CheckboxSkeleton };

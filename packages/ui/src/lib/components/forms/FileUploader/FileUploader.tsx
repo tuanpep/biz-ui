@@ -8,16 +8,13 @@
  * - Carbon-aligned validation patterns
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { fileUploaderVariants } from './FileUploader.variants';
-import { FileUploaderButton } from './FileUploaderButton';
-import { FileUploaderDropContainer } from './FileUploaderDropContainer';
-import { FileUploaderItem } from './FileUploaderItem';
-import type {
-  FileUploaderProps,
-  FileUploaderFile,
-} from './FileUploader.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { fileUploaderVariants } from "./FileUploader.variants";
+import { FileUploaderButton } from "./FileUploaderButton";
+import { FileUploaderDropContainer } from "./FileUploaderDropContainer";
+import { FileUploaderItem } from "./FileUploaderItem";
+import type { FileUploaderProps, FileUploaderFile } from "./FileUploader.types";
 
 // ============================================================================
 // Helper Functions
@@ -39,7 +36,7 @@ const fileListToFiles = (fileList: FileList): FileUploaderFile[] => {
     name: file.name,
     size: file.size,
     type: file.type,
-    status: 'uploading' as const,
+    status: "uploading" as const,
   }));
 };
 
@@ -47,10 +44,11 @@ const fileListToFiles = (fileList: FileList): FileUploaderFile[] => {
  * Format file size for display.
  */
 const formatFileSize = (bytes: number): string => {
-  if (bytes === 0) return '0 B';
+  if (bytes === 0) return "0 B";
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  if (bytes < 1024 * 1024 * 1024)
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   return `${(bytes / (1024 * 1024 * 1024)).toFixed(1)} GB`;
 };
 
@@ -63,7 +61,7 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
     {
       className,
       wrapperClassName,
-      size = 'md',
+      size = "md",
       label,
       description,
       error,
@@ -76,18 +74,18 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
       maxFiles,
       files: controlledFiles,
       onChange,
-      buttonLabel = 'Add file',
+      buttonLabel = "Add file",
       dropContainerLabel,
-      dragAndDropLabel = 'Drag and drop files here or click to upload',
+      dragAndDropLabel = "Drag and drop files here or click to upload",
       disabled = false,
       readOnly = false,
       onRemove,
       onFileClick,
-      'data-testid': testId,
+      "data-testid": testId,
       id: propId,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Generate IDs
     const generatedId = React.useId();
@@ -102,7 +100,9 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
     const hasWarning = !readOnly && !hasError && !effectiveDisabled && !!warn;
 
     // Internal state for uncontrolled mode
-    const [internalFiles, setInternalFiles] = React.useState<FileUploaderFile[]>([]);
+    const [internalFiles, setInternalFiles] = React.useState<
+      FileUploaderFile[]
+    >([]);
     const files = controlledFiles ?? internalFiles;
 
     // Handle file selection
@@ -115,7 +115,7 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
       if (maxFileSize) {
         newFiles.forEach((file) => {
           if (file.size > maxFileSize) {
-            file.status = 'error';
+            file.status = "error";
             file.errorMessage = `File size (${formatFileSize(file.size)}) exceeds limit (${formatFileSize(maxFileSize)})`;
           }
         });
@@ -158,15 +158,6 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
       if (effectiveDisabled) return;
       onFileClick?.(file, index);
     };
-
-    // Build aria-describedby
-    const ariaDescribedBy = [
-      description && !hasError && !hasWarning ? descriptionId : null,
-      hasError ? errorId : null,
-      hasWarning ? warnId : null,
-    ]
-      .filter(Boolean)
-      .join(' ') || undefined;
 
     // Render drop container and button
     const uploadArea = (
@@ -223,7 +214,7 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
           id={uploaderId}
           className={cn(
             fileUploaderVariants({ size, disabled: effectiveDisabled }),
-            className
+            className,
           )}
           data-testid={testId}
           {...props}
@@ -240,7 +231,7 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
         id={uploaderId}
         className={cn(
           fileUploaderVariants({ size, disabled: effectiveDisabled }),
-          wrapperClassName
+          wrapperClassName,
         )}
         data-testid={testId}
         {...props}
@@ -249,10 +240,10 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
           <label
             htmlFor={uploaderId}
             className={cn(
-              'block font-medium mb-1.5 text-text-02',
-              size === 'sm' && 'text-xs',
-              size === 'lg' && 'text-base',
-              effectiveDisabled && 'opacity-50'
+              "block font-medium mb-1.5 text-text-02",
+              size === "sm" && "text-xs",
+              size === "lg" && "text-base",
+              effectiveDisabled && "opacity-50",
             )}
           >
             {label}
@@ -267,12 +258,19 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
         {fileItems}
         <div>
           {description && !hasError && !hasWarning && (
-            <p id={descriptionId} className="text-sm text-muted-foreground mt-1">
+            <p
+              id={descriptionId}
+              className="text-sm text-muted-foreground mt-1"
+            >
               {description}
             </p>
           )}
           {hasError && (
-            <p id={errorId} className="text-xs text-destructive mt-1" role="alert">
+            <p
+              id={errorId}
+              className="text-xs text-destructive mt-1"
+              role="alert"
+            >
               {error}
             </p>
           )}
@@ -284,32 +282,32 @@ const FileUploader = React.forwardRef<HTMLDivElement, FileUploaderProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
-FileUploader.displayName = 'FileUploader';
+FileUploader.displayName = "FileUploader";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { FileUploader };
-export { FileUploaderButton } from './FileUploaderButton';
-export { FileUploaderDropContainer } from './FileUploaderDropContainer';
-export { FileUploaderItem } from './FileUploaderItem';
+export { FileUploaderButton } from "./FileUploaderButton";
+export { FileUploaderDropContainer } from "./FileUploaderDropContainer";
+export { FileUploaderItem } from "./FileUploaderItem";
 export {
   fileUploaderVariants,
-  fileUploaderButtonVariants
-  fileUploaderDropContainerVariants
-  fileUploaderItemVariants
-} from './FileUploader.variants';
+  fileUploaderButtonVariants,
+  fileUploaderDropContainerVariants,
+  fileUploaderItemVariants,
+} from "./FileUploader.variants";
 export type {
   FileUploaderProps,
-  FileUploaderButtonProps
-  FileUploaderDropContainerProps
-  FileUploaderItemProps
-  FileUploaderFile
-  FileUploaderFileStatus
-  FileUploaderSize
-  FileUploaderSkeletonProps
-} from './FileUploader.types';
+  FileUploaderButtonProps,
+  FileUploaderDropContainerProps,
+  FileUploaderItemProps,
+  FileUploaderFile,
+  FileUploaderFileStatus,
+  FileUploaderSize,
+  FileUploaderSkeletonProps,
+} from "./FileUploader.types";

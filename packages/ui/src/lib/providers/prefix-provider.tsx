@@ -22,8 +22,8 @@
  * ```
  */
 
-import * as React from 'react';
-import { createContext } from '../utils/create-context';
+import * as React from "react";
+import { createContext } from "../utils/create-context";
 
 // ============================================================================
 // Context
@@ -32,8 +32,8 @@ import { createContext } from '../utils/create-context';
 const [PrefixContextProvider, usePrefixContext, PrefixContext] = createContext<{
   prefix: string;
 }>({
-  name: 'Prefix',
-  defaultValue: { prefix: 'biz' },
+  name: "Prefix",
+  defaultValue: { prefix: "biz" },
 });
 
 // ============================================================================
@@ -52,9 +52,9 @@ export interface PrefixProviderProps {
 // ============================================================================
 
 export function PrefixProvider({
-  prefix = 'biz',
+  prefix = "biz",
   children,
-}: PrefixProviderProps): JSX.Element {
+}: PrefixProviderProps): React.JSX.Element {
   const value = React.useMemo(() => ({ prefix }), [prefix]);
 
   return (
@@ -96,10 +96,10 @@ export function usePrefix(): string {
  */
 export function addPrefix(
   className: string | string[],
-  prefix: string
+  prefix: string,
 ): string {
   if (Array.isArray(className)) {
-    return className.map((c) => `${prefix}-${c}`).join(' ');
+    return className.map((c) => `${prefix}-${c}`).join(" ");
   }
   return `${prefix}-${className}`;
 }
@@ -119,7 +119,7 @@ export function createPrefixedClass(prefix: string) {
     return classNames
       .filter(Boolean)
       .map((c) => `${prefix}-${c}`)
-      .join(' ');
+      .join(" ");
   };
 }
 

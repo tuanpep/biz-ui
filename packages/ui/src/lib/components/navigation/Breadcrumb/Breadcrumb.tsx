@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Breadcrumb Component
  *
@@ -8,38 +9,63 @@
  * - Customizable separator
  */
 
-import * as React from 'react';
-import { ChevronRight } from 'lucide-react';
-import { cn } from '../../utils/cn';
-import type { BreadcrumbProps, BreadcrumbLinkProps } from './breadcrumb.types';
+import * as React from "react";
+import { ChevronRight } from "lucide-react";
+import { cn } from "../../../utils/cn";
+import type {
+  BreadcrumbProps,
+  BreadcrumbLinkProps,
+  BreadcrumbItem,
+} from "./Breadcrumb.types";
 
 // ============================================================================
 // Default Link Component
 // ============================================================================
 
-const DefaultLink: React.ComponentType<BreadcrumbLinkProps> =
-  ({ to, href, className, children }) => (
-    <a href={to || href} className={className}>
-      {children}
-    </a>
-  );
+const DefaultLink: React.ComponentType<BreadcrumbLinkProps> = ({
+  to,
+  href,
+  className,
+  children,
+}) => (
+  <a href={to || href} className={className}>
+    {children}
+  </a>
+);
 
 // ============================================================================
 // Breadcrumb Component
 // ============================================================================
 
 const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
-  ({ className, items, linkComponent: LinkComponent = DefaultLink, separator, ...props }, ref) => {
-    const defaultSeparator = <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />;
+  (
+    {
+      className,
+      items,
+      linkComponent: LinkComponent = DefaultLink,
+      separator,
+      ...props
+    },
+    ref,
+  ) => {
+    const defaultSeparator = (
+      <ChevronRight
+        className="h-4 w-4 shrink-0 text-muted-foreground"
+        aria-hidden
+      />
+    );
 
     return (
       <nav
         ref={ref}
         aria-label="Breadcrumb"
-        className={cn('flex items-center gap-1.5 text-sm text-muted-foreground', className)}
+        className={cn(
+          "flex items-center gap-1.5 text-sm text-muted-foreground",
+          className,
+        )}
         {...props}
       >
-        {items.map((item, index) => {
+        {items.map((item: BreadcrumbItem, index: number) => {
           const isLast = index === items.length - 1;
           return (
             <React.Fragment key={item.key ?? index}>
@@ -54,8 +80,8 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
                 </LinkComponent>
               ) : (
                 <span
-                  className={cn(isLast && 'font-medium text-foreground')}
-                  aria-current={isLast ? 'page' : undefined}
+                  className={cn(isLast && "font-medium text-foreground")}
+                  aria-current={isLast ? "page" : undefined}
                 >
                   {item.label}
                 </span>
@@ -65,9 +91,9 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
         })}
       </nav>
     );
-  }
+  },
 );
-Breadcrumb.displayName = 'Breadcrumb';
+Breadcrumb.displayName = "Breadcrumb";
 
 // ============================================================================
 // Exports

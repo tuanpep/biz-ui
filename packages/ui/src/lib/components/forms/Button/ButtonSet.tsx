@@ -13,9 +13,9 @@
  * ```
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import type { ButtonSetProps } from './Button.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import type { ButtonSetProps } from "./Button.types";
 
 // ============================================================================
 // ButtonSet Component
@@ -25,22 +25,22 @@ const ButtonSet = React.forwardRef<HTMLDivElement, ButtonSetProps>(
   (
     {
       className,
-      orientation = 'horizontal',
+      orientation = "horizontal",
       stacked = false,
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const isStacked = stacked || orientation === 'vertical';
+    const isStacked = stacked || orientation === "vertical";
 
     return (
       <div
         ref={ref}
         className={cn(
-          'flex',
-          isStacked ? 'flex-col gap-2' : 'flex-row gap-3',
-          className
+          "flex",
+          isStacked ? "flex-col gap-2" : "flex-row gap-3",
+          className,
         )}
         role="group"
         {...props}
@@ -48,9 +48,9 @@ const ButtonSet = React.forwardRef<HTMLDivElement, ButtonSetProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
-ButtonSet.displayName = 'ButtonSet';
+ButtonSet.displayName = "ButtonSet";
 
 export { ButtonSet };

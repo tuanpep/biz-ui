@@ -5,17 +5,17 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { buttonSkeletonVariants } from './Button.variants';
-import type { ButtonSkeletonProps } from './Button.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { buttonSkeletonVariants } from "./Button.variants";
+import type { ButtonSkeletonProps } from "./Button.types";
 
 // ============================================================================
 // Button Skeleton Component
 // ============================================================================
 
 const ButtonSkeleton = React.forwardRef<HTMLDivElement, ButtonSkeletonProps>(
-  ({ className, size = 'md', hasIcon = false, ...props }, ref) => {
+  ({ className, size = "md", hasIcon = false, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -28,10 +28,10 @@ const ButtonSkeleton = React.forwardRef<HTMLDivElement, ButtonSkeletonProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-ButtonSkeleton.displayName = 'ButtonSkeleton';
+ButtonSkeleton.displayName = "ButtonSkeleton";
 
 // ============================================================================
 // Exports

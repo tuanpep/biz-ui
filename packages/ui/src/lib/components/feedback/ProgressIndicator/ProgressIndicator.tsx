@@ -8,35 +8,48 @@
  * - Labels for descriptions
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { Check } from 'lucide-react';
-import { stepProgressVariants, progressStepVariants, iconSizes } from './progress-indicator.variants';
-import type { ProgressIndicatorProps, ProgressStepProps } from './progress-indicator.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { Check } from "lucide-react";
+import {
+  stepProgressVariants,
+  progressStepVariants,
+  iconSizes,
+} from "./ProgressIndicator.variants";
+import type {
+  ProgressIndicatorProps,
+  ProgressStepProps,
+} from "./ProgressIndicator.types";
 
 // ============================================================================
 // ProgressIndicator Component
 // ============================================================================
 
-const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProps>(
+const ProgressIndicator = React.forwardRef<
+  HTMLDivElement,
+  ProgressIndicatorProps
+>(
   (
     {
       className,
-      orientation = 'horizontal',
-      size = 'md',
+      orientation = "horizontal",
+      size = "md",
       currentStep,
       totalSteps,
       onChange,
       showLabels = false,
-      labelPosition = 'end',
       ...props
     },
-    ref
+    ref,
   ) => {
     const steps = [];
     for (let i = 1; i <= totalSteps; i++) {
-      const status: 'pending' | 'current' | 'completed' =
-        i < currentStep ? 'completed' : i === currentStep ? 'current' : 'pending';
+      const status: "pending" | "current" | "completed" =
+        i < currentStep
+          ? "completed"
+          : i === currentStep
+            ? "current"
+            : "pending";
       steps.push({
         step: i,
         status,
@@ -65,10 +78,10 @@ const ProgressIndicator = React.forwardRef<HTMLDivElement, ProgressIndicatorProp
         ))}
       </div>
     );
-  }
+  },
 );
 
-ProgressIndicator.displayName = 'ProgressIndicator';
+ProgressIndicator.displayName = "ProgressIndicator";
 
 // ============================================================================
 // ProgressStep Component
@@ -78,34 +91,32 @@ const ProgressStep = React.forwardRef<HTMLDivElement, ProgressStepProps>(
   (
     {
       className,
-      size = 'md',
-      status = 'pending',
+      size = "md",
+      status = "pending",
       step,
       label,
       description,
-      icon,
-      showStepNumber = true,
       showLabel = true,
       onClick,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const isCompleted = status === 'completed';
-    const isCurrent = status === 'current';
+    const isCompleted = status === "completed";
+    const isCurrent = status === "current";
 
     const stepNumberSize = {
-      sm: 'h-5 w-5 text-xs',
-      md: 'h-6 w-6 text-sm',
-      lg: 'h-7 w-7 text-base',
-    }[size];
+      sm: "h-5 w-5 text-xs",
+      md: "h-6 w-6 text-sm",
+      lg: "h-7 w-7 text-base",
+    }[size as NonNullable<typeof size>];
 
     return (
       <div
         ref={ref}
         className={cn(progressStepVariants({ status, size }), className)}
-        aria-current={isCurrent ? 'step' : undefined}
-        role={isCurrent ? 'step' : undefined}
+        aria-current={isCurrent ? "step" : undefined}
+        role={isCurrent ? "step" : undefined}
         tabIndex={isCurrent || isCompleted ? 0 : undefined}
         onClick={onClick}
         {...props}
@@ -113,15 +124,18 @@ const ProgressStep = React.forwardRef<HTMLDivElement, ProgressStepProps>(
         {/* Step indicator circle */}
         <div
           className={cn(
-            'rounded-full flex items-center justify-center font-medium',
+            "rounded-full flex items-center justify-center font-medium",
             stepNumberSize,
-            isCompleted && 'bg-success text-success-foreground',
-            isCurrent && 'bg-interactive-01 text-white',
-            !isCompleted && !isCurrent && 'border border-border'
+            isCompleted && "bg-success text-success-foreground",
+            isCurrent && "bg-interactive-01 text-white",
+            !isCompleted && !isCurrent && "border border-border",
           )}
         >
           {isCompleted ? (
-            <Check className={iconSizes[size]} aria-hidden="true" />
+            <Check
+              className={iconSizes[size as keyof typeof iconSizes]}
+              aria-hidden="true"
+            />
           ) : (
             <span>{step}</span>
           )}
@@ -130,9 +144,21 @@ const ProgressStep = React.forwardRef<HTMLDivElement, ProgressStepProps>(
         {/* Label */}
         {showLabel && label && (
           <div className="flex-1">
-            <span className={cn('font-medium', iconSizes[size])}>{label}</span>
+            <span
+              className={cn(
+                "font-medium",
+                iconSizes[size as keyof typeof iconSizes],
+              )}
+            >
+              {label}
+            </span>
             {description && (
-              <span className={cn('text-muted-foreground', size === 'sm' ? 'text-xs' : 'text-sm')}>
+              <span
+                className={cn(
+                  "text-muted-foreground",
+                  size === "sm" ? "text-xs" : "text-sm",
+                )}
+              >
                 {description}
               </span>
             )}
@@ -140,10 +166,10 @@ const ProgressStep = React.forwardRef<HTMLDivElement, ProgressStepProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-ProgressStep.displayName = 'ProgressStep';
+ProgressStep.displayName = "ProgressStep";
 
 // ============================================================================
 // Exports

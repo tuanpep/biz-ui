@@ -3,18 +3,24 @@
  * Following Carbon's FileUploader patterns with enhanced validation states.
  */
 
-import * as React from 'react';
-import type { VariantProps } from 'class-variance-authority';
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 
 /**
  * FileUploader size types.
  */
-export type FileUploaderSize = VariantProps<typeof import('./FileUploader.variants').fileUploaderVariants>['size'];
+export type FileUploaderSize = VariantProps<
+  typeof import("./FileUploader.variants").fileUploaderVariants
+>["size"];
 
 /**
  * File status type.
  */
-export type FileUploaderFileStatus = 'uploading' | 'complete' | 'editing' | 'error';
+export type FileUploaderFileStatus =
+  | "uploading"
+  | "complete"
+  | "editing"
+  | "error";
 
 /**
  * Uploaded file type.
@@ -41,7 +47,10 @@ export interface FileUploaderFile {
 /**
  * FileUploader component props.
  */
-export interface FileUploaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+export interface FileUploaderProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange"
+> {
   /** Input size */
   size?: FileUploaderSize;
   /** Label text for the uploader */
@@ -59,7 +68,7 @@ export interface FileUploaderProps extends Omit<React.HTMLAttributes<HTMLDivElem
   /** Additional wrapper className */
   wrapperClassName?: string;
   /** Test id for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
   /** Accepted file types (e.g., '.jpg,.png,image/*') */
   accept?: string;
   /** Allow multiple file selection */
@@ -91,7 +100,10 @@ export interface FileUploaderProps extends Omit<React.HTMLAttributes<HTMLDivElem
 /**
  * FileUploaderButton component props.
  */
-export interface FileUploaderButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
+export interface FileUploaderButtonProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "size" | "onChange"
+> {
   /** Button size */
   size?: FileUploaderSize;
   /** Disabled state */
@@ -105,15 +117,20 @@ export interface FileUploaderButtonProps extends Omit<React.ButtonHTMLAttributes
   /** onChange handler for file input */
   onChange?: (files: FileList) => void;
   /** Button variant */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost';
+  variant?: "primary" | "secondary" | "tertiary" | "ghost";
 }
 
 /**
  * FileUploaderDropContainer component props.
  */
-export interface FileUploaderDropContainerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size' | 'onChange'> {
+export interface FileUploaderDropContainerProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size" | "onChange"
+> {
   /** Container size */
   size?: FileUploaderSize;
+  /** Test id */
+  "data-testid"?: string;
   /** Disabled state */
   disabled?: boolean;
   /** Accept file types */
@@ -127,13 +144,16 @@ export interface FileUploaderDropContainerProps extends Omit<React.HTMLAttribute
   /** Custom drop label */
   dropLabel?: string;
   /** Drop container variant */
-  variant?: 'default' | 'compact';
+  variant?: "default" | "compact";
 }
 
 /**
  * FileUploaderItem component props.
  */
-export interface FileUploaderItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'size'> {
+export interface FileUploaderItemProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "size"
+> {
   /** Item size */
   size?: FileUploaderSize;
   /** File data */

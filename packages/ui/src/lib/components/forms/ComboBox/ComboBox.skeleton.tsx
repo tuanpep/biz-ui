@@ -5,26 +5,32 @@
  * Following Carbon's skeleton pattern.
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { comboBoxSkeletonVariants, comboBoxSkeletonLabelVariants } from './ComboBox.variants';
-import type { ComboBoxSkeletonProps } from './ComboBox.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import {
+  comboBoxSkeletonVariants,
+  comboBoxSkeletonLabelVariants,
+} from "./ComboBox.variants";
+import type { ComboBoxSkeletonProps } from "./ComboBox.types";
 
 // ============================================================================
 // ComboBox Skeleton Component
 // ============================================================================
 
-const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>(
+const ComboBoxSkeleton = React.forwardRef<
+  HTMLDivElement,
+  ComboBoxSkeletonProps
+>(
   (
     {
       className,
-      size = 'md',
+      size = "md",
       withLabel = false,
       hasDescription = false,
       hasError = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const comboBoxElement = (
       <div className={cn(comboBoxSkeletonVariants({ size }))} />
@@ -33,12 +39,7 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
     // Render without wrapper if no label/description/error
     if (!withLabel && !hasDescription && !hasError) {
       return (
-        <div
-          ref={ref}
-          className={className}
-          aria-hidden="true"
-          {...props}
-        >
+        <div ref={ref} className={className} aria-hidden="true" {...props}>
           {comboBoxElement}
         </div>
       );
@@ -47,7 +48,7 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
     return (
       <div
         ref={ref}
-        className={cn('flex flex-col gap-1.5', className)}
+        className={cn("flex flex-col gap-1.5", className)}
         aria-hidden="true"
         {...props}
       >
@@ -63,10 +64,10 @@ const ComboBoxSkeleton = React.forwardRef<HTMLDivElement, ComboBoxSkeletonProps>
         )}
       </div>
     );
-  }
+  },
 );
 
-ComboBoxSkeleton.displayName = 'ComboBoxSkeleton';
+ComboBoxSkeleton.displayName = "ComboBoxSkeleton";
 
 // ============================================================================
 // Exports

@@ -8,11 +8,19 @@
  * - Optional status indicator
  */
 
-import * as React from 'react';
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { cn } from '../../utils/cn';
-import { avatarVariants, avatarImageVariants, avatarFallbackVariants } from './Avatar.variants';
-import type { AvatarProps, AvatarImageProps, AvatarFallbackProps } from './Avatar.types';
+import * as React from "react";
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import { cn } from "../../../utils/cn";
+import {
+  avatarVariants,
+  avatarImageVariants,
+  avatarFallbackVariants,
+} from "./Avatar.variants";
+import type {
+  AvatarProps,
+  AvatarImageProps,
+  AvatarFallbackProps,
+} from "./Avatar.types";
 
 // ============================================================================
 // Avatar Component
@@ -67,5 +75,14 @@ AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 // ============================================================================
 
 export { Avatar, AvatarImage, AvatarFallback };
-export { avatarVariants, avatarImageVariants, avatarFallbackVariants } from './Avatar.variants';
-export type { AvatarProps, AvatarImageProps, AvatarFallbackProps, AvatarSize } from './Avatar.types';
+export {
+  avatarVariants,
+  avatarImageVariants,
+  avatarFallbackVariants,
+} from "./Avatar.variants";
+export type {
+  AvatarProps,
+  AvatarImageProps,
+  AvatarFallbackProps,
+  AvatarSize,
+} from "./Avatar.types";

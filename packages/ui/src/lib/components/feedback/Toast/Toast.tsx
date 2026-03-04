@@ -9,11 +9,11 @@
  * - Multiple positions
  */
 
-import * as React from 'react';
-import * as ToastPrimitives from '@radix-ui/react-toast';
-import { cn } from '../../utils/cn';
-import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
-import { toastVariants } from './Toast.variants';
+import * as React from "react";
+import * as ToastPrimitives from "@radix-ui/react-toast";
+import { cn } from "../../../utils/cn";
+import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from "lucide-react";
+import { toastVariants } from "./Toast.variants";
 import type {
   ToastProps,
   ToastActionProps,
@@ -25,7 +25,7 @@ import type {
   ToastMessage,
   ToastContextValue,
   ToastVariant,
-} from './Toast.types';
+} from "./Toast.types";
 
 // ============================================================================
 // Toast Provider
@@ -44,8 +44,8 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]',
-      className
+      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+      className,
     )}
     {...props}
   />
@@ -81,8 +81,8 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-      className
+      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      className,
     )}
     {...props}
   />
@@ -100,8 +100,8 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      'absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100',
-      className
+      "absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100",
+      className,
     )}
     toast-close=""
     {...props}
@@ -121,7 +121,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn('text-sm font-semibold', className)}
+    className={cn("text-sm font-semibold", className)}
     {...props}
   />
 ));
@@ -137,7 +137,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn('text-sm opacity-90', className)}
+    className={cn("text-sm opacity-90", className)}
     {...props}
   />
 ));
@@ -148,17 +148,17 @@ ToastDescription.displayName = ToastPrimitives.Description.displayName;
 // ============================================================================
 
 const ToastIcon = ({ variant }: { variant?: ToastVariant }) => {
-  const iconClass = 'h-5 w-5 flex-shrink-0';
+  const iconClass = "h-5 w-5 flex-shrink-0";
 
   switch (variant) {
-    case 'success':
-      return <CheckCircle className={cn(iconClass, 'text-success')} />;
-    case 'error':
-      return <AlertCircle className={cn(iconClass, 'text-destructive')} />;
-    case 'warning':
-      return <AlertTriangle className={cn(iconClass, 'text-warning')} />;
-    case 'info':
-      return <Info className={cn(iconClass, 'text-info')} />;
+    case "success":
+      return <CheckCircle className={cn(iconClass, "text-success")} />;
+    case "error":
+      return <AlertCircle className={cn(iconClass, "text-destructive")} />;
+    case "warning":
+      return <AlertTriangle className={cn(iconClass, "text-warning")} />;
+    case "info":
+      return <Info className={cn(iconClass, "text-info")} />;
     default:
       return null;
   }
@@ -168,12 +168,14 @@ const ToastIcon = ({ variant }: { variant?: ToastVariant }) => {
 // Toast Context & Hook
 // ============================================================================
 
-const ToastContext = React.createContext<ToastContextValue | undefined>(undefined);
+const ToastContext = React.createContext<ToastContextValue | undefined>(
+  undefined,
+);
 
 export function useToast() {
   const context = React.useContext(ToastContext);
   if (!context) {
-    throw new Error('useToast must be used within a ToastContextProvider');
+    throw new Error("useToast must be used within a ToastContextProvider");
   }
   return context;
 }
@@ -190,8 +192,8 @@ const ToastContextProvider = ({
   const [toasts, setToasts] = React.useState<ToastMessage[]>([]);
 
   const toast = React.useCallback(
-    (message: Omit<ToastMessage, 'id'>) => {
-      const id = React.useId();
+    (message: Omit<ToastMessage, "id">) => {
+      const id = `toast-${Math.random().toString(36).substring(2, 9)}`;
       const newToast: ToastMessage = {
         ...message,
         id,
@@ -205,7 +207,7 @@ const ToastContextProvider = ({
 
       return id;
     },
-    [duration, maxToasts]
+    [duration, maxToasts],
   );
 
   const dismiss = React.useCallback((id: string) => {
@@ -226,7 +228,9 @@ const ToastContextProvider = ({
               {t.variant && <ToastIcon variant={t.variant} />}
               <div className="grid gap-1">
                 {t.title && <ToastTitle>{t.title}</ToastTitle>}
-                {t.description && <ToastDescription>{t.description}</ToastDescription>}
+                {t.description && (
+                  <ToastDescription>{t.description}</ToastDescription>
+                )}
               </div>
             </div>
             {t.action && (
@@ -269,4 +273,4 @@ export type {
   ToastMessage,
   ToastContextValue,
   ToastVariant,
-} from './Toast.types';
+} from "./Toast.types";

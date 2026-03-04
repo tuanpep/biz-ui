@@ -9,11 +9,15 @@
  * - Multiple sizes
  */
 
-import * as React from 'react';
-import { cn } from '../../utils/cn';
-import { X } from 'lucide-react';
-import { tagVariants, tagCloseVariants } from './Tag.variants';
-import type { TagProps, DismissibleTagProps, SelectableTagProps, TagVariant, TagSize } from './Tag.types';
+import * as React from "react";
+import { cn } from "../../../utils/cn";
+import { X } from "lucide-react";
+import { tagVariants, tagCloseVariants } from "./Tag.variants";
+import type {
+  TagProps,
+  DismissibleTagProps,
+  SelectableTagProps,
+} from "./Tag.types";
 
 // ============================================================================
 // Tag Component
@@ -35,9 +39,10 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       onClick,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [uncontrolledSelected, setUncontrolledSelected] = React.useState(false);
+    const [uncontrolledSelected, setUncontrolledSelected] =
+      React.useState(false);
     const selected = controlledSelected ?? uncontrolledSelected;
 
     const handleClick = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -55,7 +60,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
-      if (selectable && (event.key === 'Enter' || event.key === ' ')) {
+      if (selectable && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault();
         const newSelected = !selected;
         setUncontrolledSelected(newSelected);
@@ -68,13 +73,13 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
         ref={ref}
         className={cn(
           tagVariants({ variant, size, selected }),
-          selectable && 'cursor-pointer select-none',
-          className
+          selectable && "cursor-pointer select-none",
+          className,
         )}
         onClick={handleClick}
         onKeyDown={selectable ? handleKeyDown : undefined}
         tabIndex={selectable ? 0 : undefined}
-        role={selectable ? 'checkbox' : undefined}
+        role={selectable ? "checkbox" : undefined}
         aria-checked={selectable ? selected : undefined}
         {...props}
       >
@@ -92,10 +97,10 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
         )}
       </span>
     );
-  }
+  },
 );
 
-Tag.displayName = 'Tag';
+Tag.displayName = "Tag";
 
 // ============================================================================
 // DismissibleTag Component
@@ -104,10 +109,10 @@ Tag.displayName = 'Tag';
 const DismissibleTag = React.forwardRef<HTMLSpanElement, DismissibleTagProps>(
   ({ onDismiss, ...props }, ref) => {
     return <Tag ref={ref} dismissible onDismiss={onDismiss} {...props} />;
-  }
+  },
 );
 
-DismissibleTag.displayName = 'DismissibleTag';
+DismissibleTag.displayName = "DismissibleTag";
 
 // ============================================================================
 // SelectableTag Component
@@ -116,17 +121,29 @@ DismissibleTag.displayName = 'DismissibleTag';
 const SelectableTag = React.forwardRef<HTMLSpanElement, SelectableTagProps>(
   ({ selected, onSelect, ...props }, ref) => {
     return (
-      <Tag ref={ref} selectable selected={selected} onSelect={onSelect} {...props} />
+      <Tag
+        ref={ref}
+        selectable
+        selected={selected}
+        onSelect={onSelect}
+        {...props}
+      />
     );
-  }
+  },
 );
 
-SelectableTag.displayName = 'SelectableTag';
+SelectableTag.displayName = "SelectableTag";
 
 // ============================================================================
 // Exports
 // ============================================================================
 
 export { Tag, DismissibleTag, SelectableTag };
-export { tagVariants, tagCloseVariants } from './Tag.variants';
-export type { TagProps, DismissibleTagProps, SelectableTagProps, TagVariant, TagSize } from './Tag.types';
+export { tagVariants, tagCloseVariants } from "./Tag.variants";
+export type {
+  TagProps,
+  DismissibleTagProps,
+  SelectableTagProps,
+  TagVariant,
+  TagSize,
+} from "./Tag.types";

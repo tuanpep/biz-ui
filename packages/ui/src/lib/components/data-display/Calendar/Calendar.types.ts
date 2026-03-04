@@ -3,12 +3,10 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
-
 /**
  * Calendar mode type.
  */
-export type CalendarMode = 'single' | 'range';
+export type CalendarMode = "single" | "range";
 
 /**
  * Date range type.
