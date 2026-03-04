@@ -99,8 +99,11 @@ describe('Search', () => {
 
   it('hides label when hideLabel is true', () => {
     render(<Search label="Hidden" hideLabel />);
-    const label = screen.getByText('Hidden');
-    expect(label).toHaveClass('sr-only');
+    // When hideLabel is true, Search uses aria-label instead of rendering a label element
+    const input = screen.getByRole('searchbox');
+    expect(input).toHaveAttribute('aria-label', 'Hidden');
+    // Label text should not be visible as a separate element
+    expect(screen.queryByText('Hidden')).not.toBeInTheDocument();
   });
 
   it('renders different sizes', () => {
@@ -130,7 +133,7 @@ describe('ExpandableSearch', () => {
     render(<ExpandableSearch placeholder="Search..." />);
     const input = screen.getByRole('searchbox');
     fireEvent.focus(input);
-    // The expandable search should have transition classes
-    expect(input.closest('.transition-all')).toBeInTheDocument();
+    // The expandable search should have transition classes on the input
+    expect(input).toHaveClass('transition-all');
   });
 });

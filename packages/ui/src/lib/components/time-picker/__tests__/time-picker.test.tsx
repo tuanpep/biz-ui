@@ -22,7 +22,7 @@ describe('TimePicker', () => {
   it('renders with error state', () => {
     render(<TimePicker label="Time" error="Invalid time" />);
     expect(screen.getByText('Invalid time')).toBeInTheDocument();
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText('Time');
     expect(input).toHaveAttribute('aria-invalid', 'true');
   });
 
@@ -38,7 +38,7 @@ describe('TimePicker', () => {
 
   it('handles disabled state', () => {
     render(<TimePicker label="Time" disabled />);
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText('Time');
     expect(input).toBeDisabled();
   });
 
