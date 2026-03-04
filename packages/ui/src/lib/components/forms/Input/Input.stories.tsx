@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from '../Input';
 import { Search, Mail, Lock, User } from 'lucide-react';
 
 const meta: Meta<typeof Input> = {
-  title: 'Components/Input',
+  title: 'Components/Forms/Input',
   component: Input,
   parameters: {
     layout: 'centered',
@@ -32,6 +32,18 @@ const meta: Meta<typeof Input> = {
       control: 'text',
       description: 'Optional error text',
     },
+    warn: {
+      control: 'text',
+      description: 'Optional warning text',
+    },
+    leftIcon: {
+      control: false,
+      description: 'Icon to show on the left side',
+    },
+    rightIcon: {
+      control: false,
+      description: 'Icon to show on the right side',
+    },
   },
   decorators: [
     (Story) => (
@@ -56,6 +68,7 @@ export const WithLabel: Story = {
     label: 'Email',
     type: 'email',
     placeholder: 'email@example.com',
+    required: true,
   },
 };
 
@@ -70,7 +83,16 @@ export const WithDescription: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    placeholder: 'Disabled input',
+    label: 'Disabled Input',
+    placeholder: 'Cannot type here',
+  },
+};
+
+export const ReadOnly: Story = {
+  args: {
+    readOnly: true,
+    label: 'Read Only Input',
+    value: 'This value is read-only',
   },
 };
 
@@ -83,42 +105,47 @@ export const WithError: Story = {
   },
 };
 
-export const SearchInput: Story = {
-  render: () => (
-    <div className="relative">
-      <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-      <Input placeholder="Search..." className="pl-10" />
-    </div>
-  ),
+export const WithWarning: Story = {
+  args: {
+    label: 'Password',
+    type: 'password',
+    placeholder: 'Enter password',
+    warn: 'Password is weak.',
+  },
 };
 
-export const WithIcons: Story = {
-  render: () => (
-    <div className="grid gap-4">
-      <div className="relative">
-        <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input placeholder="Username" className="pl-10" />
-      </div>
-      <div className="relative">
-        <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input type="email" placeholder="Email" className="pl-10" />
-      </div>
-      <div className="relative">
-        <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input type="password" placeholder="Password" className="pl-10" />
-      </div>
-    </div>
-  ),
+export const WithLeftIcon: Story = {
+  args: {
+    placeholder: 'Search...',
+    leftIcon: <Search className="h-4 w-4" />,
+  },
+};
+
+export const WithRightIcon: Story = {
+  args: {
+    placeholder: 'Enter email',
+    type: 'email',
+    rightIcon: <Mail className="h-4 w-4" />,
+  },
+};
+
+export const WithBothIcons: Story = {
+  args: {
+    placeholder: 'Password',
+    type: 'password',
+    leftIcon: <Lock className="h-4 w-4" />,
+    rightIcon: <User className="h-4 w-4" />,
+  },
 };
 
 export const InputTypes: Story = {
   render: () => (
     <div className="grid gap-4">
-      <Input label="Text" type="text" placeholder="Text input" />
-      <Input label="Email" type="email" placeholder="email@example.com" />
-      <Input label="Password" type="password" placeholder="Password" />
       <Input label="Number" type="number" placeholder="123" />
       <Input label="Date" type="date" />
+      <Input label="Time" type="time" />
+      <Input label="Datetime" type="datetime-local" />
+      <Input label="Color" type="color" className="h-10 w-20" />
     </div>
   ),
 };

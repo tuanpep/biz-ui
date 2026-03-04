@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Progress } from './Progress';
 import { useState, useEffect } from 'react';
 
 const meta: Meta<typeof Progress> = {
-  title: 'Components/Progress',
+  title: 'Components/Feedback/Progress',
   component: Progress,
   parameters: {
     layout: 'centered',

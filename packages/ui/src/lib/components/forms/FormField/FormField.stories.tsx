@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Form, FormField, FormGroup } from './FormField';
 import { Input } from '../Input';
 import { Button } from '../Button';
@@ -6,7 +6,7 @@ import { Checkbox } from '../Checkbox';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../Select';
 
 const meta: Meta<typeof FormField> = {
-  title: 'Components/FormField',
+  title: 'Components/Forms/FormField',
   component: FormField,
   parameters: {
     layout: 'centered',

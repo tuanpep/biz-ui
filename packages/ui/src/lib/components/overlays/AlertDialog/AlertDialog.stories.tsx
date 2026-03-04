@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -13,7 +13,7 @@ import {
 import { Button } from '../../forms/Button';
 
 const meta: Meta<typeof AlertDialog> = {
-  title: 'Components/AlertDialog',
+  title: 'Components/Overlays/AlertDialog',
   component: AlertDialog,
   parameters: {
     layout: 'centered',

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Flex, FlexItem, Spacer } from './Flex';
 
 const meta: Meta<typeof Flex> = {

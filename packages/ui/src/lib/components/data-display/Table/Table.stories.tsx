@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Table,
   TableHeader,
@@ -11,7 +11,7 @@ import {
 import { Badge } from '../Badge';
 
 const meta: Meta<typeof Table> = {
-  title: 'Components/Table',
+  title: 'Components/Data Display/Table',
   component: Table,
   parameters: {
     layout: 'centered',

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Accordion,
   AccordionItem,
@@ -7,7 +7,7 @@ import {
 } from "./Accordion";
 
 const meta: Meta<typeof Accordion> = {
-  title: "Components/Accordion",
+  title: 'Components/Data Display/Accordion',
   component: Accordion,
   parameters: {
     layout: "centered",

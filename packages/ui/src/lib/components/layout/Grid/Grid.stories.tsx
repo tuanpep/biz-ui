@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Grid, Row, Column } from './Grid';
 
 const meta: Meta<typeof Grid> = {

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Skeleton, SkeletonText, SkeletonCircle, SkeletonGroup } from './Skeleton';
 
 const meta: Meta<typeof Skeleton> = {
-  title: 'Components/Skeleton',
+  title: 'Components/Feedback/Skeleton',
   component: Skeleton,
   parameters: {
     layout: 'centered',

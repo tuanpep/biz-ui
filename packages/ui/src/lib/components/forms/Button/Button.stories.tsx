@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '../Button';
-import { Mail } from 'lucide-react';
+import { Mail, Send, ChevronRight, Loader2 } from 'lucide-react';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Components/Forms/Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -63,16 +63,10 @@ export const Secondary: Story = {
   },
 };
 
-export const Tertiary: Story = {
-  args: {
-    variant: 'tertiary',
-  },
-};
-
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
-    children: 'Delete',
+    children: 'Delete Account',
   },
 };
 
@@ -88,66 +82,41 @@ export const Ghost: Story = {
   },
 };
 
-export const Link: Story = {
-  args: {
-    variant: 'link',
-  },
-};
-
 export const Success: Story = {
   args: {
     variant: 'success',
-    children: 'Confirm',
+    children: (
+      <>
+        <Send className="mr-2 h-4 w-4" /> Success
+      </>
+    ),
   },
 };
 
-export const Warning: Story = {
+export const WithIcons: Story = {
   args: {
-    variant: 'warning',
-    children: 'Warning',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    children: 'Small',
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
-    children: 'Large Button',
-  },
-};
-
-export const ExtraLarge: Story = {
-  args: {
-    size: 'xl',
-    children: 'Extra Large',
-  },
-};
-
-export const Icon: Story = {
-  args: {
-    size: 'icon',
-    children: <Mail className="h-4 w-4" />,
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: 'Disabled',
+    children: (
+      <>
+        Email <ChevronRight className="ml-2 h-4 w-4" />
+      </>
+    ),
   },
 };
 
 export const Loading: Story = {
   args: {
     loading: true,
-    loadingText: 'Submitting',
-    children: 'Submitting...',
+    loadingText: 'Processing',
+    children: 'Submit',
+  },
+};
+
+export const IconButton: Story = {
+  args: {
+    size: 'icon',
+    variant: 'outline',
+    children: <Mail className="h-4 w-4" />,
+    'aria-label': 'Send email',
   },
 };
 
@@ -172,7 +141,7 @@ export const AllSizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Button size="sm">Small</Button>
-      <Button size="default">Default</Button>
+      <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
       <Button size="xl">Extra Large</Button>
     </div>

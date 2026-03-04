@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Collapsible,
   CollapsibleTrigger,
@@ -9,7 +9,7 @@ import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 const meta: Meta<typeof Collapsible> = {
-  title: "Components/Collapsible",
+  title: 'Components/Overlays/Collapsible',
   component: Collapsible,
   parameters: {
     layout: "centered",

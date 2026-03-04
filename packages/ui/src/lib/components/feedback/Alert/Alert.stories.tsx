@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Alert } from "../Alert";
 import { Button } from "../../forms/Button";
+import { Bell, Terminal } from "lucide-react";
 
 const meta: Meta<typeof Alert> = {
-  title: "Components/Alert",
+  title: "Components/Feedback/Alert",
   component: Alert,
   parameters: {
     layout: "centered",
@@ -39,7 +40,7 @@ const meta: Meta<typeof Alert> = {
   },
   decorators: [
     (Story) => (
-      <div className="w-[400px]">
+      <div className="w-[450px]">
         <Story />
       </div>
     ),
@@ -52,104 +53,106 @@ type Story = StoryObj<typeof Alert>;
 export const Default: Story = {
   args: {
     variant: "default",
+    title: "New update available",
+    description: "A new software version is ready for installation.",
   },
 };
 
 export const Info: Story = {
   args: {
     variant: "info",
-    title: "Information",
-    description: "Here is some helpful information for you.",
+    title: "Note",
+    description: "This action cannot be undone once confirmed.",
   },
 };
 
 export const Success: Story = {
   args: {
     variant: "success",
-    title: "Success!",
-    description: "Your changes have been saved successfully.",
+    title: "Success",
+    description: "Your document has been uploaded successfully.",
   },
 };
 
 export const Warning: Story = {
   args: {
     variant: "warning",
-    title: "Warning",
-    description: "Please review your input before proceeding.",
+    title: "Low disk space",
+    description: "You have less than 10% of disk space remaining.",
   },
 };
 
 export const Destructive: Story = {
   args: {
     variant: "destructive",
-    title: "Error",
-    description: "Something went wrong. Please try again.",
+    title: "Connection failed",
+    description: "Could not connect to the server. Please try again.",
   },
 };
 
 export const Closable: Story = {
   args: {
     variant: "info",
-    title: "Closable Alert",
-    description: "Click the X button to close this alert.",
+    title: "Dismissible Alert",
+    description: "Click the close button on the right to remove this alert.",
     closable: true,
+  },
+};
+
+export const CustomIcon: Story = {
+  args: {
+    variant: "default",
+    title: "Terminal",
+    description: "npm install @repo/ui",
+    icon: <Terminal className="h-5 w-5" />,
   },
 };
 
 export const WithActions: Story = {
   args: {
     variant: "warning",
-    title: "Confirm Action",
-    description: "Are you sure you want to delete this item?",
+    title: "Action Required",
+    description: "Your subscription is about to expire. Renew now to avoid interruption.",
     actions: (
       <>
         <Button size="sm" variant="outline">
-          Cancel
+          Later
         </Button>
-        <Button size="sm" variant="destructive">
-          Delete
+        <Button size="sm">
+          Renew Now
         </Button>
       </>
     ),
   },
 };
 
-export const WithoutIcon: Story = {
-  args: {
-    variant: "info",
-    title: "No Icon",
-    description: "This alert does not show an icon.",
-    showIcon: false,
-  },
-};
-
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 w-[400px]">
+    <div className="flex flex-col gap-4">
       <Alert
         variant="default"
         title="Default Alert"
-        description="This is a default alert."
+        description="General information alert."
       />
       <Alert
         variant="info"
         title="Info Alert"
-        description="This is an info alert."
+        description="Informational alert for neutral messages."
       />
       <Alert
         variant="success"
         title="Success Alert"
-        description="This is a success alert."
+        description="Positive feedback alert."
       />
       <Alert
         variant="warning"
         title="Warning Alert"
-        description="This is a warning alert."
+        description="Cautionary alert for potential issues."
       />
       <Alert
         variant="destructive"
         title="Error Alert"
-        description="This is an error alert."
+        description="Critical error or failure alert."
       />
     </div>
   ),

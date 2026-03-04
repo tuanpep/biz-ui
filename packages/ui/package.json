@@ -36,10 +36,18 @@
   },
   "typesVersions": {
     "*": {
-      "components": ["./dist/components/index.d.ts"],
-      "utils": ["./dist/utils/index.d.ts"],
-      "types": ["./dist/types/index.d.ts"],
-      "core": ["./dist/core/index.d.ts"]
+      "components": [
+        "./dist/components/index.d.ts"
+      ],
+      "utils": [
+        "./dist/utils/index.d.ts"
+      ],
+      "types": [
+        "./dist/types/index.d.ts"
+      ],
+      "core": [
+        "./dist/core/index.d.ts"
+      ]
     }
   },
   "files": [
@@ -103,7 +111,15 @@
   "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@storybook/addon-a11y": "^8.5.0",
+    "@storybook/addon-docs": "^8.5.0",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/addon-interactions": "^8.5.0",
+    "@storybook/addon-links": "^8.5.0",
+    "@storybook/addon-onboarding": "^8.5.0",
+    "@storybook/blocks": "^8.5.0",
     "@storybook/react-vite": "^8.5.0",
+    "@storybook/test": "^8.5.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.15.3",

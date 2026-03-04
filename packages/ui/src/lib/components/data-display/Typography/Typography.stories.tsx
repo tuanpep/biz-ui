@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Heading, Body, TypographyLabel, HelperText, Code } from "./Typography";
 
 const meta: Meta = {
-  title: "Components/Typography",
+  title: 'Components/Data Display/Typography',
   parameters: {
     layout: "centered",
   },

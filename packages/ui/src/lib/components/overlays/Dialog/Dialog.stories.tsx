@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Dialog,
   DialogTrigger,
@@ -14,7 +14,7 @@ import { Input } from '../../forms/Input';
 import { Label } from '../../forms/Label';
 
 const meta: Meta<typeof Dialog> = {
-  title: 'Components/Dialog',
+  title: 'Components/Overlays/Dialog',
   component: Dialog,
   parameters: {
     layout: 'centered',

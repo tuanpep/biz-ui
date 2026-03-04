@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Card,
   CardHeader,
@@ -10,7 +10,7 @@ import {
 import { Button } from '../../forms/Button';
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card',
+  title: 'Components/Layout/Card',
   component: Card,
   parameters: {
     layout: 'centered',

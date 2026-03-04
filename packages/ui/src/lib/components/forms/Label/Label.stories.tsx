@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Label } from './Label';
 import { Input } from '../Input';
 import { Checkbox } from '../Checkbox';
 
 const meta: Meta<typeof Label> = {
-  title: 'Components/Label',
+  title: 'Components/Forms/Label',
   component: Label,
   parameters: {
     layout: 'centered',

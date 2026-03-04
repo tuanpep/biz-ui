@@ -17,9 +17,10 @@ const config: StorybookConfig = {
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   "addons": [
-    getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@storybook/addon-docs'),
-    getAbsolutePath('@storybook/addon-onboarding')
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-links")
   ],
   "framework": getAbsolutePath('@storybook/react-vite'),
   "viteFinal": async (config) => {
@@ -36,8 +37,8 @@ const config: StorybookConfig = {
         ...config.css,
         postcss: {
           plugins: [
-            tailwindcss({ config: tailwindConfigPath }) as any,
-            autoprefixer() as any,
+            tailwindcss({ config: tailwindConfigPath }),
+            autoprefixer(),
           ],
         },
       },

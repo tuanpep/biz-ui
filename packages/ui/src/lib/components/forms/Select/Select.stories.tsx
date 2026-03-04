@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
   Select,
   SelectContent,
@@ -11,7 +11,7 @@ import {
 import { Label } from '../Label';
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Components/Forms/Select',
   component: Select,
   parameters: {
     layout: 'centered',

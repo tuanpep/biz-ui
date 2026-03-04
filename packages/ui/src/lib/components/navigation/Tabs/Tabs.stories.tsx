@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs";
 
 const meta: Meta<typeof Tabs> = {
-  title: "Components/Tabs",
+  title: "Components/Navigation/Tabs",
   component: Tabs,
   parameters: {
     layout: "centered",
@@ -10,7 +10,7 @@ const meta: Meta<typeof Tabs> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div className="w-[400px]">
+      <div className="w-[450px]">
         <Story />
       </div>
     ),

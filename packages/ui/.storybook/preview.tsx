@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react-vite'
+import type { Preview } from '@storybook/react'
 import '../src/lib/styles/storybook.css'
 import React from 'react';
 
@@ -11,6 +11,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     backgrounds: {
       default: 'light',
       values: [
@@ -28,7 +29,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <div className="biz-ui">
+      <div className="biz-ui p-8">
         <Story />
       </div>
     ),

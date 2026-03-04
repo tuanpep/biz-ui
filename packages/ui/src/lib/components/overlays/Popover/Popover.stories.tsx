@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Popover, PopoverContent, PopoverTrigger } from "../Popover";
 import { Button } from "../../forms/Button";
 import { Input } from "../../forms/Input";
 import { Label } from "../../forms/Label";
 
 const meta: Meta<typeof Popover> = {
-  title: "Components/Popover",
+  title: 'Components/Overlays/Popover',
   component: Popover,
   parameters: {
     layout: "centered",
