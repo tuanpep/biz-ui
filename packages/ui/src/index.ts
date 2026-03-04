@@ -1,23 +1,20 @@
 // Components
-export * from './lib/components'
+export * from "./lib/components";
 
 // Core
-export * from './lib/core'
+export * from "./lib/core";
 
 // Types
-export * from './lib/types'
+export * from "./lib/types";
 
 // Utilities
-export * from './lib/utils'
+export * from "./lib/utils";
 
 // Hooks
-export * from './lib/hooks'
+export * from "./lib/hooks";
 
 // Providers
-export * from './lib/providers'
+export * from "./lib/providers";
 
 // i18n
-export * from './lib/i18n'
-
-// i18n
-export * from './lib/i18n';
+export * from "./lib/i18n";
