@@ -22,10 +22,7 @@ export const Default: Story = {
   render: () => (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <a
-          href="#"
-          className="text-sm font-medium text-[var(--interactive-01)] underline"
-        >
+        <a href="#" className="text-sm font-medium text-primary underline">
           @biz-ui
         </a>
       </HoverCardTrigger>

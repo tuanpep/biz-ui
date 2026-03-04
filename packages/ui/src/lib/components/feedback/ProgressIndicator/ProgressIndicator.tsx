@@ -127,7 +127,7 @@ const ProgressStep = React.forwardRef<HTMLDivElement, ProgressStepProps>(
             "rounded-full flex items-center justify-center font-medium",
             stepNumberSize,
             isCompleted && "bg-success text-success-foreground",
-            isCurrent && "bg-interactive-01 text-white",
+            isCurrent && "bg-primary text-white",
             !isCompleted && !isCurrent && "border border-border",
           )}
         >

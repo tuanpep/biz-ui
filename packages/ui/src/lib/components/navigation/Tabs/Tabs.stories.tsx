@@ -32,12 +32,12 @@ export const Default: Story = {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="account">
-        <p className="p-4 text-sm text-text-02">
+        <p className="p-4 text-sm text-muted-foreground">
           Make changes to your account here. Click save when you&apos;re done.
         </p>
       </TabsContent>
       <TabsContent value="password">
-        <p className="p-4 text-sm text-text-02">
+        <p className="p-4 text-sm text-muted-foreground">
           Change your password here. After saving, you&apos;ll be logged out.
         </p>
       </TabsContent>
@@ -61,8 +61,8 @@ export const Contained: Story = {
       </TabsList>
       <TabsContent value="tab-1">
         <div className="p-4">
-          <h3 className="text-lg font-semibold text-text-01">Details</h3>
-          <p className="text-sm text-text-02 mt-1">
+          <h3 className="text-lg font-semibold text-foreground">Details</h3>
+          <p className="text-sm text-muted-foreground mt-1">
             This is a contained tab style, often used for secondary navigation
             within pages.
           </p>
@@ -79,7 +79,7 @@ export const Showcase: Story = {
   render: () => (
     <div className="space-y-12 w-full">
       <div className="space-y-4">
-        <h4 className="text-sm font-bold uppercase tracking-wider text-text-03">
+        <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
           Line Tabs (Standard)
         </h4>
         <Tabs defaultValue="1">
@@ -98,7 +98,7 @@ export const Showcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h4 className="text-sm font-bold uppercase tracking-wider text-text-03">
+        <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
           Contained Tabs
         </h4>
         <Tabs defaultValue="1">
@@ -117,7 +117,7 @@ export const Showcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h4 className="text-sm font-bold uppercase tracking-wider text-text-03">
+        <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
           Sizes
         </h4>
         <div className="flex flex-col gap-6">

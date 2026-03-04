@@ -28,7 +28,7 @@ function PortalDemo() {
       </p>
       <button
         onClick={() => setShow(!show)}
-        className="px-3 py-1 bg-[var(--interactive-01)] text-white text-sm"
+        className="px-3 py-1 bg-primary text-primary-foreground text-sm"
         type="button"
       >
         {show ? "Hide" : "Show"} Portal Content

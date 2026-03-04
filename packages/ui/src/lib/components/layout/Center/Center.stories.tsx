@@ -47,7 +47,7 @@ export const Inline: Story = {
       Some text with an{" "}
       <Center
         inline
-        className="h-6 w-6 bg-[var(--interactive-01)] text-white text-xs"
+        className="h-6 w-6 bg-primary text-primary-foreground text-xs"
       >
         3
       </Center>{" "}

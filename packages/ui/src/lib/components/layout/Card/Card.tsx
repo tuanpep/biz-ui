@@ -68,7 +68,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
       <Comp
         ref={ref}
         className={cn(
-          "text-lg font-semibold tracking-tight text-text-01 leading-tight",
+          "text-lg font-semibold tracking-tight text-foreground leading-tight",
           className,
         )}
         {...props}
@@ -92,7 +92,7 @@ const CardDescription = React.forwardRef<
   return (
     <Comp
       ref={ref}
-      className={cn("text-sm text-text-02 leading-normal", className)}
+      className={cn("text-sm text-muted-foreground leading-normal", className)}
       {...props}
     />
   );

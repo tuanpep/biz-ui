@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { keys, type Key } from './keys';
+import * as React from "react";
+import { keys } from "./keys";
 
 /**
  * Get the next index for arrow key navigation.
@@ -12,19 +12,19 @@ import { keys, type Key } from './keys';
 export function getNextIndex(
   currentIndex: number,
   totalItems: number,
-  direction: 'up' | 'down',
-  loop: boolean = true
+  direction: "up" | "down",
+  loop: boolean = true,
 ): number {
   if (totalItems === 0) return -1;
 
-  if (direction === 'down') {
+  if (direction === "down") {
     if (currentIndex === totalItems - 1) {
       return loop ? 0 : currentIndex;
     }
     return currentIndex + 1;
   }
 
-  if (direction === 'up') {
+  if (direction === "up") {
     if (currentIndex === 0) {
       return loop ? totalItems - 1 : currentIndex;
     }
@@ -40,14 +40,14 @@ export function getNextIndex(
 export function getNextIndexHorizontal(
   currentIndex: number,
   totalItems: number,
-  direction: 'left' | 'right',
-  loop: boolean = true
+  direction: "left" | "right",
+  loop: boolean = true,
 ): number {
   return getNextIndex(
     currentIndex,
     totalItems,
-    direction === 'right' ? 'down' : 'up',
-    loop
+    direction === "right" ? "down" : "up",
+    loop,
   );
 }
 
@@ -56,10 +56,10 @@ export function getNextIndexHorizontal(
  */
 export function getBoundaryIndex(
   totalItems: number,
-  boundary: 'first' | 'last'
+  boundary: "first" | "last",
 ): number {
   if (totalItems === 0) return -1;
-  return boundary === 'first' ? 0 : totalItems - 1;
+  return boundary === "first" ? 0 : totalItems - 1;
 }
 
 /**
@@ -91,7 +91,7 @@ export function handleArrowNavigation(
     loop?: boolean;
     /** Also handle Home/End keys */
     handleHomeEnd?: boolean;
-  } = {}
+  } = {},
 ): number | null {
   const {
     horizontal = true,
@@ -103,37 +103,37 @@ export function handleArrowNavigation(
   switch (event.key) {
     case keys.ArrowDown:
       if (vertical) {
-        return getNextIndex(currentIndex, totalItems, 'down', loop);
+        return getNextIndex(currentIndex, totalItems, "down", loop);
       }
       break;
 
     case keys.ArrowUp:
       if (vertical) {
-        return getNextIndex(currentIndex, totalItems, 'up', loop);
+        return getNextIndex(currentIndex, totalItems, "up", loop);
       }
       break;
 
     case keys.ArrowRight:
       if (horizontal) {
-        return getNextIndexHorizontal(currentIndex, totalItems, 'right', loop);
+        return getNextIndexHorizontal(currentIndex, totalItems, "right", loop);
       }
       break;
 
     case keys.ArrowLeft:
       if (horizontal) {
-        return getNextIndexHorizontal(currentIndex, totalItems, 'left', loop);
+        return getNextIndexHorizontal(currentIndex, totalItems, "left", loop);
       }
       break;
 
     case keys.Home:
       if (handleHomeEnd) {
-        return getBoundaryIndex(totalItems, 'first');
+        return getBoundaryIndex(totalItems, "first");
       }
       break;
 
     case keys.End:
       if (handleHomeEnd) {
-        return getBoundaryIndex(totalItems, 'last');
+        return getBoundaryIndex(totalItems, "last");
       }
       break;
   }
@@ -176,14 +176,14 @@ export function useArrowNavigation(
     loop?: boolean;
     /** Handle Home/End keys */
     handleHomeEnd?: boolean;
-  } = {}
+  } = {},
 ): [
   number,
   {
     onKeyDown: (event: React.KeyboardEvent) => void;
     setFocusedIndex: (index: number) => void;
     reset: () => void;
-  }
+  },
 ] {
   const {
     initialIndex = 0,
@@ -202,7 +202,7 @@ export function useArrowNavigation(
         event.nativeEvent,
         focusedIndex,
         totalItems,
-        { horizontal, vertical, loop, handleHomeEnd }
+        { horizontal, vertical, loop, handleHomeEnd },
       );
 
       if (nextIndex !== null) {
@@ -211,7 +211,15 @@ export function useArrowNavigation(
         onChange?.(nextIndex);
       }
     },
-    [focusedIndex, totalItems, horizontal, vertical, loop, handleHomeEnd, onChange]
+    [
+      focusedIndex,
+      totalItems,
+      horizontal,
+      vertical,
+      loop,
+      handleHomeEnd,
+      onChange,
+    ],
   );
 
   const reset = React.useCallback(() => {
@@ -228,4 +236,4 @@ export function useArrowNavigation(
   ];
 }
 
-export { keys, type Key } from './keys';
+export { keys, type Key } from "./keys";

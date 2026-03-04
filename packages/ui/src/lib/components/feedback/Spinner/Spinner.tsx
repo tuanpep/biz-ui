@@ -21,7 +21,7 @@ const spinnerVariants = cva("animate-spin", {
     },
     color: {
       default: "text-muted-foreground",
-      primary: "text-[var(--interactive-01)]",
+      primary: "text-primary",
       white: "text-white",
       current: "text-current",
     },

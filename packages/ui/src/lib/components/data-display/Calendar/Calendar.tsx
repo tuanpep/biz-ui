@@ -121,7 +121,7 @@ const Calendar = ({
         {weekDays.map((day) => (
           <div
             key={day}
-            className="h-8 w-8 flex items-center justify-center text-[10px] uppercase font-semibold text-text-02"
+            className="h-8 w-8 flex items-center justify-center text-[10px] uppercase font-semibold text-muted-foreground"
           >
             {day}
           </div>
@@ -140,18 +140,18 @@ const Calendar = ({
               onClick={() => handleDateClick(day)}
               className={cn(
                 "h-8 w-8 text-xs flex items-center justify-center rounded-sm transition-colors relative",
-                !currentMonthState && "text-text-03 opacity-40",
-                selectedState && "bg-interactive-01 text-white z-10",
-                rangeState && !selectedState && "bg-interactive-01/10",
+                !currentMonthState && "text-muted-foreground opacity-40",
+                selectedState && "bg-primary text-white z-10",
+                rangeState && !selectedState && "bg-primary/10",
                 !selectedState &&
                   currentMonthState &&
                   !disabledState &&
-                  "hover:bg-ui-02",
+                  "hover:bg-muted",
                 isToday(day) &&
                   !selectedState &&
-                  "border border-interactive-01 text-interactive-01",
+                  "border border-primary text-primary",
                 disabledState &&
-                  "cursor-not-allowed text-text-03 bg-transparent",
+                  "cursor-not-allowed text-muted-foreground bg-transparent",
               )}
             >
               {format(day, "d")}

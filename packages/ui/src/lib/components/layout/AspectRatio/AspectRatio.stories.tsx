@@ -45,7 +45,7 @@ export const Square: Story = {
   render: (args) => (
     <div className="w-[200px]">
       <AspectRatio {...args}>
-        <div className="flex h-full w-full items-center justify-center bg-[var(--interactive-01-subtle)] text-[var(--interactive-01)] text-sm font-medium">
+        <div className="flex h-full w-full items-center justify-center bg-primary-muted text-primary text-sm font-medium">
           1:1 Square
         </div>
       </AspectRatio>

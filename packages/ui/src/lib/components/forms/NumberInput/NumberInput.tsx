@@ -269,7 +269,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "text-sm font-medium leading-none text-text-02",
+              "text-sm font-medium leading-none text-muted-foreground",
               hideLabel && "sr-only",
               effectiveDisabled && "opacity-50",
             )}

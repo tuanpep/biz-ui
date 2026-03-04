@@ -43,7 +43,7 @@ export const Colors: Story = {
     <div className="flex items-center gap-4">
       <Spinner color="default" />
       <Spinner color="primary" />
-      <div className="bg-[var(--interactive-01)] p-2">
+      <div className="bg-primary p-2">
         <Spinner color="white" />
       </div>
     </div>

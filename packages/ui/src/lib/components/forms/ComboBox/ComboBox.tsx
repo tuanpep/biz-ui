@@ -346,7 +346,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(
           <label
             htmlFor={comboBoxId}
             className={cn(
-              "block font-medium mb-1.5 text-text-02",
+              "block font-medium mb-1.5 text-muted-foreground",
               size === "sm" && "text-xs",
               size === "lg" && "text-base",
               effectiveDisabled && "opacity-50",

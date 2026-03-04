@@ -1,44 +1,55 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../Button';
-import { Mail, Send, ChevronRight, Loader2 } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../Button";
+import { Mail, Send, ChevronRight } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Forms/Button',
+  title: "Components/Forms/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'primary', 'secondary', 'tertiary', 'destructive', 'outline', 'ghost', 'link', 'success', 'warning'],
-      description: 'Button variant style',
+      control: "select",
+      options: [
+        "default",
+        "primary",
+        "secondary",
+        "tertiary",
+        "destructive",
+        "outline",
+        "ghost",
+        "link",
+        "success",
+        "warning",
+      ],
+      description: "Button variant style",
     },
     size: {
-      control: 'select',
-      options: ['default', 'sm', 'lg', 'xl', 'icon'],
-      description: 'Button size',
+      control: "select",
+      options: ["default", "sm", "lg", "xl", "icon"],
+      description: "Button size",
     },
     loading: {
-      control: 'boolean',
-      description: 'Whether the button is in a loading state',
+      control: "boolean",
+      description: "Whether the button is in a loading state",
     },
     loadingText: {
-      control: 'text',
-      description: 'Text to show when loading for screen readers',
+      control: "text",
+      description: "Text to show when loading for screen readers",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the button is disabled',
+      control: "boolean",
+      description: "Whether the button is disabled",
     },
     asChild: {
       control: false,
-      description: 'Render as a different element using Radix Slot',
+      description: "Render as a different element using Radix Slot",
     },
   },
   args: {
-    children: 'Button',
+    children: "Button",
   },
 };
 
@@ -47,44 +58,44 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    variant: 'default',
+    variant: "default",
   },
 };
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
+    variant: "primary",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
+    variant: "secondary",
   },
 };
 
 export const Destructive: Story = {
   args: {
-    variant: 'destructive',
-    children: 'Delete Account',
+    variant: "destructive",
+    children: "Delete Account",
   },
 };
 
 export const Outline: Story = {
   args: {
-    variant: 'outline',
+    variant: "outline",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    variant: 'ghost',
+    variant: "ghost",
   },
 };
 
 export const Success: Story = {
   args: {
-    variant: 'success',
+    variant: "success",
     children: (
       <>
         <Send className="mr-2 h-4 w-4" /> Success
@@ -106,17 +117,17 @@ export const WithIcons: Story = {
 export const Loading: Story = {
   args: {
     loading: true,
-    loadingText: 'Processing',
-    children: 'Submit',
+    loadingText: "Processing",
+    children: "Submit",
   },
 };
 
 export const IconButton: Story = {
   args: {
-    size: 'icon',
-    variant: 'outline',
+    size: "icon",
+    variant: "outline",
     children: <Mail className="h-4 w-4" />,
-    'aria-label': 'Send email',
+    "aria-label": "Send email",
   },
 };
 

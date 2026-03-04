@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Alert } from "../Alert";
 import { Button } from "../../forms/Button";
-import { Bell, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 
 const meta: Meta<typeof Alert> = {
   title: "Components/Feedback/Alert",
@@ -112,15 +112,14 @@ export const WithActions: Story = {
   args: {
     variant: "warning",
     title: "Action Required",
-    description: "Your subscription is about to expire. Renew now to avoid interruption.",
+    description:
+      "Your subscription is about to expire. Renew now to avoid interruption.",
     actions: (
       <>
         <Button size="sm" variant="outline">
           Later
         </Button>
-        <Button size="sm">
-          Renew Now
-        </Button>
+        <Button size="sm">Renew Now</Button>
       </>
     ),
   },

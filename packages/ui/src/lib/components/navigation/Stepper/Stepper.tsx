@@ -82,9 +82,8 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                     "flex items-center justify-center border-2 font-medium transition-colors",
                     size === "sm" ? "h-6 w-6 text-xs" : "h-8 w-8 text-sm",
                     isCompleted &&
-                      "border-[var(--interactive-01)] bg-[var(--interactive-01)] text-white",
-                    isActive &&
-                      "border-[var(--interactive-01)] text-[var(--interactive-01)]",
+                      "border-primary bg-primary text-primary-foreground",
+                    isActive && "border-primary text-primary",
                     !isCompleted &&
                       !isActive &&
                       "border-border text-muted-foreground",
@@ -113,7 +112,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                   <div
                     className={cn(
                       "w-0.5 min-h-[2rem] my-1",
-                      isCompleted ? "bg-[var(--interactive-01)]" : "bg-border",
+                      isCompleted ? "bg-primary" : "bg-border",
                     )}
                   />
                 )}
@@ -157,7 +156,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                 <div
                   className={cn(
                     "flex-1 h-0.5 mx-3 mt-4 min-w-[2rem]",
-                    isCompleted ? "bg-[var(--interactive-01)]" : "bg-border",
+                    isCompleted ? "bg-primary" : "bg-border",
                   )}
                 />
               )}

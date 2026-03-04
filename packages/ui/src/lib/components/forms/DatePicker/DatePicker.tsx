@@ -121,12 +121,15 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
             aria-describedby={ariaDescribedBy}
             aria-required={required}
           >
-            <span className={cn(!value && "text-text-03")}>
+            <span className={cn(!value && "text-muted-foreground")}>
               {value && isValid(value)
                 ? format(value, dateFormat)
                 : placeholder}
             </span>
-            <CalendarIcon className="h-4 w-4 text-text-02" aria-hidden="true" />
+            <CalendarIcon
+              className="h-4 w-4 text-muted-foreground"
+              aria-hidden="true"
+            />
           </div>
         </PopoverTrigger>
         <PopoverContent className="p-0 w-auto" align="start">
@@ -173,7 +176,7 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
           <label
             htmlFor={pickerId}
             className={cn(
-              "block font-medium mb-1.5 text-text-02",
+              "block font-medium mb-1.5 text-muted-foreground",
               size === "sm" && "text-xs",
               size === "lg" && "text-base",
               effectiveDisabled && "opacity-50",
@@ -323,10 +326,13 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
             aria-describedby={ariaDescribedBy}
             aria-required={required}
           >
-            <span className={cn(!value.start && "text-text-03")}>
+            <span className={cn(!value.start && "text-muted-foreground")}>
               {displayText}
             </span>
-            <CalendarIcon className="h-4 w-4 text-text-02" aria-hidden="true" />
+            <CalendarIcon
+              className="h-4 w-4 text-muted-foreground"
+              aria-hidden="true"
+            />
           </div>
         </PopoverTrigger>
         <PopoverContent className="p-0 w-auto" align="start">
@@ -374,7 +380,7 @@ const DateRangePicker = React.forwardRef<HTMLDivElement, DateRangePickerProps>(
           <label
             htmlFor={pickerId}
             className={cn(
-              "block font-medium mb-1.5 text-text-02",
+              "block font-medium mb-1.5 text-muted-foreground",
               size === "sm" && "text-xs",
               size === "lg" && "text-base",
               effectiveDisabled && "opacity-50",
@@ -458,7 +464,7 @@ const DateTimePicker = React.forwardRef<HTMLDivElement, DateTimePickerProps>(
         {label && !hideLabel && (
           <label
             className={cn(
-              "block font-medium text-text-02",
+              "block font-medium text-muted-foreground",
               size === "sm" && "text-xs",
               size === "lg" && "text-base",
               disabled && "opacity-50",

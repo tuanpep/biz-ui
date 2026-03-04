@@ -14,13 +14,11 @@ const bannerVariants = cva(
   {
     variants: {
       variant: {
-        info: "bg-[var(--support-info-subtle)] text-[var(--text-01)] border-b border-[var(--support-info)]",
-        success:
-          "bg-[var(--support-success-subtle)] text-[var(--text-01)] border-b border-[var(--support-success)]",
-        warning:
-          "bg-[var(--support-warning-subtle)] text-[var(--text-01)] border-b border-[var(--support-warning)]",
+        info: "bg-info-muted text-foreground border-b border-info",
+        success: "bg-success-muted text-foreground border-b border-success",
+        warning: "bg-warning-muted text-foreground border-b border-warning",
         error:
-          "bg-[var(--support-error-subtle)] text-[var(--text-01)] border-b border-[var(--support-error)]",
+          "bg-destructive-muted text-foreground border-b border-destructive",
       },
     },
     defaultVariants: {

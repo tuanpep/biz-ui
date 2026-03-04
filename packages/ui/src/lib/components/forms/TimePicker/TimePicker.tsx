@@ -82,13 +82,13 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
           value={value || ""}
           onChange={handleTimeChange}
           placeholder={placeholder}
-          className="flex-1 bg-transparent border-none outline-none text-text-01 placeholder:text-text-03"
+          className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground"
           aria-invalid={hasError}
           aria-describedby={ariaDescribedBy}
           aria-required={required}
           data-testid={testId}
         />
-        <Clock className="h-4 w-4 text-text-02" aria-hidden="true" />
+        <Clock className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
       </div>
     );
 
@@ -112,7 +112,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
           <label
             htmlFor={pickerId}
             className={cn(
-              "block font-medium text-text-02",
+              "block font-medium text-muted-foreground",
               size === "sm" && "text-xs",
               size === "lg" && "text-base",
               effectiveDisabled && "opacity-50",

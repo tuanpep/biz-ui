@@ -66,71 +66,7 @@ module.exports = {
           foreground: 'var(--card-foreground)',
         },
 
-        /* Biz UI-style interactive tokens */
-        'interactive-01': {
-          DEFAULT: 'var(--interactive-01)',
-          hover: 'var(--interactive-01-hover)',
-          subtle: 'var(--interactive-01-subtle)',
-          foreground: 'var(--interactive-01-foreground)',
-        },
-        'interactive-02': {
-          DEFAULT: 'var(--interactive-02)',
-          hover: 'var(--interactive-02-hover)',
-          subtle: 'var(--interactive-02-subtle)',
-          foreground: 'var(--interactive-02-foreground)',
-        },
-        'interactive-03': {
-          DEFAULT: 'var(--interactive-03)',
-          hover: 'var(--interactive-03-hover)',
-          foreground: 'var(--interactive-03-foreground)',
-        },
-        'interactive-04': 'var(--interactive-04)',
 
-        /* Biz UI-style text tokens */
-        'text-01': 'var(--text-01)',
-        'text-02': 'var(--text-02)',
-        'text-03': 'var(--text-03)',
-        'text-04': 'var(--text-04)',
-        'text-05': 'var(--text-05)',
-        'text-error': 'var(--text-error)',
-
-        /* Biz UI-style icon tokens */
-        'icon-01': 'var(--icon-01)',
-        'icon-02': 'var(--icon-02)',
-        'icon-03': 'var(--icon-03)',
-
-        /* Biz UI-style UI surface tokens */
-        'ui-background': 'var(--ui-background)',
-        'ui-01': 'var(--ui-01)',
-        'ui-02': 'var(--ui-02)',
-        'ui-03': 'var(--ui-03)',
-        'ui-04': 'var(--ui-04)',
-        'ui-05': 'var(--ui-05)',
-        'ui-hover': 'var(--ui-hover)',
-        'ui-active': 'var(--ui-active)',
-
-        /* Biz UI-style support tokens */
-        'support-success': {
-          DEFAULT: 'var(--support-success)',
-          subtle: 'var(--support-success-subtle)',
-        },
-        'support-warning': {
-          DEFAULT: 'var(--support-warning)',
-          subtle: 'var(--support-warning-subtle)',
-        },
-        'support-error': {
-          DEFAULT: 'var(--support-error)',
-          subtle: 'var(--support-error-subtle)',
-        },
-        'support-info': {
-          DEFAULT: 'var(--support-info)',
-          subtle: 'var(--support-info-subtle)',
-        },
-
-        /* Biz UI-style field tokens */
-        'field-01': 'var(--field-01)',
-        'field-02': 'var(--field-02)',
-        'field-03': 'var(--field-03)',
 
         /* Focus tokens */
         focus: 'var(--focus)',
@@ -328,15 +264,28 @@ module.exports = {
         full: 'var(--radius-full)',
       },
       fontFamily: {
-        sans: ['Inter', 'Open Sans', 'sans-serif'],
+        sans: [
+          'IBM Plex Sans',
+          'Inter',
+          'Open Sans',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
         mono: [
-          'Inter Mono',
+          'IBM Plex Mono',
           'ui-monospace',
           'SFMono-Regular',
           'SF Mono',
           'Menlo',
           'Monaco',
           'Consolas',
+          'Liberation Mono',
+          'Courier New',
           'monospace',
         ],
       },
