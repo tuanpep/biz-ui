@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PlaygroundDemo from "../components/playground/PlaygroundDemo";
+import { Heading, Body, Link } from "biz-ui";
+---
+
+<BaseLayout title="Playground | Biz UI" description="Try Biz UI components in the browser">
+  <main class="min-h-[calc(100vh-3.5rem)] border-t border-border">
+    <div class="container mx-auto max-w-4xl px-4 py-12">
+      <Heading variant="heading-02">Playground</Heading>
+      <Body variant="body-lg" className="mt-2 text-muted-foreground">
+        Interactive preview of Biz UI components. Use this page to experiment with the library.
+      </Body>
+      <div class="mt-10 rounded-xl border border-border bg-muted/30 p-8">
+        <PlaygroundDemo client:load />
+      </div>
+      <Body variant="body-sm" className="mt-6 text-muted-foreground">
+        For the full component catalog and stories, run <code class="rounded bg-muted px-1.5 py-0.5">bun run storybook</code> from the repo root.
+      </Body>
+    </div>
+  </main>
+</BaseLayout>

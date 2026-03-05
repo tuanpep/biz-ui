@@ -1,0 +1,26 @@
+---
+import { Container, Flex, Link, Body } from "biz-ui";
+---
+
+<footer class="border-t border-border bg-muted/50">
+  <Container>
+    <Flex direction="col" align="center" justify="between" className="py-12 gap-6 md:flex-row">
+      <Flex gap={2} align="center">
+        <Body weight="semibold" className="text-foreground">Biz UI</Body>
+        <Body variant="body-sm" className="text-muted-foreground">— React component library</Body>
+      </Flex>
+      <Flex gap={6} align="center" className="flex-wrap justify-center">
+        <Link href="https://github.com/biz-ui/biz-ui" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </Link>
+        <Link href="https://www.npmjs.com/package/biz-ui" target="_blank" rel="noopener noreferrer">
+          npm
+        </Link>
+        <Link href="/docs">Documentation</Link>
+      </Flex>
+    </Flex>
+    <Body variant="body-sm" className="block text-center text-muted-foreground mt-8">
+      Built with Radix UI primitives and Tailwind CSS. MIT License.
+    </Body>
+  </Container>
+</footer>

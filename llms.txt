@@ -1,0 +1,26 @@
+# Biz UI Workspace
+
+## Skills
+
+- [.cursor/skills/biz-ui/SKILL.md](.cursor/skills/biz-ui/SKILL.md): Build React user interfaces using the Biz UI component library. Use when working with Biz UI, creating UI components, building dashboards, or implementing forms with Radix UI primitives and Tailwind CSS.
+
+## Skill References
+
+- [.cursor/skills/biz-ui/references/COMPONENTS.md](.cursor/skills/biz-ui/references/COMPONENTS.md): Components index with quick import guide
+- [.cursor/skills/biz-ui/references/layout.md](.cursor/skills/biz-ui/references/layout.md): Layout components - Card, Flex, Grid, ScrollArea, Separator, Stack, AspectRatio, Center, Container, Divider, Portal, SimpleGrid, VisuallyHidden
+- [.cursor/skills/biz-ui/references/forms.md](.cursor/skills/biz-ui/references/forms.md): Forms components - Button, Input, Select, Checkbox, RadioGroup, Switch, Textarea, Slider, DatePicker, TimePicker, FileUploader, ComboBox, MultiSelect, NumberInput, PinInput, Search, FormField, InputGroup, Label, IconButton, ButtonGroup
+- [.cursor/skills/biz-ui/references/navigation.md](.cursor/skills/biz-ui/references/navigation.md): Navigation components - Tabs, DropdownMenu, Breadcrumb, Pagination, Stepper, TreeView, Link
+- [.cursor/skills/biz-ui/references/feedback.md](.cursor/skills/biz-ui/references/feedback.md): Feedback components - Alert, Toast, Banner, EmptyState, Loading, Progress, ProgressIndicator, Skeleton
+- [.cursor/skills/biz-ui/references/data-display.md](.cursor/skills/biz-ui/references/data-display.md): Data Display components - Typography, Avatar, Badge, Tag, Table, Accordion, Icon, Calendar, Kbd, List
+- [.cursor/skills/biz-ui/references/overlays.md](.cursor/skills/biz-ui/references/overlays.md): Overlays components - Dialog, Sheet, Popover, Tooltip, AlertDialog, HoverCard, Collapsible, ComposedModal
+- [.cursor/skills/biz-ui/references/THEMING.md](.cursor/skills/biz-ui/references/THEMING.md): Theming guide with custom themes, CSS variables, providers, and dark mode
+
+## Documentation
+
+- [apps/website/src/pages/index.astro](apps/website/src/pages/index.astro): Homepage
+- [apps/website/src/pages/docs/index.astro](apps/website/src/pages/docs/index.astro): Documentation index
+- [apps/website/src/pages/docs/components/button.astro](apps/website/src/pages/docs/components/button.astro): Button component docs
+- [apps/website/src/pages/docs/components/card.astro](apps/website/src/pages/docs/components/card.astro): Card component docs
+- [apps/website/src/pages/docs/components/input.astro](apps/website/src/pages/docs/components/input.astro): Input component docs
+- [apps/website/src/pages/docs/components/alert.astro](apps/website/src/pages/docs/components/alert.astro): Alert component docs
+- [apps/website/src/pages/playground.astro](apps/website/src/pages/playground.astro): Interactive playground

@@ -1,38 +1,17 @@
+/* @import must precede all other statements */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import './theme.css';
+
 /**
  * Ocean-UI Library Styles
  *
  * Biz UI aligned styles for library consumers.
  * All styles are scoped to .biz-ui to prevent conflicts with host applications.
  *
- * Design Principles (Biz UI-aligned):
- * - Open: Community-driven, extensible
- * - Inclusive: WCAG 2.1 AA accessible
- * - Modular & Flexible: Components work seamlessly together
- * - User First: Human-centered design
- * - Consistent: Based on Biz UI design principles
- *
  * Usage:
  * 1. Import this CSS file in your application
  * 2. Wrap your Ocean-UI components in a container with the .biz-ui class
- *
- * Example:
- * ```tsx
- * import '@cmc-dx/biz-ui/styles';
- *
- * function App() {
- *   return (
- *     <div className="biz-ui">
- *       <Button>Click me</Button>
- *     </div>
- *   );
- * }
- * ```
  */
-
-/* ========================================
- * OCEAN UI TYPOGRAPHY (Biz UI default)
- * ======================================== */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 /* ========================================
  * CSS LAYER ISOLATION
@@ -40,9 +19,6 @@
  * to prevent specificity conflicts with host apps
  * ======================================== */
 @layer biz-ui;
-
-/* Theme variables, dark mode, and keyframe animations */
-@import './theme.css';
 
 /* ========================================
  * TAILWIND DIRECTIVES
