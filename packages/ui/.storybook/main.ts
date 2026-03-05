@@ -12,8 +12,8 @@ const config: StorybookConfig = {
   ],
   framework: "@storybook/react-vite",
   viteFinal: async (config) => {
-    // Add Tailwind CSS support using dynamic imports for ESM compatibility
-    const tailwindcss = (await import("tailwindcss")).default;
+    // Add Tailwind CSS support using @tailwindcss/postcss
+    const tailwindcss = (await import("@tailwindcss/postcss")).default;
     const autoprefixer = (await import("autoprefixer")).default;
 
     // Get the path to the tailwind config

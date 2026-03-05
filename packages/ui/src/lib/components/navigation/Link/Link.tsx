@@ -47,7 +47,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
 
     const linkClasses = cn(
       linkVariants({ variant, underline, size }),
-      disabled && "pointer-events-none opacity-50 cursor-not-allowed",
+      disabled &&
+        "disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed",
     );
 
     // Render as span for non-interactive links

@@ -9,7 +9,7 @@ import { cva } from "class-variance-authority";
  * Link variant styles.
  */
 export const linkVariants = cva(
-  "inline-flex items-center gap-1 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "inline-flex items-center gap-1 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-pointer",
   {
     variants: {
       variant: {

@@ -159,7 +159,7 @@ const RadioGroupItem = React.forwardRef<
         id={itemId}
         className={cn(
           radioGroupItemVariants({ variant, size }),
-          "aspect-square rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          "aspect-square rounded-full border border-primary text-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
           className,
         )}
         disabled={disabled}
@@ -178,7 +178,10 @@ const RadioGroupItem = React.forwardRef<
 
     return (
       <div
-        className={cn("flex items-start space-x-2", disabled && "opacity-50")}
+        className={cn(
+          "flex items-start space-x-2",
+          disabled && "disabled:opacity-50",
+        )}
       >
         <div className="pt-0.5">{radio}</div>
         <div className="grid gap-1.5 leading-none">
@@ -187,7 +190,6 @@ const RadioGroupItem = React.forwardRef<
               htmlFor={itemId}
               className={cn(
                 "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer",
-                disabled && "cursor-not-allowed",
               )}
             >
               {label}

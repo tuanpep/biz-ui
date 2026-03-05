@@ -94,7 +94,7 @@ const Switch = React.forwardRef<
                 "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer",
                 hasError && "text-destructive",
                 hasWarning && "text-warning",
-                disabled && "opacity-50 cursor-not-allowed",
+                disabled && "disabled:opacity-50 disabled:cursor-not-allowed",
               )}
             >
               {label}

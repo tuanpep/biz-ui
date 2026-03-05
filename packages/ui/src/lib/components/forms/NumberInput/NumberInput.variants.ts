@@ -79,7 +79,7 @@ export const numberInputStepperVariants = cva(
  * NumberInput stepper button variants.
  */
 export const numberInputStepperButtonVariants = cva(
-  "flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
+  "flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer",
   {
     variants: {
       size: {

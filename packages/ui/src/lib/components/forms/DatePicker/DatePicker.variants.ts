@@ -28,7 +28,7 @@ export const datePickerVariants = cva("relative biz-ui", {
  * DatePicker input variant styles.
  */
 export const datePickerInputVariants = cva(
-  "flex items-center gap-2 px-3 py-2 border rounded-md bg-background cursor-pointer transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary",
+  "flex items-center gap-2 px-3 py-2 border rounded-md bg-background cursor-pointer transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
   {
     variants: {
       size: {

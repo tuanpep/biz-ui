@@ -89,7 +89,8 @@ const FileUploaderItem = React.forwardRef<
           className={cn(
             "flex items-center gap-2 flex-1 text-left",
             "cursor-pointer hover:bg-muted/50 rounded-sm p-1 -ml-1",
-            (disabled || readOnly) && "cursor-default pointer-events-none",
+            (disabled || readOnly) &&
+              "disabled:cursor-default disabled:pointer-events-none read-only:cursor-default read-only:pointer-events-none",
           )}
           onClick={(e) => {
             e.stopPropagation();

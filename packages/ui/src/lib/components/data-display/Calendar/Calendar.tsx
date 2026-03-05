@@ -139,7 +139,7 @@ const Calendar = ({
               disabled={disabledState}
               onClick={() => handleDateClick(day)}
               className={cn(
-                "h-8 w-8 text-xs flex items-center justify-center rounded-sm transition-colors relative",
+                "h-8 w-8 text-xs flex items-center justify-center rounded-sm transition-colors relative cursor-pointer",
                 !currentMonthState && "text-muted-foreground opacity-40",
                 selectedState && "bg-primary text-white z-10",
                 rangeState && !selectedState && "bg-primary/10",

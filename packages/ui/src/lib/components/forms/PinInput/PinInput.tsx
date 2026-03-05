@@ -140,9 +140,9 @@ const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
             autoFocus={autoFocus && index === 0}
             className={cn(
               "text-center border border-border bg-background transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
-              error && "border-destructive focus:ring-destructive",
-              disabled && "opacity-50 cursor-not-allowed",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-transparent",
+              error && "border-destructive focus-visible:ring-destructive",
+              disabled && "disabled:opacity-50 disabled:cursor-not-allowed",
               sizeClasses[size],
             )}
             onChange={(e) => handleChange(index, e.target.value.slice(-1))}
