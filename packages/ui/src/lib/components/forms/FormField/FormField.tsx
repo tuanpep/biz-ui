@@ -33,6 +33,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
       required,
       orientation = "vertical",
       size = "md",
+      disabled,
       children,
       ...props
     },
@@ -49,6 +50,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
             "flex items-center gap-4 grid-cols-none",
           size === "sm" && "gap-1",
           size === "lg" && "gap-2",
+          disabled && "opacity-50 pointer-events-none",
           className,
         )}
         {...props}

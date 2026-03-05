@@ -3,22 +3,22 @@
  * Separated for better organization and reusability.
  */
 
-import * as React from 'react';
+import * as React from "react";
 
 /**
  * Form field size type.
  */
-export type FormFieldSize = 'sm' | 'md' | 'lg';
+export type FormFieldSize = "sm" | "md" | "lg";
 
 /**
  * Form field orientation type.
  */
-export type FormFieldOrientation = 'vertical' | 'horizontal';
+export type FormFieldOrientation = "vertical" | "horizontal";
 
 /**
  * Form variant type.
  */
-export type FormVariant = 'default' | 'compact' | 'spacious';
+export type FormVariant = "default" | "compact" | "spacious";
 
 /**
  * FormField component props.
@@ -38,6 +38,8 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   orientation?: FormFieldOrientation;
   /** Size variant */
   size?: FormFieldSize;
+  /** Disabled state */
+  disabled?: boolean;
 }
 
 /**

@@ -4,34 +4,15 @@
  * Renders children into a DOM node outside the parent component tree.
  * Useful for modals, tooltips, and popups that need to escape
  * overflow:hidden or z-index stacking contexts.
+ *
+ * Built on @radix-ui/react-portal for proper SSR handling and accessibility.
  */
 
 import * as React from "react";
-import { createPortal } from "react-dom";
+import * as PortalPrimitive from "@radix-ui/react-portal";
 
-export interface PortalProps {
-  /** Content to render in the portal */
-  children: React.ReactNode;
-  /**
-   * Target container element. Defaults to `document.body`.
-   */
-  container?: Element | DocumentFragment | null;
-}
-
-function Portal({
-  children,
-  container,
-}: PortalProps): React.ReactPortal | null {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const target = container ?? document.body;
-  return createPortal(children, target);
+function Portal(props: PortalPrimitive.PortalProps) {
+  return <PortalPrimitive.Portal {...props} />;
 }
 
 Portal.displayName = "Portal";

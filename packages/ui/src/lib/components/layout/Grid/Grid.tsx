@@ -92,21 +92,20 @@ const Column = React.forwardRef<HTMLDivElement, ColumnProps>(
       max: max ?? span?.max,
     };
 
-    // Generate column classes
+    // Generate column classes using Tailwind's col-span utilities
     const columnClasses = cn(
-      "ocean-col",
-      // Responsive column widths
-      breakpoints.sm && `ocean-col-sm-${breakpoints.sm}`,
-      breakpoints.md && `ocean-col-md-${breakpoints.md}`,
-      breakpoints.lg && `ocean-col-lg-${breakpoints.lg}`,
-      breakpoints.xlg && `ocean-col-xlg-${breakpoints.xlg}`,
-      breakpoints.max && `ocean-col-max-${breakpoints.max}`,
-      // Offset classes
-      offset?.sm && `ocean-col-offset-sm-${offset.sm}`,
-      offset?.md && `ocean-col-offset-md-${offset.md}`,
-      offset?.lg && `ocean-col-offset-lg-${offset.lg}`,
-      offset?.xlg && `ocean-col-offset-xlg-${offset.xlg}`,
-      offset?.max && `ocean-col-offset-max-${offset.max}`,
+      // Responsive column widths using standard Tailwind grid classes
+      breakpoints.sm && `sm:col-span-${breakpoints.sm}`,
+      breakpoints.md && `md:col-span-${breakpoints.md}`,
+      breakpoints.lg && `lg:col-span-${breakpoints.lg}`,
+      breakpoints.xlg && `xlg:col-span-${breakpoints.xlg}`,
+      breakpoints.max && `max:col-span-${breakpoints.max}`,
+      // Offset classes using standard Tailwind grid classes
+      offset?.sm && `sm:col-start-${offset.sm + 1}`,
+      offset?.md && `md:col-start-${offset.md + 1}`,
+      offset?.lg && `lg:col-start-${offset.lg + 1}`,
+      offset?.xlg && `xlg:col-start-${offset.xlg + 1}`,
+      offset?.max && `max:col-start-${offset.max + 1}`,
       className,
     );
 
