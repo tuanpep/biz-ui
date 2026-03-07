@@ -4,13 +4,14 @@
  */
 
 // ID generation
-export { useId } from './use-id';
+export { useId } from "./use-id";
 
 // Ref utilities
-export { useMergedRefs, assignRef } from './use-merged-refs';
+export { useMergedRefs, assignRef } from "./use-merged-refs";
 
 // Event handling
-export { useOutsideClick, useOutsideClickMultiple } from './use-outside-click';
+export { useOutsideClick, useOutsideClickMultiple } from "./use-outside-click";
+export { useEvent, useWindowEvent } from "./use-event";
 
 // Responsive utilities
 export {
@@ -18,22 +19,32 @@ export {
   useBreakpoint,
   usePrefersReducedMotion,
   usePrefersDarkMode,
-} from './use-match-media';
+} from "./use-match-media";
+
+// Resize observation
+export { useResizeObserver } from "./use-resize-observer";
 
 // State management
-export { useControllableState, type ControllableStateProps } from './use-controllable-state';
+export {
+  useControllableState,
+  type ControllableStateProps,
+} from "./use-controllable-state";
+export { useDelayedState, type DispatchWithDelay } from "./use-delayed-state";
 
 // Callback utilities
-export { useCallbackRef, useStableCallback } from './use-callback-ref';
+export { useCallbackRef, useStableCallback } from "./use-callback-ref";
 
 // Lifecycle utilities
-export { useMount, useUnmount } from './use-unmount';
+export { useMount, useUnmount } from "./use-unmount";
 
 // Effect utilities
-export { useIsomorphicLayoutEffect } from './use-layout-effect';
+export { useIsomorphicLayoutEffect } from "./use-layout-effect";
 
 // Value tracking
-export { usePrevious, usePreviousOrCurrent } from './use-previous';
+export { usePrevious, usePreviousOrCurrent } from "./use-previous";
+
+// Animation utilities
+export { usePresence } from "./use-presence";
 
 // Misc utilities
-export { useForceUpdate } from './use-force-update';
+export { useForceUpdate } from "./use-force-update";

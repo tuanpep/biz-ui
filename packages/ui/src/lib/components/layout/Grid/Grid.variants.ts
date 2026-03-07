@@ -3,24 +3,24 @@
  * Separated for better organization and reusability.
  */
 
-import { cva } from 'class-variance-authority';
+import { cva } from "class-variance-authority";
 
 /**
  * Grid container variant styles.
  */
-export const gridVariants = cva('ocean-grid', {
+export const gridVariants = cva("biz-grid", {
   variants: {
     condensed: {
-      true: 'ocean-grid--condensed',
-      false: '',
+      true: "biz-grid--condensed",
+      false: "",
     },
     narrow: {
-      true: 'ocean-grid--narrow',
-      false: '',
+      true: "biz-grid--narrow",
+      false: "",
     },
     fullWidth: {
-      true: 'ocean-grid--full-width',
-      false: '',
+      true: "biz-grid--full-width",
+      false: "",
     },
   },
   defaultVariants: {
@@ -33,15 +33,15 @@ export const gridVariants = cva('ocean-grid', {
 /**
  * Row variant styles.
  */
-export const rowVariants = cva('ocean-row', {
+export const rowVariants = cva("biz-row", {
   variants: {
     condensed: {
-      true: 'ocean-row--condensed',
-      false: '',
+      true: "biz-row--condensed",
+      false: "",
     },
     narrow: {
-      true: 'ocean-row--narrow',
-      false: '',
+      true: "biz-row--narrow",
+      false: "",
     },
   },
   defaultVariants: {

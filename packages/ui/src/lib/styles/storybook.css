@@ -1,5 +1,5 @@
 /**
- * Ocean-UI Storybook Styles
+ * Biz UI Storybook Styles
  *
  * This file is for Storybook development only.
  * For library consumption, use index.css instead.
@@ -8,9 +8,10 @@
 /* Import theme CSS variables - must be first */
 @import './theme.css';
 
-/* Import Tailwind CSS */
-@import "tailwindcss";
-@config "../../../tailwind.config.js";
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Base Layer - Storybook specific styling */
 @layer base {

@@ -3,13 +3,13 @@
  * These types define the structure of the theme object.
  */
 
-import type { Radius, Size } from '../../types/variants';
+import type { Radius, Size } from "../../types/variants";
 
 /** Color scale with multiple shades */
 export type ColorScale = string[];
 
 /** Named colors in the theme */
-export type OceanColors = {
+export type BizUIColors = {
   primary: ColorScale;
   secondary: ColorScale;
   destructive: ColorScale;
@@ -20,7 +20,7 @@ export type OceanColors = {
 } & Record<string, ColorScale | undefined>;
 
 /** Typography settings */
-export interface OceanTypography {
+export interface BizUITypography {
   fontFamily: string;
   fontFamilyMonospace: string;
   fontSizes: Record<Size, string>;
@@ -28,19 +28,19 @@ export interface OceanTypography {
 }
 
 /** Spacing scale */
-export interface OceanSpacing {
+export interface BizUISpacing {
   xs: string;
   sm: string;
   md: string;
   lg: string;
   xl: string;
-  '2xl': string;
-  '3xl': string;
-  '4xl': string;
+  "2xl": string;
+  "3xl": string;
+  "4xl": string;
 }
 
 /** Shadow scale */
-export interface OceanShadows {
+export interface BizUIShadows {
   xs: string;
   sm: string;
   md: string;
@@ -49,7 +49,7 @@ export interface OceanShadows {
 }
 
 /** Radius scale */
-export interface OceanRadius {
+export interface BizUIRadius {
   xs: string;
   sm: string;
   md: string;
@@ -69,23 +69,23 @@ export interface ComponentThemeOverride {
 }
 
 /** Complete theme object */
-export interface OceanTheme {
+export interface BizUITheme {
   /** Color palette */
-  colors: OceanColors;
+  colors: BizUIColors;
   /** Primary color name */
   primaryColor: string;
   /** Typography settings */
-  typography: OceanTypography;
+  typography: BizUITypography;
   /** Spacing scale */
-  spacing: OceanSpacing;
+  spacing: BizUISpacing;
   /** Shadow scale */
-  shadows: OceanShadows;
+  shadows: BizUIShadows;
   /** Border radius scale */
-  radius: OceanRadius;
+  radius: BizUIRadius;
   /** Default radius to use */
   defaultRadius: Radius;
   /** Focus ring style: 'auto' | 'always' | 'never' */
-  focusRing: 'auto' | 'always' | 'never';
+  focusRing: "auto" | "always" | "never";
   /** Component-specific overrides */
   components: Record<string, ComponentThemeOverride>;
   /** CSS selector for theme */
@@ -95,12 +95,37 @@ export interface OceanTheme {
 }
 
 /** Theme context value */
-export interface OceanThemeContextValue {
-  theme: OceanTheme;
+export interface BizUIThemeContextValue {
+  theme: BizUITheme;
   /** Current color scheme */
-  colorScheme: 'light' | 'dark';
+  colorScheme: "light" | "dark";
   /** Set color scheme */
-  setColorScheme: (scheme: 'light' | 'dark') => void;
+  setColorScheme: (scheme: "light" | "dark") => void;
   /** Toggle color scheme */
   toggleColorScheme: () => void;
 }
+
+// ============================================================================
+// Backwards Compatibility Type Aliases
+// ============================================================================
+
+/** @deprecated Use BizUIColors instead */
+export type OceanColors = BizUIColors;
+
+/** @deprecated Use BizUITypography instead */
+export type OceanTypography = BizUITypography;
+
+/** @deprecated Use BizUISpacing instead */
+export type OceanSpacing = BizUISpacing;
+
+/** @deprecated Use BizUIShadows instead */
+export type OceanShadows = BizUIShadows;
+
+/** @deprecated Use BizUIRadius instead */
+export type OceanRadius = BizUIRadius;
+
+/** @deprecated Use BizUITheme instead */
+export type OceanTheme = BizUITheme;
+
+/** @deprecated Use BizUIThemeContextValue instead */
+export type OceanThemeContextValue = BizUIThemeContextValue;

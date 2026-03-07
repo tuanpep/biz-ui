@@ -11,43 +11,12 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles": "./src/lib/styles/index.css",
+    "./styles": "./dist/styles.css",
     "./styles/theme": "./src/lib/styles/theme.css",
-    "./components": {
-      "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.mjs",
-      "require": "./dist/components/index.js"
-    },
-    "./utils": {
-      "types": "./dist/utils/index.d.ts",
-      "import": "./dist/utils/index.mjs",
-      "require": "./dist/utils/index.js"
-    },
-    "./types": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/types/index.mjs",
-      "require": "./dist/types/index.js"
-    },
-    "./core": {
-      "types": "./dist/core/index.d.ts",
-      "import": "./dist/core/index.mjs",
-      "require": "./dist/core/index.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "components": [
-        "./dist/components/index.d.ts"
-      ],
-      "utils": [
-        "./dist/utils/index.d.ts"
-      ],
-      "types": [
-        "./dist/types/index.d.ts"
-      ],
-      "core": [
-        "./dist/core/index.d.ts"
-      ]
+    "./lib/*": {
+      "types": "./dist/lib/*.d.ts",
+      "import": "./dist/lib/*.mjs",
+      "require": "./dist/lib/*.js"
     }
   },
   "files": [
@@ -66,8 +35,10 @@
     "tailwindcss"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "npm run clean:dist && rollup -c && npm run build:css",
+    "build:css": "npx tailwindcss -i src/lib/styles/index.css -o dist/styles.css --minify",
+    "clean:dist": "rm -rf dist",
+    "dev": "rollup -c -w",
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit",
     "clean": "rm -rf dist .turbo node_modules",
@@ -106,7 +77,11 @@
     "lucide-react": "^0.400.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "tailwind-merge": "^2.0.0",
+    "tailwind-merge": "^2.0.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.0",
+    "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.0"
   },
   "devDependencies": {
@@ -134,6 +109,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.5.0",
     "jsdom": "^26.0.0",
+    "postcss": "^8.5.8",
+    "postcss-cli": "^11.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1",

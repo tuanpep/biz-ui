@@ -1,5 +1,5 @@
 /**
- * OceanThemeProvider
+ * BizUIThemeProvider
  *
  * Provides theme context to biz-ui components.
  * Based on Biz UI principles:
@@ -9,29 +9,29 @@
  *
  * @example
  * ```tsx
- * import { OceanThemeProvider, defaultTheme } from '@cmc-dx/biz-ui';
+ * import { BizUIThemeProvider, defaultTheme } from 'biz-ui';
  *
  * function App() {
  *   return (
- *     <OceanThemeProvider theme={defaultTheme}>
+ *     <BizUIThemeProvider theme={defaultTheme}>
  *       <div className="biz-ui">
  *         <Button>Click me</Button>
  *       </div>
- *     </OceanThemeProvider>
+ *     </BizUIThemeProvider>
  *   );
  * }
  * ```
  */
 
 import * as React from "react";
-import type { OceanTheme, OceanThemeContextValue } from "./theme-types";
+import type { BizUITheme, BizUIThemeContextValue } from "./theme-types";
 import { defaultTheme } from "./default-theme";
 
 // ============================================================================
 // Context
 // ============================================================================
 
-const OceanThemeContext = React.createContext<OceanThemeContextValue | null>(
+const BizUIThemeContext = React.createContext<BizUIThemeContextValue | null>(
   null,
 );
 
@@ -41,12 +41,12 @@ const OceanThemeContext = React.createContext<OceanThemeContextValue | null>(
 
 /**
  * Hook to access the biz-ui theme context.
- * Must be used within an OceanThemeProvider.
+ * Must be used within a BizUIThemeProvider.
  */
-export function useOceanTheme(): OceanThemeContextValue {
-  const context = React.useContext(OceanThemeContext);
+export function useBizUITheme(): BizUIThemeContextValue {
+  const context = React.useContext(BizUIThemeContext);
   if (!context) {
-    throw new Error("useOceanTheme must be used within an OceanThemeProvider");
+    throw new Error("useBizUITheme must be used within a BizUIThemeProvider");
   }
   return context;
 }
@@ -55,9 +55,9 @@ export function useOceanTheme(): OceanThemeContextValue {
 // Provider Props
 // ============================================================================
 
-export interface OceanThemeProviderProps {
+export interface BizUIThemeProviderProps {
   /** Custom theme to merge with default theme */
-  theme?: Partial<OceanTheme>;
+  theme?: Partial<BizUITheme>;
   /** Child components */
   children: React.ReactNode;
   /** Whether to inject CSS variables into the DOM */
@@ -103,7 +103,7 @@ function deepMerge<T extends object>(target: T, source: Partial<T>): T {
 // CSS Variable Injection
 // ============================================================================
 
-function generateCssVariables(theme: OceanTheme): string {
+function generateCssVariables(theme: BizUITheme): string {
   const vars: string[] = [];
 
   // Colors
@@ -122,7 +122,7 @@ function generateCssVariables(theme: OceanTheme): string {
     if (scale) {
       scale.forEach((value, index) => {
         // Map index 0-9 to Biz UI-style 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
-        const oceanIndex = index === 0 ? 50 : index * 100;
+        const bizIndex = index === 0 ? 50 : index * 100;
         // Wrap bare HSL triplets (e.g. "214 100% 97%") in hsl() for valid CSS
         const cssValue =
           value.startsWith("#") ||
@@ -130,7 +130,7 @@ function generateCssVariables(theme: OceanTheme): string {
           value.startsWith("rgb")
             ? value
             : `hsl(${value})`;
-        vars.push(`--ocean-${colorName}-${oceanIndex}: ${cssValue};`);
+        vars.push(`--biz-${colorName}-${bizIndex}: ${cssValue};`);
       });
     }
   });
@@ -169,7 +169,7 @@ function generateCssVariables(theme: OceanTheme): string {
   return vars.join("\n  ");
 }
 
-function injectThemeStyles(theme: OceanTheme, selector: string): void {
+function injectThemeStyles(theme: BizUITheme, selector: string): void {
   const cssVariables = generateCssVariables(theme);
 
   const styleId = "biz-ui-theme-variables";
@@ -192,11 +192,11 @@ ${selector} {
 // Provider Component
 // ============================================================================
 
-export function OceanThemeProvider({
+export function BizUIThemeProvider({
   theme: customTheme,
   children,
   injectCssVariables = false,
-}: OceanThemeProviderProps): React.JSX.Element {
+}: BizUIThemeProviderProps): React.JSX.Element {
   // Merge custom theme with default theme
   const theme = React.useMemo(() => {
     if (!customTheme) return defaultTheme;
@@ -211,7 +211,7 @@ export function OceanThemeProvider({
   }, [theme, injectCssVariables]);
 
   // Context value - color scheme is always 'light' for now (dark mode not implemented)
-  const contextValue = React.useMemo<OceanThemeContextValue>(
+  const contextValue = React.useMemo<BizUIThemeContextValue>(
     () => ({
       theme,
       colorScheme: "light",
@@ -226,9 +226,9 @@ export function OceanThemeProvider({
   );
 
   return (
-    <OceanThemeContext.Provider value={contextValue}>
+    <BizUIThemeContext.Provider value={contextValue}>
       {children}
-    </OceanThemeContext.Provider>
+    </BizUIThemeContext.Provider>
   );
 }
 
@@ -236,4 +236,20 @@ export function OceanThemeProvider({
 // Exports
 // ============================================================================
 
-export { OceanThemeContext };
+export { BizUIThemeContext };
+
+// ============================================================================
+// Backwards Compatibility Exports
+// ============================================================================
+
+/** @deprecated Use BizUIThemeProvider instead */
+export const OceanThemeProvider = BizUIThemeProvider;
+
+/** @deprecated Use BizUIThemeProviderProps instead */
+export type OceanThemeProviderProps = BizUIThemeProviderProps;
+
+/** @deprecated Use BizUIThemeContext instead */
+export const OceanThemeContext = BizUIThemeContext;
+
+/** @deprecated Use useBizUITheme instead */
+export const useOceanTheme = useBizUITheme;

@@ -1,9 +1,8 @@
 /* @import must precede all other statements */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 @import './theme.css';
 
 /**
- * Ocean-UI Library Styles
+ * Biz UI Library Styles
  *
  * Biz UI aligned styles for library consumers.
  * All styles are scoped to .biz-ui to prevent conflicts with host applications.

@@ -12,15 +12,12 @@ const config: StorybookConfig = {
   ],
   framework: "@storybook/react-vite",
   viteFinal: async (config) => {
-    // Add Tailwind CSS support using @tailwindcss/postcss
-    const tailwindcss = (await import("@tailwindcss/postcss")).default;
+    // Add Tailwind CSS support
+    const tailwindcss = (await import("tailwindcss")).default;
     const autoprefixer = (await import("autoprefixer")).default;
 
-    // Get the path to the tailwind config
-    const tailwindConfigPath = join(
-      process.cwd(),
-      "packages/ui/tailwind.config.js",
-    );
+    // Get the path to the tailwind config (relative to packages/ui)
+    const tailwindConfigPath = join(process.cwd(), "tailwind.config.js");
 
     return {
       ...config,

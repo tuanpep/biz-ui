@@ -7,7 +7,7 @@
  */
 
 // Keyboard utilities
-export * from './keyboard';
+export * from "./keyboard";
 
 // Warning utilities
 export {
@@ -18,10 +18,12 @@ export {
   warnRequiredProp,
   warnInvalidPropCombination,
   resetWarningCache,
-} from './warn';
+} from "./warn";
 
 // Focus utilities
 export {
+  selectorTabbable,
+  selectorFocusable,
   getFocusableElements,
   getFirstFocusableElement,
   getLastFocusableElement,
@@ -31,7 +33,11 @@ export {
   useFocusTrap,
   useSavedFocus,
   useReturnFocus,
-} from './focus';
+  elementOrParentIsFloatingMenu,
+  wrapFocus,
+  wrapFocusWithoutSentinels,
+  useWrapFocus,
+} from "./focus";
 
 // ID utilities
 export {
@@ -39,7 +45,7 @@ export {
   generateRandomId,
   resetIdCounter,
   getIdCounter,
-} from './id';
+} from "./id";
 
 // Polymorphic component types
 export type {
@@ -50,8 +56,8 @@ export type {
   ElementTypeFromProps,
   MergeElementProps,
   RefFromProps,
-} from './polymorphic';
-export { isValidElementType } from './polymorphic';
+} from "./polymorphic";
+export { isValidElementType } from "./polymorphic";
 
 // Event handling utilities
 export {
@@ -60,7 +66,7 @@ export {
   stopPropagation,
   preventDefault,
   stopEvent,
-} from './events';
+} from "./events";
 
 // Component utilities
 export {
@@ -70,7 +76,7 @@ export {
   findChildByType,
   hasChildOfType,
   cloneElementIfType,
-} from './component-utils';
+} from "./component-utils";
 
 // Normalized input props hook
 export {
@@ -78,4 +84,4 @@ export {
   getValidationClassNames,
   type NormalizedInputPropsConfig,
   type NormalizedInputProps,
-} from './use-normalized-input-props';
+} from "./use-normalized-input-props";
