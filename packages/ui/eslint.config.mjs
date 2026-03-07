@@ -30,6 +30,21 @@ export default [
       "react/react-in-jsx-scope": "off",
     },
   },
+  // CommonJS config files (tailwind, postcss, rollup, etc.)
+  {
+    files: ["*.config.js", "*.config.cjs", "scripts/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        module: "readonly",
+        require: "readonly",
+        __dirname: "readonly",
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
   {
     ignores: ["dist/**", "node_modules/**", "coverage/**", "storybook-static/**"],
   },

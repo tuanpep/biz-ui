@@ -20,7 +20,11 @@ import type { ButtonProps } from "./Button.types";
 // Loading Spinner Component
 // ============================================================================
 
-const LoadingSpinner = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => {
+const LoadingSpinner = React.memo(function LoadingSpinner({
+  size = "md",
+}: {
+  size?: "sm" | "md" | "lg";
+}) {
   const sizeClasses = {
     sm: "h-3 w-3",
     md: "h-4 w-4",
@@ -50,13 +54,13 @@ const LoadingSpinner = ({ size = "md" }: { size?: "sm" | "md" | "lg" }) => {
       />
     </svg>
   );
-};
+});
 
 // ============================================================================
 // Button Component
 // ============================================================================
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const ButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
@@ -136,7 +140,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   },
 );
 
-Button.displayName = "Button";
+ButtonBase.displayName = "Button";
+
+// Memoize Button to prevent unnecessary re-renders
+const Button = React.memo(ButtonBase);
 
 // ============================================================================
 // Exports

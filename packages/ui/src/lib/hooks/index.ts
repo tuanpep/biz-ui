@@ -46,5 +46,16 @@ export { usePrevious, usePreviousOrCurrent } from "./use-previous";
 // Animation utilities
 export { usePresence } from "./use-presence";
 
+// Form field utilities
+export {
+  useFormField,
+  useFormFieldIds,
+  useFormFieldStates,
+  type UseFormFieldOptions,
+  type UseFormFieldReturn,
+  type FormFieldIds,
+  type FormFieldStates,
+} from "./use-form-field";
+
 // Misc utilities
 export { useForceUpdate } from "./use-force-update";

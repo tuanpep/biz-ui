@@ -20,7 +20,7 @@ import type { TableProps } from "./Table.types";
 // Table Component
 // ============================================================================
 
-const Table = React.forwardRef<HTMLTableElement, TableProps>(
+const TableBase = React.forwardRef<HTMLTableElement, TableProps>(
   ({ className, stickyHeader, useZebraStyles, size, ...props }, ref) => (
     <div className="relative w-full overflow-auto">
       <table
@@ -34,25 +34,27 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
     </div>
   ),
 );
-Table.displayName = "Table";
+TableBase.displayName = "Table";
+const Table = React.memo(TableBase);
 
 // ============================================================================
 // Table Header
 // ============================================================================
 
-const TableHeader = React.forwardRef<
+const TableHeaderBase = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
 ));
-TableHeader.displayName = "TableHeader";
+TableHeaderBase.displayName = "TableHeader";
+const TableHeader = React.memo(TableHeaderBase);
 
 // ============================================================================
 // Table Body
 // ============================================================================
 
-const TableBody = React.forwardRef<
+const TableBodyBase = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
@@ -62,13 +64,14 @@ const TableBody = React.forwardRef<
     {...props}
   />
 ));
-TableBody.displayName = "TableBody";
+TableBodyBase.displayName = "TableBody";
+const TableBody = React.memo(TableBodyBase);
 
 // ============================================================================
 // Table Footer
 // ============================================================================
 
-const TableFooter = React.forwardRef<
+const TableFooterBase = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
@@ -81,13 +84,14 @@ const TableFooter = React.forwardRef<
     {...props}
   />
 ));
-TableFooter.displayName = "TableFooter";
+TableFooterBase.displayName = "TableFooter";
+const TableFooter = React.memo(TableFooterBase);
 
 // ============================================================================
-// Table Row
+// Table Row - Memoized for performance in large tables
 // ============================================================================
 
-const TableRow = React.forwardRef<
+const TableRowBase = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
@@ -100,13 +104,14 @@ const TableRow = React.forwardRef<
     {...props}
   />
 ));
-TableRow.displayName = "TableRow";
+TableRowBase.displayName = "TableRow";
+const TableRow = React.memo(TableRowBase);
 
 // ============================================================================
-// Table Head
+// Table Head - Memoized for performance in large tables
 // ============================================================================
 
-const TableHead = React.forwardRef<
+const TableHeadBase = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
@@ -119,13 +124,14 @@ const TableHead = React.forwardRef<
     {...props}
   />
 ));
-TableHead.displayName = "TableHead";
+TableHeadBase.displayName = "TableHead";
+const TableHead = React.memo(TableHeadBase);
 
 // ============================================================================
-// Table Cell
+// Table Cell - Memoized for performance in large tables
 // ============================================================================
 
-const TableCell = React.forwardRef<
+const TableCellBase = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
@@ -135,13 +141,14 @@ const TableCell = React.forwardRef<
     {...props}
   />
 ));
-TableCell.displayName = "TableCell";
+TableCellBase.displayName = "TableCell";
+const TableCell = React.memo(TableCellBase);
 
 // ============================================================================
 // Table Caption
 // ============================================================================
 
-const TableCaption = React.forwardRef<
+const TableCaptionBase = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
@@ -151,7 +158,8 @@ const TableCaption = React.forwardRef<
     {...props}
   />
 ));
-TableCaption.displayName = "TableCaption";
+TableCaptionBase.displayName = "TableCaption";
+const TableCaption = React.memo(TableCaptionBase);
 
 // ============================================================================
 // Exports
