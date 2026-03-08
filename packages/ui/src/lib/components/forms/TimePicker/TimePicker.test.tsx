@@ -5,7 +5,8 @@
  */
 
 import * as React from "react";
-import { render, screen, fireEvent } from "../../../../test/utils";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "../../../test/utils";
 import { TimePicker, TimePickerSkeleton } from "./index";
 
 describe("TimePicker", () => {

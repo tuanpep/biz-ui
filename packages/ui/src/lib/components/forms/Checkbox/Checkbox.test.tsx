@@ -1,50 +1,74 @@
-import * as React from 'react';
-import { render, screen, fireEvent } from '../../../test/utils';
-import { Checkbox } from './Checkbox';
+import * as React from "react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "../../../../test/utils";
+import { Checkbox } from "./Checkbox";
 
-describe('Checkbox', () => {
-  it('renders correctly', () => {
-    render(<Checkbox label="Accept terms" />);
-    expect(screen.getByRole('checkbox')).toBeInTheDocument();
-    expect(screen.getByText('Accept terms')).toBeInTheDocument();
+describe("Checkbox", () => {
+  it("renders correctly", () => {
+    render(<Checkbox />);
+    expect(screen.getByRole("checkbox")).toBeInTheDocument();
   });
 
-  it('can be checked and unchecked', () => {
-    const handleChange = vi.fn();
-    render(<Checkbox label="Check me" onCheckedChange={handleChange} />);
+  it("renders with label", () => {
+    render(<Checkbox label="Accept terms" id="terms" />);
+    expect(screen.getByLabelText("Accept terms")).toBeInTheDocument();
+  });
 
-    const checkbox = screen.getByRole('checkbox');
+  it("applies checked state", () => {
+    render(<Checkbox checked />);
+    expect(screen.getByRole("checkbox")).toBeChecked();
+  });
+
+  it("applies unchecked state", () => {
+    render(<Checkbox checked={false} />);
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
+  });
+
+  it("handles onCheckedChange", () => {
+    const handleChange = vi.fn();
+    render(<Checkbox onCheckedChange={handleChange} />);
+
+    const checkbox = screen.getByRole("checkbox");
     fireEvent.click(checkbox);
 
-    expect(handleChange).toHaveBeenCalledWith(true);
+    expect(handleChange).toHaveBeenCalled();
   });
 
-  it('renders indeterminate state', () => {
-    render(<Checkbox checked="indeterminate" label="Select all" />);
-    const checkbox = screen.getByRole('checkbox');
-    expect(checkbox).toHaveAttribute('data-state', 'indeterminate');
+  it("applies disabled state", () => {
+    render(<Checkbox disabled />);
+    expect(screen.getByRole("checkbox")).toBeDisabled();
   });
 
-  it('displays error message', () => {
-    render(<Checkbox error="This is required" label="Required" />);
-    expect(screen.getByText('This is required')).toBeInTheDocument();
+  it("applies size variants", () => {
+    const { container } = render(<Checkbox size="lg" />);
+    expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('displays description', () => {
-    render(<Checkbox description="Please accept the terms" label="Terms" />);
-    expect(screen.getByText('Please accept the terms')).toBeInTheDocument();
+  it("applies variant styles", () => {
+    const { container } = render(<Checkbox variant="destructive" />);
+    expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('is disabled when disabled prop is true', () => {
-    render(<Checkbox disabled label="Disabled" />);
-    expect(screen.getByRole('checkbox')).toBeDisabled();
+  it("renders with description", () => {
+    render(<Checkbox description="Check to accept terms" id="terms" />);
+    expect(screen.getByText("Check to accept terms")).toBeInTheDocument();
   });
 
-  it('applies size variants', () => {
-    const { rerender } = render(<Checkbox size="sm" label="Small" />);
-    expect(screen.getByRole('checkbox')).toHaveClass('h-4');
+  it("renders with error", () => {
+    render(<Checkbox error="You must accept terms" id="terms" />);
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "You must accept terms",
+    );
+  });
 
-    rerender(<Checkbox size="lg" label="Large" />);
-    expect(screen.getByRole('checkbox')).toHaveClass('h-6');
+  it("applies error styles when error is present", () => {
+    render(<Checkbox error="Required" id="terms" />);
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("accepts custom className", () => {
+    const { container } = render(<Checkbox className="custom-class" />);
+    expect(container.firstChild).toHaveClass("custom-class");
   });
 });

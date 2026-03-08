@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '../../../../test/utils';
+import * as React from "react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, fireEvent } from "../../../../test/utils";
 import {
   Select,
   SelectContent,
@@ -10,10 +10,10 @@ import {
   SelectLabel,
   SelectGroup,
   SelectSeparator,
-} from '../../forms/Select';
+} from "./Select";
 
-describe('Select', () => {
-  it('renders correctly', () => {
+describe("Select", () => {
+  it("renders correctly", () => {
     render(
       <Select>
         <SelectTrigger>
@@ -23,12 +23,12 @@ describe('Select', () => {
           <SelectItem value="option1">Option 1</SelectItem>
           <SelectItem value="option2">Option 2</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
-  it('renders with placeholder', () => {
+  it("renders with placeholder", () => {
     render(
       <Select>
         <SelectTrigger>
@@ -37,12 +37,12 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="option1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByText('Choose an option')).toBeInTheDocument();
+    expect(screen.getByText("Choose an option")).toBeInTheDocument();
   });
 
-  it('renders with label', () => {
+  it("renders with label", () => {
     render(
       <Select>
         <SelectTrigger label="Country">
@@ -51,12 +51,12 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="us">United States</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByText('Country')).toBeInTheDocument();
+    expect(screen.getByText("Country")).toBeInTheDocument();
   });
 
-  it('applies size variants', () => {
+  it("applies size variants", () => {
     const { container } = render(
       <Select>
         <SelectTrigger size="lg">
@@ -65,12 +65,12 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="test">Test</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
     expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('applies disabled state', () => {
+  it("applies disabled state", () => {
     render(
       <Select disabled>
         <SelectTrigger>
@@ -79,12 +79,12 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('combobox')).toBeDisabled();
+    expect(screen.getByRole("combobox")).toBeDisabled();
   });
 
-  it('applies error state', () => {
+  it("applies error state", () => {
     render(
       <Select>
         <SelectTrigger error errorText="Selection required">
@@ -93,12 +93,15 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('combobox')).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByRole("combobox")).toHaveAttribute(
+      "aria-invalid",
+      "true",
+    );
   });
 
-  it('renders with error message', () => {
+  it("renders with error message", () => {
     render(
       <Select>
         <SelectTrigger errorText="Please select an option">
@@ -107,12 +110,14 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('Please select an option');
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "Please select an option",
+    );
   });
 
-  it('handles onValueChange', () => {
+  it("handles onValueChange", () => {
     const handleValueChange = vi.fn();
     render(
       <Select onValueChange={handleValueChange}>
@@ -122,15 +127,15 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="option1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
 
     // Open select and click item
-    const trigger = screen.getByRole('combobox');
+    const trigger = screen.getByRole("combobox");
     fireEvent.click(trigger);
   });
 
-  it('accepts custom className', () => {
+  it("accepts custom className", () => {
     render(
       <Select>
         <SelectTrigger className="custom-trigger">
@@ -139,12 +144,12 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="test">Test</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('combobox')).toHaveClass('custom-trigger');
+    expect(screen.getByRole("combobox")).toHaveClass("custom-trigger");
   });
 
-  it('renders with groups', () => {
+  it("renders with groups", () => {
     render(
       <Select>
         <SelectTrigger>
@@ -162,12 +167,12 @@ describe('Select', () => {
             <SelectItem value="carrot">Carrot</SelectItem>
           </SelectGroup>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
-  it('renders with warning state', () => {
+  it("renders with warning state", () => {
     render(
       <Select>
         <SelectTrigger warn warnText="Please verify your selection">
@@ -176,12 +181,14 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('Please verify your selection');
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      "Please verify your selection",
+    );
   });
 
-  it('renders with label prop', () => {
+  it("renders with label prop", () => {
     render(
       <Select>
         <SelectTrigger label="Country">
@@ -190,26 +197,31 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="us">United States</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByLabelText('Country')).toBeInTheDocument();
+    expect(screen.getByLabelText("Country")).toBeInTheDocument();
   });
 
-  it('renders with description', () => {
+  it("renders with description", () => {
     render(
       <Select>
-        <SelectTrigger label="Country" description="Select your country of residence">
+        <SelectTrigger
+          label="Country"
+          description="Select your country of residence"
+        >
           <SelectValue placeholder="Select" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="us">United States</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByText('Select your country of residence')).toBeInTheDocument();
+    expect(
+      screen.getByText("Select your country of residence"),
+    ).toBeInTheDocument();
   });
 
-  it('renders with required indicator', () => {
+  it("renders with required indicator", () => {
     render(
       <Select>
         <SelectTrigger label="Country" required>
@@ -218,13 +230,13 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="us">United States</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    const label = screen.getByText('Country').closest('label');
-    expect(label).toHaveTextContent('*');
+    const label = screen.getByText("Country").closest("label");
+    expect(label).toHaveTextContent("*");
   });
 
-  it('hides label visually with hideLabel', () => {
+  it("hides label visually with hideLabel", () => {
     render(
       <Select>
         <SelectTrigger label="Country" hideLabel>
@@ -233,23 +245,28 @@ describe('Select', () => {
         <SelectContent>
           <SelectItem value="us">United States</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByText('Country')).toHaveClass('sr-only');
+    expect(screen.getByText("Country")).toHaveClass("sr-only");
   });
 
-  it('error takes precedence over warning', () => {
+  it("error takes precedence over warning", () => {
     render(
       <Select>
-        <SelectTrigger error errorText="Required field" warn warnText="Just a warning">
+        <SelectTrigger
+          error
+          errorText="Required field"
+          warn
+          warnText="Just a warning"
+        >
           <SelectValue placeholder="Select" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="1">Option 1</SelectItem>
         </SelectContent>
-      </Select>
+      </Select>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('Required field');
-    expect(screen.queryByText('Just a warning')).not.toBeInTheDocument();
+    expect(screen.getByRole("alert")).toHaveTextContent("Required field");
+    expect(screen.queryByText("Just a warning")).not.toBeInTheDocument();
   });
 });

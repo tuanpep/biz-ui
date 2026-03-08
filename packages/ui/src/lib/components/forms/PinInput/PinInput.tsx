@@ -7,38 +7,14 @@
 
 import * as React from "react";
 import { cn } from "../../../utils/cn";
-
-export interface PinInputProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  "onChange"
-> {
-  /** Number of input fields */
-  length?: number;
-  /** Mask input values (for passwords/PINs) */
-  mask?: boolean;
-  /** Called when all inputs are filled */
-  onComplete?: (value: string) => void;
-  /** Called on each value change */
-  onChange?: (value: string) => void;
-  /** Placeholder character for each input */
-  placeholder?: string;
-  /** Auto-focus first input on mount */
-  autoFocus?: boolean;
-  /** Disabled state */
-  disabled?: boolean;
-  /** Error state */
-  error?: boolean;
-  /** Size variant */
-  size?: "sm" | "md" | "lg";
-  /** Input type */
-  type?: "text" | "number";
-}
-
-const sizeClasses = {
-  sm: "h-8 w-8 text-sm",
-  md: "h-10 w-10 text-base",
-  lg: "h-12 w-12 text-lg",
-};
+import {
+  pinInputVariants,
+  pinInputFieldSizeClasses,
+  pinInputFieldBaseClasses,
+  pinInputFieldErrorClasses,
+  pinInputFieldDisabledClasses,
+} from "./PinInput.variants";
+import type { PinInputProps } from "./PinInput.types";
 
 const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
   (
@@ -123,7 +99,11 @@ const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
     };
 
     return (
-      <div ref={ref} className={cn("inline-flex gap-2", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn(pinInputVariants({ size }), className)}
+        {...props}
+      >
         {Array.from({ length }).map((_, index) => (
           <input
             key={index}
@@ -139,11 +119,10 @@ const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
             disabled={disabled}
             autoFocus={autoFocus && index === 0}
             className={cn(
-              "text-center border border-border bg-background transition-colors",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-transparent",
-              error && "border-destructive focus-visible:ring-destructive",
-              disabled && "disabled:opacity-50 disabled:cursor-not-allowed",
-              sizeClasses[size],
+              pinInputFieldBaseClasses,
+              error && pinInputFieldErrorClasses,
+              disabled && pinInputFieldDisabledClasses,
+              pinInputFieldSizeClasses[size ?? "md"],
             )}
             onChange={(e) => handleChange(index, e.target.value.slice(-1))}
             onKeyDown={(e) => handleKeyDown(index, e)}
@@ -158,3 +137,8 @@ const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
 PinInput.displayName = "PinInput";
 
 export { PinInput };
+export type {
+  PinInputProps,
+  PinInputSize,
+  PinInputType,
+} from "./PinInput.types";

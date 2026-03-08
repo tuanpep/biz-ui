@@ -7,25 +7,24 @@
 
 import * as React from "react";
 import { cn } from "../../../utils/cn";
-
-export interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Size variant matching Input sizes */
-  size?: "sm" | "md" | "lg";
-}
-
-export interface InputAddonProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Placement of the addon */
-  placement?: "left" | "right";
-}
+import {
+  inputGroupVariants,
+  inputAddonVariants,
+  inputLeftElementVariants,
+  inputRightElementVariants,
+} from "./InputGroup.variants";
+import type {
+  InputGroupProps,
+  InputAddonProps,
+  InputLeftElementProps,
+  InputRightElementProps,
+} from "./InputGroup.types";
 
 const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, size, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "flex items-center w-full [&>input]:flex-1 [&>input]:min-w-0",
-        className,
-      )}
+      className={cn(inputGroupVariants({ size }), className)}
       {...props}
     />
   ),
@@ -36,11 +35,7 @@ const InputAddon = React.forwardRef<HTMLDivElement, InputAddonProps>(
   ({ className, placement = "left", ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "flex items-center justify-center px-3 border border-border bg-muted text-muted-foreground text-sm whitespace-nowrap h-10",
-        placement === "left" ? "border-r-0" : "border-l-0",
-        className,
-      )}
+      className={cn(inputAddonVariants({ placement }), className)}
       {...props}
     />
   ),
@@ -49,14 +44,11 @@ InputAddon.displayName = "InputAddon";
 
 const InputLeftElement = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  InputLeftElementProps
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "absolute left-0 top-0 flex items-center justify-center h-full w-10 text-muted-foreground pointer-events-none",
-      className,
-    )}
+    className={cn(inputLeftElementVariants(), className)}
     {...props}
   />
 ));
@@ -64,17 +56,22 @@ InputLeftElement.displayName = "InputLeftElement";
 
 const InputRightElement = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  InputRightElementProps
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "absolute right-0 top-0 flex items-center justify-center h-full w-10 text-muted-foreground",
-      className,
-    )}
+    className={cn(inputRightElementVariants(), className)}
     {...props}
   />
 ));
 InputRightElement.displayName = "InputRightElement";
 
 export { InputGroup, InputAddon, InputLeftElement, InputRightElement };
+export type {
+  InputGroupProps,
+  InputAddonProps,
+  InputLeftElementProps,
+  InputRightElementProps,
+  InputGroupSize,
+  InputAddonPlacement,
+} from "./InputGroup.types";

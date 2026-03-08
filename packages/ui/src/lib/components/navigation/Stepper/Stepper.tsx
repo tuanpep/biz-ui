@@ -8,26 +8,15 @@
 import * as React from "react";
 import { Check } from "lucide-react";
 import { cn } from "../../../utils/cn";
-
-export interface StepperStep {
-  /** Step label */
-  label: string;
-  /** Optional description */
-  description?: string;
-  /** Whether the step is optional */
-  optional?: boolean;
-}
-
-export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Array of step definitions */
-  steps: StepperStep[];
-  /** Current active step (0-indexed) */
-  activeStep: number;
-  /** Orientation */
-  orientation?: "horizontal" | "vertical";
-  /** Size variant */
-  size?: "sm" | "md";
-}
+import {
+  stepperVariants,
+  stepperStepVariants,
+  stepperIndicatorVariants,
+  stepperLabelVariants,
+  stepperDescriptionVariants,
+  stepperConnectorVariants,
+} from "./Stepper.variants";
+import type { StepperProps } from "./Stepper.types";
 
 const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
   (
@@ -44,12 +33,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          orientation === "horizontal"
-            ? "flex items-start w-full"
-            : "flex flex-col",
-          className,
-        )}
+        className={cn(stepperVariants({ orientation }), className)}
         role="list"
         aria-label="Progress steps"
         {...props}
@@ -62,12 +46,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
           return (
             <div
               key={index}
-              className={cn(
-                orientation === "horizontal"
-                  ? "flex items-center flex-1"
-                  : "flex items-start",
-                isLast && orientation === "horizontal" && "flex-none",
-              )}
+              className={cn(stepperStepVariants({ orientation, isLast }))}
               role="listitem"
               aria-current={isActive ? "step" : undefined}
             >
@@ -80,14 +59,14 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
               >
                 <div
                   className={cn(
-                    "flex items-center justify-center border-2 font-medium transition-colors",
-                    size === "sm" ? "h-6 w-6 text-xs" : "h-8 w-8 text-sm",
-                    isCompleted &&
-                      "border-primary bg-primary text-primary-foreground",
-                    isActive && "border-primary text-primary",
-                    !isCompleted &&
-                      !isActive &&
-                      "border-border text-muted-foreground",
+                    stepperIndicatorVariants({
+                      size,
+                      state: isCompleted
+                        ? "completed"
+                        : isActive
+                          ? "active"
+                          : "pending",
+                    }),
                   )}
                 >
                   {isCompleted ? (
@@ -101,8 +80,10 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                 {!isLast && orientation === "vertical" && (
                   <div
                     className={cn(
-                      "w-0.5 min-h-[2rem] my-1",
-                      isCompleted ? "bg-primary" : "bg-border",
+                      stepperConnectorVariants({
+                        orientation: "vertical",
+                        state: isCompleted ? "completed" : "pending",
+                      }),
                     )}
                   />
                 )}
@@ -115,22 +96,11 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                   orientation === "horizontal" ? "ml-2" : "mt-0",
                 )}
               >
-                <span
-                  className={cn(
-                    "font-medium leading-tight",
-                    size === "sm" ? "text-xs" : "text-sm",
-                    isActive ? "text-foreground" : "text-muted-foreground",
-                  )}
-                >
+                <span className={cn(stepperLabelVariants({ size, isActive }))}>
                   {step.label}
                 </span>
                 {step.description && (
-                  <span
-                    className={cn(
-                      "text-muted-foreground mt-0.5",
-                      size === "sm" ? "text-[10px]" : "text-xs",
-                    )}
-                  >
+                  <span className={cn(stepperDescriptionVariants({ size }))}>
                     {step.description}
                   </span>
                 )}
@@ -145,8 +115,10 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
               {!isLast && orientation === "horizontal" && (
                 <div
                   className={cn(
-                    "flex-1 h-0.5 mx-3 mt-4 min-w-[2rem]",
-                    isCompleted ? "bg-primary" : "bg-border",
+                    stepperConnectorVariants({
+                      orientation: "horizontal",
+                      state: isCompleted ? "completed" : "pending",
+                    }),
                   )}
                 />
               )}
@@ -160,3 +132,17 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
 Stepper.displayName = "Stepper";
 
 export { Stepper };
+export type {
+  StepperProps,
+  StepperStep,
+  StepperOrientation,
+  StepperSize,
+} from "./Stepper.types";
+export {
+  stepperVariants,
+  stepperStepVariants,
+  stepperIndicatorVariants,
+  stepperLabelVariants,
+  stepperDescriptionVariants,
+  stepperConnectorVariants,
+} from "./Stepper.variants";

@@ -6,39 +6,10 @@
  */
 
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "../../../utils/cn";
-
-const bannerVariants = cva(
-  "relative flex items-center w-full px-4 py-3 text-sm",
-  {
-    variants: {
-      variant: {
-        info: "bg-info-muted text-foreground border-b border-info",
-        success: "bg-success-muted text-foreground border-b border-success",
-        warning: "bg-warning-muted text-foreground border-b border-warning",
-        error:
-          "bg-destructive-muted text-foreground border-b border-destructive",
-      },
-    },
-    defaultVariants: {
-      variant: "info",
-    },
-  },
-);
-
-export interface BannerProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof bannerVariants> {
-  /** Whether the banner can be dismissed */
-  dismissible?: boolean;
-  /** Called when the dismiss button is clicked */
-  onDismiss?: () => void;
-  /** Icon to display before the content */
-  icon?: React.ReactNode;
-}
+import { bannerVariants } from "./Banner.variants";
+import type { BannerProps } from "./Banner.types";
 
 const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
   (
@@ -77,3 +48,4 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
 Banner.displayName = "Banner";
 
 export { Banner, bannerVariants };
+export type { BannerProps } from "./Banner.types";

@@ -5,15 +5,15 @@
  */
 
 import * as React from "react";
-import { render, screen, fireEvent } from "../../../../test/utils";
+import { render, screen, fireEvent } from "../../../test/utils";
 import {
   FileUploader,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,
   FileUploaderSkeleton,
-} from "../Index";
-import type { FileUploaderFile } from "../FileUploader.types";
+} from "./index";
+import type { FileUploaderFile } from "./FileUploader.types";
 
 // Helpers removed as they were unused
 

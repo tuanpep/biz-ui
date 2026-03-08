@@ -8,9 +8,17 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
 import { cn } from "../../../utils/cn";
+import { sheetContentVariants } from "./Sheet.variants";
+import type {
+  SheetOverlayProps,
+  SheetContentProps,
+  SheetHeaderProps,
+  SheetFooterProps,
+  SheetTitleProps,
+  SheetDescriptionProps,
+} from "./Sheet.types";
 
 const Sheet = DialogPrimitive.Root;
 const SheetTrigger = DialogPrimitive.Trigger;
@@ -19,7 +27,7 @@ const SheetPortal = DialogPrimitive.Portal;
 
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+  SheetOverlayProps
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     className={cn(
@@ -31,30 +39,6 @@ const SheetOverlay = React.forwardRef<
   />
 ));
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName;
-
-const sheetContentVariants = cva(
-  "fixed z-50 bg-background shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
-  {
-    variants: {
-      side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-        bottom:
-          "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
-        right:
-          "inset-y-0 right-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
-      },
-    },
-    defaultVariants: {
-      side: "right",
-    },
-  },
-);
-
-export interface SheetContentProps
-  extends
-    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof sheetContentVariants> {}
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
@@ -77,10 +61,7 @@ const SheetContent = React.forwardRef<
 ));
 SheetContent.displayName = DialogPrimitive.Content.displayName;
 
-const SheetHeader = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const SheetHeader = ({ className, ...props }: SheetHeaderProps) => (
   <div
     className={cn("flex flex-col space-y-2 p-6 pb-0", className)}
     {...props}
@@ -88,10 +69,7 @@ const SheetHeader = ({
 );
 SheetHeader.displayName = "SheetHeader";
 
-const SheetFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
+const SheetFooter = ({ className, ...props }: SheetFooterProps) => (
   <div
     className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 p-6 pt-0",
@@ -104,7 +82,7 @@ SheetFooter.displayName = "SheetFooter";
 
 const SheetTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+  SheetTitleProps
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
@@ -116,7 +94,7 @@ SheetTitle.displayName = DialogPrimitive.Title.displayName;
 
 const SheetDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+  SheetDescriptionProps
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
@@ -139,3 +117,12 @@ export {
   SheetDescription,
   sheetContentVariants,
 };
+export type {
+  SheetOverlayProps,
+  SheetContentProps,
+  SheetHeaderProps,
+  SheetFooterProps,
+  SheetTitleProps,
+  SheetDescriptionProps,
+  SheetSide,
+} from "./Sheet.types";
