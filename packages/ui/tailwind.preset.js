@@ -1,18 +1,4 @@
-/**
- * Biz UI Tailwind CSS Preset
- *
- * This preset provides all design tokens and configurations needed to use
- * Biz UI's design system in your Tailwind CSS setup.
- *
- * @example
- * // tailwind.config.js
- * module.exports = {
- *   presets: [require('biz-ui/tailwind.preset')],
- *   content: ['./src/**/*.{js,ts,jsx,tsx}'],
- * }
- */
 
-/** @type {import('tailwindcss').Config */
 const bizUIPreset = {
   // Dark mode via class strategy (matches .dark class)
   darkMode: ['class', '.dark'],
@@ -417,6 +403,30 @@ const bizUIPreset = {
         'biz-col-lg-10': '83.333333%',
         'biz-col-lg-11': '91.666667%',
         'biz-col-lg-12': '100%',
+        'biz-col-xlg-1': '8.333333%',
+        'biz-col-xlg-2': '16.666667%',
+        'biz-col-xlg-3': '25%',
+        'biz-col-xlg-4': '33.333333%',
+        'biz-col-xlg-5': '41.666667%',
+        'biz-col-xlg-6': '50%',
+        'biz-col-xlg-7': '58.333333%',
+        'biz-col-xlg-8': '66.666667%',
+        'biz-col-xlg-9': '75%',
+        'biz-col-xlg-10': '83.333333%',
+        'biz-col-xlg-11': '91.666667%',
+        'biz-col-xlg-12': '100%',
+        'biz-col-max-1': '8.333333%',
+        'biz-col-max-2': '16.666667%',
+        'biz-col-max-3': '25%',
+        'biz-col-max-4': '33.333333%',
+        'biz-col-max-5': '41.666667%',
+        'biz-col-max-6': '50%',
+        'biz-col-max-7': '58.333333%',
+        'biz-col-max-8': '66.666667%',
+        'biz-col-max-9': '75%',
+        'biz-col-max-10': '83.333333%',
+        'biz-col-max-11': '91.666667%',
+        'biz-col-max-12': '100%',
       },
     },
   },

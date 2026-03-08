@@ -60,9 +60,23 @@ biz-ui/
 │       │   │   └── utils/           # Utility functions
 │       │   └── index.ts             # Main entry point
 │       ├── .storybook/              # Storybook configuration
-│       └── tsup.config.ts           # Build configuration
+│       ├── rollup.config.js         # Library build (ESM + CJS)
+│       ├── tailwind.config.js       # Tailwind for build & Storybook
+│       ├── tailwind.preset.js       # Preset for consumers
+│       └── scripts/                 # CSS layer & build scripts
 └── turbo.json                       # Turborepo configuration
 ```
+
+## Build Configuration
+
+The UI package uses **Rollup** (`rollup.config.js`), not tsup or Vite, for the library build:
+
+- **Entry points**: All `src/**/*.{ts,tsx}` except tests, stories, and config.
+- **Output**: ESM (`.mjs`) and CJS (`.js`) in `dist/`, with `preserveModules: true` so each component stays a separate file for tree-shaking.
+- **Directives**: The `'use client'` directive is preserved for React Server Components.
+- **CSS**: Built separately via `npm run build:css` (Tailwind → `dist/styles.css`) and `npm run build:layer` (→ `dist/styles.layer.css` in `@layer biz-ui`).
+
+Scripts: `bun run build` runs clean, Rollup, then CSS steps. Use `bun run dev` for watch mode. Theme and design tokens (colors, radius, spacing, etc.) live in **tailwind.preset.js** only; the local `tailwind.config.js` uses that preset, so edit the preset when changing the design system.
 
 ## Creating a New Component
 
@@ -74,7 +88,7 @@ ComponentName/
 ├── ComponentName.types.ts      # TypeScript interfaces and types
 ├── ComponentName.variants.ts   # CVA variant definitions
 ├── ComponentName.stories.tsx   # Storybook stories
-└── ComponentName.test.tsx      # Unit tests
+└── ComponentName.test.tsx      # Unit tests (or place in __tests__/)
 ```
 
 ### Step-by-Step Guide
@@ -163,7 +177,7 @@ ComponentName/
    };
    ```
 
-6. **Write tests** (`ComponentName.test.tsx`):
+6. **Write tests**: Prefer `ComponentName.test.tsx` next to the component (co-located). Tests in a `__tests__/` subfolder are also accepted; keep one style per component and document any new test file location in your PR.
 
    ```tsx
    import { render, screen } from "@testing-library/react";
@@ -190,6 +204,19 @@ ComponentName/
 - **forwardRef**: All components must forward refs
 - **displayName**: All components must set `displayName`
 
+## Testing & coverage
+
+- **Run tests:** `bun run test` (or `npm run test` from repo root).
+- **Run tests with coverage:** `bun run test:coverage` in `packages/ui` (or `npm run test:coverage`). Requires `@vitest/coverage-v8`; report is written to `coverage/` (text, JSON, HTML). Use this to spot untested code when adding or changing components.
+- **Watch mode:** `bun run test:watch` for development.
+- **E2E (Playwright):** From `packages/ui`, run `npm run build-storybook` once, then `npm run e2e`. Playwright starts a local server for the static Storybook build and runs smoke tests. For CI use `npm run e2e:ci` (builds Storybook, installs browser, then runs tests). Add new scenarios in `packages/ui/e2e/`.
+- **API docs (TypeDoc):** From `packages/ui`, run `npm run docs:api` to generate API documentation from TypeScript types. Output is written to `packages/ui/docs/api/`. Useful for consumers who prefer static type docs alongside Storybook.
+
+## Versioning & deprecation
+
+- We follow [Semantic Versioning](https://semver.org/). See [CHANGELOG.md](../CHANGELOG.md) for release history.
+- **Deprecated APIs** (e.g. `OceanThemeProvider`): They remain exported for backward compatibility and are marked with JSDoc `@deprecated`. Prefer the new names (`BizUIThemeProvider`, etc.). Deprecated exports may be removed in a future major version; we will announce any removal in the CHANGELOG and release notes.
+
 ## Code Style
 
 - TypeScript strict mode
@@ -205,6 +232,20 @@ ComponentName/
 5. Update Storybook stories if adding/modifying components
 6. Write descriptive commit messages
 7. Open a PR with a clear description of changes
+
+## Release checklist
+
+Before cutting a release, from the repo root:
+
+1. Bump version in `packages/ui/package.json` (and root if applicable).
+2. Update [CHANGELOG.md](../CHANGELOG.md): move items from `[Unreleased]` into a new version heading and add the release date.
+3. Run `bun run ci` (or equivalent: build, lint, check-types, test).
+4. Optionally run `bun run e2e:ci` and `npm run size -w biz-ui` (bundle size check in `packages/ui`).
+5. Commit, tag (e.g. `v0.2.0`), push, and publish per your release process.
+
+## Bundle size
+
+From `packages/ui`, run `npm run size` after building to check ESM output size against the limit defined in `package.json` (`sizeLimit`). Adjust the limit there if the library grows intentionally.
 
 ## License
 

@@ -5,16 +5,16 @@ Guide to customizing and theming Biz UI components.
 ## Setup
 
 ```tsx
-import { OceanThemeProvider, defaultTheme } from "biz-ui";
+import { BizUIThemeProvider, defaultTheme } from "biz-ui";
 import "biz-ui/styles";
 
 function App() {
   return (
-    <OceanThemeProvider theme={defaultTheme}>
+    <BizUIThemeProvider theme={defaultTheme}>
       <div className="biz-ui">
         <Button>Themed Button</Button>
       </div>
-    </OceanThemeProvider>
+    </BizUIThemeProvider>
   );
 }
 ```
@@ -22,7 +22,7 @@ function App() {
 ## Theme Structure
 
 ```typescript
-interface OceanTheme {
+interface Theme {
   colors: {
     // Brand colors
     brand: {
@@ -72,7 +72,7 @@ interface OceanTheme {
 ## Creating Custom Theme
 
 ```tsx
-import { OceanThemeProvider, defaultTheme } from "biz-ui";
+import { BizUIThemeProvider, defaultTheme } from "biz-ui";
 
 const customTheme = {
   ...defaultTheme,
@@ -88,11 +88,11 @@ const customTheme = {
 
 function App() {
   return (
-    <OceanThemeProvider theme={customTheme}>
+    <BizUIThemeProvider theme={customTheme}>
       <div className="biz-ui">
         <Button>Custom Themed</Button>
       </div>
-    </OceanThemeProvider>
+    </BizUIThemeProvider>
   );
 }
 ```
@@ -146,10 +146,10 @@ Biz UI uses CSS variables for theming. The `biz-ui` className scope provides:
 Components automatically use theme values. Access theme programmatically:
 
 ```tsx
-import { useOceanTheme } from "biz-ui";
+import { useBizUITheme } from "biz-ui";
 
 function Component() {
-  const { theme, prefix } = useOceanTheme();
+  const { theme, prefix } = useBizUITheme();
 
   return <div style={{ color: theme.colors.text.primary }}>Themed content</div>;
 }
@@ -198,4 +198,4 @@ The theme supports dark mode via CSS variables:
 }
 ```
 
-Wrap your app in `ThemeProvider` and use the `dark` class on html/body.
+Wrap your app in `BizUIThemeProvider` and use the `dark` class on html/body.

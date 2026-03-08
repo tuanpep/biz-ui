@@ -14,6 +14,7 @@
     "clean:cache": "turbo daemon clean && rm -rf .turbo",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
+    "e2e:ci": "npm run e2e:ci -w biz-ui",
     "ci": "turbo run build lint check-types test",
     "prepare": "husky"
   },

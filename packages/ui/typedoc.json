@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
+  "entryPointStrategy": "resolve",
+  "out": "docs/api",
+  "exclude": [
+    "**/*.test.{ts,tsx}",
+    "**/*.spec.{ts,tsx}",
+    "**/*.stories.{ts,tsx}",
+    "**/__tests__/**",
+    "**/test/**"
+  ],
+  "excludeExternals": true,
+  "readme": "none",
+  "plugin": [],
+  "name": "Biz UI",
+  "includeVersion": true
+}

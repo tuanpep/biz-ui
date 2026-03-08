@@ -12,16 +12,16 @@ A React component library with 70+ accessible components built on Radix UI primi
 ### Setup
 
 ```tsx
-import { OceanThemeProvider, defaultTheme, Button } from "biz-ui";
+import { BizUIThemeProvider, defaultTheme, Button } from "biz-ui";
 import "biz-ui/styles";
 
 function App() {
   return (
-    <OceanThemeProvider theme={defaultTheme}>
+    <BizUIThemeProvider theme={defaultTheme}>
       <div className="biz-ui">
         <Button>Click me</Button>
       </div>
-    </OceanThemeProvider>
+    </BizUIThemeProvider>
   );
 }
 ```
@@ -39,7 +39,7 @@ function App() {
 
 ### Key Exports
 
-- **Core**: `OceanThemeProvider`, `defaultTheme`, `useOceanTheme()`
+- **Core**: `BizUIThemeProvider`, `defaultTheme`, `useBizUITheme()`
 - **Providers**: `PrefixProvider`, `FeatureFlagsProvider`
 - **Hooks**: `useToast()`, `usePrefix()`, `useFeatureFlag()`
 

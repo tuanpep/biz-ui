@@ -28,6 +28,13 @@ export default defineConfig({
         "**/__stories__/**",
         "src/index.ts",
       ],
+      // Optional: enforce minimums in CI by uncommenting and setting values
+      // thresholds: {
+      //   statements: 0,
+      //   branches: 0,
+      //   functions: 0,
+      //   lines: 0,
+      // },
     },
   },
   resolve: {

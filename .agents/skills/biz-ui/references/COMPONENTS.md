@@ -130,9 +130,9 @@ import {
   TooltipProvider,
 
   // Core
-  OceanThemeProvider,
+  BizUIThemeProvider,
   defaultTheme,
-  useOceanTheme,
+  useBizUITheme,
 
   // Providers
   PrefixProvider,

@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Storybook documentation for all components
 - Unit tests with Vitest and Testing Library
 - ESLint + Prettier code quality tooling
-- Turborepo monorepo build system with tsup
+- Turborepo monorepo build system with Rollup
 
 ## [0.1.0] - 2026-03-04
 

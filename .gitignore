@@ -28,6 +28,9 @@ build
 dist
 .astro
 
+# Generated API docs (run npm run docs:api in packages/ui to regenerate)
+packages/ui/docs/
+
 
 # Debug
 npm-debug.log*

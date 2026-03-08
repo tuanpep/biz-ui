@@ -30,9 +30,9 @@ export default [
       "react/react-in-jsx-scope": "off",
     },
   },
-  // CommonJS config files (tailwind, postcss, rollup, etc.)
+  // CommonJS config files (tailwind, postcss, rollup, preset, etc.)
   {
-    files: ["*.config.js", "*.config.cjs", "scripts/**/*.js"],
+    files: ["*.config.js", "*.config.cjs", "*.preset.js", "scripts/**/*.js"],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -46,6 +46,6 @@ export default [
     },
   },
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**", "storybook-static/**"],
+    ignores: ["dist/**", "node_modules/**", "coverage/**", "storybook-static/**", "e2e/**", "playwright.config.ts"],
   },
 ];

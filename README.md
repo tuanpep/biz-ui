@@ -45,16 +45,16 @@ npm install @radix-ui/react-accordion @radix-ui/react-alert-dialog @radix-ui/rea
 import "biz-ui/styles";
 ```
 
-2. Wrap your components with the Biz UI provider:
+2. Wrap your components with the Biz UI theme provider:
 
 ```tsx
-import { ThemeProvider } from "biz-ui";
+import { BizUIThemeProvider } from "biz-ui";
 
 function App() {
   return (
-    <ThemeProvider>
+    <BizUIThemeProvider>
       <div className="biz-ui">{/* Your app components */}</div>
-    </ThemeProvider>
+    </BizUIThemeProvider>
   );
 }
 ```
