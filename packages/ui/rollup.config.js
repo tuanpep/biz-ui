@@ -85,6 +85,9 @@ const esmPlugins = [
     declaration: true,
     declarationDir: "./dist",
     outDir: "./dist",
+    // Override module settings for proper ESM output
+    module: "ESNext",
+    moduleResolution: "bundler",
   }),
   preserveDirectives({
     suppressPreserveModulesWarning: true,
@@ -104,6 +107,9 @@ const cjsPlugins = [
     noEmitOnError: true,
     declaration: false,
     declarationMap: false,
+    // Use CommonJS module output
+    module: "CommonJS",
+    moduleResolution: "node",
   }),
   preserveDirectives({
     suppressPreserveModulesWarning: true,
