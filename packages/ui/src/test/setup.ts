@@ -1,6 +1,12 @@
-import { beforeAll, afterAll } from "vitest";
+import { beforeAll, afterAll, afterEach } from "vitest";
 import "@testing-library/jest-dom/vitest";
+import { cleanup } from "@testing-library/react";
 import { vi } from "vitest";
+
+// Auto cleanup after each test
+afterEach(() => {
+  cleanup();
+});
 
 // Mock window.matchMedia for components that use media queries
 Object.defineProperty(window, "matchMedia", {

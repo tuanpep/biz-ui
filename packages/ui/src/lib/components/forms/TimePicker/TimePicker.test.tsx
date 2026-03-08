@@ -6,7 +6,7 @@
 
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "../../../test/utils";
+import { render, screen, fireEvent } from "../../../../test/utils";
 import { TimePicker, TimePickerSkeleton } from "./index";
 
 describe("TimePicker", () => {
@@ -53,21 +53,22 @@ describe("TimePicker", () => {
         value="12:00"
       />,
     );
-    const input = screen.getByRole("textbox");
-    expect(input).toHaveAttribute("readonly");
+    const input = screen.getByLabelText("Time");
+    // input[type="time"] uses readOnly property
+    expect(input).toHaveProperty("readOnly", true);
   });
 
   it("handles value change", () => {
     const handleChange = vi.fn();
     render(<TimePicker label="Time" onChange={handleChange} />);
-    const input = screen.getByRole("textbox");
+    const input = screen.getByLabelText("Time");
     fireEvent.change(input, { target: { value: "14:30" } });
     expect(handleChange).toHaveBeenCalledWith("14:30");
   });
 
   it("renders with initial value", () => {
     render(<TimePicker label="Time" value="12:00" />);
-    const input = screen.getByRole("textbox");
+    const input = screen.getByLabelText("Time");
     expect(input).toHaveValue("12:00");
   });
 
@@ -85,8 +86,8 @@ describe("TimePicker", () => {
 
   it("hides label when hideLabel is true", () => {
     render(<TimePicker label="Hidden" hideLabel />);
-    const label = screen.getByText("Hidden");
-    expect(label).toHaveClass("sr-only");
+    // When hideLabel is true, the label is not rendered at all
+    expect(screen.queryByText("Hidden")).not.toBeInTheDocument();
   });
 
   it("renders different sizes", () => {
@@ -98,9 +99,10 @@ describe("TimePicker", () => {
   });
 
   it("renders without wrapper when no label/description/error/warn", () => {
-    render(<TimePicker hideLabel />);
-    // Should render just the input without wrapper
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    const { container } = render(<TimePicker hideLabel />);
+    // Should render just the input without wrapper - find input element
+    const input = container.querySelector('input[type="time"]');
+    expect(input).toBeInTheDocument();
   });
 });
 

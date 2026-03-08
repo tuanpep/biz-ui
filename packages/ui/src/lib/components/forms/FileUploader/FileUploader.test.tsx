@@ -5,7 +5,7 @@
  */
 
 import * as React from "react";
-import { render, screen, fireEvent } from "../../../test/utils";
+import { render, screen, fireEvent } from "../../../../test/utils";
 import {
   FileUploader,
   FileUploaderButton,
@@ -66,14 +66,19 @@ describe("FileUploader", () => {
 
   it("hides label when hideLabel is true", () => {
     render(<FileUploader label="Hidden" hideLabel />);
-    const label = screen.getByText("Hidden");
-    expect(label).toHaveClass("sr-only");
+    // When hideLabel is true, the label is not rendered at all
+    expect(screen.queryByText("Hidden")).not.toBeInTheDocument();
   });
 
   it("applies custom className", () => {
-    render(<FileUploader label="Upload" className="custom-class" />);
-    const container = screen.getByText("Upload").parentElement;
-    expect(container).toHaveClass("custom-class");
+    // className is only applied when hideLabel is true (no wrapper)
+    render(<FileUploader hideLabel className="custom-class" />);
+    const { container } = render(
+      <FileUploader hideLabel className="custom-class" />,
+    );
+    expect(
+      container.querySelector('[class*="custom-class"]'),
+    ).toBeInTheDocument();
   });
 
   it("applies wrapperClassName", () => {

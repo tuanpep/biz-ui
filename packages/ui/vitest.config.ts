@@ -10,11 +10,13 @@ export default defineConfig({
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     exclude: ["node_modules", "dist", ".turbo", "src/**/__stories__/**"],
-    // Use forks pool with single fork for better memory management
+    // Use forks pool for better isolation
     pool: "forks",
     poolOptions: {
       forks: {
-        singleFork: true,
+        singleFork: false,
+        minForks: 1,
+        maxForks: 4,
       },
     },
     coverage: {

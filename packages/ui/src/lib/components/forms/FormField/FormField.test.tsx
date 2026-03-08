@@ -47,7 +47,8 @@ describe("FormField", () => {
         <Input id="name" placeholder="Name" />
       </FormField>,
     );
-    expect(screen.getByLabelText(/name/)).toBeInTheDocument();
+    // Use case-insensitive regex and check for label text
+    expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
     expect(document.body.textContent).toContain("*");
   });
 
