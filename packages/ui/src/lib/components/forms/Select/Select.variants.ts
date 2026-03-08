@@ -31,12 +31,53 @@ export const selectTriggerVariants = cva(
         true: "border-warning focus-visible:ring-warning",
         false: "",
       },
+      success: {
+        true: "border-success focus-visible:ring-success",
+        false: "",
+      },
     },
+    compoundVariants: [
+      // Filled variant + error state
+      {
+        variant: "filled",
+        error: true,
+        className: "bg-destructive-muted",
+      },
+      // Filled variant + warn state
+      {
+        variant: "filled",
+        warn: true,
+        className: "bg-warning-muted",
+      },
+      // Filled variant + success state
+      {
+        variant: "filled",
+        success: true,
+        className: "bg-success-muted",
+      },
+      // Unstyled variant should not show validation rings
+      {
+        variant: "unstyled",
+        error: true,
+        className: "focus-visible:ring-0",
+      },
+      {
+        variant: "unstyled",
+        warn: true,
+        className: "focus-visible:ring-0",
+      },
+      {
+        variant: "unstyled",
+        success: true,
+        className: "focus-visible:ring-0",
+      },
+    ],
     defaultVariants: {
       variant: "default",
       size: "md",
       error: false,
       warn: false,
+      success: false,
     },
   },
 );

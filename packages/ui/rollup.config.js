@@ -12,11 +12,11 @@
  * - TypeScript declaration generation
  */
 
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
-import preserveDirectives from 'rollup-plugin-preserve-directives';
-import glob from 'fast-glob';
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
+import preserveDirectives from "rollup-plugin-preserve-directives";
+import glob from "fast-glob";
 
 const banner = `/**
  * Biz UI - React Component Library
@@ -31,8 +31,8 @@ const banner = `/**
 // External dependencies - don't bundle these
 const external = [
   // React
-  'react',
-  'react-dom',
+  "react",
+  "react-dom",
   /^react\//,
   /^react-dom\//,
 
@@ -40,40 +40,51 @@ const external = [
   /^@radix-ui\//,
 
   // Utilities
-  'clsx',
-  'tailwind-merge',
-  'class-variance-authority',
-  'date-fns',
+  "clsx",
+  "tailwind-merge",
+  "class-variance-authority",
+  "date-fns",
   /^lucide-react/,
 ];
 
 // Get all TypeScript files as entry points for true module preservation
-const entryPoints = glob.sync('src/**/*.{ts,tsx}', {
-  ignore: ['src/**/*.spec.ts', 'src/**/*.spec.tsx', 'src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/*.stories.ts', 'src/**/*.stories.tsx', 'src/**/__tests__/**', 'src/**/__stories__/**']
-}).reduce((entries, file) => {
-  // Convert file path to entry name: src/lib/components/Button/Button.tsx -> lib/components/Button/Button
-  const name = file.replace(/^src\//, '').replace(/\.tsx?$/, '');
-  entries[name] = file;
-  return entries;
-}, {});
+const entryPoints = glob
+  .sync("src/**/*.{ts,tsx}", {
+    ignore: [
+      "src/**/*.spec.ts",
+      "src/**/*.spec.tsx",
+      "src/**/*.test.ts",
+      "src/**/*.test.tsx",
+      "src/**/*.stories.ts",
+      "src/**/*.stories.tsx",
+      "src/**/__tests__/**",
+      "src/**/__stories__/**",
+    ],
+  })
+  .reduce((entries, file) => {
+    // Convert file path to entry name: src/lib/components/Button/Button.tsx -> lib/components/Button/Button
+    const name = file.replace(/^src\//, "").replace(/\.tsx?$/, "");
+    entries[name] = file;
+    return entries;
+  }, {});
 
 // Add the main index file
-entryPoints['index'] = 'src/index.ts';
+entryPoints["index"] = "src/index.ts";
 
 // ESM plugins
 const esmPlugins = [
   resolve({
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   }),
   commonjs({
     include: /node_modules/,
   }),
   typescript({
-    tsconfig: './tsconfig.json',
+    tsconfig: "./tsconfig.json",
     noEmitOnError: true,
     declaration: true,
-    declarationDir: './dist',
-    outDir: './dist',
+    declarationDir: "./dist",
+    outDir: "./dist",
   }),
   preserveDirectives({
     suppressPreserveModulesWarning: true,
@@ -83,13 +94,13 @@ const esmPlugins = [
 // CJS plugins (no declaration files)
 const cjsPlugins = [
   resolve({
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   }),
   commonjs({
     include: /node_modules/,
   }),
   typescript({
-    tsconfig: './tsconfig.json',
+    tsconfig: "./tsconfig.json",
     noEmitOnError: true,
     declaration: false,
     declarationMap: false,
@@ -101,7 +112,7 @@ const cjsPlugins = [
 
 // Suppress module directive warnings
 const onwarn = (warning, warn) => {
-  if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+  if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
     return;
   }
   warn(warning);
@@ -114,14 +125,14 @@ export default [
     external,
     plugins: esmPlugins,
     output: {
-      dir: 'dist',
-      format: 'esm',
+      dir: "dist",
+      format: "esm",
       preserveModules: true,
-      preserveModulesRoot: 'src',
+      preserveModulesRoot: "src",
       banner,
       sourcemap: true,
-      exports: 'named',
-      entryFileNames: '[name].mjs',
+      exports: "named",
+      entryFileNames: "[name].mjs",
     },
     onwarn,
   },
@@ -131,14 +142,14 @@ export default [
     external,
     plugins: cjsPlugins,
     output: {
-      dir: 'dist',
-      format: 'cjs',
+      dir: "dist",
+      format: "cjs",
       preserveModules: true,
-      preserveModulesRoot: 'src',
+      preserveModulesRoot: "src",
       banner,
       sourcemap: true,
-      exports: 'named',
-      entryFileNames: '[name].js',
+      exports: "named",
+      entryFileNames: "[name].js",
     },
     onwarn,
   },

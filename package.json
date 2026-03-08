@@ -3,9 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "build:website": "turbo run build --filter=@biz-ui/website",
     "dev": "turbo run dev",
-    "dev:website": "turbo run dev --filter=@biz-ui/website",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
@@ -48,7 +46,6 @@
     "packages/ui/**/*.{ts,tsx}": "eslint -c packages/ui/eslint.config.mjs --fix"
   },
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "packages/*"
   ]
 }

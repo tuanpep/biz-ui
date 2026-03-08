@@ -12,7 +12,14 @@
       "require": "./dist/index.js"
     },
     "./styles": "./dist/styles.css",
+    "./styles/layer": "./dist/styles.layer.css",
     "./styles/theme": "./src/lib/styles/theme.css",
+    "./tailwind.preset": "./tailwind.preset.js",
+    "./variants": {
+      "types": "./dist/lib/variants/index.d.ts",
+      "import": "./dist/lib/variants/index.mjs",
+      "require": "./dist/lib/variants/index.js"
+    },
     "./lib/*": {
       "types": "./dist/lib/*.d.ts",
       "import": "./dist/lib/*.mjs",
@@ -21,7 +28,8 @@
   },
   "files": [
     "dist",
-    "src/lib/styles"
+    "src/lib/styles",
+    "tailwind.preset.js"
   ],
   "sideEffects": [
     "*.css"
@@ -35,8 +43,9 @@
     "tailwindcss"
   ],
   "scripts": {
-    "build": "npm run clean:dist && rollup -c && npm run build:css",
+    "build": "npm run clean:dist && rollup -c && npm run build:css && npm run build:layer",
     "build:css": "npx tailwindcss -i src/lib/styles/index.css -o dist/styles.css --minify",
+    "build:layer": "node scripts/generate-css-layer.js",
     "clean:dist": "rm -rf dist",
     "dev": "rollup -c -w",
     "lint": "eslint . --max-warnings 0",
@@ -82,7 +91,6 @@
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.0"
   },
-  "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@storybook/addon-a11y": "^8.5.0",
@@ -109,11 +117,10 @@
     "globals": "^16.5.0",
     "jsdom": "^26.0.0",
     "postcss": "^8.5.8",
-    "postcss-cli": "^11.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1",
-    "tsup": "^8.3.5",
+    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "5.9.2",
     "typescript-eslint": "^8.50.0",
     "vitest": "^3.1.1"

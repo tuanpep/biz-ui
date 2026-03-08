@@ -7,16 +7,19 @@
  * - Puts users first
  * - Builds consistency
  *
+ * Features:
+ * - Light/Dark mode support with system preference detection
+ * - Runtime CSS variable injection
+ * - Deep theme customization
+ *
  * @example
  * ```tsx
  * import { BizUIThemeProvider, defaultTheme } from 'biz-ui';
  *
  * function App() {
  *   return (
- *     <BizUIThemeProvider theme={defaultTheme}>
- *       <div className="biz-ui">
- *         <Button>Click me</Button>
- *       </div>
+ *     <BizUIThemeProvider defaultColorScheme="auto">
+ *       <Button>Click me</Button>
  *     </BizUIThemeProvider>
  *   );
  * }
@@ -24,7 +27,11 @@
  */
 
 import * as React from "react";
-import type { BizUITheme, BizUIThemeContextValue } from "./theme-types";
+import type {
+  BizUITheme,
+  BizUIThemeContextValue,
+  ColorScheme,
+} from "./theme-types";
 import { defaultTheme } from "./default-theme";
 
 // ============================================================================
@@ -62,6 +69,12 @@ export interface BizUIThemeProviderProps {
   children: React.ReactNode;
   /** Whether to inject CSS variables into the DOM */
   injectCssVariables?: boolean;
+  /** Default color scheme: 'light', 'dark', or 'auto' (follows system) */
+  defaultColorScheme?: ColorScheme;
+  /** Custom class name for the wrapper */
+  className?: string;
+  /** Custom wrapper element type */
+  as?: React.ElementType;
 }
 
 // ============================================================================
@@ -97,6 +110,17 @@ function deepMerge<T extends object>(target: T, source: Partial<T>): T {
   }
 
   return result;
+}
+
+// ============================================================================
+// System Color Scheme Detection
+// ============================================================================
+
+function getSystemColorScheme(): "light" | "dark" {
+  if (typeof window === "undefined") return "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 // ============================================================================
@@ -196,12 +220,49 @@ export function BizUIThemeProvider({
   theme: customTheme,
   children,
   injectCssVariables = false,
+  defaultColorScheme = "light",
+  className,
+  as: Component = "div",
 }: BizUIThemeProviderProps): React.JSX.Element {
   // Merge custom theme with default theme
   const theme = React.useMemo(() => {
     if (!customTheme) return defaultTheme;
     return deepMerge(defaultTheme, customTheme);
   }, [customTheme]);
+
+  // Color scheme state
+  const [colorScheme, setColorSchemeState] = React.useState<"light" | "dark">(
+    () => {
+      if (defaultColorScheme === "auto") {
+        return getSystemColorScheme();
+      }
+      return defaultColorScheme;
+    },
+  );
+
+  // Listen for system color scheme changes when in auto mode
+  React.useEffect(() => {
+    if (defaultColorScheme !== "auto") return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setColorSchemeState(e.matches ? "dark" : "light");
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [defaultColorScheme]);
+
+  // Set color scheme function
+  const setColorScheme = React.useCallback((scheme: "light" | "dark") => {
+    setColorSchemeState(scheme);
+  }, []);
+
+  // Toggle color scheme function
+  const toggleColorScheme = React.useCallback(() => {
+    setColorSchemeState((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
 
   // Inject CSS variables if enabled
   React.useEffect(() => {
@@ -210,24 +271,35 @@ export function BizUIThemeProvider({
     }
   }, [theme, injectCssVariables]);
 
-  // Context value - color scheme is always 'light' for now (dark mode not implemented)
+  // Context value
   const contextValue = React.useMemo<BizUIThemeContextValue>(
     () => ({
       theme,
-      colorScheme: "light",
-      setColorScheme: () => {
-        console.warn("Dark mode is not implemented yet");
-      },
-      toggleColorScheme: () => {
-        console.warn("Dark mode is not implemented yet");
-      },
+      colorScheme,
+      setColorScheme,
+      toggleColorScheme,
+      isDark: colorScheme === "dark",
     }),
-    [theme],
+    [theme, colorScheme, setColorScheme, toggleColorScheme],
   );
+
+  // Compute wrapper class names
+  const wrapperClassName = React.useMemo(() => {
+    const classes = ["biz-ui"];
+    if (colorScheme === "dark") {
+      classes.push("dark");
+    }
+    if (className) {
+      classes.push(className);
+    }
+    return classes.join(" ");
+  }, [colorScheme, className]);
 
   return (
     <BizUIThemeContext.Provider value={contextValue}>
-      {children}
+      <Component className={wrapperClassName} data-color-scheme={colorScheme}>
+        {children}
+      </Component>
     </BizUIThemeContext.Provider>
   );
 }

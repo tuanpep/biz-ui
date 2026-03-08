@@ -7,7 +7,10 @@
  */
 
 // Main component
-export { Separator } from './Separator';
+export { Separator } from "./Separator";
 
 // Types
-export type { SeparatorProps } from './Separator.types';
+export type {
+  SeparatorProps,
+  SeparatorLabelAlignment,
+} from "./Separator.types";

@@ -29,6 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       description,
       error,
       warn,
+      success,
       required = false,
       hideLabel = false,
       leftIcon,
@@ -53,6 +54,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const effectiveDisabled = !readOnly && disabled;
     const hasError = !readOnly && !effectiveDisabled && !!error;
     const hasWarning = !readOnly && !hasError && !effectiveDisabled && !!warn;
+    const hasSuccess =
+      !readOnly && !hasError && !hasWarning && !effectiveDisabled && !!success;
 
     // Build aria-describedby
     const ariaDescribedBy =
@@ -63,12 +66,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       ]
         .filter(Boolean)
         .join(" ") || undefined;
-
-    // Build validation classes
-    const validationClasses = {
-      "border-destructive focus-visible:ring-destructive": hasError,
-      "border-warning focus-visible:ring-warning": hasWarning,
-    };
 
     // Has icons
     const hasLeftIcon = !!leftIcon;
@@ -85,8 +82,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           id={inputId}
           className={cn(
-            inputVariants({ variant, size }),
-            validationClasses,
+            // Use CVA variants with validation states
+            inputVariants({
+              variant,
+              size,
+              error: hasError,
+              warn: hasWarning,
+              success: hasSuccess,
+            }),
             hasLeftIcon && "pl-10",
             hasRightIcon && "pr-10",
             className,

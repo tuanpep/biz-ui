@@ -79,7 +79,6 @@ function MyComponent() {
 This repository is a Turborepo monorepo:
 
 - **`packages/ui`** – Biz UI component library
-- **`apps/website`** – Documentation site and enterprise demo (at `/examples/enterprise-demo`)
 
 ## Development
 
@@ -92,9 +91,6 @@ npm run build
 
 # Run development mode
 npm run dev
-
-# Run the website (docs + examples)
-npm run dev:website
 
 # Run Storybook (from repo root)
 npm run storybook

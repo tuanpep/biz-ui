@@ -8,7 +8,6 @@ export * from "./layout/Stack";
 export * from "./layout/AspectRatio";
 export * from "./layout/Center";
 export * from "./layout/Container";
-export * from "./layout/Divider";
 export * from "./layout/Portal";
 export * from "./layout/SimpleGrid";
 export * from "./layout/VisuallyHidden";

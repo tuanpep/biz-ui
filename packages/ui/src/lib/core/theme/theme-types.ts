@@ -94,6 +94,9 @@ export interface BizUITheme {
   respectReducedMotion: boolean;
 }
 
+/** Color scheme options */
+export type ColorScheme = "light" | "dark" | "auto";
+
 /** Theme context value */
 export interface BizUIThemeContextValue {
   theme: BizUITheme;
@@ -103,6 +106,8 @@ export interface BizUIThemeContextValue {
   setColorScheme: (scheme: "light" | "dark") => void;
   /** Toggle color scheme */
   toggleColorScheme: () => void;
+  /** Whether dark mode is enabled */
+  isDark: boolean;
 }
 
 // ============================================================================

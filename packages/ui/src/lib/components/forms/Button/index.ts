@@ -4,25 +4,20 @@
  * Following Carbon's component export pattern:
  * - Main component as named export
  * - Skeleton variant
- * - ButtonSet for grouping
  * - Variants utility
  * - Type exports
  */
 
 // Main component
-export { Button, buttonVariants } from './Button';
-
-// ButtonSet component
-export { ButtonSet } from './ButtonSet';
+export { Button, buttonVariants } from "./Button";
 
 // Skeleton variant
-export { ButtonSkeleton } from './Button.skeleton';
+export { ButtonSkeleton } from "./Button.skeleton";
 
 // Types
 export type {
   ButtonProps,
   ButtonSkeletonProps,
-  ButtonSetProps,
   ButtonVariant,
   ButtonSize,
-} from './Button.types';
+} from "./Button.types";
