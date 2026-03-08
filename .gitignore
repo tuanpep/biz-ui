@@ -14,6 +14,11 @@ node_modules
 
 # Testing
 coverage
+test-results
+playwright-report
+
+# Storybook build output
+storybook-static
 
 # Turbo
 .turbo
@@ -39,4 +44,15 @@ yarn-error.log*
 
 # Misc
 .DS_Store
+Thumbs.db
 *.pem
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Cursor AI (user-specific)
+.cursor/

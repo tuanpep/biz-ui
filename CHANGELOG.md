@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **RFC-0001 Codebase Refactoring**: Reorganized component structure following SDD+TDD patterns
+  - Split component files into separate concerns: `Component.tsx`, `Component.types.ts`, `Component.variants.ts`
+  - Colocated tests alongside components (`Component.test.tsx`)
+  - Standardized Storybook stories structure (`Component.stories.tsx`)
+  - Added automatic test cleanup in setup.ts to prevent test pollution
+  - Fixed all component tests to work with Radix UI primitives (data-disabled attributes)
+  - Added missing Storybook stories for Icon, DatePicker, TimePicker, and TreeView components
+
+### Fixed
+
+- Test suite now properly handles Radix UI's `data-disabled` attribute instead of native `disabled`
+- TimePicker tests use correct query methods for `input[type="time"]` elements
+- Skeleton component tests use class substring selectors for Tailwind classes
+- FormField tests use case-insensitive regex for label matching
+- MultiSelect hideLabel tests correctly verify label absence
+
 ### Added
 
 - Initial open-source release

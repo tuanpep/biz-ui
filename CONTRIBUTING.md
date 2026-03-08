@@ -212,6 +212,41 @@ ComponentName/
 - **E2E (Playwright):** From `packages/ui`, run `npm run build-storybook` once, then `npm run e2e`. Playwright starts a local server for the static Storybook build and runs smoke tests. For CI use `npm run e2e:ci` (builds Storybook, installs browser, then runs tests). Add new scenarios in `packages/ui/e2e/`.
 - **API docs (TypeDoc):** From `packages/ui`, run `npm run docs:api` to generate API documentation from TypeScript types. Output is written to `packages/ui/docs/api/`. Useful for consumers who prefer static type docs alongside Storybook.
 
+### Testing patterns for Radix UI components
+
+When testing components built on Radix UI primitives, keep these patterns in mind:
+
+- **Disabled state:** Radix components use `data-disabled` attribute instead of the native `disabled` attribute.
+
+  ```tsx
+  // ✅ Correct
+  expect(element).toHaveAttribute("data-disabled");
+  // ❌ Wrong - Radix doesn't set native disabled
+  expect(element).toBeDisabled();
+  ```
+
+- **Input types:** Special input types like `input[type="time"]` don't have the `textbox` role.
+
+  ```tsx
+  // ✅ Correct - use getByLabelText or querySelector
+  const input = screen.getByLabelText("Time");
+  // or
+  const input = container.querySelector('input[type="time"]');
+  // ❌ Wrong - no textbox role
+  const input = screen.getByRole("textbox");
+  ```
+
+- **Tailwind class queries:** When testing for Tailwind classes, use class substring matching since elements often have multiple classes.
+
+  ```tsx
+  // ✅ Correct - class substring matching
+  expect(element.querySelector('[class*="h-4"]')).toBeInTheDocument();
+  // ❌ Wrong - single class selector
+  expect(element.querySelector(".h-4")).toBeInTheDocument();
+  ```
+
+- **Test cleanup:** Automatic cleanup is configured in `src/test/setup.ts`. Avoid manual cleanup unless needed for specific scenarios.
+
 ## Versioning & deprecation
 
 - We follow [Semantic Versioning](https://semver.org/). See [CHANGELOG.md](../CHANGELOG.md) for release history.
