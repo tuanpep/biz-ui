@@ -89,46 +89,50 @@ const TreeView = React.forwardRef<HTMLDivElement, TreeViewProps>(
         : selected === item.id;
 
       return (
-        <div
-          key={item.id}
-          className={cn(
-            treeItemVariants({ selected: isSelected, disabled: item.disabled }),
-          )}
-          style={{ paddingLeft: depth * 16 }}
-          role="treeitem"
-          aria-selected={isSelected}
-          aria-expanded={hasChildren ? isExpanded : undefined}
-        >
-          {/* Expand/Collapse button */}
-          {hasChildren && (
-            <button
-              type="button"
-              onClick={() => toggleExpanded(item.id)}
-              className="mr-1 p-1 rounded hover:bg-muted"
-              aria-label={isExpanded ? "Collapse" : "Expand"}
-            >
-              {isExpanded ? (
-                <ChevronDown className="h-4 w-4" />
-              ) : (
-                <ChevronRight className="h-4 w-4" />
-              )}
-            </button>
-          )}
-
-          {/* Item content */}
+        <div key={item.id}>
           <div
-            className="flex-1 flex items-center gap-2"
-            onClick={() => !item.disabled && handleSelect(item.id)}
+            className={cn(
+              treeItemVariants({
+                selected: isSelected,
+                disabled: item.disabled,
+              }),
+            )}
+            style={{ paddingLeft: depth * 16 }}
+            role="treeitem"
+            aria-selected={isSelected}
+            aria-expanded={hasChildren ? isExpanded : undefined}
           >
-            {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
-            <span className={cn(item.disabled && "text-muted-foreground")}>
-              {item.label}
-            </span>
+            {/* Expand/Collapse button */}
+            {hasChildren && (
+              <button
+                type="button"
+                onClick={() => toggleExpanded(item.id)}
+                className="mr-1 p-1 rounded hover:bg-muted"
+                aria-label={isExpanded ? "Collapse" : "Expand"}
+              >
+                {isExpanded ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </button>
+            )}
+
+            {/* Item content */}
+            <div
+              className="flex-1 flex items-center gap-2"
+              onClick={() => !item.disabled && handleSelect(item.id)}
+            >
+              {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+              <span className={cn(item.disabled && "text-muted-foreground")}>
+                {item.label}
+              </span>
+            </div>
           </div>
 
-          {/* Render children */}
+          {/* Render children as siblings */}
           {hasChildren && isExpanded && (
-            <div className="ml-4">
+            <div role="group">
               {item.children?.map((child) => renderTreeItem(child, depth + 1))}
             </div>
           )}
@@ -174,38 +178,43 @@ const TreeItem = React.forwardRef<HTMLDivElement, TreeItemProps>(
     const hasChildren = item.children && item.children.length > 0;
 
     return (
-      <div
-        ref={ref}
-        className={cn(treeItemVariants({ selected, disabled }), className)}
-        style={{ paddingLeft: depth * 16 }}
-        {...props}
-      >
-        {hasChildren && (
-          <button
-            type="button"
-            onClick={onToggleExpand}
-            className="mr-1 p-1 rounded hover:bg-muted"
-          >
-            {expanded ? (
-              <ChevronDown className="h-4 w-4" />
-            ) : (
-              <ChevronRight className="h-4 w-4" />
-            )}
-          </button>
-        )}
+      <div>
+        <div
+          ref={ref}
+          className={cn(treeItemVariants({ selected, disabled }), className)}
+          style={{ paddingLeft: depth * 16 }}
+          role="treeitem"
+          aria-selected={selected}
+          aria-expanded={hasChildren ? expanded : undefined}
+          {...props}
+        >
+          {hasChildren && (
+            <button
+              type="button"
+              onClick={onToggleExpand}
+              className="mr-1 p-1 rounded hover:bg-muted"
+            >
+              {expanded ? (
+                <ChevronDown className="h-4 w-4" />
+              ) : (
+                <ChevronRight className="h-4 w-4" />
+              )}
+            </button>
+          )}
 
-        <div className="flex-1 flex items-center gap-2" onClick={onClick}>
-          {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
-          <span className={cn(disabled && "text-muted-foreground")}>
-            {item.label}
-          </span>
+          <div className="flex-1 flex items-center gap-2" onClick={onClick}>
+            {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+            <span className={cn(disabled && "text-muted-foreground")}>
+              {item.label}
+            </span>
+          </div>
         </div>
 
         {hasChildren && expanded && (
-          <div className="ml-4">
-            {item.children?.map((child: TreeViewItemData, index: number) => (
+          <div role="group">
+            {item.children?.map((child: TreeViewItemData) => (
               <TreeItem
-                key={index}
+                key={child.id}
                 item={child}
                 depth={depth + 1}
                 size={size}

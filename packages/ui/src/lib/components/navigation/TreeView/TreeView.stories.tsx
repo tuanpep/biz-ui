@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TreeView } from "./TreeView";
-import { TreeViewItem } from "./TreeView";
+import React from "react";
+import { TreeView, TreeItem } from "./TreeView";
 import { Folder, FolderOpen, File, FileText } from "lucide-react";
 
 const meta: Meta<typeof TreeView> = {
@@ -26,22 +26,24 @@ const meta: Meta<typeof TreeView> = {
       {
         id: "root",
         label: "Root Folder",
-        icon: Folder,
+        icon: <Folder />,
         children: [
           {
             id: "folder1",
             label: "Folder 1",
-            icon: Folder,
+            icon: <Folder />,
             children: [
-              { id: "file1-1", label: "File 1-1", icon: File },
-              { id: "file1-2", label: "File 1-2", icon: File },
+              { id: "file1-1", label: "File 1-1", icon: <File /> },
+              { id: "file1-2", label: "File 1-2", icon: <File /> },
             ],
           },
           {
             id: "folder2",
             label: "Folder 2",
-            icon: FolderOpen,
-            children: [{ id: "file2-1", label: "File 2-1", icon: FileText }],
+            icon: <FolderOpen />,
+            children: [
+              { id: "file2-1", label: "File 2-1", icon: <FileText /> },
+            ],
           },
         ],
       },
@@ -61,24 +63,24 @@ export const WithIcons: Story = {
       {
         id: "root",
         label: "Documents",
-        icon: Folder,
+        icon: <Folder />,
         children: [
           {
             id: "work",
             label: "Work",
-            icon: Folder,
+            icon: <Folder />,
             children: [
-              { id: "project1", label: "Project 1", icon: FolderOpen },
-              { id: "project2", label: "Project 2", icon: Folder },
+              { id: "project1", label: "Project 1", icon: <FolderOpen /> },
+              { id: "project2", label: "Project 2", icon: <Folder /> },
             ],
           },
           {
             id: "personal",
             label: "Personal",
-            icon: Folder,
+            icon: <Folder />,
             children: [
-              { id: "photos", label: "Photos", icon: Folder },
-              { id: "music", label: "Music", icon: Folder },
+              { id: "photos", label: "Photos", icon: <Folder /> },
+              { id: "music", label: "Music", icon: <Folder /> },
             ],
           },
         ],
@@ -127,10 +129,10 @@ export const AllSizes: Story = {
   ),
 };
 
-// TreeViewItem standalone story
-const treeViewItemMeta: Meta<typeof TreeViewItem> = {
+// TreeItem standalone story
+const treeViewItemMeta: Meta<typeof TreeItem> = {
   title: "Components/Navigation/TreeViewItem",
-  component: TreeViewItem,
+  component: TreeItem,
   parameters: {
     layout: "centered",
   },
@@ -144,16 +146,12 @@ const treeViewItemMeta: Meta<typeof TreeViewItem> = {
       control: "boolean",
       description: "Whether item is expanded",
     },
-    hasChildren: {
-      control: "boolean",
-      description: "Whether item has children",
-    },
   },
   args: {
     item: {
       id: "demo",
       label: "Demo Item",
-      icon: File,
+      icon: <File />,
     },
     size: "md",
   },
@@ -168,10 +166,12 @@ export const TreeViewItemWithChildren: typeof treeViewItemMeta = {
     item: {
       id: "parent",
       label: "Parent Item",
-      icon: Folder,
-      children: [],
+      icon: <Folder />,
+      children: [
+        { id: "child1", label: "Child 1" },
+        { id: "child2", label: "Child 2" },
+      ],
     },
-    hasChildren: true,
     expanded: true,
   },
 };
@@ -181,10 +181,12 @@ export const TreeViewItemExpanded: typeof treeViewItemMeta = {
     item: {
       id: "folder",
       label: "Expanded Folder",
-      icon: FolderOpen,
-      children: [],
+      icon: <FolderOpen />,
+      children: [
+        { id: "child1", label: "Child Item 1" },
+        { id: "child2", label: "Child Item 2" },
+      ],
     },
-    hasChildren: true,
     expanded: true,
   },
 };
