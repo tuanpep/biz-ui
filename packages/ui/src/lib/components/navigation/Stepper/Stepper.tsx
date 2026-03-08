@@ -6,6 +6,7 @@
  */
 
 import * as React from "react";
+import { Check } from "lucide-react";
 import { cn } from "../../../utils/cn";
 
 export interface StepperStep {
@@ -90,18 +91,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                   )}
                 >
                   {isCompleted ? (
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
                   ) : (
                     index + 1
                   )}
