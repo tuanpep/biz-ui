@@ -1,0 +1,9 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { LeavePageContent } from '@examples/components/hr'
+import { leaveRequests } from '@examples/data'
+---
+
+<Layout title="Leave Management - Biz UI Enterprise Demo">
+  <LeavePageContent allRequests={leaveRequests} client:only="react" />
+</Layout>

@@ -39,6 +39,14 @@
     "build-storybook": {
       "dependsOn": ["^build"],
       "outputs": ["storybook-static/**"]
+    },
+    "@biz-ui/website#build": {
+      "dependsOn": ["biz-ui#build"],
+      "outputs": ["dist/**"]
+    },
+    "@biz-ui/website#dev": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

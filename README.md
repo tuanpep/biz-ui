@@ -42,20 +42,18 @@ npm install @radix-ui/react-accordion @radix-ui/react-alert-dialog @radix-ui/rea
 1. Import the CSS in your app:
 
 ```tsx
-import 'biz-ui/styles';
+import "biz-ui/styles";
 ```
 
 2. Wrap your components with the Biz UI provider:
 
 ```tsx
-import { ThemeProvider } from 'biz-ui';
+import { ThemeProvider } from "biz-ui";
 
 function App() {
   return (
     <ThemeProvider>
-      <div className="biz-ui">
-        {/* Your app components */}
-      </div>
+      <div className="biz-ui">{/* Your app components */}</div>
     </ThemeProvider>
   );
 }
@@ -64,7 +62,7 @@ function App() {
 3. Use the components:
 
 ```tsx
-import { Button, Card, Input } from 'biz-ui';
+import { Button, Card, Input } from "biz-ui";
 
 function MyComponent() {
   return (
@@ -78,51 +76,64 @@ function MyComponent() {
 
 ## Repository
 
-This repository contains the **biz-ui** package only. The library lives in `packages/ui` and is built with Turborepo.
+This repository is a Turborepo monorepo:
+
+- **`packages/ui`** – Biz UI component library
+- **`apps/website`** – Documentation site and enterprise demo (at `/examples/enterprise-demo`)
 
 ## Development
 
 ```bash
 # Install dependencies
-bun install
+npm install
 
 # Build all packages
-bun run build
+npm run build
 
 # Run development mode
-bun run dev
+npm run dev
+
+# Run the website (docs + examples)
+npm run dev:website
 
 # Run Storybook (from repo root)
-bun run storybook
+npm run storybook
 
 # Run linting
-bun run lint
+npm run lint
 
 # Type checking
-bun run check-types
+npm run check-types
 ```
 
 ## Components
 
 ### Layout & Display
+
 - Avatar, Badge, Breadcrumb, Button, Card, Flex, Grid, Icon, IconButton, Link, Loading, Progress, ProgressIndicator, Stack, Table, Tag
 
 ### Overlays & Modals
+
 - Dialog, AlertDialog, Popover
 
 ### Form Components
+
 - Checkbox, ComboBox, DatePicker, Input, Label, MultiSelect, RadioGroup, Search, Select, Slider, Switch, Textarea, FormField, TimePicker, Calendar
 
 ### Feedback
+
 - Alert, Skeleton, Toast, Tooltip
 
 ### Navigation
+
 - DropdownMenu, Pagination, Tabs
 
 ### Data Display
+
 - Accordion, ScrollArea, Separator, Collapsible, TreeView
 
 ### Typography
+
 - Text components with various sizes and styles
 
 ## License

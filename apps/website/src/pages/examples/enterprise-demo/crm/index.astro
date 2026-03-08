@@ -1,0 +1,41 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { Button } from 'biz-ui'
+import { Card, CardContent } from 'biz-ui'
+import { ContactTable, ContactFilters } from '@examples/components/crm'
+import { contacts } from '@examples/data'
+import { Plus } from 'lucide-react'
+import { BASE } from '@examples/constants'
+---
+
+<Layout title="Contacts - Biz UI Enterprise Demo">
+  <div class="space-y-6">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <nav class="mb-2 flex items-center gap-1 text-sm text-muted-foreground">
+          <span class="text-foreground font-medium">CRM</span>
+        </nav>
+        <h1 class="text-2xl font-semibold text-foreground">Contacts</h1>
+        <p class="mt-1 text-sm text-muted-foreground">Manage your customer relationships</p>
+      </div>
+      <a href={`${BASE}/crm/new`}>
+        <Button client:load>
+          <Plus className="mr-2 h-4 w-4" />
+          Add Contact
+        </Button>
+      </a>
+    </div>
+
+    <Card>
+      <CardContent className="p-4">
+        <ContactFilters client:only="react" />
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardContent className="p-0">
+        <ContactTable contacts={contacts} client:only="react" />
+      </CardContent>
+    </Card>
+  </div>
+</Layout>

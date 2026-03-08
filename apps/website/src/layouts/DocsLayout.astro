@@ -1,0 +1,35 @@
+---
+import Layout from './Layout.astro';
+import Sidebar from '../components/layout/Sidebar';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title={`${title} | Biz UI`} description={description}>
+  <div class="relative mx-auto flex max-w-7xl items-start px-4 sm:px-6 lg:px-8">
+    <Sidebar client:load currentPath={currentPath} />
+
+    <main class="min-w-0 flex-1 py-6 md:pl-64">
+      <article class="prose prose-gray max-w-none dark:prose-invert">
+        <slot />
+      </article>
+
+      <!-- Page navigation -->
+      <div class="mt-16 flex items-center justify-between border-t border-border pt-8">
+        <slot name="prev" />
+        <slot name="next" />
+      </div>
+    </main>
+
+    <!-- Table of contents (optional, for docs pages) -->
+    <aside class="sticky top-20 hidden h-[calc(100vh-5rem)] w-64 shrink-0 overflow-y-auto py-6 xl:block">
+      <slot name="toc" />
+    </aside>
+  </div>
+</Layout>

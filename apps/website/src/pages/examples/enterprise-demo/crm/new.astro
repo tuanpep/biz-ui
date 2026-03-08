@@ -1,0 +1,22 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { PageHeader } from '@examples/components/layout'
+import { ContactForm } from '@examples/components/crm'
+import { BASE } from '@examples/constants'
+---
+
+<Layout title="New Contact - Biz UI Enterprise Demo">
+  <div class="max-w-3xl mx-auto">
+    <PageHeader
+      title="New Contact"
+      description="Add a new contact to your CRM"
+      breadcrumbs={[
+        { label: 'CRM', href: BASE + '/crm' },
+        { label: 'Contacts', href: BASE + '/crm' },
+        { label: 'New' },
+      ]}
+      client:load
+    />
+    <ContactForm client:only="react" />
+  </div>
+</Layout>

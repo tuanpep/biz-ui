@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const docs = await getCollection('docs');
+const gettingStarted = docs.filter((doc) => doc.data.category === 'getting-started').sort((a, b) => a.data.order - b.data.order);
+const componentDocs = docs.filter((doc) => doc.data.category === 'components').sort((a, b) => a.data.order - b.data.order);
+---
+
+<DocsLayout title="Documentation" description="Biz UI documentation - learn how to use all components">
+  <h1>Documentation</h1>
+
+  <p class="lead">
+    Welcome to the Biz UI documentation. Here you'll find everything you need to build beautiful,
+    accessible React applications.
+  </p>
+
+  <h2>Getting Started</h2>
+  <p>Learn the basics of Biz UI and get up and running quickly.</p>
+  <ul>
+    {gettingStarted.map((doc) => (
+      <li>
+        <a href={`/docs/${doc.id.replace(/\.md$/, '')}`}>{doc.data.title}</a>
+      </li>
+    ))}
+  </ul>
+
+  <h2>Components</h2>
+  <p>Explore all available components organized by category.</p>
+  <ul>
+    {componentDocs.map((doc) => (
+      <li>
+        <a href={`/docs/${doc.id.replace(/\.md$/, '')}`}>{doc.data.title}</a>
+      </li>
+    ))}
+  </ul>
+
+  <h2>By Category</h2>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <a href="/docs/components/layout" class="rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary">
+      <h3 class="font-semibold text-foreground">Layout</h3>
+      <p class="text-sm text-muted-foreground">Card, Flex, Grid, Stack, and more</p>
+    </a>
+    <a href="/docs/components/forms" class="rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary">
+      <h3 class="font-semibold text-foreground">Forms</h3>
+      <p class="text-sm text-muted-foreground">Button, Input, Select, and more</p>
+    </a>
+    <a href="/docs/components/navigation" class="rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary">
+      <h3 class="font-semibold text-foreground">Navigation</h3>
+      <p class="text-sm text-muted-foreground">Tabs, Breadcrumb, and more</p>
+    </a>
+    <a href="/docs/components/data-display" class="rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary">
+      <h3 class="font-semibold text-foreground">Data Display</h3>
+      <p class="text-sm text-muted-foreground">Table, Badge, Avatar, and more</p>
+    </a>
+    <a href="/docs/components/feedback" class="rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary">
+      <h3 class="font-semibold text-foreground">Feedback</h3>
+      <p class="text-sm text-muted-foreground">Alert, Toast, Progress, and more</p>
+    </a>
+    <a href="/docs/components/overlays" class="rounded-lg border border-border bg-card p-4 no-underline transition-colors hover:border-primary">
+      <h3 class="font-semibold text-foreground">Overlays</h3>
+      <p class="text-sm text-muted-foreground">Dialog, Popover, Tooltip, and more</p>
+    </a>
+  </div>
+</DocsLayout>

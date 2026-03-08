@@ -1,0 +1,24 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { ContactDetail } from '@examples/components/crm'
+import { getContactById, getAllContactIds } from '@examples/data'
+import { BASE } from '@examples/constants'
+
+export function getStaticPaths() {
+  const ids = getAllContactIds()
+  return ids.map((id) => ({
+    params: { id },
+  }))
+}
+
+const { id } = Astro.params
+const contact = getContactById(id)
+
+if (!contact) {
+  return Astro.redirect('/404')
+}
+---
+
+<Layout title={`${contact.firstName} ${contact.lastName} - Biz UI Enterprise Demo`}>
+  <ContactDetail contact={contact} client:only="react" />
+</Layout>

@@ -1,0 +1,77 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'biz-ui'
+import { LayoutDashboard, Users, UserCog } from 'lucide-react'
+import { BASE } from '@examples/constants'
+
+const demos = [
+  {
+    title: 'Dashboard',
+    description: 'Admin dashboard with metrics, charts, and data tables',
+    href: BASE + '/dashboard',
+    icon: 'LayoutDashboard',
+  },
+  {
+    title: 'CRM / Contacts',
+    description: 'Customer relationship management with contact lists and forms',
+    href: BASE + '/crm',
+    icon: 'Users',
+  },
+  {
+    title: 'HR / Employee',
+    description: 'Employee directory, attendance, and leave management',
+    href: BASE + '/hr',
+    icon: 'UserCog',
+  },
+]
+---
+
+<Layout title="Biz UI Enterprise Demo">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-3xl font-bold">Welcome to Biz UI Enterprise Demo</h1>
+      <p class="mt-2 text-muted-foreground">
+        Explore real-world enterprise use cases built with Biz UI components.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {demos.map((demo) => (
+        <a key={demo.href} href={demo.href}>
+          <Card class="h-full hover:shadow-md transition-shadow cursor-pointer">
+            <CardHeader>
+              <div class="mb-2 text-primary">
+                {demo.icon === 'LayoutDashboard' && <LayoutDashboard class="h-8 w-8" />}
+                {demo.icon === 'Users' && <Users class="h-8 w-8" />}
+                {demo.icon === 'UserCog' && <UserCog class="h-8 w-8" />}
+              </div>
+              <CardTitle>{demo.title}</CardTitle>
+              <CardDescription>{demo.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <span class="text-sm text-primary font-medium">
+                View Demo →
+              </span>
+            </CardContent>
+          </Card>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-12 rounded-lg border border-border bg-card p-6">
+      <h2 class="text-xl font-semibold">About This Demo</h2>
+      <p class="mt-2 text-muted-foreground">
+        This demo showcases the Biz UI component library in realistic enterprise
+        scenarios. Each demo page demonstrates how to use multiple components
+        together to build complex, production-ready interfaces.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="rounded bg-muted px-2 py-1 text-xs">React 19</span>
+        <span class="rounded bg-muted px-2 py-1 text-xs">Astro</span>
+        <span class="rounded bg-muted px-2 py-1 text-xs">Tailwind CSS</span>
+        <span class="rounded bg-muted px-2 py-1 text-xs">Radix UI</span>
+        <span class="rounded bg-muted px-2 py-1 text-xs">Recharts</span>
+      </div>
+    </div>
+  </div>
+</Layout>

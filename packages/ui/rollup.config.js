@@ -48,8 +48,8 @@ const external = [
 ];
 
 // Get all TypeScript files as entry points for true module preservation
-const entryPoints = glob.sync('src/**/*.ts', {
-  ignore: ['src/**/*.spec.ts', 'src/**/*.test.ts', 'src/**/*.stories.ts', 'src/**/__tests__/**', 'src/**/__stories__/**']
+const entryPoints = glob.sync('src/**/*.{ts,tsx}', {
+  ignore: ['src/**/*.spec.ts', 'src/**/*.spec.tsx', 'src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/*.stories.ts', 'src/**/*.stories.tsx', 'src/**/__tests__/**', 'src/**/__stories__/**']
 }).reduce((entries, file) => {
   // Convert file path to entry name: src/lib/components/Button/Button.tsx -> lib/components/Button/Button
   const name = file.replace(/^src\//, '').replace(/\.tsx?$/, '');

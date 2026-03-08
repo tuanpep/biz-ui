@@ -1,0 +1,36 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { Button } from 'biz-ui'
+import { Card, CardContent } from 'biz-ui'
+import { EmployeeGrid, EmployeeFilters } from '@examples/components/hr'
+import { employees, departments } from '@examples/data'
+import { Plus } from 'lucide-react'
+---
+
+<Layout title="Employee Directory - Biz UI Enterprise Demo">
+  <div class="space-y-6">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <nav class="mb-2 flex items-center gap-1 text-sm text-muted-foreground">
+          <span class="text-foreground font-medium">HR</span>
+          <span>/</span>
+          <span class="text-foreground font-medium">Employees</span>
+        </nav>
+        <h1 class="text-2xl font-semibold text-foreground">Employee Directory</h1>
+        <p class="mt-1 text-sm text-muted-foreground">View and manage your team members</p>
+      </div>
+      <Button client:load>
+        <Plus class="mr-2 h-4 w-4" />
+        Add Employee
+      </Button>
+    </div>
+
+    <Card>
+      <CardContent className="p-4">
+        <EmployeeFilters departments={departments} client:only="react" />
+      </CardContent>
+    </Card>
+
+    <EmployeeGrid employees={employees} client:only="react" />
+  </div>
+</Layout>

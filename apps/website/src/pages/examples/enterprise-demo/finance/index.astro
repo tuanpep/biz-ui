@@ -1,0 +1,20 @@
+---
+import Layout from '@examples/layouts/Layout.astro'
+import { FinanceOverview } from '@examples/components/finance'
+---
+
+<Layout title="Finance - Biz UI Enterprise Demo">
+  <div class="space-y-6">
+    <div class="mb-6">
+      <nav class="mb-2 flex items-center gap-1 text-sm text-muted-foreground">
+        <span class="text-foreground font-medium">Finance</span>
+        <span>/</span>
+        <span class="text-foreground font-medium">Overview</span>
+      </nav>
+      <h1 class="text-2xl font-semibold text-foreground">Finance Overview</h1>
+      <p class="mt-1 text-sm text-muted-foreground">Manage invoices and expenses</p>
+    </div>
+
+    <FinanceOverview client:only="react" />
+  </div>
+</Layout>
