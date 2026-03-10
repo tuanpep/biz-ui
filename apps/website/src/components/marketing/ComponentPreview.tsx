@@ -5,7 +5,7 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 /**
  * Live component preview showing various Biz UI components

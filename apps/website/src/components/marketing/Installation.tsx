@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { Badge, Button, Alert } from "biz-ui";
+import { Badge, Button, Alert } from "@biz-ui/react";
 import { CodeBlock } from "../ui/CodeBlock";
 
 const packageManagers = [
@@ -49,7 +49,7 @@ export function Installation() {
         </div>
 
         <CodeBlock
-          code={`import { Button, Input, Card } from 'biz-ui'
+          code={`import { Button, Input, Card } from '@biz-ui/react'
 
 function App() {
   return (

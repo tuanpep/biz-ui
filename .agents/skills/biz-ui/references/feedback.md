@@ -69,7 +69,7 @@ import {
   EmptyStateDescription,
   EmptyStateIcon,
   EmptyStateAction,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <EmptyState>
   <EmptyStateIcon icon={<SearchIcon />} />
@@ -106,7 +106,7 @@ import { Progress } from 'biz-ui';
 ## ProgressIndicator
 
 ```tsx
-import { ProgressIndicator } from "biz-ui";
+import { ProgressIndicator } from "@biz-ui/react";
 
 <ProgressIndicator currentIndex={2}>
   <ProgressIndicatorStep title="Step 1" />

@@ -25,7 +25,7 @@ describe("CodeBlock", () => {
     });
 
     it("renders multi-line code", () => {
-      const code = `import { Button } from 'biz-ui'
+      const code = `import { Button } from '@biz-ui/react'
 
 function App() {
   return <Button>Click me</Button>

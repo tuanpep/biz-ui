@@ -1,5 +1,5 @@
 import { ArrowRight, Github } from "lucide-react";
-import { Button } from "biz-ui";
+import { Button } from "@biz-ui/react";
 
 /**
  * Call-to-action section at the bottom of the homepage

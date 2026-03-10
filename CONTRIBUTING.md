@@ -207,10 +207,10 @@ ComponentName/
 ## Testing & coverage
 
 - **Run tests:** `bun run test` (or `npm run test` from repo root).
-- **Run tests with coverage:** `bun run test:coverage` in `packages/ui` (or `npm run test:coverage`). Requires `@vitest/coverage-v8`; report is written to `coverage/` (text, JSON, HTML). Use this to spot untested code when adding or changing components.
+- **Run tests with coverage:** `bun run test:coverage` in `packages/react` (or `npm run test:coverage`). Requires `@vitest/coverage-v8`; report is written to `coverage/` (text, JSON, HTML). Use this to spot untested code when adding or changing components.
 - **Watch mode:** `bun run test:watch` for development.
-- **E2E (Playwright):** From `packages/ui`, run `npm run build-storybook` once, then `npm run e2e`. Playwright starts a local server for the static Storybook build and runs smoke tests. For CI use `npm run e2e:ci` (builds Storybook, installs browser, then runs tests). Add new scenarios in `packages/ui/e2e/`.
-- **API docs (TypeDoc):** From `packages/ui`, run `npm run docs:api` to generate API documentation from TypeScript types. Output is written to `packages/ui/docs/api/`. Useful for consumers who prefer static type docs alongside Storybook.
+- **E2E (Playwright):** From `packages/react`, run `npm run build-storybook` once, then `npm run e2e`. Playwright starts a local server for the static Storybook build and runs smoke tests. For CI use `npm run e2e:ci` (builds Storybook, installs browser, then runs tests). Add new scenarios in `packages/react/e2e/`.
+- **API docs (TypeDoc):** From `packages/react`, run `npm run docs:api` to generate API documentation from TypeScript types. Output is written to `packages/react/docs/api/`. Useful for consumers who prefer static type docs alongside Storybook.
 
 ### Testing patterns for Radix UI components
 
@@ -272,15 +272,15 @@ When testing components built on Radix UI primitives, keep these patterns in min
 
 Before cutting a release, from the repo root:
 
-1. Bump version in `packages/ui/package.json` (and root if applicable).
+1. Bump version in `packages/react/package.json` (and root if applicable).
 2. Update [CHANGELOG.md](../CHANGELOG.md): move items from `[Unreleased]` into a new version heading and add the release date.
 3. Run `bun run ci` (or equivalent: build, lint, check-types, test).
-4. Optionally run `bun run e2e:ci` and `npm run size -w biz-ui` (bundle size check in `packages/ui`).
+4. Optionally run `bun run e2e:ci` and `npm run size -w biz-ui` (bundle size check in `packages/react`).
 5. Commit, tag (e.g. `v0.2.0`), push, and publish per your release process.
 
 ## Bundle size
 
-From `packages/ui`, run `npm run size` after building to check ESM output size against the limit defined in `package.json` (`sizeLimit`). Adjust the limit there if the library grows intentionally.
+From `packages/react`, run `npm run size` after building to check ESM output size against the limit defined in `package.json` (`sizeLimit`). Adjust the limit there if the library grows intentionally.
 
 ## License
 

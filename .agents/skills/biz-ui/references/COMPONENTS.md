@@ -142,5 +142,5 @@ import {
   usePrefix,
   useFeatureFlag,
   useFeatureFlags,
-} from "biz-ui";
+} from "@biz-ui/react";
 ```

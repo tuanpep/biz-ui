@@ -5,7 +5,7 @@ Guide to customizing and theming Biz UI components.
 ## Setup
 
 ```tsx
-import { BizUIThemeProvider, defaultTheme } from "biz-ui";
+import { BizUIThemeProvider, defaultTheme } from "@biz-ui/react";
 import "biz-ui/styles";
 
 function App() {
@@ -72,7 +72,7 @@ interface Theme {
 ## Creating Custom Theme
 
 ```tsx
-import { BizUIThemeProvider, defaultTheme } from "biz-ui";
+import { BizUIThemeProvider, defaultTheme } from "@biz-ui/react";
 
 const customTheme = {
   ...defaultTheme,
@@ -146,7 +146,7 @@ Biz UI uses CSS variables for theming. The `biz-ui` className scope provides:
 Components automatically use theme values. Access theme programmatically:
 
 ```tsx
-import { useBizUITheme } from "biz-ui";
+import { useBizUITheme } from "@biz-ui/react";
 
 function Component() {
   const { theme, prefix } = useBizUITheme();
@@ -162,7 +162,7 @@ function Component() {
 CSS class prefix for isolation:
 
 ```tsx
-import { PrefixProvider } from "biz-ui";
+import { PrefixProvider } from "@biz-ui/react";
 
 <PrefixProvider prefix="custom">
   <Button className="custom-Button">Themed</Button>
@@ -174,7 +174,7 @@ import { PrefixProvider } from "biz-ui";
 Enable/disable features:
 
 ```tsx
-import { FeatureFlagsProvider, defaultFeatureFlags } from "biz-ui";
+import { FeatureFlagsProvider, defaultFeatureFlags } from "@biz-ui/react";
 
 <FeatureFlagsProvider
   flags={{

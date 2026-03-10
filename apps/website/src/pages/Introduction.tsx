@@ -46,7 +46,7 @@ export function Introduction() {
         <p>Then import the components you need:</p>
 
         <CodeBlock
-          code={`import { Button, Input, Card } from 'biz-ui'
+          code={`import { Button, Input, Card } from '@biz-ui/react'
 
 function App() {
   return (

@@ -37,7 +37,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, 
 ## Flex
 
 ```tsx
-import { Flex } from "biz-ui";
+import { Flex } from "@biz-ui/react";
 
 <Flex direction="row" align="center" justify="between" gap={4}>
   <Child1 />
@@ -56,7 +56,7 @@ import { Flex } from "biz-ui";
 ## Grid
 
 ```tsx
-import { Grid } from "biz-ui";
+import { Grid } from "@biz-ui/react";
 
 <Grid columns={3} gap={4}>
   <Cell />
@@ -74,7 +74,7 @@ import { Grid } from "biz-ui";
 ## ScrollArea
 
 ```tsx
-import { ScrollArea } from "biz-ui";
+import { ScrollArea } from "@biz-ui/react";
 
 <ScrollArea className="h-[200px]">
   <div>Long content...</div>
@@ -93,7 +93,7 @@ import { Separator } from 'biz-ui';
 ## Stack
 
 ```tsx
-import { Stack } from "biz-ui";
+import { Stack } from "@biz-ui/react";
 
 <Stack gap={4}>
   <Item />
@@ -104,7 +104,7 @@ import { Stack } from "biz-ui";
 ## AspectRatio
 
 ```tsx
-import { AspectRatio } from "biz-ui";
+import { AspectRatio } from "@biz-ui/react";
 
 <AspectRatio ratio={16 / 9}>
   <img src="..." alt="..." />
@@ -114,7 +114,7 @@ import { AspectRatio } from "biz-ui";
 ## Center
 
 ```tsx
-import { Center } from "biz-ui";
+import { Center } from "@biz-ui/react";
 
 <Center>
   <div>Centered content</div>
@@ -144,7 +144,7 @@ import { Divider } from 'biz-ui';
 ## Portal
 
 ```tsx
-import { Portal } from "biz-ui";
+import { Portal } from "@biz-ui/react";
 
 <Portal>
   <div>This renders outside the DOM hierarchy</div>
@@ -154,7 +154,7 @@ import { Portal } from "biz-ui";
 ## SimpleGrid
 
 ```tsx
-import { SimpleGrid } from "biz-ui";
+import { SimpleGrid } from "@biz-ui/react";
 
 <SimpleGrid columns={3} spacing={4}>
   <Item />
@@ -166,7 +166,7 @@ import { SimpleGrid } from "biz-ui";
 ## VisuallyHidden
 
 ```tsx
-import { VisuallyHidden } from "biz-ui";
+import { VisuallyHidden } from "@biz-ui/react";
 
 <VisuallyHidden>Hidden but accessible to screen readers</VisuallyHidden>;
 ```

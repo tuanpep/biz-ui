@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Button, Badge, Card } from "biz-ui";
+import { Button, Badge, Card } from "@biz-ui/react";
 
 const components = [
   { name: "Button", category: "Forms" },

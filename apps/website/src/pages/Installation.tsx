@@ -69,7 +69,7 @@ module.exports = {
         <p>Now you can import and use any component:</p>
 
         <CodeBlock
-          code={`import { Button, Card, Input } from 'biz-ui'
+          code={`import { Button, Card, Input } from '@biz-ui/react'
 
 function App() {
   return (

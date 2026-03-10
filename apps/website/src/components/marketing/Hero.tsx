@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Badge, Button } from "biz-ui";
+import { Badge, Button } from "@biz-ui/react";
 import { ComponentPreview } from "./ComponentPreview";
 
 /**

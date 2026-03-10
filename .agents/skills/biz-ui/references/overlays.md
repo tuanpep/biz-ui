@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogClose,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <Dialog>
   <DialogTrigger asChild>
@@ -36,7 +36,7 @@ import {
   SheetHeader,
   SheetBody,
   SheetFooter,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <Sheet>
   <SheetTrigger asChild>
@@ -55,7 +55,7 @@ import {
 ## Popover
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent } from "biz-ui";
+import { Popover, PopoverTrigger, PopoverContent } from "@biz-ui/react";
 
 <Popover>
   <PopoverTrigger asChild>
@@ -73,7 +73,7 @@ import {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <TooltipProvider>
   <Tooltip>
@@ -96,7 +96,7 @@ import {
   AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <AlertDialog>
   <AlertDialogTrigger asChild>
@@ -116,7 +116,7 @@ import {
 ## HoverCard
 
 ```tsx
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "biz-ui";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@biz-ui/react";
 
 <HoverCard>
   <HoverCardTrigger asChild>
@@ -129,7 +129,11 @@ import { HoverCard, HoverCardTrigger, HoverCardContent } from "biz-ui";
 ## Collapsible
 
 ```tsx
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "biz-ui";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@biz-ui/react";
 
 <Collapsible open={open} onOpenChange={setOpen}>
   <CollapsibleTrigger>Toggle</CollapsibleTrigger>
@@ -140,7 +144,12 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "biz-ui";
 ## ComposedModal
 
 ```tsx
-import { ComposedModal, ModalHeader, ModalBody, ModalFooter } from "biz-ui";
+import {
+  ComposedModal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@biz-ui/react";
 
 <ComposedModal open={open} onClose={() => setOpen(false)}>
   <ModalHeader>Title</ModalHeader>

@@ -12,7 +12,7 @@ A React component library with 70+ accessible components built on Radix UI primi
 ### Setup
 
 ```tsx
-import { BizUIThemeProvider, defaultTheme, Button } from "biz-ui";
+import { BizUIThemeProvider, defaultTheme, Button } from "@biz-ui/react";
 import "biz-ui/styles";
 
 function App() {
@@ -103,5 +103,5 @@ For complete component APIs, props, and advanced usage, see:
 ## Available Resources
 
 - [Biz UI Website](http://localhost:4321) - Docs and playground
-- Storybook: `bun run storybook` from packages/ui
-- Source: `packages/ui/src/lib/components/`
+- Storybook: `bun run storybook` from packages/react
+- Source: `packages/react/src/lib/components/`

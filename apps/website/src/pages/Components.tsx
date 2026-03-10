@@ -1,6 +1,6 @@
 import { Layout } from "../components/layout";
 import { ArrowRight } from "lucide-react";
-import { Badge, Card } from "biz-ui";
+import { Badge, Card } from "@biz-ui/react";
 
 const componentCategories = [
   {

@@ -1,5 +1,5 @@
 {
-  "name": "biz-ui",
+  "name": "@biz-ui/monorepo",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -14,7 +14,7 @@
     "clean:cache": "turbo daemon clean && rm -rf .turbo",
     "storybook": "turbo run storybook",
     "build-storybook": "turbo run build-storybook",
-    "e2e:ci": "npm run e2e:ci -w biz-ui",
+    "e2e:ci": "npm run e2e:ci -w @biz-ui/react",
     "ci": "turbo run build lint check-types test",
     "prepare": "husky"
   },
@@ -44,7 +44,7 @@
   "packageManager": "npm@10.9.2",
   "lint-staged": {
     "*.{ts,tsx,md}": "prettier --write",
-    "packages/ui/**/*.{ts,tsx}": "eslint -c packages/ui/eslint.config.mjs --fix"
+    "packages/react/**/*.{ts,tsx}": "eslint -c packages/react/eslint.config.mjs --fix"
   },
   "workspaces": [
     "packages/*",

@@ -5,7 +5,7 @@ Form components for collecting user input.
 ## Button
 
 ```tsx
-import { Button, ButtonSet, ButtonSkeleton, buttonVariants } from 'biz-ui';
+import { Button, ButtonSet, ButtonSkeleton, buttonVariants } from '@biz-ui/react';
 
 // Variants
 <Button variant="primary">Primary</Button>
@@ -55,7 +55,7 @@ import { Button, ButtonSet, ButtonSkeleton, buttonVariants } from 'biz-ui';
 ## Input
 
 ```tsx
-import { Input, InputSkeleton, inputVariants } from 'biz-ui';
+import { Input, InputSkeleton, inputVariants } from '@biz-ui/react';
 
 // Variants
 <Input variant="default" placeholder="Default" />
@@ -86,7 +86,7 @@ import { Input, InputSkeleton, inputVariants } from 'biz-ui';
 ## Select
 
 ```tsx
-import { Select } from "biz-ui";
+import { Select } from "@biz-ui/react";
 
 <Select>
   <SelectTrigger>
@@ -117,7 +117,7 @@ import { Select } from "biz-ui";
 ## Checkbox
 
 ```tsx
-import { Checkbox } from 'biz-ui';
+import { Checkbox } from '@biz-ui/react';
 
 <Checkbox>Label text</Checkbox>
 <Checkbox defaultChecked>Checked</Checkbox>
@@ -131,7 +131,7 @@ import { Checkbox } from 'biz-ui';
 ## RadioGroup
 
 ```tsx
-import { RadioGroup, RadioGroupItem } from "biz-ui";
+import { RadioGroup, RadioGroupItem } from "@biz-ui/react";
 
 <RadioGroup defaultValue="option1">
   <RadioGroupItem value="option1">Option 1</RadioGroupItem>
@@ -142,7 +142,7 @@ import { RadioGroup, RadioGroupItem } from "biz-ui";
 ## Switch
 
 ```tsx
-import { Switch } from 'biz-ui';
+import { Switch } from '@biz-ui/react';
 
 <Switch>Label</Switch>
 <Switch defaultChecked />
@@ -154,7 +154,7 @@ import { Switch } from 'biz-ui';
 ## Textarea
 
 ```tsx
-import { Textarea } from 'biz-ui';
+import { Textarea } from '@biz-ui/react';
 
 <Textarea placeholder="Enter description" />
 <Textarea rows={4} />
@@ -166,7 +166,7 @@ import { Textarea } from 'biz-ui';
 ## Slider
 
 ```tsx
-import { Slider } from 'biz-ui';
+import { Slider } from '@biz-ui/react';
 
 <Slider defaultValue={[50]} />
 <Slider defaultValue={[20, 80]} min={0} max={100} step={1} />
@@ -176,7 +176,7 @@ import { Slider } from 'biz-ui';
 ## DatePicker
 
 ```tsx
-import { DatePicker } from 'biz-ui';
+import { DatePicker } from '@biz-ui/react';
 
 <DatePicker />
 <DatePicker mode="range" />
@@ -186,7 +186,7 @@ import { DatePicker } from 'biz-ui';
 ## TimePicker
 
 ```tsx
-import { TimePicker } from 'biz-ui';
+import { TimePicker } from '@biz-ui/react';
 
 <TimePicker />
 <TimePicker hour12 />
@@ -195,7 +195,7 @@ import { TimePicker } from 'biz-ui';
 ## FileUploader
 
 ```tsx
-import { FileUploader, FileUploaderItem } from "biz-ui";
+import { FileUploader, FileUploaderItem } from "@biz-ui/react";
 
 <FileUploader>
   <FileUploaderItem name="document.pdf" size={1024} />
@@ -205,7 +205,7 @@ import { FileUploader, FileUploaderItem } from "biz-ui";
 ## ComboBox
 
 ```tsx
-import { ComboBox } from "biz-ui";
+import { ComboBox } from "@biz-ui/react";
 
 const options = [{ value: "apple" }, { value: "banana" }];
 <ComboBox options={options} placeholder="Select fruit" />;
@@ -214,7 +214,7 @@ const options = [{ value: "apple" }, { value: "banana" }];
 ## MultiSelect
 
 ```tsx
-import { MultiSelect } from "biz-ui";
+import { MultiSelect } from "@biz-ui/react";
 
 const options = [{ value: "apple" }, { value: "banana" }];
 <MultiSelect options={options} placeholder="Select fruits" />;
@@ -223,7 +223,7 @@ const options = [{ value: "apple" }, { value: "banana" }];
 ## NumberInput
 
 ```tsx
-import { NumberInput } from 'biz-ui';
+import { NumberInput } from '@biz-ui/react';
 
 <NumberInput />
 <NumberInput min={0} max={100} step={1} />
@@ -233,7 +233,7 @@ import { NumberInput } from 'biz-ui';
 ## PinInput
 
 ```tsx
-import { PinInput } from 'biz-ui';
+import { PinInput } from '@biz-ui/react';
 
 <PinInput length={4} />
 <PinInput length={6} type="numeric" />
@@ -242,7 +242,7 @@ import { PinInput } from 'biz-ui';
 ## Search
 
 ```tsx
-import { Search } from 'biz-ui';
+import { Search } from '@biz-ui/react';
 
 <Search placeholder="Search..." />
 <Search value={query} onChange={(e) => setQuery(e.target.value)} />
@@ -251,7 +251,7 @@ import { Search } from 'biz-ui';
 ## FormField
 
 ```tsx
-import { FormField, Label, Input } from "biz-ui";
+import { FormField, Label, Input } from "@biz-ui/react";
 
 <FormField>
   <Label>Email</Label>
@@ -262,7 +262,7 @@ import { FormField, Label, Input } from "biz-ui";
 ## InputGroup
 
 ```tsx
-import { InputGroup } from "biz-ui";
+import { InputGroup } from "@biz-ui/react";
 
 <InputGroup>
   <InputGroup.Addon>@</InputGroup.Addon>
@@ -274,7 +274,7 @@ import { InputGroup } from "biz-ui";
 ## Label
 
 ```tsx
-import { Label } from 'biz-ui';
+import { Label } from '@biz-ui/react';
 
 <Label htmlFor="input-id">Label text</Label>
 <Label disabled>Disabled label</Label>
@@ -283,7 +283,7 @@ import { Label } from 'biz-ui';
 ## IconButton
 
 ```tsx
-import { IconButton } from 'biz-ui';
+import { IconButton } from '@biz-ui/react';
 
 <IconButton icon={<SearchIcon />} aria-label="Search" />
 <IconButton icon={<SearchIcon />} variant="primary" size="sm" />
@@ -293,7 +293,7 @@ import { IconButton } from 'biz-ui';
 ## ButtonGroup
 
 ```tsx
-import { ButtonGroup } from "biz-ui";
+import { ButtonGroup } from "@biz-ui/react";
 
 <ButtonGroup>
   <Button>One</Button>

@@ -1,0 +1,155 @@
+{
+  "name": "@biz-ui/react",
+  "version": "0.1.0",
+  "description": "Comprehensive React UI component library built on Radix UI and Tailwind CSS",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles": "./dist/styles.css",
+    "./styles/layer": "./dist/styles.layer.css",
+    "./styles/theme": "./src/lib/styles/theme.css",
+    "./tailwind.preset": "./tailwind.preset.js",
+    "./variants": {
+      "types": "./dist/lib/variants/index.d.ts",
+      "import": "./dist/lib/variants/index.mjs",
+      "require": "./dist/lib/variants/index.js"
+    },
+    "./lib/*": {
+      "types": "./dist/lib/*.d.ts",
+      "import": "./dist/lib/*.mjs",
+      "require": "./dist/lib/*.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src/lib/styles",
+    "tailwind.preset.js"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "radix-ui",
+    "tailwindcss"
+  ],
+  "scripts": {
+    "build": "npm run clean:dist && rollup -c && npm run build:css && npm run build:layer",
+    "build:css": "npx tailwindcss -i src/lib/styles/index.css -o dist/styles.css --minify",
+    "build:layer": "node scripts/generate-css-layer.js",
+    "clean:dist": "rm -rf dist",
+    "dev": "rollup -c -w",
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules",
+    "test": "NODE_OPTIONS='--max-old-space-size=8192' vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "e2e": "playwright test",
+    "e2e:ci": "npm run build-storybook && playwright install --with-deps chromium && playwright test",
+    "docs:api": "typedoc",
+    "size": "size-limit",
+    "prepublishOnly": "bun run build"
+  },
+  "size-limit": [
+    {
+      "name": "ESM output",
+      "path": "dist/**/*.mjs",
+      "limit": "3 MB"
+    }
+  ],
+  "peerDependencies": {
+    "@radix-ui/react-accordion": "^1.0.0",
+    "@radix-ui/react-alert-dialog": "^1.0.0",
+    "@radix-ui/react-avatar": "^1.0.0",
+    "@radix-ui/react-checkbox": "^1.0.0",
+    "@radix-ui/react-collapsible": "^1.0.0",
+    "@radix-ui/react-dialog": "^1.0.0",
+    "@radix-ui/react-dropdown-menu": "^2.0.0",
+    "@radix-ui/react-label": "^2.0.0",
+    "@radix-ui/react-popover": "^1.0.0",
+    "@radix-ui/react-portal": "^1.0.0",
+    "@radix-ui/react-progress": "^1.0.0",
+    "@radix-ui/react-radio-group": "^1.0.0",
+    "@radix-ui/react-scroll-area": "^1.0.0",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-separator": "^1.0.0",
+    "@radix-ui/react-slider": "^1.0.0",
+    "@radix-ui/react-slot": "^1.0.0",
+    "@radix-ui/react-switch": "^1.0.0",
+    "@radix-ui/react-tabs": "^1.0.0",
+    "@radix-ui/react-toast": "^1.0.0",
+    "@radix-ui/react-tooltip": "^1.0.0",
+    "autoprefixer": "^10.4.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.400.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss": "^3.4.0",
+    "tailwindcss-animate": "^1.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@storybook/addon-a11y": "^8.5.0",
+    "@storybook/addon-docs": "^8.5.0",
+    "@storybook/addon-essentials": "^8.5.0",
+    "@storybook/addon-interactions": "^8.5.0",
+    "@storybook/addon-links": "^8.5.0",
+    "@storybook/addon-onboarding": "^8.5.0",
+    "@storybook/blocks": "^8.5.0",
+    "@storybook/react-vite": "^8.5.0",
+    "@storybook/test": "^8.5.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
+    "jsdom": "^26.0.0",
+    "postcss": "^8.5.8",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.13.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "typescript": "5.9.2",
+    "typescript-eslint": "^8.50.0",
+    "vitest": "^3.1.1",
+    "@vitest/coverage-v8": "^3.1.1",
+    "@playwright/test": "^1.49.0",
+    "typedoc": "^0.28.0",
+    "size-limit": "^11.0.0",
+    "@size-limit/file": "^11.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biz-ui/biz-ui"
+  },
+  "homepage": "https://github.com/biz-ui/biz-ui#readme",
+  "bugs": {
+    "url": "https://github.com/biz-ui/biz-ui/issues"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -5,6 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from "../components/providers/ThemeProvider";
 
 // All providers wrapper
+// eslint-disable-next-line react-refresh/only-export-components
 function AllProviders({ children }: { children: React.ReactNode }) {
   return (
     <MemoryRouter>
@@ -22,5 +23,6 @@ function customRender(
 }
 
 // Re-export everything
+// eslint-disable-next-line react-refresh/only-export-components
 export * from "@testing-library/react";
 export { customRender as render };

@@ -90,7 +90,7 @@ import {
   TableHead,
   TableCell,
   TableCaption,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <Table>
   <TableCaption>Table caption</TableCaption>
@@ -117,7 +117,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <Accordion type="single" collapsible>
   <AccordionItem value="item-1">

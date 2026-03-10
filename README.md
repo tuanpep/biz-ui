@@ -7,9 +7,23 @@ A comprehensive React UI component library built on Radix UI and Tailwind CSS.
 - **60+ Components**: A wide range of components including buttons, forms, dialogs, navigation, and more
 - **Radix UI Primitives**: Built on top of Radix UI for accessibility and interaction patterns
 - **Tailwind CSS**: Utility-first styling with a customizable design system
+- **CSS Variables**: Zero-runtime theming system with excellent performance
 - **TypeScript**: Full TypeScript support with comprehensive types
 - **Storybook**: Interactive component documentation and development
 - **Tree-shakeable**: Only import the components you need
+- **SSR-friendly**: Server-side rendering support with zero runtime overhead
+
+## CSS Styling Guide
+
+Biz UI follows industry best practices for CSS styling in UI library packages. See our comprehensive [CSS Styling Guide](./packages/react/CSS_STYLING_GUIDE.md) to learn about:
+
+- Current architecture strengths
+- Best practices from Material UI, Tailwind CSS, Emotion, and Styled Components
+- Component styling patterns
+- Theming system
+- CSS injection order management
+- Performance optimization tips
+- SSR considerations
 
 ## Installation
 
@@ -48,12 +62,12 @@ import "biz-ui/styles";
 2. Wrap your components with the Biz UI theme provider:
 
 ```tsx
-import { BizUIThemeProvider } from "biz-ui";
+import { BizUIThemeProvider } from "@biz-ui/react";
 
 function App() {
   return (
     <BizUIThemeProvider>
-      <div className="biz-ui">{/* Your app components */}</div>
+      <div className="@biz-ui/react">{/* Your app components */}</div>
     </BizUIThemeProvider>
   );
 }
@@ -62,7 +76,7 @@ function App() {
 3. Use the components:
 
 ```tsx
-import { Button, Card, Input } from "biz-ui";
+import { Button, Card, Input } from "@biz-ui/react";
 
 function MyComponent() {
   return (
@@ -78,7 +92,7 @@ function MyComponent() {
 
 This repository is a Turborepo monorepo:
 
-- **`packages/ui`** – Biz UI component library
+- **`packages/react`** – Biz UI component library
 
 ## Development
 

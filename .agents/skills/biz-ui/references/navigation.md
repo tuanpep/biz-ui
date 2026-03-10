@@ -5,7 +5,7 @@ Navigation components for navigating between pages and sections.
 ## Tabs
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "biz-ui";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@biz-ui/react";
 
 <Tabs defaultValue="tab1">
   <TabsList>
@@ -27,7 +27,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -52,7 +52,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from "biz-ui";
+} from "@biz-ui/react";
 
 <Breadcrumb>
   <BreadcrumbList>
@@ -70,7 +70,7 @@ import {
 ## Pagination
 
 ```tsx
-import { Pagination } from "biz-ui";
+import { Pagination } from "@biz-ui/react";
 
 <Pagination
   count={100}
@@ -82,7 +82,7 @@ import { Pagination } from "biz-ui";
 ## Stepper
 
 ```tsx
-import { Stepper, StepperStep } from "biz-ui";
+import { Stepper, StepperStep } from "@biz-ui/react";
 
 <Stepper currentStep={2}>
   <StepperStep title="Step 1">Content 1</StepperStep>
@@ -94,7 +94,7 @@ import { Stepper, StepperStep } from "biz-ui";
 ## TreeView
 
 ```tsx
-import { TreeView } from "biz-ui";
+import { TreeView } from "@biz-ui/react";
 
 const data = [
   { id: "1", label: "Root", children: [{ id: "2", label: "Child" }] },

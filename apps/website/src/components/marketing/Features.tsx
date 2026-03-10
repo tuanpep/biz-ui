@@ -1,5 +1,5 @@
 import { Layers, Palette, Code2, Zap } from "lucide-react";
-import { Card } from "biz-ui";
+import { Card } from "@biz-ui/react";
 
 const features = [
   {

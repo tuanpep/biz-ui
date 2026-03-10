@@ -1,5 +1,5 @@
 import { ArrowRight, Box, Github } from "lucide-react";
-import { Button } from "biz-ui";
+import { Button } from "@biz-ui/react";
 import { ThemeToggle } from "../ui/ThemeToggle";
 
 const navLinks = [
