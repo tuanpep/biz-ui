@@ -22,8 +22,8 @@
 
   /* Storybook body styling */
   body {
-    background-color: var(--biz-gray-0);
-    color: var(--biz-gray-9);
+    background-color: var(--biz-gray-0, #f8f9fa);
+    color: var(--biz-gray-9, #111827);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

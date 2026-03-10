@@ -45,18 +45,21 @@ const SheetContent = React.forwardRef<
   SheetContentProps
 >(({ side = "right", className, children, ...props }, ref) => (
   <SheetPortal>
-    <SheetOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(sheetContentVariants({ side }), className)}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none">
-        <X className="h-4 w-4" aria-hidden="true" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
+    {/* Ensure theme CSS variables apply inside Radix Portal. */}
+    <div className="biz-ui fixed inset-0 z-50 pointer-events-none [&>*]:pointer-events-auto">
+      <SheetOverlay />
+      <DialogPrimitive.Content
+        ref={ref}
+        className={cn(sheetContentVariants({ side }), className)}
+        {...props}
+      >
+        {children}
+        <DialogPrimitive.Close className="absolute right-4 top-4 opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none">
+          <X className="h-4 w-4" aria-hidden="true" />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
+      </DialogPrimitive.Content>
+    </div>
   </SheetPortal>
 ));
 SheetContent.displayName = DialogPrimitive.Content.displayName;
