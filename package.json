@@ -47,7 +47,6 @@
     "packages/react/**/*.{ts,tsx}": "eslint -c packages/react/eslint.config.mjs --fix"
   },
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "packages/*"
   ]
 }
